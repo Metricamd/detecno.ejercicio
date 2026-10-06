@@ -26,7 +26,7 @@ export const Glossy: React.FC<{ color: string; rough?: number; metal?: number }>
   />
 );
 
-const RBox: React.FC<{
+export const RBox: React.FC<{
   size: V3;
   radius?: number;
   color: string;

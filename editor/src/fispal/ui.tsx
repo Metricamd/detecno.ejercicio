@@ -39,9 +39,9 @@ export const Enter: React.FC<{
 };
 
 // estilo.md §4: fondo #F8F9FF con dos manchas difuminadas.
-export const Background: React.FC = () => {
+export const Background: React.FC<{ bpm?: number }> = ({ bpm = BPM }) => {
   const frame = useCurrentFrame();
-  const beat = useBeat();
+  const beat = useBeat(bpm);
   const drift = Math.sin(frame / 60) * 40;
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg, overflow: "hidden" }}>
@@ -79,10 +79,10 @@ export const Background: React.FC = () => {
 
 // Music beat (124 BPM): 1 right on each beat, decaying to 0 before the next.
 export const BPM = 124;
-export const useBeat = () => {
+export const useBeat = (bpm = BPM) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const beat = (60 / BPM) * fps;
+  const beat = (60 / bpm) * fps;
   return Math.exp(-((frame % beat) / beat) * 6);
 };
 

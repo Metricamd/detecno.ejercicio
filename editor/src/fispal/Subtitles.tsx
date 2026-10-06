@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame } from "remotion";
-import { buildPages, type Page, type Word } from "./captions";
+import type { Page, Word } from "./captions";
 import { C, FONT, s } from "./theme";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -86,12 +86,12 @@ const PageView: React.FC<{ page: Page; frame: number }> = ({ page, frame }) => {
   );
 };
 
-export const Subtitles: React.FC<{ centerY?: number; end: number }> = ({
+export const Subtitles: React.FC<{ centerY?: number; pages: Page[] }> = ({
   centerY = 1560,
-  end,
+  pages,
 }) => {
   const frame = useCurrentFrame();
-  const page = buildPages(end).find((p) => frame >= s(p.start) && frame < s(p.end));
+  const page = pages.find((p) => frame >= s(p.start) && frame < s(p.end));
   if (!page) return null;
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>

@@ -18,6 +18,7 @@ import {
   S6Claims,
   S7Cierre,
 } from "./scenes";
+import { buildPages } from "./captions";
 import { Subtitles } from "./Subtitles";
 import { fontsLoaded, s } from "./theme";
 import { CUE, VOICE_DURATION } from "./timeline";
@@ -26,6 +27,7 @@ import { Background, Scene } from "./ui";
 // Voice-over + 1 s hold on the closing logo.
 export const REEL_DURATION = s(VOICE_DURATION + 1);
 const VOICE = "audio/voz.wav";
+const PAGES = buildPages(REEL_DURATION / 30);
 
 // Scene cuts follow the voice-over phrases; consecutive scenes overlap by
 // 2 frames so the blur cross-fade (estilo.md §5) has both layers on screen.
@@ -79,7 +81,7 @@ export const FispalReel: React.FC = () => {
           </Scene>
         </Sequence>
       ))}
-      <Subtitles end={REEL_DURATION / 30} />
+      <Subtitles pages={PAGES} />
 
       {hasVoice && <Audio src={staticFile(VOICE)} />}
       <Audio
