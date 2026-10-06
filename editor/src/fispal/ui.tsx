@@ -41,6 +41,7 @@ export const Enter: React.FC<{
 // estilo.md §4: fondo #F8F9FF con dos manchas difuminadas.
 export const Background: React.FC = () => {
   const frame = useCurrentFrame();
+  const beat = useBeat();
   const drift = Math.sin(frame / 60) * 40;
   return (
     <AbsoluteFill style={{ backgroundColor: C.bg, overflow: "hidden" }}>
@@ -55,6 +56,7 @@ export const Background: React.FC = () => {
           background: C.lavender,
           filter: "blur(140px)",
           opacity: 0.75,
+          transform: `scale(${1 + 0.06 * beat})`,
         }}
       />
       <div
@@ -68,13 +70,25 @@ export const Background: React.FC = () => {
           background: C.mint,
           filter: "blur(140px)",
           opacity: 0.7,
+          transform: `scale(${1 + 0.06 * beat})`,
         }}
       />
     </AbsoluteFill>
   );
 };
 
-// estilo.md §5: fundido cruzado con desenfoque de 4–6 fotogramas.
+// Music beat (124 BPM): 1 right on each beat, decaying to 0 before the next.
+export const BPM = 124;
+export const useBeat = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const beat = (60 / BPM) * fps;
+  return Math.exp(-((frame % beat) / beat) * 6);
+};
+
+// estilo.md §5 + corrección "más dinámico": cruce con desenfoque en 6
+// fotogramas, la escena entrante crece 0,9 → 1 y la saliente "atraviesa" la
+// cámara (1 → 1,12).
 export const Scene: React.FC<{
   duration: number;
   children: React.ReactNode;
@@ -82,13 +96,14 @@ export const Scene: React.FC<{
   fadeOut?: boolean;
 }> = ({ duration, children, fadeIn = true, fadeOut = true }) => {
   const frame = useCurrentFrame();
-  const inP = fadeIn ? interpolate(frame, [0, 5], [0, 1], clamp) : 1;
+  const inP = fadeIn ? interpolate(frame, [0, 6], [0, 1], clamp) : 1;
   const outP = fadeOut
-    ? interpolate(frame, [duration - 5, duration], [1, 0], clamp)
+    ? interpolate(frame, [duration - 6, duration], [1, 0], clamp)
     : 1;
   const p = Math.min(inP, outP);
-  // estilo.md §6: zoom lento 1,00 → 1,05 mientras la escena está en pantalla.
-  const zoom = interpolate(frame, [0, duration], [1, 1.04], clamp);
+  // estilo.md §6: zoom lento 1,00 → 1,04 mientras la escena está en pantalla.
+  const drift = interpolate(frame, [0, duration], [1, 1.04], clamp);
+  const zoom = drift * (0.9 + 0.1 * inP) * (1 + 0.12 * (1 - outP));
   return (
     <AbsoluteFill
       style={{

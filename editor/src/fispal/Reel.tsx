@@ -83,10 +83,10 @@ export const FispalReel: React.FC = () => {
 
       {hasVoice && <Audio src={staticFile(VOICE)} />}
       <Audio
-        src={staticFile("music/bed.wav")}
-        // music bed sits ~13 dB under the voice, fades out with the logo
+        src={staticFile("music/upbeat.wav")}
+        // upbeat 124 BPM bed under the voice, fades out with the logo
         volume={(f) =>
-          interpolate(f, [0, 10, REEL_DURATION - 30, REEL_DURATION], [0, 0.22, 0.22, 0], {
+          interpolate(f, [0, 4, REEL_DURATION - 30, REEL_DURATION], [0, 0.3, 0.3, 0], {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
           })

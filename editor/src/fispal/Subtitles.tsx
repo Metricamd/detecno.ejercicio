@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, interpolate, spring, useCurrentFrame } from "remotion";
 import { buildPages, type Page, type Word } from "./captions";
 import { C, FONT, s } from "./theme";
 
@@ -10,13 +10,23 @@ const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const WordView: React.FC<{ word: Word; frame: number }> = ({ word, frame }) => {
   const p = interpolate(frame, [s(word.start), s(word.start) + 8], [0, 1], clamp);
   const hero = word.role === "hero";
+  // Highlighted word lands with a springy overshoot (more energy, same timing).
+  const pop = spring({
+    frame: frame - s(word.start),
+    fps: 30,
+    config: { damping: 9, stiffness: 180 },
+    from: 0.7,
+    to: 1,
+  });
   return (
     <span
       style={{
         display: "inline-block",
         opacity: p,
         filter: `blur(${(1 - p) * 8}px)`,
-        transform: `translateY(${(1 - p) * (hero ? 18 : 10)}px)`,
+        transform: hero
+          ? `scale(${pop}) translateY(${(1 - p) * 18}px)`
+          : `translateY(${(1 - p) * 10}px)`,
         margin: hero ? 0 : "0 0.14em",
       }}
     >

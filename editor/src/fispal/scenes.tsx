@@ -11,6 +11,25 @@ import {
 import { Dashboard } from "./Dashboard";
 import { C, FONT, MONO, s } from "./theme";
 import { CUE } from "./timeline";
+import { Stage } from "./three/Stage";
+import {
+  ApiNodes,
+  Blocks,
+  Calendar,
+  CheckBadge,
+  CoinStacks,
+  Contract,
+  Dial,
+  Floaters,
+  IdBadge,
+  Invoices,
+  Knot,
+  Modules,
+  Orb,
+  People,
+  PlanCard,
+  Pop,
+} from "./three/objects";
 import { Card, Check, Enter, Headline, Pill, ScanCorners, useEnter } from "./ui";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -67,15 +86,20 @@ export const S1Logo: React.FC<{ from?: number }> = () => {
   const dot = spring({ frame: frame - 10, fps: 30, config: { damping: 8 } });
   return (
     <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
-      <div style={{ position: "absolute", top: 420 }}>
-        <Enter delay={4}>
+      <Stage top={150} height={540}>
+        <Pop at={0} scale={1.15}>
+          <Orb />
+        </Pop>
+      </Stage>
+      <div style={{ position: "absolute", top: 1080 }}>
+        <Enter delay={8}>
           <Pill>Nueva experiencia</Pill>
         </Enter>
       </div>
       <div
         style={{
           position: "absolute",
-          top: 640,
+          top: 740,
           opacity: p,
           transform: `scale(${0.85 + 0.15 * p})`,
           filter: `blur(${(1 - p) * 10}px)`,
@@ -108,14 +132,25 @@ export const S2Contratar: React.FC<{ from: number }> = ({ from }) => {
   const tPill = at(CUE.contratar, from);
   const tPanel = at(CUE.gestionar, from);
   const panel = spring({ frame: frame - tPanel, fps, config: { damping: 14 } });
+  const push = spring({ frame: frame - tPill, fps, config: { damping: 16 } });
+  const pull = spring({ frame: frame - tPanel, fps, config: { damping: 16 } });
+  const cam = 1 + 0.1 * push - 0.1 * pull;
   return (
     <AbsoluteFill>
+      <Stage top={1000} height={470}>
+        <Pop at={tPill} position={[-2.2, 0, 0]} scale={0.95}>
+          <Contract />
+        </Pop>
+        <Pop at={tPanel + 4} position={[2.0, 0, 0]} scale={1} tilt={0.4}>
+          <PlanCard />
+        </Pop>
+      </Stage>
       <div style={{ position: "absolute", top: 190, width: "100%", display: "flex", justifyContent: "center" }}>
         <Enter delay={tPill}>
           <Pill>Nueva forma de contratar</Pill>
         </Enter>
       </div>
-      <div style={{ position: "absolute", left: 70, top: 330 }}>
+      <div style={{ position: "absolute", left: 70, top: 330, transform: `scale(${cam})`, transformOrigin: "50% 20%" }}>
         <Enter delay={0} from={0.92}>
           <div style={{ position: "relative", borderRadius: 22, boxShadow: "0 30px 80px rgba(37,14,148,.18)" }}>
             <Dashboard reveal={4} />
@@ -213,12 +248,31 @@ export const S3Personaliza: React.FC<{ from: number }> = ({ from }) => {
   const active = ADDONS.filter((a) => frame >= at(a.t, from)).length;
   return (
     <AbsoluteFill>
-      <div style={{ position: "absolute", top: 170, width: "100%", display: "flex", justifyContent: "center" }}>
-        <Enter delay={2}>
-          <Pill>Personaliza tu plan</Pill>
-        </Enter>
-      </div>
-      <div style={{ position: "absolute", left: 90, top: 290 }}>
+      {/* 3D icon of whatever the voice is naming right now */}
+      <Stage top={90} height={540}>
+        <Pop at={0} out={at(CUE.cfdi, from) - 3}>
+          <Blocks at={0} />
+        </Pop>
+        <Pop at={at(CUE.cfdi, from)} out={at(CUE.rfc, from) - 3} scale={1.05}>
+          <Invoices />
+        </Pop>
+        <Pop at={at(CUE.rfc, from)} out={at(CUE.modulos, from) - 3} scale={1.1}>
+          <IdBadge />
+        </Pop>
+        <Pop at={at(CUE.modulos, from)} out={at(CUE.colaboradores, from) - 3}>
+          <Modules at={at(CUE.modulos, from)} />
+        </Pop>
+        <Pop at={at(CUE.colaboradores, from)} out={at(CUE.integraciones, from) - 3} spin={0.006}>
+          <People />
+        </Pop>
+        <Pop at={at(CUE.integraciones, from)} out={at(CUE.integraciones, from) + 30}>
+          <ApiNodes />
+        </Pop>
+        <Pop at={at(CUE.integraciones, from) + 33} spin={0.004} tilt={0.15}>
+          <CheckBadge />
+        </Pop>
+      </Stage>
+      <div style={{ position: "absolute", left: 90, top: 620, transform: "scale(0.8)", transformOrigin: "50% 0" }}>
         <Enter delay={0} from={0.9}>
           <div style={{ position: "relative" }}>
             <Card style={{ width: 900, padding: "36px 40px", fontFamily: FONT }}>
@@ -279,14 +333,6 @@ export const S3Personaliza: React.FC<{ from: number }> = ({ from }) => {
               })}
             </Card>
             <ScanCorners width={900} height={1000} delay={4} />
-            {/* "Plan listo" badge lands on "API." so the card keeps moving */}
-            <div style={{ position: "absolute", left: 0, right: 0, bottom: -62, display: "flex", justifyContent: "center" }}>
-              <Enter delay={at(CUE.integraciones, from) + 30}>
-                <Pill style={{ background: C.accent, color: C.text }} dot={false}>
-                  ✓ Plan listo
-                </Pill>
-              </Enter>
-            </div>
           </div>
         </Enter>
       </div>
@@ -307,12 +353,19 @@ export const S4Selector: React.FC<{ from: number }> = ({ from }) => {
   const anualOn = frame >= tAnual + 4;
   return (
     <AbsoluteFill>
-      <div style={{ position: "absolute", top: 330, width: "100%" }}>
+      <Stage top={70} height={470}>
+        <Pop at={0} scale={1.15} spin={0} tilt={0.1}>
+          <group rotation={[0.25, -0.35, 0]}>
+            <Calendar annual={move} />
+          </group>
+        </Pop>
+      </Stage>
+      <div style={{ position: "absolute", top: 560, width: "100%" }}>
         <Enter delay={0}>
           <Headline size={78}>Elige cómo contratar.</Headline>
         </Enter>
       </div>
-      <div style={{ position: "absolute", top: 600, left: (1080 - W) / 2 }}>
+      <div style={{ position: "absolute", top: 730, left: (1080 - W) / 2 }}>
         <Enter delay={4}>
           <div
             style={{
@@ -366,7 +419,7 @@ export const S4Selector: React.FC<{ from: number }> = ({ from }) => {
           </div>
         </Enter>
       </div>
-      <div style={{ position: "absolute", top: 830, left: (1080 - W) / 2, width: W, display: "flex", justifyContent: "flex-end" }}>
+      <div style={{ position: "absolute", top: 960, left: (1080 - W) / 2, width: W, display: "flex", justifyContent: "flex-end" }}>
         <div
           style={{
             opacity: interpolate(frame, [tAnual + 6, tAnual + 12], [0, 1], clamp),
@@ -397,6 +450,11 @@ export const S5Ahorro: React.FC<{ from: number }> = ({ from }) => {
   const count = Math.round(interpolate(frame, [t20, t20 + 14], [0, 20], clamp));
   return (
     <AbsoluteFill style={{ alignItems: "center" }}>
+      <Stage top={1000} height={450}>
+        <group scale={[1.45, 1.45, 1.45]} position={[0, 0.6, 0]}>
+          <CoinStacks at={t20} />
+        </group>
+      </Stage>
       <div style={{ position: "absolute", top: 260 }}>
         <Enter delay={0}>
           <Pill>Plan anual</Pill>
@@ -436,7 +494,7 @@ export const S5Ahorro: React.FC<{ from: number }> = ({ from }) => {
       >
         de ahorro
       </div>
-      <div style={{ position: "absolute", top: 1010 }}>
+      <div style={{ position: "absolute", top: 915 }}>
         <Enter delay={at(CUE.alElegir, from)}>
           <div
             style={{
@@ -472,8 +530,19 @@ const CLAIMS = [
 export const S6Claims: React.FC<{ from: number }> = ({ from }) => {
   const frame = useCurrentFrame();
   return (
-    <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
-      <div style={{ display: "flex", flexDirection: "column", gap: 54 }}>
+    <AbsoluteFill style={{ alignItems: "center" }}>
+      <Stage top={90} height={560}>
+        <Pop at={at(CUE.masFlex, from)} out={at(CUE.masControl, from) - 3}>
+          <Knot />
+        </Pop>
+        <Pop at={at(CUE.masControl, from)} out={at(CUE.masFispal, from) - 3} spin={0.004}>
+          <Dial at={at(CUE.masControl, from)} />
+        </Pop>
+        <Pop at={at(CUE.masFispal, from)} scale={1.1}>
+          <Orb />
+        </Pop>
+      </Stage>
+      <div style={{ display: "flex", flexDirection: "column", gap: 54, marginTop: 720 }}>
         {CLAIMS.map((c, i) => {
           const t = at(c.t, from);
           const p = interpolate(frame, [t, t + 6], [0, 1], clamp);
@@ -518,6 +587,11 @@ export const S7Cierre: React.FC<{ from: number }> = ({ from }) => {
   const tUrl = at(CUE.url, from);
   return (
     <AbsoluteFill style={{ alignItems: "center" }}>
+      <Stage top={0} height={1920} z={18}>
+        <Pop at={0} spin={0} tilt={0}>
+          <Floaters />
+        </Pop>
+      </Stage>
       <div style={{ position: "absolute", top: 420 }}>
         <Enter delay={0} from={0.85}>
           <Img src={staticFile("brand/fispal-logo.png")} style={{ width: 700 }} />

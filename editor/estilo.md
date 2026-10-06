@@ -77,3 +77,14 @@ Valores en px convertidos a lienzo **1080×1920** (factor ×2,33). `[SUPOSICION]
   - Cada bloque de subtítulo es una frase hablada completa y dura **≥ 2 s**. Se queda en pantalla hasta que empieza el siguiente, sin salir antes.
   - Las palabras siguen apareciendo sincronizadas con la voz, pero **0,1 s antes** de que se digan y con una animación de entrada de **8 fotogramas** (antes eran 6).
   - En voces en off, las pausas entre frases se recortan a **0,6 s como máximo**, en lugar de quitar todo lo que supere 0,3 s. Así hay tiempo para leer.
+- **Ritmo más dinámico** (2026-10-06). Esta corrección no cambia la duración de los textos:
+  - Transición entre escenas: la escena saliente se escala de 1 a 1,12 con desenfoque y la entrante de 0,9 a 1, en **6 fotogramas**.
+  - La cámara se mueve dentro de las escenas largas: por ejemplo, se acerca un 10 % cuando la voz dice una palabra clave y vuelve a alejarse en la siguiente acción.
+  - La palabra destacada entra con un spring con rebote (escala 0,7 → 1; damping 9, stiffness 180).
+  - El fondo late con la música: las manchas se escalan un +6 % en cada beat.
+- **Música alegre y con ritmo** (2026-10-06). Tempo de **~124 BPM** en tono mayor (progresión I–V–vi–IV), con bombo en cada tiempo, palmas en 2 y 4, hi-hats a contratiempo, un bajo saltarín y una melodía de marimba. Va al **0,3** de volumen bajo la voz y la mezcla final queda en −15,5 LUFS.
+- **Gráficos 3D que ilustran lo que se dice** (2026-10-06). Se hacen con `@remotion/three` y se renderizan con `--gl=swangle`.
+  - Los objetos son simples y brillantes, con clearcoat y reflejos de RoomEnvironment, y usan solo los colores de la marca (verde, morado, lavanda, blanco y dorado para el dinero).
+  - Cada concepto tiene su objeto, que aparece **justo cuando la voz lo nombra**: entra con un giro y un spring con rebote, sale en 6 fotogramas y flota ligeramente mientras está en pantalla.
+  - Equivalencias usadas en Fispal: contratar = contrato con sello · plan = tarjeta · personalizar = bloques que encajan · CFDI = pila de facturas · RFC = credencial · módulos = cubos · colaboradores = personas · API = nodos conectados · mensual/anual = calendario · ahorro = pilas de monedas · flexibilidad = nudo · control = perilla · marca = esfera verde con anillo.
+  - El 3D ocupa la franja superior (≈ y 90–650) o la franja libre entre el gráfico y los subtítulos. Nunca tapa los subtítulos.
