@@ -20,37 +20,45 @@ import {
 } from "./scenes";
 import { Subtitles } from "./Subtitles";
 import { fontsLoaded, s } from "./theme";
+import { CUE, VOICE_DURATION } from "./timeline";
 import { Background, Scene } from "./ui";
 
-export const REEL_DURATION = s(27);
+// Voice-over + 1 s hold on the closing logo.
+export const REEL_DURATION = s(VOICE_DURATION + 1);
 const VOICE = "audio/voz.wav";
 
 // Scene cuts follow the voice-over phrases; consecutive scenes overlap by
 // 2 frames so the blur cross-fade (estilo.md §5) has both layers on screen.
+const cut = (t: number) => s(t - 0.15);
 const SCENES = [
-  { from: 0, to: s(1.9), C: S1Logo },
-  { from: s(1.86), to: s(4.93), C: S2Contratar },
-  { from: s(4.9), to: s(13.93), C: S3Personaliza },
-  { from: s(13.87), to: s(16.56), C: S4Selector },
-  { from: s(16.5), to: s(19.04), C: S5Ahorro },
-  { from: s(19.0), to: s(22.75), C: S6Claims },
-  { from: s(22.7), to: REEL_DURATION, C: S7Cierre },
+  { from: 0, to: cut(CUE.llego) + 2, C: S1Logo },
+  { from: cut(CUE.llego), to: cut(CUE.personaliza) + 2, C: S2Contratar },
+  { from: cut(CUE.personaliza), to: cut(CUE.elige) + 2, C: S3Personaliza },
+  { from: cut(CUE.elige), to: cut(CUE.y) + 2, C: S4Selector },
+  { from: cut(CUE.y), to: cut(CUE.masFlex) + 2, C: S5Ahorro },
+  { from: cut(CUE.masFlex), to: cut(CUE.conoce) + 2, C: S6Claims },
+  { from: cut(CUE.conoce), to: REEL_DURATION, C: S7Cierre },
 ];
 
 const SFX: { file: string; at: number; volume: number }[] = [
   // whoosh on every scene change
   ...SCENES.slice(1).map((sc) => ({ file: "whoosh", at: sc.from - 4, volume: 0.35 })),
   // pops on elements that land
-  { file: "pop", at: s(0.05), volume: 0.5 },
-  { file: "pop", at: s(2.85), volume: 0.4 },
-  { file: "pop", at: s(3.57), volume: 0.45 },
-  ...[7.92, 8.91, 10.36, 11.43, 12.53].map((t) => ({ file: "pop", at: s(t), volume: 0.5 })),
-  { file: "click", at: s(15.25), volume: 0.7 },
-  { file: "click", at: s(15.89), volume: 0.7 },
-  { file: "ding", at: s(17.04), volume: 0.3 },
-  ...[19.06, 20.4, 21.42].map((t) => ({ file: "pop", at: s(t), volume: 0.45 })),
-  { file: "click", at: s(4.14) + 2, volume: 0.6 },
-  { file: "click", at: s(24.36) + 18, volume: 0.6 },
+  { file: "pop", at: 2, volume: 0.5 },
+  { file: "pop", at: s(CUE.contratar), volume: 0.4 },
+  { file: "pop", at: s(CUE.gestionar), volume: 0.45 },
+  ...[CUE.cfdi, CUE.rfc, CUE.modulos, CUE.colaboradores, CUE.integraciones].map((t) => ({
+    file: "pop",
+    at: s(t),
+    volume: 0.5,
+  })),
+  { file: "ding", at: s(CUE.integraciones) + 30, volume: 0.25 },
+  { file: "click", at: s(CUE.mensual), volume: 0.7 },
+  { file: "click", at: s(CUE.anual), volume: 0.7 },
+  { file: "ding", at: s(CUE.veinte), volume: 0.3 },
+  ...[CUE.masFlex, CUE.masControl, CUE.masFispal].map((t) => ({ file: "pop", at: s(t), volume: 0.45 })),
+  { file: "click", at: s(CUE.gestionar) + 20, volume: 0.6 },
+  { file: "click", at: s(CUE.url) + 18, volume: 0.6 },
 ];
 
 export const FispalReel: React.FC = () => {
@@ -71,7 +79,7 @@ export const FispalReel: React.FC = () => {
           </Scene>
         </Sequence>
       ))}
-      <Subtitles />
+      <Subtitles end={REEL_DURATION / 30} />
 
       {hasVoice && <Audio src={staticFile(VOICE)} />}
       <Audio

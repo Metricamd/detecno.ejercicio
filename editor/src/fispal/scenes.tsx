@@ -10,6 +10,7 @@ import {
 } from "remotion";
 import { Dashboard } from "./Dashboard";
 import { C, FONT, MONO, s } from "./theme";
+import { CUE } from "./timeline";
 import { Card, Check, Enter, Headline, Pill, ScanCorners, useEnter } from "./ui";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -104,8 +105,8 @@ export const S1Logo: React.FC<{ from?: number }> = () => {
 export const S2Contratar: React.FC<{ from: number }> = ({ from }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const tPill = at(2.85, from);
-  const tPanel = at(3.57, from);
+  const tPill = at(CUE.contratar, from);
+  const tPanel = at(CUE.gestionar, from);
   const panel = spring({ frame: frame - tPanel, fps, config: { damping: 14 } });
   return (
     <AbsoluteFill>
@@ -199,11 +200,11 @@ const TypeLine: React.FC<{ text: string; start: number; end: number }> = ({
 };
 
 const ADDONS = [
-  { icon: "XML", title: "Paquetes de CFDI", sub: "+1,000 timbres", t: 7.92 },
-  { icon: "RFC", title: "RFC adicionales", sub: "+3 razones sociales", t: 8.91 },
-  { icon: "MOD", title: "Módulos avanzados", sub: "Nómina · Conciliación", t: 10.36 },
-  { icon: "USR", title: "Colaboradores", sub: "+5 usuarios", t: 11.43 },
-  { icon: "API", title: "Integraciones API", sub: "REST · Webhooks", t: 12.53 },
+  { icon: "XML", title: "Paquetes de CFDI", sub: "+1,000 timbres", t: CUE.cfdi },
+  { icon: "RFC", title: "RFC adicionales", sub: "+3 razones sociales", t: CUE.rfc },
+  { icon: "MOD", title: "Módulos avanzados", sub: "Nómina · Conciliación", t: CUE.modulos },
+  { icon: "USR", title: "Colaboradores", sub: "+5 usuarios", t: CUE.colaboradores },
+  { icon: "API", title: "Integraciones API", sub: "REST · Webhooks", t: CUE.integraciones },
 ];
 
 export const S3Personaliza: React.FC<{ from: number }> = ({ from }) => {
@@ -229,8 +230,8 @@ export const S3Personaliza: React.FC<{ from: number }> = ({ from }) => {
               </div>
               <TypeLine
                 text="Hecho a la medida de tu operación"
-                start={at(5.68, from)}
-                end={at(7.3, from)}
+                start={at(CUE.aLaMedida, from)}
+                end={at(CUE.operacionEnd, from)}
               />
               {ADDONS.map((a) => {
                 const on = spring({ frame: frame - at(a.t, from), fps, config: { damping: 12 } });
@@ -278,6 +279,14 @@ export const S3Personaliza: React.FC<{ from: number }> = ({ from }) => {
               })}
             </Card>
             <ScanCorners width={900} height={1000} delay={4} />
+            {/* "Plan listo" badge lands on "API." so the card keeps moving */}
+            <div style={{ position: "absolute", left: 0, right: 0, bottom: -62, display: "flex", justifyContent: "center" }}>
+              <Enter delay={at(CUE.integraciones, from) + 30}>
+                <Pill style={{ background: C.accent, color: C.text }} dot={false}>
+                  ✓ Plan listo
+                </Pill>
+              </Enter>
+            </div>
           </div>
         </Enter>
       </div>
@@ -289,8 +298,8 @@ export const S3Personaliza: React.FC<{ from: number }> = ({ from }) => {
 export const S4Selector: React.FC<{ from: number }> = ({ from }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const tMensual = at(15.25, from);
-  const tAnual = at(15.89, from);
+  const tMensual = at(CUE.mensual, from);
+  const tAnual = at(CUE.anual, from);
   const show = spring({ frame: frame - tMensual, fps, config: { damping: 14 } });
   const move = spring({ frame: frame - tAnual, fps, config: { damping: 13 } });
   const W = 860;
@@ -383,7 +392,7 @@ export const S4Selector: React.FC<{ from: number }> = ({ from }) => {
 export const S5Ahorro: React.FC<{ from: number }> = ({ from }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const t20 = at(17.04, from);
+  const t20 = at(CUE.veinte, from);
   const p = spring({ frame: frame - t20, fps, config: { damping: 11 } });
   const count = Math.round(interpolate(frame, [t20, t20 + 14], [0, 20], clamp));
   return (
@@ -428,7 +437,7 @@ export const S5Ahorro: React.FC<{ from: number }> = ({ from }) => {
         de ahorro
       </div>
       <div style={{ position: "absolute", top: 1010 }}>
-        <Enter delay={at(18.0, from)}>
+        <Enter delay={at(CUE.alElegir, from)}>
           <div
             style={{
               display: "inline-flex",
@@ -455,9 +464,9 @@ export const S5Ahorro: React.FC<{ from: number }> = ({ from }) => {
 
 /* ---------- Escena 6 — Más flexibilidad. Más control. Más Fispal. ---------- */
 const CLAIMS = [
-  { word: "flexibilidad.", t: 19.06 },
-  { word: "control.", t: 20.4 },
-  { word: "Fispal.", t: 21.42 },
+  { word: "flexibilidad.", t: CUE.masFlex },
+  { word: "control.", t: CUE.masControl },
+  { word: "Fispal.", t: CUE.masFispal },
 ];
 
 export const S6Claims: React.FC<{ from: number }> = ({ from }) => {
@@ -505,8 +514,8 @@ export const S6Claims: React.FC<{ from: number }> = ({ from }) => {
 /* ---------- Escena 7 — Cierre ---------- */
 export const S7Cierre: React.FC<{ from: number }> = ({ from }) => {
   const frame = useCurrentFrame();
-  const tCta = at(23.5, from);
-  const tUrl = at(24.36, from);
+  const tCta = at(CUE.experiencia, from);
+  const tUrl = at(CUE.url, from);
   return (
     <AbsoluteFill style={{ alignItems: "center" }}>
       <div style={{ position: "absolute", top: 420 }}>

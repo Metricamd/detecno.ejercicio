@@ -72,4 +72,8 @@ Valores en px convertidos a lienzo **1080×1920** (factor ×2,33). `[SUPOSICION]
 
 ---
 ## Correcciones del usuario (se añaden aquí y tienen prioridad sobre lo anterior)
-- _(vacío)_
+- **Voz con acento mexicano** (2026-10-06). Si la voz es sintética, se usa una voz del catálogo marcada como mexicana, con la etiqueta `[Mexican accent]` y velocidad 0,9. La voz elegida para Fispal es la femenina de Araceli Mendoza.
+- **Textos legibles, sin prisa** (2026-10-06). Esta corrección sustituye en parte a §1 y §2:
+  - Cada bloque de subtítulo es una frase hablada completa y dura **≥ 2 s**. Se queda en pantalla hasta que empieza el siguiente, sin salir antes.
+  - Las palabras siguen apareciendo sincronizadas con la voz, pero **0,1 s antes** de que se digan y con una animación de entrada de **8 fotogramas** (antes eran 6).
+  - En voces en off, las pausas entre frases se recortan a **0,6 s como máximo**, en lugar de quitar todo lo que supere 0,3 s. Así hay tiempo para leer.
