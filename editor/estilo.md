@@ -72,6 +72,7 @@ Valores en px convertidos a lienzo **1080×1920** (factor ×2,33). `[SUPOSICION]
 
 ---
 ## Correcciones del usuario (se añaden aquí y tienen prioridad sobre lo anterior)
+> Aprobado por el usuario el 2026-10-06 con el borrador 3 del reel de Fispal, que sirve de referencia para los próximos vídeos (`entregas/fispal-borrador-3.mp4`).
 - **Voz con acento mexicano** (2026-10-06). Si la voz es sintética, se usa una voz del catálogo marcada como mexicana, con la etiqueta `[Mexican accent]` y velocidad 0,9. La voz elegida para Fispal es la femenina de Araceli Mendoza.
 - **Textos legibles, sin prisa** (2026-10-06). Esta corrección sustituye en parte a §1 y §2:
   - Cada bloque de subtítulo es una frase hablada completa y dura **≥ 2 s**. Se queda en pantalla hasta que empieza el siguiente, sin salir antes.
