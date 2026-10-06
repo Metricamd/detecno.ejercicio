@@ -10,3 +10,9 @@ import { Config } from "@remotion/cli/config";
 Config.setRspack(true);
 Config.setVideoImageFormat("jpeg");
 Config.setOverwriteOutput(true);
+
+// Optional: point to a preinstalled headless shell (e.g. in cloud containers
+// where Remotion can't download its own browser).
+if (process.env.REMOTION_CHROME) {
+  Config.setBrowserExecutable(process.env.REMOTION_CHROME);
+}
