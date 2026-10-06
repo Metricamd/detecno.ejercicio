@@ -11,6 +11,7 @@ const StudioEnv: React.FC = () => {
   useEffect(() => {
     const pmrem = new THREE.PMREMGenerator(gl);
     const tex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    scene.environmentIntensity = 0.55;
     scene.environment = tex;
     return () => {
       tex.dispose();
@@ -35,12 +36,14 @@ export const Stage: React.FC<{
       width={width}
       height={height}
       camera={{ position: [0, 0, z], fov }}
+      // no filmic tone mapping: keep brand colors (#20D99D, #250E94) true
+      flat
       gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }}
       style={{ background: "transparent" }}
     >
       <StudioEnv />
-      <ambientLight intensity={0.95} />
-      <directionalLight position={[4, 6, 8]} intensity={1.6} />
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[4, 6, 8]} intensity={1.1} />
       <directionalLight position={[-6, -2, 4]} intensity={0.5} color="#C9C2FF" />
       {children}
     </ThreeCanvas>

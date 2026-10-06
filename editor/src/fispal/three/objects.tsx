@@ -155,7 +155,7 @@ export const Blocks: React.FC<{ at: number }> = ({ at }) => {
     { p: [0.62, 0.62, 0], c: LAVENDER },
   ];
   return (
-    <group rotation={[0.5, 0.6, 0]}>
+    <group rotation={[0.3, 0.35, 0]}>
       {pieces.map((b, i) => {
         const k = spring({ frame: frame - at - i * 5, fps, config: { damping: 11 } });
         return (
