@@ -3,6 +3,7 @@ import { MyComposition } from "./Composition";
 import { CUENTA_DURATION, CuentaReel } from "./cuenta/Reel";
 import { FispalReel, REEL_DURATION } from "./fispal/Reel";
 import { AlmacenamientoPost } from "./posts/Almacenamiento";
+import { MODULOS_FRAMES, ModulosRfcCarousel } from "./posts/ModulosRFC";
 import { PERSONALIZA_FRAMES, PersonalizaCarousel, POST_H, POST_W } from "./posts/Personaliza";
 
 export const RemotionRoot: React.FC = () => {
@@ -37,6 +38,14 @@ export const RemotionRoot: React.FC = () => {
         id="PostAlmacenamiento"
         component={AlmacenamientoPost}
         durationInFrames={60}
+        fps={30}
+        width={POST_W}
+        height={POST_H}
+      />
+      <Composition
+        id="CarruselModulosRFC"
+        component={ModulosRfcCarousel}
+        durationInFrames={MODULOS_FRAMES}
         fps={30}
         width={POST_W}
         height={POST_H}

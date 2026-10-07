@@ -1,5 +1,6 @@
 // 3D objects for the "Mi cuenta" reel (same material language as objects.tsx).
-import React from "react";
+import React, { useMemo } from "react";
+import * as THREE from "three";
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { Glossy, RBox } from "./objects";
 
@@ -7,6 +8,7 @@ const GREEN = "#20D99D";
 const PURPLE = "#250E94";
 const LAVENDER = "#C9C2FF";
 const WHITE = "#FFFFFF";
+const GOLD = "#FFD84D";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
@@ -194,6 +196,83 @@ export const ArchiveBox: React.FC = () => {
           />
         ))}
       </group>
+    </group>
+  );
+};
+
+const extrude = (shape: THREE.Shape, depth: number) =>
+  new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelSize: 0.06, bevelThickness: 0.06, bevelSegments: 4, curveSegments: 24 });
+
+/* ---- Auditoría: escudo con check ---- */
+export const Shield: React.FC = () => {
+  const geo = useMemo(() => {
+    const s = new THREE.Shape();
+    s.moveTo(0, 1.25);
+    s.bezierCurveTo(0.55, 1.0, 0.95, 1.0, 1.1, 0.95);
+    s.bezierCurveTo(1.1, -0.2, 0.75, -0.9, 0, -1.3);
+    s.bezierCurveTo(-0.75, -0.9, -1.1, -0.2, -1.1, 0.95);
+    s.bezierCurveTo(-0.95, 1.0, -0.55, 1.0, 0, 1.25);
+    const g = extrude(s, 0.35);
+    g.center();
+    return g;
+  }, []);
+  return (
+    <group>
+      <mesh geometry={geo}>
+        <Glossy color={GREEN} />
+      </mesh>
+      <group position={[0, 0.02, 0.28]} scale={[0.9, 0.9, 0.9]}>
+        <RBox size={[0.2, 0.45, 0.12]} radius={0.05} color={WHITE} position={[-0.18, -0.06, 0]} rotation={[0, 0, 0.75]} />
+        <RBox size={[0.2, 0.85, 0.12]} radius={0.05} color={WHITE} position={[0.15, 0.1, 0]} rotation={[0, 0, -0.65]} />
+      </group>
+    </group>
+  );
+};
+
+/* ---- Cancelaciones: documento con X ---- */
+export const CancelDoc: React.FC = () => (
+  <group>
+    <RBox size={[1.8, 2.3, 0.14]} radius={0.08} color={WHITE} />
+    {[0.7, 0.45, 0.2].map((y, i) => (
+      <RBox key={y} size={[i === 0 ? 1.1 : 1.3, 0.1, 0.04]} radius={0.03} color={LAVENDER} position={[i === 0 ? -0.15 : 0, y, 0.09]} />
+    ))}
+    <group position={[0.35, -0.55, 0.25]}>
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.6, 0.6, 0.2, 48]} />
+        <Glossy color="#EC4C7A" />
+      </mesh>
+      <RBox size={[0.16, 0.75, 0.1]} radius={0.04} color={WHITE} position={[0, 0, 0.12]} rotation={[0, 0, 0.785]} />
+      <RBox size={[0.16, 0.75, 0.1]} radius={0.04} color={WHITE} position={[0, 0, 0.12]} rotation={[0, 0, -0.785]} />
+    </group>
+  </group>
+);
+
+/* ---- Riesgo: señal de alerta ---- */
+export const AlertSign: React.FC = () => {
+  const geo = useMemo(() => {
+    const s = new THREE.Shape();
+    const r = 0.18;
+    s.moveTo(-1.2 + r, -1);
+    s.lineTo(1.2 - r, -1);
+    s.quadraticCurveTo(1.2, -1, 1.1, -0.84);
+    s.lineTo(0.1, 1.05);
+    s.quadraticCurveTo(0, 1.2, -0.1, 1.05);
+    s.lineTo(-1.1, -0.84);
+    s.quadraticCurveTo(-1.2, -1, -1.2 + r, -1);
+    const g = extrude(s, 0.3);
+    g.center();
+    return g;
+  }, []);
+  return (
+    <group>
+      <mesh geometry={geo}>
+        <Glossy color={GOLD} metal={0} rough={0.2} />
+      </mesh>
+      <RBox size={[0.18, 0.75, 0.1]} radius={0.06} color={PURPLE} position={[0, 0.02, 0.26]} />
+      <mesh position={[0, -0.6, 0.26]}>
+        <sphereGeometry args={[0.11, 24, 24]} />
+        <Glossy color={PURPLE} />
+      </mesh>
     </group>
   );
 };
