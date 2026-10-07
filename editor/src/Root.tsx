@@ -2,6 +2,7 @@ import { Composition } from "remotion";
 import { MyComposition } from "./Composition";
 import { CUENTA_DURATION, CuentaReel } from "./cuenta/Reel";
 import { FispalReel, REEL_DURATION } from "./fispal/Reel";
+import { PERSONALIZA_FRAMES, PersonalizaCarousel, POST_H, POST_W } from "./posts/Personaliza";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -22,6 +23,14 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1080}
         height={1920}
+      />
+      <Composition
+        id="CarruselPersonaliza"
+        component={PersonalizaCarousel}
+        durationInFrames={PERSONALIZA_FRAMES}
+        fps={30}
+        width={POST_W}
+        height={POST_H}
       />
     </>
   );

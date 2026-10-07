@@ -112,3 +112,25 @@ export const PieChart: React.FC<{ at: number[] }> = ({ at }) => {
     </group>
   );
 };
+
+/* ---- Paquetes de CFDI: three invoice stacks of growing volume ---- */
+export const InvoiceTiers: React.FC<{ selected?: number }> = ({ selected = 1 }) => {
+  const frame = useCurrentFrame();
+  const heights = [3, 7, 12];
+  return (
+    <group rotation={[0.32, -0.45, 0]}>
+      {heights.map((h, s) => {
+        const shown = Math.floor(interpolate(frame - s * 5, [0, 20], [0, h], clamp));
+        return Array.from({ length: shown }).map((_, i) => (
+          <group key={`${s}-${i}`} position={[s * 1.9 - 1.9, -1.5 + i * 0.16, 0]} rotation={[0, (i % 3) * 0.04, 0]}>
+            <RBox
+              size={[1.4, 0.1, 1.8]}
+              radius={0.04}
+              color={i === shown - 1 ? (s === selected ? GREEN : PURPLE) : i % 2 ? WHITE : LAVENDER}
+            />
+          </group>
+        ));
+      })}
+    </group>
+  );
+};
