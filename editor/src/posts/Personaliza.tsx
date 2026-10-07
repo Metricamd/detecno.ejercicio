@@ -38,15 +38,15 @@ export const SLIDE_FRAMES = 60;
 export const STILL_AT = 50;
 
 const TOTAL = 6;
-const BLUE = C.purple; // brand blue replaces black everywhere
-const MUTED = "#5B5F86";
-const SHADOW = "0 24px 60px rgba(37,14,148,.16), 0 2px 6px rgba(37,14,148,.06)";
+export const BLUE = C.purple; // brand blue replaces black everywhere
+export const MUTED = "#5B5F86";
+export const SHADOW = "0 24px 60px rgba(37,14,148,.16), 0 2px 6px rgba(37,14,148,.06)";
 
 /* ---------- shared pieces ---------- */
 
-type Seg = string | { hl: string };
+export type Seg = string | { hl: string };
 
-const Headline: React.FC<{ parts: Seg[]; size?: number }> = ({ parts, size = 70 }) => (
+export const Headline: React.FC<{ parts: Seg[]; size?: number }> = ({ parts, size = 70 }) => (
   <div style={{ fontFamily: FONT, fontWeight: 800, fontSize: size, lineHeight: 1.06, letterSpacing: "-0.03em", color: BLUE }}>
     {parts.map((p, i) =>
       typeof p === "string" ? <span key={i}>{p}</span> : <span key={i} style={{ color: C.accent }}>{p.hl}</span>,
@@ -54,7 +54,7 @@ const Headline: React.FC<{ parts: Seg[]; size?: number }> = ({ parts, size = 70 
   </div>
 );
 
-const Sub: React.FC<{ children: React.ReactNode; width?: number }> = ({ children, width }) => (
+export const Sub: React.FC<{ children: React.ReactNode; width?: number }> = ({ children, width }) => (
   <div style={{ fontFamily: FONT, fontWeight: 500, fontSize: 32, lineHeight: 1.35, color: MUTED, marginTop: 18, maxWidth: width }}>
     {children}
   </div>
@@ -62,7 +62,7 @@ const Sub: React.FC<{ children: React.ReactNode; width?: number }> = ({ children
 
 // Photo slot: shows public/photos/<name>.jpg when it exists, otherwise a
 // branded placeholder so the layout can be reviewed before the photo arrives.
-const Photo: React.FC<{
+export const Photo: React.FC<{
   name: string;
   hint: string;
   style: React.CSSProperties;
@@ -107,14 +107,14 @@ const Photo: React.FC<{
 };
 
 // Flat colour shapes behind the content for a livelier composition.
-const Blob: React.FC<{ style: React.CSSProperties; color?: string; rotate?: number; radius?: number | string }> = ({
+export const Blob: React.FC<{ style: React.CSSProperties; color?: string; rotate?: number; radius?: number | string }> = ({
   style,
   color = C.accent,
   rotate = 0,
   radius = "50%",
 }) => <div style={{ position: "absolute", background: color, borderRadius: radius, transform: `rotate(${rotate}deg)`, ...style }} />;
 
-const Dots: React.FC<{ x: number; y: number; cols?: number; rows?: number; color?: string }> = ({
+export const Dots: React.FC<{ x: number; y: number; cols?: number; rows?: number; color?: string }> = ({
   x,
   y,
   cols = 6,
@@ -128,7 +128,7 @@ const Dots: React.FC<{ x: number; y: number; cols?: number; rows?: number; color
   </svg>
 );
 
-const Chip: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
+export const Chip: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
   <span
     style={{
       display: "inline-flex",
@@ -150,7 +150,7 @@ const Chip: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }>
   </span>
 );
 
-const IconTile: React.FC<{ code: string; size?: number; color?: string }> = ({ code, size = 72, color = BLUE }) => (
+export const IconTile: React.FC<{ code: string; size?: number; color?: string }> = ({ code, size = 72, color = BLUE }) => (
   <div
     style={{
       width: size,
@@ -173,9 +173,9 @@ const IconTile: React.FC<{ code: string; size?: number; color?: string }> = ({ c
 
 // Decorative 3D floaters placed by hand (px on the 1080×1350 slide) in empty
 // zones so they never cover text. Camera z=16, fov 30 → 157.5 px per unit.
-type Floater = [x: number, y: number, r: number, color: string, torus?: boolean];
+export type Floater = [x: number, y: number, r: number, color: string, torus?: boolean];
 const PX = 157.5;
-const PostFloaters: React.FC<{ items: Floater[] }> = ({ items }) => {
+export const PostFloaters: React.FC<{ items: Floater[] }> = ({ items }) => {
   const frame = useCurrentFrame();
   return (
     <>
@@ -193,9 +193,9 @@ const PostFloaters: React.FC<{ items: Floater[] }> = ({ items }) => {
   );
 };
 
-const G = C.accent;
-const P = C.purple;
-const L = "#C9C2FF";
+export const G = C.accent;
+export const P = C.purple;
+export const L = "#C9C2FF";
 
 const Frame: React.FC<{
   n: number;

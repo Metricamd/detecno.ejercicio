@@ -134,3 +134,66 @@ export const InvoiceTiers: React.FC<{ selected?: number }> = ({ selected = 1 }) 
     </group>
   );
 };
+
+/* ---- Almacenamiento: nube con flecha de subida ---- */
+export const StorageCloud: React.FC = () => {
+  const frame = useCurrentFrame();
+  const puffs: [number, number, number, number][] = [
+    [-1.3, -0.2, 0, 0.85],
+    [0, 0.35, 0.1, 1.15],
+    [1.25, -0.15, 0, 0.9],
+    [-0.55, -0.55, 0.35, 0.7],
+    [0.65, -0.6, 0.35, 0.7],
+  ];
+  const bob = Math.sin(frame / 10) * 0.12;
+  return (
+    <group>
+      {puffs.map(([x, y, z, r], i) => (
+        <mesh key={i} position={[x, y, z]}>
+          <sphereGeometry args={[r, 48, 48]} />
+          <Glossy color="#EEEBFF" rough={0.2} />
+        </mesh>
+      ))}
+      <group position={[0, -0.15 + bob, 1.2]}>
+        <RBox size={[0.36, 0.9, 0.3]} radius={0.1} color={GREEN} position={[0, -0.2, 0]} />
+        <mesh position={[0, 0.42, 0]}>
+          <coneGeometry args={[0.45, 0.55, 4]} />
+          <Glossy color={GREEN} />
+        </mesh>
+      </group>
+    </group>
+  );
+};
+
+/* ---- Archivero con cajón abierto y documentos ---- */
+export const ArchiveBox: React.FC = () => {
+  const frame = useCurrentFrame();
+  const open = interpolate(frame, [0, 18], [0, 1], clamp);
+  return (
+    <group rotation={[0.3, -0.55, 0]}>
+      <RBox size={[2.2, 2.8, 2]} radius={0.14} color={PURPLE} />
+      {/* two closed drawers */}
+      {[0.75, -0.2].map((y) => (
+        <group key={y}>
+          <RBox size={[1.9, 0.8, 0.1]} radius={0.06} color="#3A23B5" position={[0, y, 1.02]} />
+          <RBox size={[0.6, 0.12, 0.12]} radius={0.05} color={GREEN} position={[0, y, 1.1]} />
+        </group>
+      ))}
+      {/* open bottom drawer full of documents */}
+      <group position={[0, -1.05, 0.3 + open * 1.1]}>
+        <RBox size={[1.9, 0.75, 1.6]} radius={0.06} color={LAVENDER} />
+        <RBox size={[0.6, 0.12, 0.12]} radius={0.05} color={GREEN} position={[0, 0, 0.82]} />
+        {[-0.5, -0.2, 0.1, 0.4].map((z, i) => (
+          <RBox
+            key={z}
+            size={[1.5, 0.9, 0.05]}
+            radius={0.03}
+            color={i === 3 ? GREEN : WHITE}
+            position={[0, 0.55 + (i % 2) * 0.08, z]}
+            rotation={[-0.15, 0, (i - 1.5) * 0.04]}
+          />
+        ))}
+      </group>
+    </group>
+  );
+};
