@@ -5,7 +5,7 @@
 import React, { useEffect, useState } from "react";
 import { AbsoluteFill, continueRender, delayRender, Img, Sequence, staticFile } from "remotion";
 import { FEATURES } from "./Carrusel";
-import { BARLOW, GradientButton, H, HandArrow, Laptop, Logo, RALEWAY, V, VHeadline, venversFonts, W } from "./kit";
+import { BARLOW, H, Laptop, Logo, RALEWAY, V, VHeadline, venversFonts, W } from "./kit";
 import { PortalDesktop } from "./screens";
 
 const ILLUS = (n: string) => staticFile(`venvers/3d/${n}.png`);
@@ -43,7 +43,6 @@ const WBackground: React.FC<{ glows: Glow[]; rings?: { x: number; y: number; r: 
   </AbsoluteFill>
 );
 
-const ARROW = V.violet;
 
 /* ---------- Slide 1 — hook: overflowing inbox ---------- */
 const INBOX = [
@@ -126,27 +125,6 @@ const S2: React.FC = () => (
 );
 
 /* ---------- Slide 3 — validated CFDI, fewer emails ---------- */
-const CompareCard: React.FC<{ y: number; kind: "bad" | "ok"; title: string; lines: string[] }> = ({ y, kind, title, lines }) => {
-  const c = kind === "ok" ? V.ok : V.bad;
-  return (
-    <div style={{ position: "absolute", left: M, top: y, width: 500, background: "#fff", borderRadius: 30, padding: "28px 30px", boxShadow: SHADOW, fontFamily: BARLOW, border: `2px solid ${c}33`, boxSizing: "border-box" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-        <div style={{ width: 54, height: 54, borderRadius: "50%", background: c, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <svg width={28} height={28} viewBox="0 0 24 24">
-            <path d={kind === "ok" ? "M5 12.5l4.5 4.5L19 7.5" : "M6 6l12 12M18 6L6 18"} fill="none" stroke="#fff" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-        <span style={{ fontSize: 34, fontWeight: 700, color: INK }}>{title}</span>
-      </div>
-      {lines.map((l) => (
-        <div key={l} style={{ fontSize: 27, color: "#4A4F70", marginTop: 12, paddingLeft: 68 }}>
-          {l}
-        </div>
-      ))}
-    </div>
-  );
-};
-
 const S3: React.FC = () => (
   <AbsoluteFill>
     <WBackground glows={[{ x: 850, y: 1000, r: 560 }, { x: 0, y: 60, r: 380, o: 0.8 }]} rings={[{ x: 850, y: 1000, r: 380 }, { x: 850, y: 1000, r: 470 }]} />
@@ -158,10 +136,7 @@ const S3: React.FC = () => (
       style={{ position: "absolute", left: M, top: 180, color: INK, lineHeight: 1.1 }}
       parts={["Recibe ", { b: "CFDI validados" }, " y reduce correos para aclarar rechazos o preguntar por el pago."]}
     />
-    <CompareCard y={720} kind="bad" title="Antes" lines={["Rechazos por correo", "“¿Ya me pagaron?”"]} />
-    <HandArrow x={250} y={958} w={120} h={110} d="M20 6 C 0 50, 20 80, 60 100" head="M30 96 L62 102 L60 70" color={ARROW} />
-    <CompareCard y={1060} kind="ok" title="Con Venvers" lines={["CFDI validado al recibirlo", "Estatus de pago visible"]} />
-    <Img src={ILLUS("cfdi-validado")} style={{ position: "absolute", left: 610, top: 780, width: 450, height: 440 }} />
+    <Img src={ILLUS("cfdi-validado")} style={{ position: "absolute", left: 170, top: 630, width: 720, height: 704 }} />
   </AbsoluteFill>
 );
 
@@ -170,16 +145,14 @@ const S4: React.FC = () => (
   <AbsoluteFill>
     <WBackground glows={[{ x: 880, y: 820, r: 560 }, { x: 40, y: 1300, r: 380, o: 0.8 }]} rings={[{ x: 880, y: 820, r: 400 }]} />
     <Logo x={M} y={70} h={58} dark />
-    <VHeadline size={88} width={W - M * 2} accent={V.purple} style={{ position: "absolute", left: M, top: 180, color: INK }} parts={["Todo el ciclo, ", { b: "en un solo portal" }]} />
-    <div style={{ position: "absolute", left: M, right: M, top: 440, height: 840, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+    <div style={{ position: "absolute", left: M, right: M, top: 190, height: 1080, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
       {FEATURES.map((f, n) => (
         <div key={f.t} style={{ background: "#fff", borderRadius: 34, padding: "18px 40px 18px 18px", boxShadow: SHADOW, display: "flex", gap: 22, alignItems: "center", border: "1px solid #ECEAFB" }}>
-          <div style={{ width: 220, height: 220, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, borderRadius: 26, background: "radial-gradient(circle, rgba(123,92,245,.22) 0%, rgba(123,92,245,0) 70%)" }}>
-            <Img src={ILLUS(["doc-check", "ojo", "monedas"][n])} style={{ maxWidth: 190, maxHeight: 190 }} />
+          <div style={{ width: 260, height: 260, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, borderRadius: 26, background: "radial-gradient(circle, rgba(123,92,245,.22) 0%, rgba(123,92,245,0) 70%)" }}>
+            <Img src={ILLUS(["doc-check", "ojo", "monedas"][n])} style={{ maxWidth: 230, maxHeight: 230 }} />
           </div>
           <div>
-            <div style={{ fontFamily: RALEWAY, fontWeight: 800, fontSize: 42, color: INK, lineHeight: 1.12 }}>{f.t}</div>
-            <div style={{ fontFamily: RALEWAY, fontWeight: 500, fontSize: 31, color: "#5A5F80", marginTop: 10 }}>{f.d}</div>
+            <div style={{ fontFamily: RALEWAY, fontWeight: 800, fontSize: 52, color: INK, lineHeight: 1.12 }}>{f.t}</div>
           </div>
         </div>
       ))}
@@ -192,14 +165,8 @@ const S5: React.FC = () => (
   <AbsoluteFill>
     <WBackground glows={[{ x: 540, y: 1150, r: 700 }, { x: 1040, y: 100, r: 380, o: 0.8 }]} rings={[{ x: 540, y: 1150, r: 520 }, { x: 540, y: 1150, r: 620 }]} />
     <Logo x={M} y={70} h={58} dark />
-    <VHeadline size={104} width={W - M * 2} accent={V.purple} style={{ position: "absolute", left: M, top: 180, color: INK, lineHeight: 1.05 }} parts={["Solicita una ", { b: "demo" }, " de Venvers"]} />
-    <div style={{ position: "absolute", left: M, top: 430, width: 880, fontFamily: RALEWAY, fontWeight: 500, fontSize: 38, color: "#4A4F70", lineHeight: 1.3 }}>
-      Transforma la forma en que interactúas con tus proveedores.
-    </div>
-    <div style={{ position: "absolute", left: M, top: 580 }}>
-      <GradientButton size={46}>Solicitar demo →</GradientButton>
-    </div>
-    <Img src={ILLUS("planeta")} style={{ position: "absolute", left: 40, top: 720, width: 1000, height: 615 }} />
+    <VHeadline size={124} width={W - M * 2} accent={V.purple} style={{ position: "absolute", left: M, top: 200, color: INK, lineHeight: 1.05 }} parts={["Solicita una ", { b: "demo" }, " de Venvers"]} />
+    <Img src={ILLUS("planeta")} style={{ position: "absolute", left: 0, top: 640, width: 1080, height: 664 }} />
   </AbsoluteFill>
 );
 
