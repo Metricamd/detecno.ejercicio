@@ -1,14 +1,11 @@
 // Venvers carousel, white version (4:5, 5 slides) — "Cuentas por pagar".
-// Same copy as Carrusel.tsx on a white canvas with soft circular purple
-// gradients; large headlines and visuals anchored to the bottom edge so no
-// slide is left with empty bands.
+// Brief copy verbatim on a white canvas with soft circular purple gradients;
+// each visual is an isometric floating-UI scene (iso.tsx) about its text.
 import React, { useEffect, useState } from "react";
-import { AbsoluteFill, continueRender, delayRender, Img, Sequence, staticFile } from "remotion";
+import { AbsoluteFill, continueRender, delayRender, Sequence } from "remotion";
 import { FEATURES } from "./Carrusel";
-import { BARLOW, H, Laptop, Logo, RALEWAY, V, VHeadline, venversFonts, W } from "./kit";
-import { PortalDesktop } from "./screens";
-
-const ILLUS = (n: string) => staticFile(`venvers/3d/${n}.png`);
+import { BARLOW, H, Logo, RALEWAY, V, VHeadline, venversFonts, W } from "./kit";
+import { SceneCfdi, SceneFeatures, SceneHero, SceneInbox, ScenePortal } from "./iso";
 
 const M = 80; // side margin
 const INK = V.navy;
@@ -99,12 +96,11 @@ const S1: React.FC = () => (
       style={{ position: "absolute", left: M, top: 180, color: INK, lineHeight: 1.08 }}
       parts={["¿Sigues recibiendo ", { b: "facturas de proveedores por correo" }, " y aclarando rechazos uno por uno?"]}
     />
-    <InboxVisual x={M} y={660} />
+    <SceneInbox x={0} y={740} w={W} h={680} />
   </AbsoluteFill>
 );
 
 /* ---------- Slide 2 — one portal ---------- */
-const MODS = ["Licitaciones", "Expedientes", "Órdenes", "CFDI", "Pagos"];
 
 const S2: React.FC = () => (
   <AbsoluteFill>
@@ -117,18 +113,7 @@ const S2: React.FC = () => (
       style={{ position: "absolute", left: M, top: 180, color: INK, lineHeight: 1.1 }}
       parts={["Con Venvers, gestiona ", { b: "licitaciones, expedientes, órdenes, CFDI y pagos" }, " desde un solo portal."]}
     />
-    <div style={{ position: "absolute", left: M, right: M, top: 650, display: "flex", flexWrap: "wrap", gap: 14 }}>
-      {MODS.map((m) => (
-        <span key={m} style={{ fontFamily: RALEWAY, fontWeight: 700, fontSize: 30, color: V.white, background: `linear-gradient(180deg, ${V.violet}, ${V.purple})`, borderRadius: 999, padding: "10px 26px", boxShadow: "0 10px 24px rgba(91,43,224,.28)" }}>
-          {m}
-        </span>
-      ))}
-    </div>
-    <Laptop x={150} y={800} w={780}>
-      <div style={{ transform: `scale(${(780 - 44) / 1000})`, transformOrigin: "0 0" }}>
-        <PortalDesktop />
-      </div>
-    </Laptop>
+    <ScenePortal x={0} y={700} w={W} h={680} />
   </AbsoluteFill>
 );
 
@@ -144,7 +129,7 @@ const S3: React.FC = () => (
       style={{ position: "absolute", left: M, top: 180, color: INK, lineHeight: 1.1 }}
       parts={["Recibe ", { b: "CFDI validados" }, " y reduce correos para aclarar rechazos o preguntar por el pago."]}
     />
-    <Img src={ILLUS("cfdi-validado")} style={{ position: "absolute", left: 170, top: 630, width: 720, height: 704 }} />
+    <SceneCfdi x={0} y={720} w={W} h={680} />
   </AbsoluteFill>
 );
 
@@ -153,18 +138,17 @@ const S4: React.FC = () => (
   <AbsoluteFill>
     <WBackground glows={[{ x: 880, y: 820, r: 560 }, { x: 40, y: 1300, r: 380, o: 0.8 }]} rings={[{ x: 880, y: 820, r: 400 }]} />
     <Logo x={M} y={70} h={58} dark />
-    <div style={{ position: "absolute", left: M, right: M, top: 190, height: 1080, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+    <div style={{ position: "absolute", left: M, right: M, top: 190, display: "flex", flexDirection: "column", gap: 26 }}>
       {FEATURES.map((f, n) => (
-        <div key={f.t} style={{ background: "#fff", borderRadius: 34, padding: "18px 40px 18px 18px", boxShadow: SHADOW, display: "flex", gap: 22, alignItems: "center", border: "1px solid #ECEAFB" }}>
-          <div style={{ width: 260, height: 260, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, borderRadius: 26, background: "radial-gradient(circle, rgba(123,92,245,.22) 0%, rgba(123,92,245,0) 70%)" }}>
-            <Img src={ILLUS(["doc-check", "ojo", "monedas"][n])} style={{ maxWidth: 230, maxHeight: 230 }} />
+        <div key={f.t} style={{ display: "flex", alignItems: "center", gap: 26 }}>
+          <div style={{ width: 76, height: 76, borderRadius: "50%", background: `linear-gradient(135deg, #8E6BFF, ${V.purple})`, color: "#fff", fontFamily: RALEWAY, fontWeight: 800, fontSize: 38, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 12px 28px rgba(91,43,224,.35)" }}>
+            {n + 1}
           </div>
-          <div>
-            <div style={{ fontFamily: RALEWAY, fontWeight: 800, fontSize: 52, color: INK, lineHeight: 1.12 }}>{f.t}</div>
-          </div>
+          <div style={{ fontFamily: RALEWAY, fontWeight: 800, fontSize: 52, color: INK, lineHeight: 1.1 }}>{f.t}</div>
         </div>
       ))}
     </div>
+    <SceneFeatures x={0} y={660} w={W} h={700} />
   </AbsoluteFill>
 );
 
@@ -174,7 +158,7 @@ const S5: React.FC = () => (
     <WBackground glows={[{ x: 540, y: 1150, r: 700 }, { x: 1040, y: 100, r: 380, o: 0.8 }]} rings={[{ x: 540, y: 1150, r: 520 }, { x: 540, y: 1150, r: 620 }]} />
     <Logo x={M} y={70} h={58} dark />
     <VHeadline size={124} width={W - M * 2} accent={V.purple} style={{ position: "absolute", left: M, top: 200, color: INK, lineHeight: 1.05 }} parts={["Solicita una ", { b: "demo" }, " de Venvers"]} />
-    <Img src={ILLUS("planeta")} style={{ position: "absolute", left: 0, top: 640, width: 1080, height: 664 }} />
+    <SceneHero x={0} y={640} w={W} h={740} />
   </AbsoluteFill>
 );
 
