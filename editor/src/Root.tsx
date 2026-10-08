@@ -8,6 +8,8 @@ import { VENVERS_FRAMES, VenversCard3D, VenversCarousel } from "./venvers/Carrus
 import { VenversAsset } from "./venvers/Assets";
 import { VenversIllus } from "./venvers/three";
 import { calculateReelMetadata, VenversReel } from "./VenversReel";
+import { calculateContraloria, ContraloriaReel } from "./contraloria/Reel";
+import { TOTAL_FRAMES as CONTRALORIA_FRAMES } from "./contraloria/timings";
 import { VENVERS_W_FRAMES, VenversCarouselWhite } from "./venvers/CarruselBlanco";
 import { PERSONALIZA_FRAMES, PersonalizaCarousel, POST_H, POST_W } from "./posts/Personaliza";
 
@@ -80,6 +82,16 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         defaultProps={{ voice: false, music: false, captions: [], extra: 0 }}
         calculateMetadata={calculateReelMetadata}
+      />
+      <Composition
+        id="VenversContraloria"
+        component={ContraloriaReel}
+        durationInFrames={CONTRALORIA_FRAMES}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{ voice: false, music: false }}
+        calculateMetadata={calculateContraloria}
       />
       <Composition
         id="VenversIllus"
