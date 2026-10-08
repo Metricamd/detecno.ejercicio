@@ -53,19 +53,12 @@ const INBOX = [
   { from: "Grupo Andino", subj: "RE: ¿Cuándo pagan la GA-554?", tag: "Pago", t: "8:40" },
 ];
 
-const S1: React.FC = () => (
-  <AbsoluteFill>
-    <WBackground glows={[{ x: 1000, y: 120, r: 420 }, { x: 60, y: 1250, r: 520 }]} rings={[{ x: 1000, y: 120, r: 250 }, { x: 1000, y: 120, r: 330 }]} />
-    <Logo x={M} y={70} h={58} dark />
-    <VHeadline
-      size={86}
-      width={W - M * 2}
-      accent={V.purple}
-      style={{ position: "absolute", left: M, top: 180, color: INK, lineHeight: 1.08 }}
-      parts={["¿Sigues recibiendo ", { b: "facturas de proveedores por correo" }, " y aclarando rechazos uno por uno?"]}
-    />
+// Slide 1 visual (inbox + unread counter). `standalone` closes the window's
+// corners so it can be exported on its own.
+export const InboxVisual: React.FC<{ x: number; y: number; standalone?: boolean }> = ({ x, y, standalone }) => (
+  <div style={{ position: "absolute", left: x, top: y, width: standalone ? 1040 : W - x + 40, height: standalone ? 780 : H - y }}>
     {/* inbox window bleeding off the right and bottom edges */}
-    <div style={{ position: "absolute", left: M, top: 730, width: W - M + 40, height: 700, background: "#fff", borderRadius: "36px 0 0 0", boxShadow: SHADOW, fontFamily: BARLOW, overflow: "hidden", border: "1px solid #ECEAFB" }}>
+    <div style={{ position: "absolute", left: 0, top: 70, width: standalone ? 1000 : W - M + 40, height: standalone ? undefined : 700, background: "#fff", borderRadius: standalone ? 36 : "36px 0 0 0", boxShadow: SHADOW, fontFamily: BARLOW, overflow: "hidden", border: "1px solid #ECEAFB" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 16, padding: "26px 34px", borderBottom: "1px solid #EFEDFA" }}>
         <svg width={34} height={26} viewBox="0 0 28 22">
           <rect x={1.5} y={1.5} width={25} height={19} rx={3} fill="none" stroke={V.purple} strokeWidth={2.6} />
@@ -84,14 +77,29 @@ const S1: React.FC = () => (
             </div>
             <div style={{ fontSize: 25, color: "#5A5F80", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{m.subj}</div>
           </div>
-          <span style={{ fontSize: 22, color: "#9A9EB8", flexShrink: 0, marginRight: 40 }}>{m.t}</span>
+          <span style={{ fontSize: 22, color: "#9A9EB8", flexShrink: 0, marginRight: standalone ? 0 : 40 }}>{m.t}</span>
         </div>
       ))}
     </div>
     {/* unread counter */}
-    <div style={{ position: "absolute", left: 930, top: 660, width: 120, height: 120, borderRadius: "50%", background: V.bad, color: "#fff", fontFamily: BARLOW, fontWeight: 700, fontSize: 42, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 16px 36px rgba(229,72,77,.4)", border: "7px solid #fff" }}>
+    <div style={{ position: "absolute", left: standalone ? 920 : 850, top: 0, width: 120, height: 120, borderRadius: "50%", background: V.bad, color: "#fff", fontFamily: BARLOW, fontWeight: 700, fontSize: 42, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 16px 36px rgba(229,72,77,.4)", border: "7px solid #fff" }}>
       +47
     </div>
+  </div>
+);
+
+const S1: React.FC = () => (
+  <AbsoluteFill>
+    <WBackground glows={[{ x: 1000, y: 120, r: 420 }, { x: 60, y: 1250, r: 520 }]} rings={[{ x: 1000, y: 120, r: 250 }, { x: 1000, y: 120, r: 330 }]} />
+    <Logo x={M} y={70} h={58} dark />
+    <VHeadline
+      size={86}
+      width={W - M * 2}
+      accent={V.purple}
+      style={{ position: "absolute", left: M, top: 180, color: INK, lineHeight: 1.08 }}
+      parts={["¿Sigues recibiendo ", { b: "facturas de proveedores por correo" }, " y aclarando rechazos uno por uno?"]}
+    />
+    <InboxVisual x={M} y={660} />
   </AbsoluteFill>
 );
 

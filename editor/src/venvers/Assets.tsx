@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { AbsoluteFill, continueRender, delayRender } from "remotion";
 import { Stage } from "../fispal/three/Stage";
 import { Pop } from "../fispal/three/objects";
+import { InboxVisual } from "./CarruselBlanco";
 import { CfdiCard3D, FEATURES, FeatureIcon, MAILS, MailCard } from "./Carrusel";
 import { BARLOW, GradientButton, HandArrow, Laptop, Mesh, Phone, Planet, RALEWAY, V, VBackground, venversFonts } from "./kit";
 import { PortalDesktop, PortalPhone } from "./screens";
@@ -23,6 +24,7 @@ const ASSETS: Record<string, React.FC> = {
       </Pop>
     </Stage>
   ),
+  "bandeja-entrada": () => <InboxVisual x={O} y={O} standalone />,
   "correo-1": () => <MailCard m={MAILS[0]} x={O} y={O} rot={0} />,
   "correo-2": () => <MailCard m={MAILS[1]} x={O} y={O} rot={0} />,
   "correo-3": () => <MailCard m={MAILS[2]} x={O} y={O} rot={0} />,
