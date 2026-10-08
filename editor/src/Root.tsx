@@ -59,7 +59,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1350}
       />
-      <Composition id="VenversCard3D" component={VenversCard3D} durationInFrames={60} fps={30} width={560} height={660} />
+      <Composition id="VenversCard3D" component={VenversCard3D} durationInFrames={60} fps={30} width={560} height={770} />
     </>
   );
 };

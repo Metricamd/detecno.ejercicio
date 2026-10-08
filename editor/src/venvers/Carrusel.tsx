@@ -187,7 +187,7 @@ const S3: React.FC = () => (
     <HandArrow x={420} y={560} w={150} h={110} d="M8 90 C 60 100, 110 80, 140 24" head="M110 26 L142 22 L140 56" />
     {/* "after": 3D card (pre-rendered by the VenversCard3D composition to avoid
         WebGL compositing glitches on this slide) */}
-    <Img src={staticFile("venvers/cfdi-card-3d.png")} style={{ position: "absolute", left: 520, top: 120, width: 560, height: 660 }} />
+    <Img src={staticFile("venvers/cfdi-card-3d.png")} style={{ position: "absolute", left: 520, top: 110, width: 560, height: 770 }} />
     <VHeadline
       size={68}
       width={860}
@@ -269,8 +269,8 @@ const S5: React.FC = () => (
 // Standalone 3D card, rendered once to public/venvers/cfdi-card-3d.png.
 export const VenversCard3D: React.FC = () => (
   <AbsoluteFill style={{ background: "transparent" }}>
-    <Stage top={0} left={0} width={560} height={660}>
-      <Pop at={0} scale={0.9} spin={0} tilt={0.05}>
+    <Stage top={0} left={0} width={560} height={770}>
+      <Pop at={0} scale={0.9} spin={0} tilt={0.05} position={[0, 0.45, 0]}>
         <CfdiCard3D />
       </Pop>
     </Stage>
