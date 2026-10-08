@@ -72,4 +72,6 @@ Referencia: 1080×1920 (9:16), 30 fps, 20,07 s, H.264 ~4,2 Mbps, audio AAC mono.
 
 ---
 ## Correcciones del usuario (se añaden aquí y tienen prioridad sobre lo anterior)
-> Vacío por ahora. Cada corrección que te guste se registra aquí con fecha.
+> Cada corrección que te guste se registra aquí con fecha.
+- **Voz femenina, energética y con acento mexicano** (2026-10-08). Voz sintética de Magnific (eleven_v3) con la etiqueta `[Mexican accent]`, `[excited]`, estabilidad 0,3 y velocidad 1,05. Se ofrecen varias candidatas y gana la que elija el usuario.
+- **Subtítulos como en la referencia** (2026-10-08). Bloques de 2 líneas que aparecen enteros con fundido (no palabra a palabra), con el tramo final en SemiBold, tal como en §2.
