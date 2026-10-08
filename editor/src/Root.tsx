@@ -7,6 +7,7 @@ import { MODULOS_FRAMES, ModulosRfcCarousel } from "./posts/ModulosRFC";
 import { VENVERS_FRAMES, VenversCard3D, VenversCarousel } from "./venvers/Carrusel";
 import { VenversAsset } from "./venvers/Assets";
 import { VenversIllus } from "./venvers/three";
+import { calculateReelMetadata, VenversReel } from "./VenversReel";
 import { VENVERS_W_FRAMES, VenversCarouselWhite } from "./venvers/CarruselBlanco";
 import { PERSONALIZA_FRAMES, PersonalizaCarousel, POST_H, POST_W } from "./posts/Personaliza";
 
@@ -69,6 +70,16 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1080}
         height={1350}
+      />
+      <Composition
+        id="VenversReel"
+        component={VenversReel}
+        durationInFrames={900}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{ voice: false, music: false, captions: [], extra: 0 }}
+        calculateMetadata={calculateReelMetadata}
       />
       <Composition
         id="VenversIllus"
