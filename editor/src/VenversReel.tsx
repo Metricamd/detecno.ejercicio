@@ -43,6 +43,15 @@ type AnyPresentation = TransitionPresentation<Record<string, unknown>>;
 const presentationFor = (i: number): AnyPresentation =>
   (i === 1 ? zoomThrough() : i === 4 ? fade() : i === 5 ? slide({ direction: "from-bottom" }) : fadeSlide()) as unknown as AnyPresentation;
 
+// Music sits at 0.15 under the voice and comes up to 0.4 between phrases.
+const musicVolume = (f: number, voice: boolean, total: number) => {
+  const t = f / FPS;
+  const fadeIO = interpolate(f, [0, 10, total - 30, total], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  if (!voice) return 0.5 * fadeIO;
+  const near = Math.min(...VO_CLIPS.map((c) => (t < c.at ? c.at - t : t > c.at + c.to - c.from ? t - (c.at + c.to - c.from) : 0)));
+  return interpolate(near, [0, 0.5], [0.15, 0.4], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) * fadeIO;
+};
+
 const timing = springTiming({ config: { damping: 200 }, durationInFrames: TRANSITION });
 
 const ORDER = [
@@ -83,7 +92,7 @@ export const VenversReel: React.FC<ReelProps> = ({ voice, music, captions, extra
             <Audio src={staticFile("voiceover.mp3")} trimBefore={Math.round(c.from * FPS)} trimAfter={Math.round(c.to * FPS)} />
           </Sequence>
         ))}
-      {music && <Audio src={staticFile("music.mp3")} volume={(f) => interpolate(f, [0, 10, REEL_FRAMES + extra - 30, REEL_FRAMES + extra], [0, voice ? 0.15 : 0.5, voice ? 0.15 : 0.5, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })} />}
+      {music && <Audio src={staticFile("music.mp3")} volume={(f) => musicVolume(f, voice, REEL_FRAMES + extra)} />}
     </AbsoluteFill>
   );
 };
