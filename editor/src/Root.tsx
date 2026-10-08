@@ -6,6 +6,7 @@ import { AlmacenamientoPost } from "./posts/Almacenamiento";
 import { MODULOS_FRAMES, ModulosRfcCarousel } from "./posts/ModulosRFC";
 import { VENVERS_FRAMES, VenversCard3D, VenversCarousel } from "./venvers/Carrusel";
 import { VenversAsset } from "./venvers/Assets";
+import { VENVERS_W_FRAMES, VenversCarouselWhite } from "./venvers/CarruselBlanco";
 import { PERSONALIZA_FRAMES, PersonalizaCarousel, POST_H, POST_W } from "./posts/Personaliza";
 
 export const RemotionRoot: React.FC = () => {
@@ -56,6 +57,14 @@ export const RemotionRoot: React.FC = () => {
         id="CarruselVenvers"
         component={VenversCarousel}
         durationInFrames={VENVERS_FRAMES}
+        fps={30}
+        width={1080}
+        height={1350}
+      />
+      <Composition
+        id="CarruselVenversBlanco"
+        component={VenversCarouselWhite}
+        durationInFrames={VENVERS_W_FRAMES}
         fps={30}
         width={1080}
         height={1350}

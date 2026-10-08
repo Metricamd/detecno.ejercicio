@@ -130,12 +130,13 @@ export const VBackground: React.FC<{ variant?: "deep" | "blue" }> = ({ variant =
 
 // Headline segments: plain text is light, { b } is bold.
 export type HSeg = string | { b: string };
-export const VHeadline: React.FC<{ parts: HSeg[]; size?: number; width?: number; style?: React.CSSProperties }> = ({
-  parts,
-  size = 72,
-  width,
-  style,
-}) => (
+export const VHeadline: React.FC<{
+  parts: HSeg[];
+  size?: number;
+  width?: number;
+  accent?: string;
+  style?: React.CSSProperties;
+}> = ({ parts, size = 72, width, accent, style }) => (
   <div
     style={{
       fontFamily: RALEWAY,
@@ -149,28 +150,29 @@ export const VHeadline: React.FC<{ parts: HSeg[]; size?: number; width?: number;
     }}
   >
     {parts.map((p, i) =>
-      typeof p === "string" ? <span key={i}>{p}</span> : <span key={i} style={{ fontWeight: 800 }}>{p.b}</span>,
+      typeof p === "string" ? <span key={i}>{p}</span> : <span key={i} style={{ fontWeight: 800, color: accent }}>{p.b}</span>,
     )}
   </div>
 );
 
-export const Logo: React.FC<{ x: number; y: number; h?: number }> = ({ x, y, h = 66 }) => (
-  <Img src={staticFile("venvers/logo-venvers.png")} style={{ position: "absolute", left: x, top: y, height: h }} />
+export const Logo: React.FC<{ x: number; y: number; h?: number; dark?: boolean }> = ({ x, y, h = 66, dark }) => (
+  <Img src={staticFile(dark ? "venvers/logo-venvers-dark.png" : "venvers/logo-venvers.png")} style={{ position: "absolute", left: x, top: y, height: h }} />
 );
 
 // Hand-drawn arrow (lilac stroke, like the references).
-export const HandArrow: React.FC<{ x: number; y: number; w: number; h: number; d: string; head: string; rotate?: number }> = ({
-  x,
-  y,
-  w,
-  h,
-  d,
-  head,
-  rotate = 0,
-}) => (
+export const HandArrow: React.FC<{
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  d: string;
+  head: string;
+  rotate?: number;
+  color?: string;
+}> = ({ x, y, w, h, d, head, rotate = 0, color = V.lilac }) => (
   <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ position: "absolute", left: x, top: y, transform: `rotate(${rotate}deg)`, overflow: "visible" }}>
-    <path d={d} fill="none" stroke={V.lilac} strokeWidth={7} strokeLinecap="round" />
-    <path d={head} fill="none" stroke={V.lilac} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round" />
+    <path d={d} fill="none" stroke={color} strokeWidth={7} strokeLinecap="round" />
+    <path d={head} fill="none" stroke={color} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
