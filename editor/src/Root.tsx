@@ -1,5 +1,6 @@
 import { Composition } from "remotion";
 import { MyComposition } from "./Composition";
+import { ALVA_DURATION, AlvaReel } from "./alva/Reel";
 import { CUENTA_DURATION, CuentaReel } from "./cuenta/Reel";
 import { FispalReel, REEL_DURATION } from "./fispal/Reel";
 import { AlmacenamientoPost } from "./posts/Almacenamiento";
@@ -49,6 +50,14 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={POST_W}
         height={POST_H}
+      />
+      <Composition
+        id="AlvaReel"
+        component={AlvaReel}
+        durationInFrames={ALVA_DURATION}
+        fps={30}
+        width={1080}
+        height={1920}
       />
     </>
   );
