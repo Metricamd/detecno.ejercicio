@@ -43,7 +43,7 @@ export const Captions: React.FC<{ captions: Caption[] }> = ({ captions }) => {
   if (!page) return null;
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>
-      <div style={{ position: "absolute", left: SAFE.side, right: SAFE.side, top: SAFE.bottom - 190, height: 170, display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+      <div style={{ position: "absolute", left: SAFE.side, right: SAFE.side, top: SAFE.bottom - 80, height: 160, display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
         <div style={{ fontFamily: POPPINS, fontWeight: 600, fontSize: 54, lineHeight: 1.2, color: C.white, textShadow: "0 4px 18px rgba(10,10,60,.85)", whiteSpace: "pre-wrap" }}>
           {page.tokens.map((t) => {
             const active = ms >= t.fromMs && ms < t.toMs;
