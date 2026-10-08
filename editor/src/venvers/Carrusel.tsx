@@ -78,55 +78,60 @@ const MailCard: React.FC<{ m: (typeof MAILS)[number]; x: number; y: number; rot:
       position: "absolute",
       left: x,
       top: y,
-      width: 470,
+      width: 560,
       background: "#fff",
-      borderRadius: 22,
-      padding: "18px 20px",
-      boxShadow: "0 24px 50px rgba(0,0,30,.45)",
+      borderRadius: 26,
+      padding: "22px 24px",
+      boxShadow: "0 28px 60px rgba(0,0,30,.5)",
       fontFamily: BARLOW,
       transform: `rotate(${rot}deg)`,
       display: "flex",
-      gap: 14,
+      gap: 18,
       alignItems: "center",
+      boxSizing: "border-box",
     }}
   >
-    <div style={{ width: 52, height: 52, borderRadius: 14, background: `${V.bad}1A`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-      <svg width={28} height={22} viewBox="0 0 28 22">
+    <div style={{ width: 64, height: 64, borderRadius: 18, background: `${V.bad}1A`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+      <svg width={34} height={26} viewBox="0 0 28 22">
         <rect x={1.5} y={1.5} width={25} height={19} rx={3} fill="none" stroke={V.bad} strokeWidth={2.6} />
         <path d="M2 3l12 9 12-9" fill="none" stroke={V.bad} strokeWidth={2.6} strokeLinejoin="round" />
       </svg>
     </div>
     <div style={{ flex: 1, minWidth: 0 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <span style={{ fontSize: 19, fontWeight: 700, color: V.ink }}>{m.from}</span>
-        <span style={{ fontSize: 14, fontWeight: 700, color: V.bad, background: `${V.bad}1A`, borderRadius: 999, padding: "2px 10px" }}>{m.tag}</span>
+        <span style={{ fontSize: 25, fontWeight: 700, color: V.ink }}>{m.from}</span>
+        <span style={{ fontSize: 18, fontWeight: 700, color: V.bad, background: `${V.bad}1A`, borderRadius: 999, padding: "3px 12px" }}>{m.tag}</span>
       </div>
-      <div style={{ fontSize: 18, color: "#4A4F70", marginTop: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{m.subj}</div>
+      <div style={{ fontSize: 22, color: "#4A4F70", marginTop: 3, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{m.subj}</div>
     </div>
   </div>
 );
 
+// Layout grid shared by the slides: 70 px margins, logo on top, headline
+// right under it, visual filling the rest down to the bottom edge.
+const M = 70;
+
 const S1: React.FC = () => (
   <AbsoluteFill>
     <VBackground />
-    <Mesh x={560} y={-60} w={620} h={560} opacity={0.3} />
-    <Planet x={960} y={600} r={70} ring opacity={0.5} />
-    <Logo x={110} y={100} />
+    <Mesh x={600} y={-80} w={600} h={420} opacity={0.25} />
+    <Logo x={M} y={70} h={60} />
     <VHeadline
-      size={68}
-      width={860}
-      style={{ position: "absolute", left: 110, top: 230 }}
+      size={90}
+      width={W - M * 2}
+      style={{ position: "absolute", left: M, top: 180, lineHeight: 1.08 }}
       parts={["¿Sigues recibiendo ", { b: "facturas de proveedores por correo" }, " y aclarando rechazos uno por uno?"]}
     />
-    {/* photo with rounded top-right corner, anchored bottom-left like the reference */}
-    <div style={{ position: "absolute", left: 0, top: 790, width: 700, height: 470, borderTopRightRadius: 70, overflow: "hidden", boxShadow: "0 30px 70px rgba(0,0,30,.5)" }}>
-      <Img src={staticFile("venvers/photos/foto1.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "30% 40%" }} />
+    {/* photo fills the lower half, bleeding off the left and bottom edges */}
+    <div style={{ position: "absolute", left: 0, top: 720, width: 760, height: H - 720, borderTopRightRadius: 80, overflow: "hidden", boxShadow: "0 30px 70px rgba(0,0,30,.5)" }}>
+      <Img src={staticFile("venvers/photos/foto1.jpg")} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "28% 40%" }} />
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(11,11,79,0) 45%, rgba(11,11,79,.55) 100%)" }} />
     </div>
-    <MailCard m={MAILS[0]} x={520} y={760} rot={-3} />
-    <MailCard m={MAILS[1]} x={560} y={900} rot={2} />
-    <MailCard m={MAILS[2]} x={500} y={1040} rot={-1.5} />
+    <MailCard m={MAILS[0]} x={450} y={790} rot={-3} />
+    <MailCard m={MAILS[1]} x={490} y={960} rot={2} />
+    <MailCard m={MAILS[2]} x={440} y={1130} rot={-1.5} />
     {/* unread counter */}
-    <div style={{ position: "absolute", left: 455, top: 712, width: 96, height: 96, borderRadius: "50%", background: V.bad, color: "#fff", fontFamily: BARLOW, fontWeight: 700, fontSize: 32, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 12px 30px rgba(229,72,77,.5)", border: "5px solid #fff" }}>
+    <div style={{ position: "absolute", left: 395, top: 740, width: 110, height: 110, borderRadius: "50%", background: V.bad, color: "#fff", fontFamily: BARLOW, fontWeight: 700, fontSize: 38, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 12px 30px rgba(229,72,77,.5)", border: "6px solid #fff" }}>
       +47
     </div>
   </AbsoluteFill>
