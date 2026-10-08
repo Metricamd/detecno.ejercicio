@@ -3,9 +3,11 @@
 import { linearTiming, TransitionPresentationComponentProps, TransitionSeries } from "@remotion/transitions";
 import React, { useEffect, useState } from "react";
 import { AbsoluteFill, Audio, CalculateMetadataFunction, continueRender, delayRender, interpolate, Sequence, staticFile } from "remotion";
+import { Captions } from "../components/Captions";
 import { hasAsset } from "../components/ui";
-import { EASE, poppinsReady } from "../theme";
-import { LightBackground } from "./kit";
+import { C, EASE, poppinsReady } from "../theme";
+import { INK, LightBackground } from "./kit";
+import { VOZ_WORDS } from "./voz";
 import { Auditoria } from "./scenes/Auditoria";
 import { Cta } from "./scenes/Cta";
 import { Historial } from "./scenes/Historial";
@@ -16,6 +18,15 @@ import { Visibilidad } from "./scenes/Visibilidad";
 import { OVERLAP, SCENE_AT, sec, TOTAL_FRAMES, VOICE_AT } from "./timings";
 
 const VOICE = "contraloria/voz.mp3";
+
+// Word-highlight captions from the voice-over alignment.
+const CAPTIONS = VOZ_WORDS.map(([text, s, e]) => ({
+  text: ` ${text}`,
+  startMs: (s + VOICE_AT) * 1000,
+  endMs: (e + VOICE_AT) * 1000,
+  timestampMs: ((s + e) / 2 + VOICE_AT) * 1000,
+  confidence: 1,
+}));
 const MUSIC = "contraloria/music.mp3";
 
 const SCENES: { C: React.FC; from: number; to: number }[] = [
@@ -61,6 +72,7 @@ export const ContraloriaReel: React.FC<ContraloriaProps> = ({ voice, music }) =>
           );
         })}
       </TransitionSeries>
+      {voice && <Captions captions={CAPTIONS} color={INK} activeColor={C.violet} shadow="0 2px 14px rgba(255,255,255,.95), 0 0 4px rgba(255,255,255,.9)" />}
       {voice && (
         <Sequence from={sec(VOICE_AT)} layout="none">
           <Audio src={staticFile(VOICE)} />

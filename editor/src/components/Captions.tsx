@@ -34,7 +34,12 @@ export const captionsFromTiming = (words: TimedWord[]): Caption[] =>
     return [{ text: ` ${w.text}`, startMs: (w.start + shift) * 1000, endMs: (w.end + shift) * 1000, timestampMs: ((w.start + w.end) / 2 + shift) * 1000, confidence: 1 }];
   });
 
-export const Captions: React.FC<{ captions: Caption[] }> = ({ captions }) => {
+export const Captions: React.FC<{ captions: Caption[]; color?: string; activeColor?: string; shadow?: string }> = ({
+  captions,
+  color = C.white,
+  activeColor = C.lilac,
+  shadow = "0 4px 18px rgba(10,10,60,.85)",
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const ms = (frame / fps) * 1000;
@@ -44,11 +49,11 @@ export const Captions: React.FC<{ captions: Caption[] }> = ({ captions }) => {
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>
       <div style={{ position: "absolute", left: SAFE.side, right: SAFE.side, top: SAFE.bottom - 80, height: 160, display: "flex", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
-        <div style={{ fontFamily: POPPINS, fontWeight: 600, fontSize: 54, lineHeight: 1.2, color: C.white, textShadow: "0 4px 18px rgba(10,10,60,.85)", whiteSpace: "pre-wrap" }}>
+        <div style={{ fontFamily: POPPINS, fontWeight: 600, fontSize: 54, lineHeight: 1.2, color, textShadow: shadow, whiteSpace: "pre-wrap" }}>
           {page.tokens.map((t) => {
             const active = ms >= t.fromMs && ms < t.toMs;
             return (
-              <span key={t.fromMs} style={{ color: active ? C.lilac : C.white }}>
+              <span key={t.fromMs} style={{ color: active ? activeColor : color }}>
                 {t.text}
               </span>
             );
