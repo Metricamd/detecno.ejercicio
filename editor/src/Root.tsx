@@ -6,6 +6,7 @@ import { AlmacenamientoPost } from "./posts/Almacenamiento";
 import { MODULOS_FRAMES, ModulosRfcCarousel } from "./posts/ModulosRFC";
 import { VENVERS_FRAMES, VenversCard3D, VenversCarousel } from "./venvers/Carrusel";
 import { VenversAsset } from "./venvers/Assets";
+import { VenversIllus } from "./venvers/three";
 import { VENVERS_W_FRAMES, VenversCarouselWhite } from "./venvers/CarruselBlanco";
 import { PERSONALIZA_FRAMES, PersonalizaCarousel, POST_H, POST_W } from "./posts/Personaliza";
 
@@ -68,6 +69,15 @@ export const RemotionRoot: React.FC = () => {
         fps={30}
         width={1080}
         height={1350}
+      />
+      <Composition
+        id="VenversIllus"
+        component={VenversIllus}
+        durationInFrames={60}
+        fps={30}
+        width={1000}
+        height={1000}
+        defaultProps={{ name: "planeta" }}
       />
       <Composition id="VenversCard3D" component={VenversCard3D} durationInFrames={60} fps={30} width={560} height={770} />
       <Composition

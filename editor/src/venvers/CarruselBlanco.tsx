@@ -4,9 +4,11 @@
 // slide is left with empty bands.
 import React, { useEffect, useState } from "react";
 import { AbsoluteFill, continueRender, delayRender, Img, Sequence, staticFile } from "remotion";
-import { FEATURES, FeatureIcon } from "./Carrusel";
-import { BARLOW, GradientButton, H, HandArrow, Laptop, Logo, Phone, RALEWAY, V, VHeadline, venversFonts, W } from "./kit";
-import { PortalDesktop, PortalPhone } from "./screens";
+import { FEATURES } from "./Carrusel";
+import { BARLOW, GradientButton, H, HandArrow, Laptop, Logo, RALEWAY, V, VHeadline, venversFonts, W } from "./kit";
+import { PortalDesktop } from "./screens";
+
+const ILLUS = (n: string) => staticFile(`venvers/3d/${n}.png`);
 
 const M = 80; // side margin
 const INK = V.navy;
@@ -159,7 +161,7 @@ const S3: React.FC = () => (
     <CompareCard y={720} kind="bad" title="Antes" lines={["Rechazos por correo", "“¿Ya me pagaron?”"]} />
     <HandArrow x={250} y={958} w={120} h={110} d="M20 6 C 0 50, 20 80, 60 100" head="M30 96 L62 102 L60 70" color={ARROW} />
     <CompareCard y={1060} kind="ok" title="Con Venvers" lines={["CFDI validado al recibirlo", "Estatus de pago visible"]} />
-    <Img src={staticFile("venvers/cfdi-card-3d-full.png")} style={{ position: "absolute", left: 570, top: 690, width: 470, height: 581 }} />
+    <Img src={ILLUS("cfdi-validado")} style={{ position: "absolute", left: 610, top: 780, width: 450, height: 440 }} />
   </AbsoluteFill>
 );
 
@@ -169,20 +171,19 @@ const S4: React.FC = () => (
     <WBackground glows={[{ x: 880, y: 820, r: 560 }, { x: 40, y: 1300, r: 380, o: 0.8 }]} rings={[{ x: 880, y: 820, r: 400 }]} />
     <Logo x={M} y={70} h={58} dark />
     <VHeadline size={88} width={W - M * 2} accent={V.purple} style={{ position: "absolute", left: M, top: 180, color: INK }} parts={["Todo el ciclo, ", { b: "en un solo portal" }]} />
-    <div style={{ position: "absolute", left: M, top: 440, width: 580, height: 820, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-      {FEATURES.map((f) => (
-        <div key={f.t} style={{ background: "#fff", borderRadius: 30, padding: "30px 30px", boxShadow: SHADOW, display: "flex", gap: 24, alignItems: "center", border: "1px solid #ECEAFB" }}>
-          <FeatureIcon i={f.i} />
+    <div style={{ position: "absolute", left: M, right: M, top: 440, height: 840, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+      {FEATURES.map((f, n) => (
+        <div key={f.t} style={{ background: "#fff", borderRadius: 34, padding: "18px 40px 18px 18px", boxShadow: SHADOW, display: "flex", gap: 22, alignItems: "center", border: "1px solid #ECEAFB" }}>
+          <div style={{ width: 220, height: 220, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, borderRadius: 26, background: "radial-gradient(circle, rgba(123,92,245,.22) 0%, rgba(123,92,245,0) 70%)" }}>
+            <Img src={ILLUS(["doc-check", "ojo", "monedas"][n])} style={{ maxWidth: 190, maxHeight: 190 }} />
+          </div>
           <div>
-            <div style={{ fontFamily: RALEWAY, fontWeight: 800, fontSize: 36, color: INK, lineHeight: 1.12 }}>{f.t}</div>
-            <div style={{ fontFamily: RALEWAY, fontWeight: 500, fontSize: 27, color: "#5A5F80", marginTop: 8 }}>{f.d}</div>
+            <div style={{ fontFamily: RALEWAY, fontWeight: 800, fontSize: 42, color: INK, lineHeight: 1.12 }}>{f.t}</div>
+            <div style={{ fontFamily: RALEWAY, fontWeight: 500, fontSize: 31, color: "#5A5F80", marginTop: 10 }}>{f.d}</div>
           </div>
         </div>
       ))}
     </div>
-    <Phone x={690} y={470} w={380}>
-      <PortalPhone />
-    </Phone>
   </AbsoluteFill>
 );
 
@@ -198,14 +199,7 @@ const S5: React.FC = () => (
     <div style={{ position: "absolute", left: M, top: 580 }}>
       <GradientButton size={46}>Solicitar demo →</GradientButton>
     </div>
-    <Laptop x={130} y={800} w={720}>
-      <div style={{ transform: `scale(${(720 - 44) / 1000})`, transformOrigin: "0 0" }}>
-        <PortalDesktop />
-      </div>
-    </Laptop>
-    <Phone x={770} y={720} w={270}>
-      <PortalPhone />
-    </Phone>
+    <Img src={ILLUS("planeta")} style={{ position: "absolute", left: 40, top: 720, width: 1000, height: 615 }} />
   </AbsoluteFill>
 );
 
