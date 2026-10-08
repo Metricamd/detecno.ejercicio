@@ -16,16 +16,23 @@ export const SCENES = {
 
 export const REEL_FRAMES = 900;
 
-// Voice-over script with estimated word timings (seconds). Replace with the
-// real transcription (public/captions.json) once voiceover.mp3 exists.
+// Voice-over (Araceli, Mexican accent) split into clips so each phrase lands
+// on its scene: audio [from, to] seconds → starts at `at` seconds of the reel.
+export const VO_CLIPS = [
+  { from: 0.1, to: 5.9, at: 1.0 }, // ¿Sabes cuánto le debes…? → hook + problema
+  { from: 6.4, to: 13.6, at: 9.0 }, // Hazlo con Venvers… en un solo lugar → marca + seguimiento
+  { from: 13.5, to: 18.3, at: 20.6 }, // para que planees tu flujo… → beneficios
+  { from: 18.8, to: 23.1, at: 25.6 }, // Conoce más del ecosistema detecno… → CTA
+];
+
+// Script with estimated timings, used for captions only when
+// public/voiceover-timing.json is missing.
 export const VO_SCRIPT =
   "¿Sabes cuánto le debes a tus proveedores, qué facturas están por vencer y cuáles ya se pagaron? Hazlo con Venvers, nuestro portal de proveedores da trazabilidad a cada factura y a cada pago en un solo lugar, para que planees tu flujo con información real y no con suposiciones. Conoce más del ecosistema detecno, visitando detecno.com";
 
-// Phrase anchors (seconds) used to spread the estimated word timings.
 export const VO_PHRASES: [number, number, string][] = [
-  [0.4, 6.8, "¿Sabes cuánto le debes a tus proveedores, qué facturas están por vencer y cuáles ya se pagaron?"],
-  [8.2, 10.6, "Hazlo con Venvers,"],
-  [11.0, 20.6, "nuestro portal de proveedores da trazabilidad a cada factura y a cada pago en un solo lugar,"],
-  [21.0, 25.8, "para que planees tu flujo con información real y no con suposiciones."],
-  [26.2, 29.6, "Conoce más del ecosistema detecno, visitando detecno.com"],
+  [1.0, 6.8, "¿Sabes cuánto le debes a tus proveedores, qué facturas están por vencer y cuáles ya se pagaron?"],
+  [9.0, 16.2, "Hazlo con Venvers, nuestro portal de proveedores da trazabilidad a cada factura y a cada pago en un solo lugar,"],
+  [20.6, 25.4, "para que planees tu flujo con información real y no con suposiciones."],
+  [25.6, 29.8, "Conoce más del ecosistema detecno, visitando detecno.com"],
 ];

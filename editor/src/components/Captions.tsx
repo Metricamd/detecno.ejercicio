@@ -4,7 +4,7 @@ import { Caption, createTikTokStyleCaptions } from "@remotion/captions";
 import React, { useMemo } from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
 import { C, POPPINS, SAFE } from "../theme";
-import { VO_PHRASES } from "../timings";
+import { VO_CLIPS, VO_PHRASES } from "../timings";
 
 // Estimated word timings from the script (used until a real transcription
 // exists in public/captions.json).
@@ -22,6 +22,17 @@ export const estimateCaptions = (): Caption[] => {
   }
   return out;
 };
+
+// Real word timings (seconds in the voiceover file) mapped onto the reel
+// through VO_CLIPS.
+export type TimedWord = { text: string; start: number; end: number };
+export const captionsFromTiming = (words: TimedWord[]): Caption[] =>
+  words.flatMap((w) => {
+    const clip = VO_CLIPS.find((c) => w.start >= c.from && w.end <= c.to + 0.05);
+    if (!clip) return [];
+    const shift = clip.at - clip.from;
+    return [{ text: ` ${w.text}`, startMs: (w.start + shift) * 1000, endMs: (w.end + shift) * 1000, timestampMs: ((w.start + w.end) / 2 + shift) * 1000, confidence: 1 }];
+  });
 
 export const Captions: React.FC<{ captions: Caption[] }> = ({ captions }) => {
   const frame = useCurrentFrame();

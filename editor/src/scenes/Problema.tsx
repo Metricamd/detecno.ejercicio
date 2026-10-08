@@ -8,10 +8,10 @@ import { clamp, EASE, ISO, SAFE } from "../theme";
 // Chaotic cards: [left, top, rotation, phase]. Exported so the brand reveal
 // can absorb them from the same spots.
 export const CHAOS: { x: number; y: number; r: number; ph: number; C: React.FC<{ w?: number }> }[] = [
-  { x: 40, y: 720, r: -9, ph: 0, C: CfdiCard },
-  { x: 640, y: 780, r: 7, ph: 1.3, C: OrdenCard },
-  { x: 70, y: 1220, r: 6, ph: 2.1, C: PagoCard },
-  { x: 650, y: 1260, r: -8, ph: 3.4, C: NotaCard },
+  { x: 40, y: 660, r: -9, ph: 0, C: CfdiCard },
+  { x: 640, y: 700, r: 7, ph: 1.3, C: OrdenCard },
+  { x: 70, y: 1080, r: 6, ph: 2.1, C: PagoCard },
+  { x: 650, y: 1110, r: -8, ph: 3.4, C: NotaCard },
 ];
 
 export const Problema: React.FC = () => {
@@ -23,7 +23,7 @@ export const Problema: React.FC = () => {
       <AssetImg name="excel-conciliacion.png" style={{ position: "absolute", left: -100, top: 640, width: 1280, opacity: 0.18, transform: `translateY(${-frame * 0.4}px)` }} />
       <Words text="¿Facturas por vencer? ¿Pagos sin confirmar?" size={92} at={2} highlight={["facturas", "pagos"]} style={{ position: "absolute", left: SAFE.side, right: SAFE.side, top: SAFE.top + 30 }} />
       {/* isometric table */}
-      <div style={{ position: "absolute", left: 540 - 600, top: 1100 - 260, width: 1200, transform: `${ISO} scale(${0.95 + tableIn * 0.1})`, opacity: tableIn }}>
+      <div style={{ position: "absolute", left: 540 - 600, top: 1000 - 260, width: 1200, transform: `${ISO} scale(${0.95 + tableIn * 0.1})`, opacity: tableIn }}>
         <ExcelTable at={8} stagger={3} />
       </div>
       {/* documents floating around, shaking */}
