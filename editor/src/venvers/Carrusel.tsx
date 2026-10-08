@@ -25,7 +25,7 @@ import { PortalDesktop, PortalPhone } from "./screens";
 export const VENVERS_SLIDE_FRAMES = 60;
 
 /* ---------- 3D: validated CFDI card + magnifier (as in the brand's post) ---------- */
-const CfdiCard3D: React.FC = () => {
+export const CfdiCard3D: React.FC = () => {
   const frame = useCurrentFrame();
   return (
     <group rotation={[0.12, -0.42, 0.04]}>
@@ -66,13 +66,13 @@ const CfdiCard3D: React.FC = () => {
 };
 
 /* ---------- Slide 1 — hook ---------- */
-const MAILS = [
+export const MAILS = [
   { from: "Aceros del Norte", subj: "RE: Factura F-1023 rechazada", tag: "Rechazo" },
   { from: "Logística Rivas", subj: "RE: RE: ¿Ya está programado mi pago?", tag: "Pago" },
   { from: "Empaques Sol", subj: "Fwd: CFDI con RFC incorrecto", tag: "Rechazo" },
 ];
 
-const MailCard: React.FC<{ m: (typeof MAILS)[number]; x: number; y: number; rot: number }> = ({ m, x, y, rot }) => (
+export const MailCard: React.FC<{ m: (typeof MAILS)[number]; x: number; y: number; rot: number }> = ({ m, x, y, rot }) => (
   <div
     style={{
       position: "absolute",
@@ -203,13 +203,13 @@ const S3: React.FC = () => (
 );
 
 /* ---------- Slide 4 — features ---------- */
-const FEATURES = [
+export const FEATURES = [
   { t: "Recepción y validación de CFDI", d: "Cada factura se valida al recibirse.", i: 3 },
   { t: "Estatus visible para proveedores", d: "Consultan su pago sin escribirte.", i: 4 },
   { t: "Conciliación y opciones de pronto pago", d: "Concilia y ofrece liquidez anticipada.", i: 1 },
 ];
 
-const FeatureIcon: React.FC<{ i: number }> = ({ i }) => {
+export const FeatureIcon: React.FC<{ i: number }> = ({ i }) => {
   const d = [
     "M7 3h7l5 5v13H7zM14 3v5h5M10 14l2 2 4-4",
     "M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0M12 7v5l3 2",
