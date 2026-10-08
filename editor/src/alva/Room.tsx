@@ -1,21 +1,21 @@
 import React, { useMemo } from "react";
-import { Easing, interpolate, spring, useCurrentFrame } from "remotion";
+import { Easing, useCurrentFrame } from "remotion";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { CUE } from "./timeline";
 
 const FPS = 30;
-const sec = (t: number) => Math.round(t * FPS);
-const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
-const ease = Easing.bezier(0.65, 0, 0.35, 1);
-type V3 = [number, number, number];
+export const sec = (t: number) => Math.round(t * FPS);
+export const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
+export const ease = Easing.bezier(0.65, 0, 0.35, 1);
+export type V3 = [number, number, number];
 
 export const FIX = sec(CUE.fix);
-const mix = (a: string, b: string, k: number) =>
+export const mix = (a: string, b: string, k: number) =>
   "#" + new THREE.Color(a).lerp(new THREE.Color(b), k).getHexString();
 
 // Deterministic randomness so every render frame agrees.
-const rand = (seed: number) => {
+export const rand = (seed: number) => {
   let a = seed >>> 0;
   return () => {
     a = (a + 0x6d2b79f5) >>> 0;
@@ -27,11 +27,11 @@ const rand = (seed: number) => {
 };
 
 // ---------- tiny building blocks ----------
-const Clay: React.FC<{ color: string; rough?: number; glow?: number }> = ({ color, rough = 0.55, glow = 0 }) => (
+export const Clay: React.FC<{ color: string; rough?: number; glow?: number }> = ({ color, rough = 0.55, glow = 0 }) => (
   <meshPhysicalMaterial color={color} roughness={rough} metalness={0.02} clearcoat={0.3} clearcoatRoughness={0.4} emissive={color} emissiveIntensity={glow} />
 );
 
-const RB: React.FC<{ size: V3; color: string; position?: V3; rotation?: V3; radius?: number; glow?: number }> = ({
+export const RB: React.FC<{ size: V3; color: string; position?: V3; rotation?: V3; radius?: number; glow?: number }> = ({
   size,
   color,
   position,
@@ -51,7 +51,7 @@ const RB: React.FC<{ size: V3; color: string; position?: V3; rotation?: V3; radi
 };
 
 // ---------- TV slides (canvas textures) ----------
-const makeSlide = (kind: "generic" | "alva") => {
+export const makeSlide = (kind: "generic" | "alva") => {
   const c = document.createElement("canvas");
   c.width = 640;
   c.height = 360;
@@ -124,7 +124,7 @@ const makeSlide = (kind: "generic" | "alva") => {
 };
 
 // ---------- people ----------
-const Person: React.FC<{
+export const Person: React.FC<{
   position: V3;
   rotY: number;
   shirt: string;
@@ -135,10 +135,14 @@ const Person: React.FC<{
   stress: number;
   happy: number;
   pointing?: boolean;
-}> = ({ position, rotY, shirt, skin, hair, seated, seed, stress, happy, pointing }) => {
+  walkPhase?: number; // radians of the gait cycle (standing people only)
+  moving?: number; // 0 = standing still, 1 = full stride
+}> = ({ position, rotY, shirt, skin, hair, seated, seed, stress, happy, pointing, walkPhase, moving = 0 }) => {
   const f = useCurrentFrame();
   const sh = Math.sin(f * 0.9 + seed) * 0.22 * stress; // head shake
-  const bob = Math.sin(f * 0.5 + seed * 3) * 0.03 * stress;
+  const walking = walkPhase !== undefined;
+  const stride = walking ? Math.sin(walkPhase) * 0.75 * moving : 0;
+  const bob = walking ? Math.abs(Math.sin(walkPhase)) * 0.07 * moving : Math.sin(f * 0.5 + seed * 3) * 0.03 * stress;
   const torsoY = seated ? 0.98 : 1.1;
   const headY = torsoY + 0.78;
   const armWave = Math.sin(f * 0.8 + seed * 2) * stress;
@@ -156,8 +160,11 @@ const Person: React.FC<{
           </>
         ) : (
           <>
-            <RB size={[0.2, 0.9, 0.2]} color="#374151" position={[-0.14, 0.45, 0]} />
-            <RB size={[0.2, 0.9, 0.2]} color="#374151" position={[0.14, 0.45, 0]} />
+            {[-1, 1].map((sd) => (
+              <group key={sd} position={[sd * 0.14, 0.9 - bob, 0]} rotation={[sd * stride, 0, 0]}>
+                <RB size={[0.2, 0.9, 0.2]} color="#374151" position={[0, -0.45, 0]} />
+              </group>
+            ))}
           </>
         )}
         {/* torso */}
@@ -167,7 +174,7 @@ const Person: React.FC<{
         </mesh>
         {/* arms */}
         {[-1, 1].map((side) => {
-          const raise = pointing && side === 1 && happy < 0.5 ? -1.25 : -0.15 - stress * (0.9 + 0.5 * armWave * side);
+          const raise = walking ? -side * stride * 0.8 : pointing && side === 1 && happy < 0.5 ? -1.25 : -0.15 - stress * (0.9 + 0.5 * armWave * side);
           return (
             <group key={side} position={[side * 0.36, torsoY + 0.28, 0]} rotation={[seated && happy > 0.5 ? -0.9 : raise, 0, side * (0.12 + stress * 0.5)]}>
               <mesh position={[0, -0.28, 0]}>
@@ -221,7 +228,7 @@ const Person: React.FC<{
   );
 };
 
-const Chair: React.FC<{ position: V3; rotY: number; color: string }> = ({ position, rotY, color }) => (
+export const Chair: React.FC<{ position: V3; rotY: number; color: string }> = ({ position, rotY, color }) => (
   <group position={position} rotation={[0, rotY, 0]}>
     <RB size={[0.62, 0.1, 0.62]} color={color} position={[0, 0.5, 0]} />
     <RB size={[0.62, 0.62, 0.09]} color={color} position={[0, 0.85, -0.3]} />
@@ -235,7 +242,7 @@ const Chair: React.FC<{ position: V3; rotY: number; color: string }> = ({ positi
 );
 
 // ---------- cost objects that swarm the room ----------
-const Coins: React.FC = () => (
+export const Coins: React.FC = () => (
   <group>
     {[0, 1, 2, 3].map((i) => (
       <mesh key={i} position={[0, i * 0.075, 0]}>
@@ -246,7 +253,7 @@ const Coins: React.FC = () => (
     <RB size={[0.7, 0.03, 0.34]} color="#58C27D" position={[0.18, 0.4, 0.1]} rotation={[0.2, 0.5, 0.15]} />
   </group>
 );
-const Gift: React.FC = () => (
+export const Gift: React.FC = () => (
   <group>
     <RB size={[0.55, 0.45, 0.55]} color="#E9578F" position={[0, 0.22, 0]} />
     <RB size={[0.6, 0.12, 0.6]} color="#C93C75" position={[0, 0.5, 0]} />
@@ -254,7 +261,7 @@ const Gift: React.FC = () => (
     <RB size={[0.57, 0.47, 0.12]} color="#FFE08A" position={[0, 0.23, 0]} />
   </group>
 );
-const Laptop: React.FC = () => (
+export const Laptop: React.FC = () => (
   <group>
     <RB size={[0.8, 0.05, 0.55]} color="#B8BEC9" position={[0, 0.03, 0]} />
     <group position={[0, 0.06, -0.27]} rotation={[-0.35, 0, 0]}>
@@ -266,7 +273,7 @@ const Laptop: React.FC = () => (
     </group>
   </group>
 );
-const Cards: React.FC = () => (
+export const Cards: React.FC = () => (
   <group>
     {[0, 1, 2].map((i) => (
       <group key={i} position={[i * 0.12 - 0.12, i * 0.05, i * -0.04]} rotation={[0, 0.35 * (i - 1), 0.12 * (i - 1)]}>
@@ -283,7 +290,7 @@ const Cards: React.FC = () => (
     ))}
   </group>
 );
-const CalendarObj: React.FC = () => (
+export const CalendarObj: React.FC = () => (
   <group>
     <RB size={[0.9, 0.9, 0.08]} color="#FFFFFF" position={[0, 0.45, 0]} />
     <RB size={[0.9, 0.2, 0.1]} color="#F26B5B" position={[0, 0.82, 0]} />
@@ -298,76 +305,7 @@ const CalendarObj: React.FC = () => (
   </group>
 );
 
-const COSTS: { at: number; node: React.ReactNode; scale: number; r: number; a0: number; w: number; h: number }[] = [
-  { at: CUE.sueldo, node: <Coins />, scale: 1, r: 2.1, a0: 0.4, w: 0.9, h: 2.4 },
-  { at: CUE.sueldo + 0.12, node: <Coins />, scale: 0.8, r: 3.0, a0: 3.2, w: -0.7, h: 3.2 },
-  { at: CUE.prestaciones, node: <Gift />, scale: 1.1, r: 2.5, a0: 1.6, w: 0.8, h: 2.8 },
-  { at: CUE.prestaciones + 0.14, node: <Gift />, scale: 0.8, r: 3.2, a0: 4.7, w: -0.9, h: 1.9 },
-  { at: CUE.equipo, node: <Laptop />, scale: 1.2, r: 2.3, a0: 2.4, w: -0.85, h: 3.4 },
-  { at: CUE.equipo + 0.12, node: <Laptop />, scale: 0.9, r: 3.1, a0: 5.4, w: 0.7, h: 2.2 },
-  { at: CUE.licencias, node: <Cards />, scale: 1.3, r: 2.7, a0: 0.9, w: 0.95, h: 3.0 },
-  { at: CUE.licencias + 0.12, node: <Cards />, scale: 1, r: 2.2, a0: 3.9, w: -1.0, h: 2.0 },
-  { at: CUE.anio, node: <CalendarObj />, scale: 1.8, r: 1.6, a0: 5.0, w: 0.55, h: 3.7 },
-];
-
-const CostObj: React.FC<{ def: (typeof COSTS)[number]; idx: number }> = ({ def, idx }) => {
-  const f = useCurrentFrame();
-  const t0 = sec(def.at);
-  const pop = spring({ frame: f - t0, fps: FPS, config: { damping: 9, stiffness: 140 } });
-  const out = interpolate(f, [FIX, FIX + 8], [1, 0], { ...clamp, easing: Easing.in(Easing.cubic) });
-  if (f < t0 || f > FIX + 9) return null;
-  const tt = (f - t0) / FPS;
-  const ang = def.a0 + def.w * tt * 1.3 + (f - t0 < 10 ? 0 : 0);
-  const drop = (1 - Math.min(1, (f - t0) / 14)) ** 2 * 4; // falls in from above
-  const x = Math.cos(ang) * def.r * (1 + 0.25 * (1 - out));
-  const z = Math.sin(ang) * def.r * (1 + 0.25 * (1 - out));
-  const y = def.h + Math.sin(f * 0.18 + idx * 2) * 0.22 + drop + (1 - out) * 2.5;
-  return (
-    <group position={[x, y, z]} rotation={[tt * 1.4 + idx, tt * 2 + idx, tt * 0.8]} scale={def.scale * pop * out}>
-      {def.node}
-    </group>
-  );
-};
-
-const Papers: React.FC = () => {
-  const f = useCurrentFrame();
-  const items = useMemo(() => {
-    const r = rand(42);
-    return Array.from({ length: 34 }, (_, i) => ({
-      at: 0.9 + (i / 34) ** 0.75 * 6.9,
-      r: 1.2 + r() * 2.6,
-      a0: r() * 6.28,
-      w: (r() < 0.5 ? -1 : 1) * (0.7 + r() * 0.9),
-      h: 0.8 + r() * 3.6,
-      ph: r() * 6,
-    }));
-  }, []);
-  return (
-    <>
-      {items.map((p, i) => {
-        const t0 = sec(p.at);
-        if (f < t0 || f > FIX + 7) return null;
-        const tt = (f - t0) / FPS;
-        const grow = Math.min(1, (f - t0) / 8);
-        const out = interpolate(f, [FIX, FIX + 7], [1, 0], clamp);
-        const ang = p.a0 + p.w * tt * 1.5;
-        return (
-          <mesh
-            key={i}
-            position={[Math.cos(ang) * p.r, p.h + Math.sin(f * 0.15 + p.ph) * 0.3, Math.sin(ang) * p.r]}
-            rotation={[tt * 3 + p.ph, tt * 2, tt * 4]}
-            scale={grow * out}
-          >
-            <boxGeometry args={[0.5, 0.015, 0.36]} />
-            <meshStandardMaterial color={i % 5 === 0 ? "#FFE08A" : "#FFFFFF"} />
-          </mesh>
-        );
-      })}
-    </>
-  );
-};
-
-const Confetti: React.FC = () => {
+export const Confetti: React.FC<{ origin?: V3 }> = ({ origin = [0, 0, 0] }) => {
   const f = useCurrentFrame();
   const bits = useMemo(() => {
     const r = rand(9);
@@ -385,7 +323,7 @@ const Confetti: React.FC = () => {
       {bits.map((b, i) => (
         <mesh
           key={i}
-          position={[b.v[0] * t, Math.max(0.1, 0.8 + b.v[1] * t - 4.5 * t * t), b.v[2] * t]}
+          position={[origin[0] + b.v[0] * t, Math.max(0.1, origin[1] + 0.8 + b.v[1] * t - 4.5 * t * t), origin[2] + b.v[2] * t]}
           rotation={[t * b.sp, t * b.sp * 0.7, 0]}
           scale={Math.min(1, (1.7 - t) * 2.5)}
         >
@@ -397,109 +335,3 @@ const Confetti: React.FC = () => {
   );
 };
 
-// ---------- the room ----------
-export const Room: React.FC = () => {
-  const f = useCurrentFrame();
-  const k = interpolate(f, [FIX, FIX + 30], [0, 1], { ...clamp, easing: ease });
-  const stress = interpolate(f, [sec(2.2), sec(7.4)], [0.0, 1], clamp) * (1 - interpolate(f, [FIX - 2, FIX + 8], [0, 1], clamp));
-  const happy = interpolate(f, [FIX + 8, FIX + 20], [0, 1], clamp);
-
-  const generic = useMemo(() => makeSlide("generic"), []);
-  const alva = useMemo(() => makeSlide("alva"), []);
-  const showAlva = f >= FIX + 14;
-  const tvOn = f < FIX + 4 || f >= FIX + 14;
-  const tvPop = spring({ frame: f - (FIX + 14), fps: FPS, config: { damping: 10, stiffness: 160 }, from: 0.88, to: 1 });
-
-  const wall = mix("#9AA0A6", "#F2B8A4", k);
-  const wallB = mix("#8C9298", "#F7C8B6", k);
-  const floor = mix("#767C82", "#F0D2B0", k);
-  const slab = mix("#6A7076", "#D7A98A", k);
-  const chair = mix("#8E9AAF", "#A28FD6", k);
-
-  // fix burst
-  const ring = interpolate(f, [FIX, FIX + 22], [0, 1], clamp);
-
-  return (
-    <group>
-      {/* floor slab + walls */}
-      <RB size={[7, 0.3, 7]} color={slab} position={[0, -0.15, 0]} radius={0.08} />
-      <RB size={[6.8, 0.06, 6.8]} color={floor} position={[0, 0.03, 0]} radius={0.02} glow={0.4} />
-      <RB size={[7, 4.2, 0.22]} color={wall} position={[0, 2.1, -3.39]} radius={0.06} glow={0.5} />
-      <RB size={[0.22, 4.2, 7]} color={wallB} position={[-3.39, 2.1, 0]} radius={0.06} glow={0.5} />
-      {/* floor planks appear when it is rebuilt */}
-      {[-2.4, -1.2, 0, 1.2, 2.4].map((x, i) => (
-        <mesh key={i} position={[x, 0.07, 0]} scale={[1, 1, k]}>
-          <boxGeometry args={[0.04, 0.01, 6.6]} />
-          <meshBasicMaterial color="#C99A6E" transparent opacity={0.45 * k} />
-        </mesh>
-      ))}
-
-      {/* TV */}
-      <group position={[0.2, 2.35, -3.2]} scale={showAlva ? tvPop : 1}>
-        <RB size={[2.75, 1.65, 0.14]} color="#14161B" radius={0.05} />
-        {tvOn && (
-          <mesh position={[0, 0, 0.075]}>
-            <planeGeometry args={[2.6, 1.46]} />
-            <meshBasicMaterial map={showAlva ? alva : generic} toneMapped={false} />
-          </mesh>
-        )}
-      </group>
-
-      {/* table + chairs */}
-      <RB size={[2.7, 0.12, 1.4]} color="#C99A6E" position={[0, 0.8, 0]} />
-      {[[-1.15, -0.5], [1.15, -0.5], [-1.15, 0.5], [1.15, 0.5]].map(([x, z], i) => (
-        <mesh key={i} position={[x, 0.4, z]}>
-          <cylinderGeometry args={[0.06, 0.06, 0.8, 10]} />
-          <meshStandardMaterial color="#A97B50" />
-        </mesh>
-      ))}
-      <Chair position={[-0.75, 0, -1.1]} rotY={0} color={chair} />
-      <Chair position={[0.85, 0, -1.1]} rotY={0} color={chair} />
-      <Chair position={[-2.05, 0, 0.05]} rotY={Math.PI / 2} color={chair} />
-      {/* things on the table */}
-      <RB size={[0.4, 0.03, 0.3]} color="#FFFFFF" position={[-0.4, 0.88, 0.2]} rotation={[0, 0.3, 0]} />
-      <RB size={[0.4, 0.03, 0.3]} color="#FFFFFF" position={[0.7, 0.88, 0.1]} rotation={[0, -0.2, 0]} />
-      {[[0.1, -0.1], [0.3, 0.3]].map(([x, z], i) => (
-        <mesh key={i} position={[x, 0.98, z]}>
-          <cylinderGeometry args={[0.07, 0.07, 0.34, 12]} />
-          <meshPhysicalMaterial color="#BFE3F5" transparent opacity={0.7} roughness={0.1} />
-        </mesh>
-      ))}
-
-      {/* plant */}
-      <group position={[-2.7, 0, -2.6]}>
-        <mesh position={[0, 0.3, 0]}>
-          <cylinderGeometry args={[0.28, 0.2, 0.6, 14]} />
-          <Clay color="#C97B55" />
-        </mesh>
-        {[[0, 0.95, 0, 0.42], [-0.2, 1.25, 0.1, 0.32], [0.22, 1.2, -0.08, 0.3]].map(([x, y, z, r], i) => (
-          <mesh key={i} position={[x, y, z]}>
-            <sphereGeometry args={[r, 14, 14]} />
-            <Clay color="#5FA36B" />
-          </mesh>
-        ))}
-      </group>
-
-      {/* people */}
-      <Person position={[0.2, 0, -2.45]} rotY={0} shirt={mix("#4F7FD6", "#AB7FED", k)} skin="#C98A5E" hair="#3A2A22" seed={1} stress={stress} happy={happy} pointing />
-      <Person position={[-0.75, 0, -1.1]} rotY={0} shirt={mix("#C9B79C", "#F7C3B3", k)} skin="#E8B994" hair="#7A5A3C" seated seed={2} stress={stress} happy={happy} />
-      <Person position={[0.85, 0, -1.1]} rotY={0} shirt={mix("#6C737D", "#7B5AA6", k)} skin="#A56E48" hair="#BDBDBD" seated seed={3} stress={stress} happy={happy} />
-      <Person position={[-2.05, 0, 0.05]} rotY={Math.PI / 2} shirt={mix("#6AA37A", "#58C2A8", k)} skin="#E2B08A" hair="#4A2F22" seated seed={4} stress={stress} happy={happy} />
-
-      {/* the mess */}
-      {COSTS.map((c, i) => (
-        <CostObj key={i} def={c} idx={i} />
-      ))}
-      <Papers />
-
-      {/* the fix: shockwave + confetti */}
-      {f >= FIX && f < FIX + 24 && (
-        <mesh position={[0, 0.1, 0]} rotation={[-Math.PI / 2, 0, 0]} scale={0.3 + ring * 3.2}>
-          <ringGeometry args={[0.94, 1, 64]} />
-          <meshBasicMaterial color="#FFFFFF" transparent opacity={0.7 * (1 - ring)} />
-        </mesh>
-      )}
-      <Confetti />
-    </group>
-  );
-};

@@ -14,7 +14,8 @@ import {
 } from "remotion";
 import { fontsLoaded } from "../fispal/theme";
 import { Stage } from "../fispal/three/Stage";
-import { Room, FIX } from "./Room";
+import { Office, walkerX } from "./Office";
+import { FIX } from "./Room";
 import { BLOCKS, CUE, TOTAL_SECONDS, VOICE_FILE, type Run } from "./timeline";
 
 const FPS = 30;
@@ -33,37 +34,48 @@ const lerpHex = (a: string, b: string, t: number) => {
   return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(",")})`;
 };
 
-// Camera keyframes: [seconds, scale, panY]. Dolly-in during the problem, a
-// punch at the reveal, then a dolly-out into the logo (estilo-alva.md §6).
-const CAM: [number, number, number, number][] = [
-  [0, 0.225, 0.12, 0],
-  [3.2, 0.265, 0.12, 0],
-  [8.15, 0.33, 0.1, -0.05],
-  [8.4, 0.35, 0.1, -0.28],
-  [11.2, 0.345, 0.12, -0.3],
-  [13.95, 0.235, 0.1, 0],
+// Camera: follows the walker through the departments, punches in at the
+// reveal, then pulls out to show the whole office before the end card.
+// [seconds, scale, panY]
+const CAM: [number, number, number][] = [
+  [0, 0.34, 0.1],
+  [3.4, 0.34, 0.1],
+  [8.1, 0.35, 0.08],
+  [8.4, 0.37, 0.08],
+  [10.4, 0.36, 0.1],
+  [13.95, 0.165, 0.1],
 ];
 const camAt = (f: number) => {
   const t = f / FPS;
   const ts = CAM.map((c) => c[0]);
-  const at = (i: number) =>
-    interpolate(t, ts, CAM.map((c) => c[i]), { ...clamp, easing: ease });
-  return { s: at(1), y: at(2), x: at(3) };
+  const at = (i: number) => interpolate(t, ts, CAM.map((c) => c[i]), { ...clamp, easing: ease });
+  // focus slightly ahead of the walker (and on the desks, not the corridor),
+  // then glide to the middle of the floor for the pull-out
+  const ahead = interpolate(t, [0, 8, 9.7, 10.4], [0.8, 0.8, 1.5, 1.5], clamp);
+  const depth = interpolate(t, [0, 8, 9.5, 10.4], [0.2, 0.2, -0.6, -0.6], clamp);
+  const w = interpolate(t, [10.4, 13.95], [0, 1], { ...clamp, easing: ease });
+  return {
+    s: at(1),
+    y: at(2),
+    fx: (walkerX(Math.min(f, sec(10.4))) + ahead) * (1 - w) + 9.0 * w,
+    fz: depth * (1 - w) + 0.1 * w,
+  };
 };
 
 const CameraRig: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const f = useCurrentFrame();
-  const { s, y, x } = camAt(f);
+  const { s, y, fx, fz } = camAt(f);
   const stress =
     interpolate(f, [sec(2.2), sec(7.9)], [0, 1], clamp) * (1 - interpolate(f, [FIX - 2, FIX + 6], [0, 1], clamp));
-  const shake = stress * 0.016;
+  const shake = stress * 0.014;
   const sx = (Math.sin(f * 2.3) + Math.sin(f * 4.1)) * shake;
   const sy = (Math.cos(f * 2.9) + Math.sin(f * 3.3)) * shake;
-  // a small drift while the new room settles
   const drift = Math.sin(f / 40) * 0.01;
   return (
-    <group position={[x + sx, y + sy, 0]} rotation={[0.62 + drift, 0, stress * 0.012 * Math.sin(f * 1.7)]} scale={s}>
-      <group rotation={[0, -Math.PI / 4, 0]}>{children}</group>
+    <group position={[sx, y + sy, 0]} rotation={[0.62 + drift, 0, stress * 0.01 * Math.sin(f * 1.7)]} scale={s}>
+      <group rotation={[0, -Math.PI / 4, 0]}>
+        <group position={[-fx, 0, -fz]}>{children}</group>
+      </group>
     </group>
   );
 };
@@ -190,7 +202,7 @@ export const AlvaReel: React.FC = () => {
         {ready && f < end + 12 && (
           <Stage top={0} height={1920} z={7.5}>
             <CameraRig>
-              <Room />
+              <Office />
             </CameraRig>
           </Stage>
         )}
