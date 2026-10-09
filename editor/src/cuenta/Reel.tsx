@@ -15,9 +15,7 @@ import {
 } from "remotion";
 import { Subtitles } from "../fispal/Subtitles";
 import { C, fontsLoaded, s } from "../fispal/theme";
-import { Stage } from "../fispal/three/Stage";
-import { Floaters, Orb, Pop } from "../fispal/three/objects";
-import { Magnifier, PieChart, RenewArrow, ToggleSwitch } from "../fispal/three/objects2";
+import { Illus, IllusFloaters } from "../fispal/Illus";
 import { Background, Enter, Pill } from "../fispal/ui";
 import { Account, type AccountCues } from "./Account";
 import { buildPages } from "./captions";
@@ -166,38 +164,20 @@ export const CuentaReel: React.FC = () => {
 
       {/* 3D object breaking out of the window's top-right corner */}
       {frame < SEC.cta + 6 && (
-        <Stage top={30} left={600} width={480} height={480}>
-          <Pop at={0} out={SEC.status - 3} scale={0.9}>
-            <Magnifier />
-          </Pop>
-          <Pop at={SEC.status} out={SEC.renew - 3} scale={0.72} spin={0} position={[-0.2, 0, 0]}>
-            <ToggleSwitch onAt={s(CUE.activo)} />
-          </Pop>
-          <Pop at={SEC.renew} out={SEC.plan - 3} scale={0.9} spin={0.004}>
-            <RenewArrow />
-          </Pop>
-          <Pop at={SEC.plan} out={SEC.done - 3} scale={0.72} spin={0} position={[-0.3, -0.2, 0]}>
-            <PieChart at={[s(CUE.rfc), s(CUE.cfdi), s(CUE.modulos)]} />
-          </Pop>
-          <Pop at={SEC.done} out={SEC.cta} scale={0.9}>
-            <Orb />
-          </Pop>
-        </Stage>
+        <>
+          <Illus name="lupa" at={0} out={SEC.status - 3} x={840} y={270} size={440} />
+          <Illus name="interruptor" at={SEC.status} out={SEC.renew - 3} x={840} y={270} size={440} />
+          <Illus name="renovacion" at={SEC.renew} out={SEC.plan - 3} x={840} y={270} size={440} />
+          <Illus name="pastel" at={SEC.plan} out={SEC.done - 3} x={840} y={270} size={440} />
+          <Illus name="esfera" at={SEC.done} out={SEC.cta} x={840} y={270} size={440} />
+        </>
       )}
 
       {/* Closing / CTA */}
       <Sequence from={SEC.cta} layout="none">
         <AbsoluteFill style={{ alignItems: "center" }}>
-          <Stage top={0} height={1920} z={18}>
-            <Pop at={0} spin={0} tilt={0}>
-              <Floaters />
-            </Pop>
-          </Stage>
-          <Stage top={170} height={420}>
-            <Pop at={2} scale={1.1}>
-              <Orb />
-            </Pop>
-          </Stage>
+          <IllusFloaters />
+          <Illus name="esfera" at={2} x={540} y={380} size={440} />
           <div style={{ position: "absolute", top: 640 }}>
             <Enter delay={4} from={0.85}>
               <Img src={staticFile("brand/fispal-logo.png")} style={{ width: 640 }} />

@@ -9,27 +9,9 @@ import {
   useVideoConfig,
 } from "remotion";
 import { Dashboard } from "./Dashboard";
+import { Illus, IllusFloaters } from "./Illus";
 import { C, FONT, MONO, s } from "./theme";
 import { CUE } from "./timeline";
-import { Stage } from "./three/Stage";
-import {
-  ApiNodes,
-  Blocks,
-  Calendar,
-  CheckBadge,
-  CoinStacks,
-  Contract,
-  Dial,
-  Floaters,
-  IdBadge,
-  Invoices,
-  Knot,
-  Modules,
-  Orb,
-  People,
-  PlanCard,
-  Pop,
-} from "./three/objects";
 import { Card, Check, Enter, Headline, Pill, ScanCorners, useEnter } from "./ui";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -86,11 +68,7 @@ export const S1Logo: React.FC<{ from?: number }> = () => {
   const dot = spring({ frame: frame - 10, fps: 30, config: { damping: 8 } });
   return (
     <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
-      <Stage top={150} height={540}>
-        <Pop at={0} scale={1.15}>
-          <Orb />
-        </Pop>
-      </Stage>
+      <Illus name="esfera" at={0} x={540} y={420} size={560} />
       <div style={{ position: "absolute", top: 1080 }}>
         <Enter delay={8}>
           <Pill>Nueva experiencia</Pill>
@@ -137,14 +115,8 @@ export const S2Contratar: React.FC<{ from: number }> = ({ from }) => {
   const cam = 1 + 0.1 * push - 0.1 * pull;
   return (
     <AbsoluteFill>
-      <Stage top={1000} height={470}>
-        <Pop at={tPill} position={[-2.2, 0, 0]} scale={0.95}>
-          <Contract />
-        </Pop>
-        <Pop at={tPanel + 4} position={[2.0, 0, 0]} scale={1} tilt={0.4}>
-          <PlanCard />
-        </Pop>
-      </Stage>
+      <Illus name="contrato" at={tPill} x={300} y={1235} size={440} />
+      <Illus name="plan" at={tPanel + 4} x={790} y={1235} size={440} phase={1.5} />
       <div style={{ position: "absolute", top: 190, width: "100%", display: "flex", justifyContent: "center" }}>
         <Enter delay={tPill}>
           <Pill>Nueva forma de contratar</Pill>
@@ -249,29 +221,13 @@ export const S3Personaliza: React.FC<{ from: number }> = ({ from }) => {
   return (
     <AbsoluteFill>
       {/* 3D icon of whatever the voice is naming right now */}
-      <Stage top={90} height={540}>
-        <Pop at={0} out={at(CUE.cfdi, from) - 3}>
-          <Blocks at={0} />
-        </Pop>
-        <Pop at={at(CUE.cfdi, from)} out={at(CUE.rfc, from) - 3} scale={1.05}>
-          <Invoices />
-        </Pop>
-        <Pop at={at(CUE.rfc, from)} out={at(CUE.modulos, from) - 3} scale={1.1}>
-          <IdBadge />
-        </Pop>
-        <Pop at={at(CUE.modulos, from)} out={at(CUE.colaboradores, from) - 3}>
-          <Modules at={at(CUE.modulos, from)} />
-        </Pop>
-        <Pop at={at(CUE.colaboradores, from)} out={at(CUE.integraciones, from) - 3} spin={0.006}>
-          <People />
-        </Pop>
-        <Pop at={at(CUE.integraciones, from)} out={at(CUE.integraciones, from) + 30}>
-          <ApiNodes />
-        </Pop>
-        <Pop at={at(CUE.integraciones, from) + 33} spin={0.004} tilt={0.15}>
-          <CheckBadge />
-        </Pop>
-      </Stage>
+      <Illus name="bloques" at={0} out={at(CUE.cfdi, from) - 3} x={540} y={360} size={520} />
+      <Illus name="facturas" at={at(CUE.cfdi, from)} out={at(CUE.rfc, from) - 3} x={540} y={360} size={520} />
+      <Illus name="credencial" at={at(CUE.rfc, from)} out={at(CUE.modulos, from) - 3} x={540} y={360} size={520} />
+      <Illus name="modulos" at={at(CUE.modulos, from)} out={at(CUE.colaboradores, from) - 3} x={540} y={360} size={520} />
+      <Illus name="colaboradores" at={at(CUE.colaboradores, from)} out={at(CUE.integraciones, from) - 3} x={540} y={360} size={520} />
+      <Illus name="integraciones" at={at(CUE.integraciones, from)} out={at(CUE.integraciones, from) + 30} x={540} y={360} size={520} />
+      <Illus name="check" at={at(CUE.integraciones, from) + 33} x={540} y={360} size={520} />
       <div style={{ position: "absolute", left: 90, top: 620, transform: "scale(0.8)", transformOrigin: "50% 0" }}>
         <Enter delay={0} from={0.9}>
           <div style={{ position: "relative" }}>
@@ -353,13 +309,7 @@ export const S4Selector: React.FC<{ from: number }> = ({ from }) => {
   const anualOn = frame >= tAnual + 4;
   return (
     <AbsoluteFill>
-      <Stage top={70} height={470}>
-        <Pop at={0} scale={1.15} spin={0} tilt={0.1}>
-          <group rotation={[0.25, -0.35, 0]}>
-            <Calendar annual={move} />
-          </group>
-        </Pop>
-      </Stage>
+      <Illus name="calendario" at={0} x={540} y={305} size={470} />
       <div style={{ position: "absolute", top: 560, width: "100%" }}>
         <Enter delay={0}>
           <Headline size={78}>Elige cómo contratar.</Headline>
@@ -450,11 +400,7 @@ export const S5Ahorro: React.FC<{ from: number }> = ({ from }) => {
   const count = Math.round(interpolate(frame, [t20, t20 + 14], [0, 20], clamp));
   return (
     <AbsoluteFill style={{ alignItems: "center" }}>
-      <Stage top={1000} height={450}>
-        <group scale={[1.45, 1.45, 1.45]} position={[0, 0.6, 0]}>
-          <CoinStacks at={t20} />
-        </group>
-      </Stage>
+      <Illus name="monedas" at={t20 - 6} x={540} y={1225} size={460} />
       <div style={{ position: "absolute", top: 260 }}>
         <Enter delay={0}>
           <Pill>Plan anual</Pill>
@@ -531,17 +477,9 @@ export const S6Claims: React.FC<{ from: number }> = ({ from }) => {
   const frame = useCurrentFrame();
   return (
     <AbsoluteFill style={{ alignItems: "center" }}>
-      <Stage top={90} height={560}>
-        <Pop at={at(CUE.masFlex, from)} out={at(CUE.masControl, from) - 3}>
-          <Knot />
-        </Pop>
-        <Pop at={at(CUE.masControl, from)} out={at(CUE.masFispal, from) - 3} spin={0.004}>
-          <Dial at={at(CUE.masControl, from)} />
-        </Pop>
-        <Pop at={at(CUE.masFispal, from)} scale={1.1}>
-          <Orb />
-        </Pop>
-      </Stage>
+      <Illus name="flexibilidad" at={at(CUE.masFlex, from)} out={at(CUE.masControl, from) - 3} x={540} y={370} size={540} />
+      <Illus name="perilla" at={at(CUE.masControl, from)} out={at(CUE.masFispal, from) - 3} x={540} y={370} size={540} />
+      <Illus name="esfera" at={at(CUE.masFispal, from)} x={540} y={370} size={540} />
       <div style={{ display: "flex", flexDirection: "column", gap: 54, marginTop: 720 }}>
         {CLAIMS.map((c, i) => {
           const t = at(c.t, from);
@@ -587,11 +525,7 @@ export const S7Cierre: React.FC<{ from: number }> = ({ from }) => {
   const tUrl = at(CUE.url, from);
   return (
     <AbsoluteFill style={{ alignItems: "center" }}>
-      <Stage top={0} height={1920} z={18}>
-        <Pop at={0} spin={0} tilt={0}>
-          <Floaters />
-        </Pop>
-      </Stage>
+      <IllusFloaters />
       <div style={{ position: "absolute", top: 420 }}>
         <Enter delay={0} from={0.85}>
           <Img src={staticFile("brand/fispal-logo.png")} style={{ width: 700 }} />
