@@ -28,10 +28,10 @@ const Escena1: React.FC = () => {
         <Pic name="escena1" label="escena1.png · cuaderno + mano" style={{ width: W, height: H }} />
       </AbsoluteFill>
       <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(30,27,75,.35) 0%, rgba(30,27,75,0) 30%)" }} />
-      {hasAsset("bling/facturas.png") && (
+      {!hasAsset("bling/escena1.mp4") && hasAsset("bling/facturas.png") && (
         <Img src={staticFile("bling/facturas.png")} style={{ position: "absolute", left: 90, bottom: -40, width: 900, transformOrigin: "50% 100%", transform: `scale(${interpolate(frame, [fall + 6, fall + 40], [0, 1], { ...clamp, easing: EASE })})` }} />
       )}
-      <FallingInvoices at={fall} count={16} floorY={1650} />
+      {!hasAsset("bling/escena1.mp4") && <FallingInvoices at={fall} count={16} floorY={1650} />}
       <Sticker lines={["¿Anotando las ventas", "en cuaderno y", "cruzando los dedos?"]} at={6} size={70} style={{ position: "absolute", top: 270, left: 0, right: 0 }} />
     </AbsoluteFill>
   );
@@ -56,7 +56,7 @@ const Escena2: React.FC = () => {
       <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(30,27,75,.35) 0%, rgba(30,27,75,0) 28%)" }} />
       {/* growing paper mountain, bottom corners */}
       {[{ x: -120, r: -8 }, { x: 640, r: 6 }].map((p, i) =>
-        hasAsset("bling/facturas.png") ? (
+        !hasAsset("bling/escena2.mp4") && hasAsset("bling/facturas.png") ? (
           <Img key={i} src={staticFile("bling/facturas.png")} style={{ position: "absolute", left: p.x, bottom: -60, width: 560, transformOrigin: "50% 100%", transform: `scale(${pile}) rotate(${p.r}deg)` }} />
         ) : null,
       )}
@@ -128,7 +128,7 @@ const Escena4: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: B.cream, overflow: "hidden" }}>
       <AbsoluteFill style={{ transform: `scale(${interpolate(frame, [0, sec(5.4)], [1.08, 1.0])})` }}>
-        <Pic name="escena3" label="escena3.png · personaje feliz" style={{ width: W, height: H }} />
+        <Pic name="escena3" from={2} label="escena3.png · personaje feliz" style={{ width: W, height: H }} />
       </AbsoluteFill>
       <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(255,246,236,.92) 0%, rgba(255,246,236,0) 32%, rgba(30,27,75,0) 55%, rgba(30,27,75,.55) 100%)" }} />
       {/* the app phone slides into the background */}

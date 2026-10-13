@@ -11,9 +11,9 @@ const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
 /* ---------- Magnific stills (placeholder until the PNG is in public/bling) ---------- */
 // Animated Magnific clip (bling/<name>.mp4) when present, otherwise the still.
-export const Pic: React.FC<{ name: string; style?: React.CSSProperties; fit?: "cover" | "contain"; label?: string; rate?: number }> = ({ name, style, fit = "cover", label, rate = 1 }) =>
+export const Pic: React.FC<{ name: string; style?: React.CSSProperties; fit?: "cover" | "contain"; label?: string; rate?: number; from?: number }> = ({ name, style, fit = "cover", label, rate = 1, from = 0 }) =>
   hasAsset(`bling/${name}.mp4`) ? (
-    <OffthreadVideo src={staticFile(`bling/${name}.mp4`)} muted playbackRate={rate} style={{ objectFit: fit, ...style }} />
+    <OffthreadVideo src={staticFile(`bling/${name}.mp4`)} muted playbackRate={rate} trimBefore={Math.round(from * 30)} style={{ objectFit: fit, ...style }} />
   ) : hasAsset(`bling/${name}.png`) ? (
     <Img src={staticFile(`bling/${name}.png`)} style={{ objectFit: fit, ...style }} />
   ) : (
