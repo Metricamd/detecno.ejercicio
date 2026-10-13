@@ -98,19 +98,18 @@ export const BlingLogo: React.FC<{ size?: number; light?: boolean }> = ({ size =
 
 /* ---------- falling invoices (cut-out pile from Magnific, or drawn sheets) ---------- */
 const Sheet: React.FC<{ w: number }> = ({ w }) => (
-  <div style={{ width: w, height: w * 1.3, background: "#FFFDF7", borderRadius: 10, boxShadow: "0 12px 24px rgba(0,0,0,.25)", padding: w * 0.1, boxSizing: "border-box", border: "2px solid #EADFCB" }}>
-    <div style={{ height: w * 0.08, width: "55%", background: B.coral, borderRadius: 4, marginBottom: w * 0.08 }} />
+  <div style={{ width: w, height: w * 1.3, background: "linear-gradient(160deg,#FFF9EC,#EFE2C8)", borderRadius: 6, boxShadow: "0 12px 24px rgba(80,50,20,.3)", padding: w * 0.1, boxSizing: "border-box", border: "2px solid #EADFCB" }}>
+    <div style={{ height: w * 0.08, width: "55%", background: "#C9B89A", borderRadius: 4, marginBottom: w * 0.08 }} />
     {[90, 70, 85, 60, 75].map((p, i) => (
       <div key={i} style={{ height: w * 0.04, width: `${p}%`, background: "#D6CDBE", borderRadius: 3, marginBottom: w * 0.06 }} />
     ))}
-    <div style={{ marginTop: w * 0.06, fontFamily: POPPINS, fontWeight: 800, fontSize: w * 0.12, color: B.ink }}>$ ---</div>
+    <div style={{ marginTop: w * 0.06, fontFamily: POPPINS, fontWeight: 800, fontSize: w * 0.12, color: "#8A7656" }}>$ ---</div>
   </div>
 );
 
 export const FallingInvoices: React.FC<{ at: number; count?: number; floorY?: number }> = ({ at, count = 14, floorY = 1500 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const usePile = hasAsset("bling/facturas.png");
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>
       {Array.from({ length: count }).map((_, i) => {
@@ -124,7 +123,7 @@ export const FallingInvoices: React.FC<{ at: number; count?: number; floorY?: nu
         const w = 210 + (seed % 4) * 30;
         return (
           <div key={i} style={{ position: "absolute", left: x - w / 2, top: y - w * 0.65, transform: `rotate(${rot}deg)` }}>
-            {usePile && i % 3 === 0 ? <Img src={staticFile("bling/facturas.png")} style={{ width: w * 1.5 }} /> : <Sheet w={w} />}
+            <Sheet w={w} />
           </div>
         );
       })}

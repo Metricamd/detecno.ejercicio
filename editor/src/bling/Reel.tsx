@@ -28,6 +28,9 @@ const Escena1: React.FC = () => {
         <Pic name="escena1" label="escena1.png · cuaderno + mano" style={{ width: W, height: H }} />
       </AbsoluteFill>
       <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(30,27,75,.35) 0%, rgba(30,27,75,0) 30%)" }} />
+      {hasAsset("bling/facturas.png") && (
+        <Img src={staticFile("bling/facturas.png")} style={{ position: "absolute", left: 90, bottom: -40, width: 900, transformOrigin: "50% 100%", transform: `scale(${interpolate(frame, [fall + 6, fall + 40], [0, 1], { ...clamp, easing: EASE })})` }} />
+      )}
       <FallingInvoices at={fall} count={16} floorY={1650} />
       <Sticker lines={["¿Anotando las ventas", "en cuaderno y", "cruzando los dedos?"]} at={6} size={70} style={{ position: "absolute", top: 270, left: 0, right: 0 }} />
     </AbsoluteFill>
@@ -44,7 +47,7 @@ const Escena2: React.FC = () => {
   const speed = interpolate(frame, [0, len], [6, 40], { ...clamp, easing: Easing.in(Easing.quad) });
   const clockIn = spring({ frame: frame - 14, fps, config: { damping: 10, stiffness: 140 } });
   const wobble = Math.sin(frame / 2.2) * interpolate(frame, [0, len], [2, 7]);
-  const pile = interpolate(frame, [0, len], [0.55, 1.25], { ...clamp, easing: Easing.out(Easing.quad) });
+  const pile = interpolate(frame, [0, len], [0.45, 0.95], { ...clamp, easing: Easing.out(Easing.quad) });
   return (
     <AbsoluteFill style={{ background: B.cream, overflow: "hidden" }}>
       <AbsoluteFill style={{ transform: `scale(${zoom})` }}>
@@ -57,8 +60,6 @@ const Escena2: React.FC = () => {
           <Img key={i} src={staticFile("bling/facturas.png")} style={{ position: "absolute", left: p.x, bottom: -60, width: 560, transformOrigin: "50% 100%", transform: `scale(${pile}) rotate(${p.r}deg)` }} />
         ) : null,
       )}
-      <FallingInvoices at={at(SCENE.s2, 8.6)} count={10} floorY={1720} />
-      <FallingInvoices at={at(SCENE.s2, 11.4)} count={10} floorY={1640} />
       <div style={{ position: "absolute", right: 70, top: 640, transform: `scale(${clockIn}) rotate(${wobble}deg)` }}>
         <Clock size={270} speed={speed} />
       </div>
@@ -162,9 +163,9 @@ const Escena4: React.FC = () => {
         </div>
       </div>
       {/* hand pointing down at the button */}
-      <div style={{ position: "absolute", right: 90, top: 960 + bob, opacity: hand, transform: `scale(${hand})` }}>
+      <div style={{ position: "absolute", right: 30, top: 900 + bob, opacity: hand, transform: `scale(${hand})` }}>
         {hasAsset("bling/mano.png") ? (
-          <Img src={staticFile("bling/mano.png")} style={{ width: 230 }} />
+          <Img src={staticFile("bling/mano.png")} style={{ width: 170 }} />
         ) : (
           <div style={{ fontSize: 170, transform: "rotate(-15deg)" }}>👇</div>
         )}
