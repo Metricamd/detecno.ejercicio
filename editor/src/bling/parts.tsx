@@ -2,7 +2,7 @@
 // bouncy sticker titles, the Bling logo, the phone with the app and the
 // falling invoices.
 import React from "react";
-import { AbsoluteFill, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Img, OffthreadVideo, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { hasAsset } from "../components/ui";
 import { POPPINS } from "../theme";
 import { B } from "./theme";
@@ -10,8 +10,11 @@ import { B } from "./theme";
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
 /* ---------- Magnific stills (placeholder until the PNG is in public/bling) ---------- */
-export const Pic: React.FC<{ name: string; style?: React.CSSProperties; fit?: "cover" | "contain"; label?: string }> = ({ name, style, fit = "cover", label }) =>
-  hasAsset(`bling/${name}.png`) ? (
+// Animated Magnific clip (bling/<name>.mp4) when present, otherwise the still.
+export const Pic: React.FC<{ name: string; style?: React.CSSProperties; fit?: "cover" | "contain"; label?: string; rate?: number }> = ({ name, style, fit = "cover", label, rate = 1 }) =>
+  hasAsset(`bling/${name}.mp4`) ? (
+    <OffthreadVideo src={staticFile(`bling/${name}.mp4`)} muted playbackRate={rate} style={{ objectFit: fit, ...style }} />
+  ) : hasAsset(`bling/${name}.png`) ? (
     <Img src={staticFile(`bling/${name}.png`)} style={{ objectFit: fit, ...style }} />
   ) : (
     <div
