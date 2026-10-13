@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { AbsoluteFill, Audio, CalculateMetadataFunction, continueRender, delayRender, Easing, Img, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { hasAsset } from "../components/ui";
 import { POPPINS, poppinsReady } from "../theme";
-import { BlingLogo, Clock, FallingInvoices, PhoneApp, Pic, Spark, Sticker, useShake } from "./parts";
+import { BlingLogo, FallingInvoices, PhoneApp, Pic, Spark, Sticker, useShake } from "./parts";
 import { B, H, SCENE, sec, TOTAL, W, wordAt } from "./theme";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -32,7 +32,7 @@ const Escena1: React.FC = () => {
         <Img src={staticFile("bling/facturas.png")} style={{ position: "absolute", left: 90, bottom: -40, width: 900, transformOrigin: "50% 100%", transform: `scale(${interpolate(frame, [fall + 6, fall + 40], [0, 1], { ...clamp, easing: EASE })})` }} />
       )}
       {!hasAsset("bling/escena1.mp4") && <FallingInvoices at={fall} count={16} floorY={1650} />}
-      <Sticker lines={["¿Anotando las ventas", "en cuaderno y", "cruzando los dedos?"]} at={6} size={70} style={{ position: "absolute", top: 270, left: 0, right: 0 }} />
+      <Sticker lines={["¿Anotando las ventas", "en cuaderno y", "cruzando los dedos?"]} hl={["cuaderno", "dedos"]} at={6} size={70} style={{ position: "absolute", top: 270, left: 0, right: 0 }} />
     </AbsoluteFill>
   );
 };
@@ -40,13 +40,8 @@ const Escena1: React.FC = () => {
 /* ---------- Scene 2: overwhelmed character, paper mountain, clock ---------- */
 const Escena2: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
   const len = sec(SCENE.s3 - SCENE.s2);
   const zoom = interpolate(frame, [0, len], [1.0, 1.12]);
-  // the clock spins faster and faster
-  const speed = interpolate(frame, [0, len], [6, 40], { ...clamp, easing: Easing.in(Easing.quad) });
-  const clockIn = spring({ frame: frame - 14, fps, config: { damping: 10, stiffness: 140 } });
-  const wobble = Math.sin(frame / 2.2) * interpolate(frame, [0, len], [2, 7]);
   const pile = interpolate(frame, [0, len], [0.45, 0.95], { ...clamp, easing: Easing.out(Easing.quad) });
   return (
     <AbsoluteFill style={{ background: B.cream, overflow: "hidden" }}>
@@ -60,10 +55,7 @@ const Escena2: React.FC = () => {
           <Img key={i} src={staticFile("bling/facturas.png")} style={{ position: "absolute", left: p.x, bottom: -60, width: 560, transformOrigin: "50% 100%", transform: `scale(${pile}) rotate(${p.r}deg)` }} />
         ) : null,
       )}
-      <div style={{ position: "absolute", right: 70, top: 640, transform: `scale(${clockIn}) rotate(${wobble}deg)` }}>
-        <Clock size={270} speed={speed} />
-      </div>
-      <Sticker lines={["El desorden frena", "tu negocio y", "te quita tiempo"]} at={at(SCENE.s2, 6.1)} size={72} style={{ position: "absolute", top: 270, left: 0, right: 0 }} />
+      <Sticker lines={["El desorden frena", "tu negocio y", "te quita tiempo"]} hl={["desorden", "tiempo"]} at={at(SCENE.s2, 6.1)} size={72} style={{ position: "absolute", top: 270, left: 0, right: 0 }} />
     </AbsoluteFill>
   );
 };
@@ -99,16 +91,16 @@ const Escena3: React.FC = () => {
   return (
     <AbsoluteFill style={{ overflow: "hidden" }}>
       <Glows />
-      <div style={{ position: "absolute", left: W / 2 - 280, top: 470, perspective: 1600 }}>
+      <div style={{ position: "absolute", left: W / 2 - 280, top: 560, perspective: 1600 }}>
         <div style={{ transform: `translateY(${(1 - rise) * 900}px) rotateY(${tilt}deg) rotateX(5deg) scale(.86)`, transformOrigin: "50% 0" }}>
           <PhoneApp on={on} checks={CHECKS} synced={synced} />
         </div>
       </div>
       <div style={{ position: "absolute", top: 260, left: 0, right: 0, opacity: out1, transform: `scale(${0.9 + out1 * 0.1})` }}>
-        <Sticker lines={["¡Llegó lo nuevo de Bling!"]} at={at(SCENE.s3, 14.0)} size={66} bg={B.sun} />
+        <Sticker lines={["¡Llegó lo nuevo", "de Bling!"]} hl={["bling"]} at={at(SCENE.s3, 14.0)} size={70} bg={B.sun} />
       </div>
       {frame >= swap - 2 && (
-        <Sticker lines={["Ventas + Inventario + Facturas", "en un solo lugar"]} at={swap} size={52} style={{ position: "absolute", top: 260, left: 0, right: 0 }} />
+        <Sticker lines={["Ventas + Inventario", "+ Facturas", "en un solo lugar"]} hl={["ventas", "inventario", "facturas"]} at={swap} size={56} style={{ position: "absolute", top: 260, left: 0, right: 0 }} />
       )}
     </AbsoluteFill>
   );
@@ -123,8 +115,6 @@ const Escena4: React.FC = () => {
   const btn = spring({ frame: frame - at(SCENE.s4, 25.1), fps, config: { damping: 8, stiffness: 160 } });
   const pulse = 1 + Math.max(0, Math.sin((frame - at(SCENE.s4, 25.6)) / 5)) * 0.06 * (frame > at(SCENE.s4, 25.6) ? 1 : 0);
   const glow = 0.5 + 0.5 * Math.sin(frame / 5);
-  const hand = spring({ frame: frame - at(SCENE.s4, 25.8), fps, config: { damping: 11, stiffness: 120 } });
-  const bob = Math.sin(frame / 4.5) * 22;
   return (
     <AbsoluteFill style={{ background: B.cream, overflow: "hidden" }}>
       <AbsoluteFill style={{ transform: `scale(${interpolate(frame, [0, sec(5.4)], [1.08, 1.0])})` }}>
@@ -138,13 +128,10 @@ const Escena4: React.FC = () => {
       <div style={{ position: "absolute", top: 270, left: 0, right: 0, display: "flex", justifyContent: "center", transform: `scale(${logo})` }}>
         <BlingLogo size={150} />
       </div>
-      <Sticker lines={["Dale un respiro", "a tu negocio"]} at={14} size={70} style={{ position: "absolute", top: 460, left: 0, right: 0 }} />
+      <Sticker lines={["Dale un respiro", "a tu negocio"]} hl={["respiro"]} at={14} size={70} style={{ position: "absolute", top: 460, left: 0, right: 0 }} />
       {/* CTA */}
       <div style={{ position: "absolute", top: 1170, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 34 }}>
-        <div style={{ fontFamily: POPPINS, fontWeight: 800, fontSize: 46, color: B.white, textAlign: "center", lineHeight: 1.15, textShadow: "0 4px 18px rgba(30,27,75,.7)", opacity: btn, transform: `translateY(${(1 - btn) * 30}px)` }}>
-          Haz clic en el link
-          <br />y prueba Bling gratis
-        </div>
+        <Sticker lines={["Haz clic en el link", "y prueba Bling gratis"]} hl={["gratis"]} hlBg={B.mint} at={at(SCENE.s4, 25.0)} size={50} />
         <div
           style={{
             fontFamily: POPPINS,
@@ -161,14 +148,6 @@ const Escena4: React.FC = () => {
         >
           ¡Pruébalo gratis!
         </div>
-      </div>
-      {/* hand pointing down at the button */}
-      <div style={{ position: "absolute", right: 30, top: 900 + bob, opacity: hand, transform: `scale(${hand})` }}>
-        {hasAsset("bling/mano.png") ? (
-          <Img src={staticFile("bling/mano.png")} style={{ width: 170 }} />
-        ) : (
-          <div style={{ fontSize: 170, transform: "rotate(-15deg)" }}>👇</div>
-        )}
       </div>
     </AbsoluteFill>
   );

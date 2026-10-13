@@ -35,42 +35,76 @@ export const Pic: React.FC<{ name: string; style?: React.CSSProperties; fit?: "c
     </div>
   );
 
-/* ---------- bouncy sticker title (white, chunky, ink outline) ---------- */
+/* ---------- bouncy sticker title: word-by-word pop, highlighted keywords, wobble ---------- */
+const normWord = (w: string) => w.toLowerCase().replace(/[¡!¿?,.+]/g, "");
+
 export const Sticker: React.FC<{
   lines: string[];
   at: number; // local frame
   size?: number;
   color?: string;
   bg?: string;
+  hl?: string[]; // words drawn as coloured chips
+  hlBg?: string;
+  out?: number; // local frame where the words pop out
   style?: React.CSSProperties;
-}> = ({ lines, at, size = 76, color = B.ink, bg = B.white, style }) => {
+}> = ({ lines, at, size = 76, color = B.ink, bg = B.white, hl = [], hlBg = B.coral, out, style }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  let n = 0;
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14, ...style }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, ...style }}>
       {lines.map((l, i) => {
-        const p = spring({ frame: frame - at - i * 5, fps, config: { damping: 9, stiffness: 170 } });
-        const rot = (i % 2 ? 1.5 : -1.5) * (1 - Math.min(1, p) * 0.4);
+        // the line plate pops first, then its words land one by one
+        const lineAt = at + i * 6;
+        const plate = spring({ frame: frame - lineAt, fps, config: { damping: 10, stiffness: 200 } });
+        const exit = out === undefined ? 0 : spring({ frame: frame - out - i * 3, fps, config: { damping: 14, stiffness: 220 } });
+        const sway = Math.sin((frame + i * 17) / 11) * 1.6;
+        const floatY = Math.sin((frame + i * 23) / 14) * 5;
         return (
           <div
             key={i}
             style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: `0 ${size * 0.26}px`,
               fontFamily: POPPINS,
               fontWeight: 800,
               fontSize: size,
-              lineHeight: 1.08,
+              lineHeight: 1.1,
               color,
               background: bg,
-              borderRadius: 28,
-              padding: `${size * 0.16}px ${size * 0.38}px`,
-              boxShadow: `0 10px 0 ${B.ink}22, 0 18px 40px rgba(30,27,75,.25)`,
+              borderRadius: 26,
+              padding: `${size * 0.14}px ${size * 0.34}px`,
               border: `5px solid ${B.ink}`,
-              textAlign: "center",
-              transform: `scale(${p}) rotate(${rot}deg)`,
-              opacity: Math.min(1, p * 2),
+              boxShadow: `0 9px 0 ${B.ink}, 0 20px 40px rgba(30,27,75,.3)`,
+              transform: `translateY(${floatY + exit * -60}px) scale(${Math.min(1.08, plate) * (1 - exit)}) rotate(${(i % 2 ? 2.2 : -2.2) * (1 - Math.min(1, plate)) * 3 + sway}deg)`,
+              opacity: Math.min(1, plate * 2) * (1 - exit),
             }}
           >
-            {l}
+            {l.split(" ").map((w, j) => {
+              const k = n++;
+              const p = spring({ frame: frame - lineAt - 3 - j * 3, fps, config: { damping: 8, stiffness: 240 } });
+              const isHl = hl.includes(normWord(w));
+              // highlighted words keep a little heartbeat
+              const beat = isHl ? 1 + Math.max(0, Math.sin((frame - lineAt) / 4)) * 0.05 : 1;
+              return (
+                <span
+                  key={j}
+                  style={{
+                    display: "inline-block",
+                    transform: `translateY(${(1 - p) * size * 0.6}px) scale(${p * beat}) rotate(${(k % 2 ? 6 : -6) * (1 - Math.min(1, p))}deg)`,
+                    opacity: Math.min(1, p * 2),
+                    ...(isHl
+                      ? { color: B.white, background: hlBg, borderRadius: size * 0.2, padding: `0 ${size * 0.14}px`, margin: `0 -${size * 0.04}px`, boxShadow: `inset 0 -${size * 0.08}px 0 rgba(0,0,0,.15)` }
+                      : {}),
+                  }}
+                >
+                  {w}
+                </span>
+              );
+            })}
           </div>
         );
       })}
