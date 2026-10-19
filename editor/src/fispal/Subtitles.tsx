@@ -35,7 +35,7 @@ const WordView: React.FC<{ word: Word; frame: number }> = ({ word, frame }) => {
   );
 };
 
-const PageView: React.FC<{ page: Page; frame: number }> = ({ page, frame }) => {
+const PageView: React.FC<{ page: Page; frame: number; color?: string }> = ({ page, frame, color = C.text }) => {
   const out = interpolate(frame, [s(page.end) - 6, s(page.end)], [1, 0], clamp);
   const line = (role: Word["role"]) => page.words.filter((w) => w.role === role);
   const ctx = line("ctx");
@@ -54,7 +54,7 @@ const PageView: React.FC<{ page: Page; frame: number }> = ({ page, frame }) => {
       }}
     >
       {ctx.length > 0 && (
-        <div style={{ fontSize: 46, fontWeight: 600, color: C.text, lineHeight: 1.25 }}>
+        <div style={{ fontSize: 46, fontWeight: 600, color, lineHeight: 1.25 }}>
           {ctx.map((w) => (
             <WordView key={w.start} word={w} frame={frame} />
           ))}
@@ -76,7 +76,7 @@ const PageView: React.FC<{ page: Page; frame: number }> = ({ page, frame }) => {
         </div>
       )}
       {tail.length > 0 && (
-        <div style={{ fontSize: 40, fontWeight: 600, color: C.text, lineHeight: 1.3 }}>
+        <div style={{ fontSize: 40, fontWeight: 600, color, lineHeight: 1.3 }}>
           {tail.map((w) => (
             <WordView key={w.start} word={w} frame={frame} />
           ))}
@@ -86,9 +86,10 @@ const PageView: React.FC<{ page: Page; frame: number }> = ({ page, frame }) => {
   );
 };
 
-export const Subtitles: React.FC<{ centerY?: number; pages: Page[] }> = ({
+export const Subtitles: React.FC<{ centerY?: number; pages: Page[]; color?: string }> = ({
   centerY = 1560,
   pages,
+  color,
 }) => {
   const frame = useCurrentFrame();
   const page = pages.find((p) => frame >= s(p.start) && frame < s(p.end));
@@ -106,7 +107,7 @@ export const Subtitles: React.FC<{ centerY?: number; pages: Page[] }> = ({
           justifyContent: "center",
         }}
       >
-        <PageView page={page} frame={frame} />
+        <PageView page={page} frame={frame} color={color} />
       </div>
     </AbsoluteFill>
   );

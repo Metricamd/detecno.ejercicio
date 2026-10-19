@@ -1,0 +1,546 @@
+{
+ "duration": 51.02,
+ "estimated": true,
+ "words": [
+  {
+   "text": "¿Cuánto",
+   "start": 0.147,
+   "end": 0.321
+  },
+  {
+   "text": "tiempo",
+   "start": 0.377,
+   "end": 0.72
+  },
+  {
+   "text": "pierde",
+   "start": 0.784,
+   "end": 1.12
+  },
+  {
+   "text": "tu",
+   "start": 1.147,
+   "end": 1.2
+  },
+  {
+   "text": "equipo",
+   "start": 1.257,
+   "end": 1.6
+  },
+  {
+   "text": "revisando",
+   "start": 1.653,
+   "end": 2.08
+  },
+  {
+   "text": "información",
+   "start": 2.133,
+   "end": 2.72
+  },
+  {
+   "text": "que",
+   "start": 2.76,
+   "end": 2.88
+  },
+  {
+   "text": "ya",
+   "start": 2.933,
+   "end": 3.04
+  },
+  {
+   "text": "debería",
+   "start": 3.093,
+   "end": 3.44
+  },
+  {
+   "text": "tener",
+   "start": 3.493,
+   "end": 3.76
+  },
+  {
+   "text": "controlada?",
+   "start": 3.81,
+   "end": 4.48
+  },
+  {
+   "text": "CFDI,",
+   "start": 4.72,
+   "end": 5.92
+  },
+  {
+   "text": "reportes,",
+   "start": 6.057,
+   "end": 7.36
+  },
+  {
+   "text": "archivos,",
+   "start": 7.431,
+   "end": 8.32
+  },
+  {
+   "text": "consultas",
+   "start": 8.38,
+   "end": 8.88
+  },
+  {
+   "text": "y",
+   "start": 8.92,
+   "end": 8.96
+  },
+  {
+   "text": "revisiones.",
+   "start": 9.031,
+   "end": 9.84
+  },
+  {
+   "text": "Cuando",
+   "start": 9.954,
+   "end": 10.64
+  },
+  {
+   "text": "la",
+   "start": 10.667,
+   "end": 10.72
+  },
+  {
+   "text": "información",
+   "start": 10.767,
+   "end": 11.28
+  },
+  {
+   "text": "crece,",
+   "start": 11.32,
+   "end": 12.08
+  },
+  {
+   "text": "también",
+   "start": 12.12,
+   "end": 12.4
+  },
+  {
+   "text": "crece",
+   "start": 12.44,
+   "end": 12.64
+  },
+  {
+   "text": "el",
+   "start": 12.693,
+   "end": 12.8
+  },
+  {
+   "text": "trabajo",
+   "start": 12.85,
+   "end": 13.2
+  },
+  {
+   "text": "necesario",
+   "start": 13.256,
+   "end": 13.76
+  },
+  {
+   "text": "para",
+   "start": 13.808,
+   "end": 14.0
+  },
+  {
+   "text": "mantenerla",
+   "start": 14.053,
+   "end": 14.56
+  },
+  {
+   "text": "bajo",
+   "start": 14.608,
+   "end": 14.8
+  },
+  {
+   "text": "control.",
+   "start": 14.87,
+   "end": 15.44
+  },
+  {
+   "text": "El",
+   "start": 15.627,
+   "end": 16.0
+  },
+  {
+   "text": "reto",
+   "start": 16.053,
+   "end": 16.32
+  },
+  {
+   "text": "no",
+   "start": 16.373,
+   "end": 16.48
+  },
+  {
+   "text": "siempre",
+   "start": 16.52,
+   "end": 16.8
+  },
+  {
+   "text": "es",
+   "start": 16.853,
+   "end": 16.96
+  },
+  {
+   "text": "tener",
+   "start": 17.0,
+   "end": 17.2
+  },
+  {
+   "text": "información.",
+   "start": 17.267,
+   "end": 18.28
+  },
+  {
+   "text": "Es",
+   "start": 18.373,
+   "end": 18.56
+  },
+  {
+   "text": "poder",
+   "start": 18.613,
+   "end": 18.88
+  },
+  {
+   "text": "consultarla,",
+   "start": 18.944,
+   "end": 19.92
+  },
+  {
+   "text": "organizarla",
+   "start": 19.96,
+   "end": 20.72
+  },
+  {
+   "text": "y",
+   "start": 20.88,
+   "end": 21.04
+  },
+  {
+   "text": "analizarla",
+   "start": 21.088,
+   "end": 21.76
+  },
+  {
+   "text": "cuando",
+   "start": 21.794,
+   "end": 22.0
+  },
+  {
+   "text": "la",
+   "start": 22.027,
+   "end": 22.08
+  },
+  {
+   "text": "necesitas.",
+   "start": 22.133,
+   "end": 22.96
+  },
+  {
+   "text": "Con",
+   "start": 23.16,
+   "end": 23.76
+  },
+  {
+   "text": "Fispal",
+   "start": 23.84,
+   "end": 24.4
+  },
+  {
+   "text": "puedes",
+   "start": 24.469,
+   "end": 24.88
+  },
+  {
+   "text": "concentrar",
+   "start": 24.933,
+   "end": 25.44
+  },
+  {
+   "text": "tus",
+   "start": 25.5,
+   "end": 25.68
+  },
+  {
+   "text": "CFDI",
+   "start": 25.76,
+   "end": 26.64
+  },
+  {
+   "text": "y",
+   "start": 26.76,
+   "end": 26.88
+  },
+  {
+   "text": "trabajar",
+   "start": 26.924,
+   "end": 27.28
+  },
+  {
+   "text": "con",
+   "start": 27.34,
+   "end": 27.52
+  },
+  {
+   "text": "ellos",
+   "start": 27.56,
+   "end": 27.76
+  },
+  {
+   "text": "desde",
+   "start": 27.8,
+   "end": 28.0
+  },
+  {
+   "text": "una",
+   "start": 28.06,
+   "end": 28.24
+  },
+  {
+   "text": "misma",
+   "start": 28.293,
+   "end": 28.56
+  },
+  {
+   "text": "plataforma.",
+   "start": 28.618,
+   "end": 29.36
+  },
+  {
+   "text": "Consulta,",
+   "start": 29.49,
+   "end": 30.56
+  },
+  {
+   "text": "análisis",
+   "start": 30.688,
+   "end": 31.68
+  },
+  {
+   "text": "y",
+   "start": 31.8,
+   "end": 31.92
+  },
+  {
+   "text": "diferentes",
+   "start": 31.971,
+   "end": 32.48
+  },
+  {
+   "text": "herramientas",
+   "start": 32.516,
+   "end": 33.04
+  },
+  {
+   "text": "para",
+   "start": 33.072,
+   "end": 33.2
+  },
+  {
+   "text": "gestionar",
+   "start": 33.25,
+   "end": 33.68
+  },
+  {
+   "text": "tu",
+   "start": 33.733,
+   "end": 33.84
+  },
+  {
+   "text": "información",
+   "start": 33.88,
+   "end": 34.32
+  },
+  {
+   "text": "fiscal.",
+   "start": 34.4,
+   "end": 34.96
+  },
+  {
+   "text": "Más",
+   "start": 35.18,
+   "end": 35.84
+  },
+  {
+   "text": "control",
+   "start": 35.89,
+   "end": 36.24
+  },
+  {
+   "text": "sobre",
+   "start": 36.28,
+   "end": 36.48
+  },
+  {
+   "text": "la",
+   "start": 36.507,
+   "end": 36.56
+  },
+  {
+   "text": "información.",
+   "start": 36.627,
+   "end": 37.68
+  },
+  {
+   "text": "Menos",
+   "start": 37.76,
+   "end": 38.08
+  },
+  {
+   "text": "trabajo",
+   "start": 38.13,
+   "end": 38.48
+  },
+  {
+   "text": "operativo",
+   "start": 38.528,
+   "end": 39.12
+  },
+  {
+   "text": "para",
+   "start": 39.152,
+   "end": 39.28
+  },
+  {
+   "text": "encontrarla",
+   "start": 39.328,
+   "end": 39.84
+  },
+  {
+   "text": "y",
+   "start": 39.88,
+   "end": 39.92
+  },
+  {
+   "text": "revisarla.",
+   "start": 39.973,
+   "end": 40.72
+  },
+  {
+   "text": "¿Cuánto",
+   "start": 41.12,
+   "end": 41.52
+  },
+  {
+   "text": "tiempo",
+   "start": 41.543,
+   "end": 41.68
+  },
+  {
+   "text": "dedica",
+   "start": 41.72,
+   "end": 42.08
+  },
+  {
+   "text": "hoy",
+   "start": 42.12,
+   "end": 42.24
+  },
+  {
+   "text": "tu",
+   "start": 42.293,
+   "end": 42.4
+  },
+  {
+   "text": "equipo",
+   "start": 42.446,
+   "end": 42.72
+  },
+  {
+   "text": "a",
+   "start": 42.76,
+   "end": 42.8
+  },
+  {
+   "text": "controlar",
+   "start": 42.85,
+   "end": 43.28
+  },
+  {
+   "text": "su",
+   "start": 43.307,
+   "end": 43.36
+  },
+  {
+   "text": "información",
+   "start": 43.407,
+   "end": 43.92
+  },
+  {
+   "text": "fiscal?",
+   "start": 43.989,
+   "end": 44.48
+  },
+  {
+   "text": "Empieza",
+   "start": 44.66,
+   "end": 45.44
+  },
+  {
+   "text": "gratis",
+   "start": 45.509,
+   "end": 45.92
+  },
+  {
+   "text": "en",
+   "start": 45.973,
+   "end": 46.08
+  },
+  {
+   "text": "fispal.mx,",
+   "start": 46.12,
+   "end": 47.92
+  },
+  {
+   "text": "y",
+   "start": 48.0,
+   "end": 48.08
+  },
+  {
+   "text": "empieza",
+   "start": 48.12,
+   "end": 48.48
+  },
+  {
+   "text": "a",
+   "start": 48.52,
+   "end": 48.56
+  },
+  {
+   "text": "gestionar",
+   "start": 48.61,
+   "end": 48.961
+  },
+  {
+   "text": "tu",
+   "start": 49.013,
+   "end": 49.12
+  },
+  {
+   "text": "información",
+   "start": 49.167,
+   "end": 49.68
+  },
+  {
+   "text": "desde",
+   "start": 49.72,
+   "end": 49.92
+  },
+  {
+   "text": "un",
+   "start": 49.947,
+   "end": 50.0
+  },
+  {
+   "text": "mismo",
+   "start": 50.053,
+   "end": 50.32
+  },
+  {
+   "text": "lugar.",
+   "start": 50.387,
+   "end": 50.72
+  }
+ ]
+}
