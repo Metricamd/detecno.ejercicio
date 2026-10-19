@@ -15,7 +15,7 @@ MAX_PAUSE = 0.6
 MERGE = [(["ce", "efe", "de", "i,"], "CFDI,"), (["ce", "efe", "de", "i"], "CFDI"),
          (["erre", "efe", "ce,"], "RFC,"), (["erre", "efe", "ce"], "RFC"),
          (["A", "P", "I."], "API."), (["veinte", "por", "ciento"], "20%"),
-         (["fispal", "punto", "em", "equis."], "fispal.mx")]
+         (["fispal", "punto", "em", "equis."], "fispal.mx"), (["fispal", "punto", "em", "equis,"], "fispal.mx,")]
 
 no_audio = sys.argv[1] == "--no-audio"
 if no_audio:
