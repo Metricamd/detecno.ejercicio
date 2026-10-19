@@ -1,6 +1,6 @@
 {
- "duration": 35.261,
- "estimated": true,
+ "duration": 34.03,
+ "estimated": false,
  "words": [
   {
    "text": "Hay",
@@ -54,348 +54,348 @@
   },
   {
    "text": "¿Sabes",
-   "start": 3.44,
-   "end": 3.68
+   "start": 3.438,
+   "end": 3.678
   },
   {
    "text": "qué",
-   "start": 3.74,
-   "end": 3.92
+   "start": 3.738,
+   "end": 3.918
   },
   {
    "text": "es?",
-   "start": 4.0,
-   "end": 4.24
+   "start": 3.998,
+   "end": 4.238
   },
   {
    "text": "No",
-   "start": 4.507,
-   "end": 5.04
+   "start": 4.505,
+   "end": 5.01
   },
   {
    "text": "todos",
-   "start": 5.08,
-   "end": 5.28
+   "start": 5.05,
+   "end": 5.25
   },
   {
    "text": "necesitan",
-   "start": 5.333,
-   "end": 5.84
+   "start": 5.303,
+   "end": 5.81
   },
   {
    "text": "administrar",
-   "start": 5.888,
-   "end": 6.4
+   "start": 5.858,
+   "end": 6.37
   },
   {
    "text": "usuarios.",
-   "start": 6.471,
-   "end": 7.12
+   "start": 6.441,
+   "end": 7.09
   },
   {
    "text": "No",
-   "start": 7.36,
-   "end": 7.84
+   "start": 7.33,
+   "end": 7.792
   },
   {
    "text": "todos",
-   "start": 7.88,
-   "end": 8.08
+   "start": 7.832,
+   "end": 8.032
   },
   {
    "text": "necesitan",
-   "start": 8.12,
-   "end": 8.56
+   "start": 8.072,
+   "end": 8.512
   },
   {
    "text": "consultar",
-   "start": 8.616,
-   "end": 9.12
+   "start": 8.568,
+   "end": 9.072
   },
   {
    "text": "lo",
-   "start": 9.147,
-   "end": 9.2
+   "start": 9.099,
+   "end": 9.152
   },
   {
    "text": "mismo.",
-   "start": 9.267,
-   "end": 9.68
+   "start": 9.219,
+   "end": 9.632
   },
   {
    "text": "No",
-   "start": 9.893,
-   "end": 10.32
+   "start": 9.845,
+   "end": 10.272
   },
   {
    "text": "todos",
-   "start": 10.373,
-   "end": 10.64
+   "start": 10.325,
+   "end": 10.592
   },
   {
    "text": "necesitan",
-   "start": 10.693,
-   "end": 11.12
+   "start": 10.645,
+   "end": 11.072
   },
   {
    "text": "las",
-   "start": 11.16,
-   "end": 11.28
+   "start": 11.112,
+   "end": 11.232
   },
   {
    "text": "mismas",
-   "start": 11.328,
-   "end": 11.6
+   "start": 11.28,
+   "end": 11.552
   },
   {
    "text": "funciones.",
-   "start": 11.672,
-   "end": 12.4
+   "start": 11.624,
+   "end": 12.352
   },
   {
    "text": "Por",
-   "start": 12.62,
-   "end": 13.28
+   "start": 12.572,
+   "end": 12.979
   },
   {
    "text": "eso",
-   "start": 13.34,
-   "end": 13.52
+   "start": 13.039,
+   "end": 13.219
   },
   {
    "text": "los",
-   "start": 13.54,
-   "end": 13.6
+   "start": 13.239,
+   "end": 13.299
   },
   {
    "text": "accesos",
-   "start": 13.667,
-   "end": 14.08
+   "start": 13.366,
+   "end": 13.779
   },
   {
    "text": "también",
-   "start": 14.12,
-   "end": 14.4
+   "start": 13.819,
+   "end": 14.099
   },
   {
    "text": "forman",
-   "start": 14.448,
-   "end": 14.8
+   "start": 14.147,
+   "end": 14.499
   },
   {
    "text": "parte",
-   "start": 14.84,
-   "end": 15.04
+   "start": 14.539,
+   "end": 14.739
   },
   {
    "text": "del",
-   "start": 15.08,
-   "end": 15.2
+   "start": 14.779,
+   "end": 14.899
   },
   {
    "text": "control",
-   "start": 15.25,
-   "end": 15.6
+   "start": 14.949,
+   "end": 15.299
   },
   {
    "text": "de",
-   "start": 15.627,
-   "end": 15.68
+   "start": 15.326,
+   "end": 15.379
   },
   {
    "text": "la",
-   "start": 15.707,
-   "end": 15.76
+   "start": 15.406,
+   "end": 15.459
   },
   {
    "text": "información",
-   "start": 15.807,
-   "end": 16.32
+   "start": 15.506,
+   "end": 16.019
   },
   {
    "text": "fiscal.",
-   "start": 16.4,
-   "end": 17.28
+   "start": 16.099,
+   "end": 16.944
   },
   {
    "text": "Fispal",
-   "start": 17.48,
-   "end": 18.0
+   "start": 17.08,
+   "end": 17.6
   },
   {
    "text": "permite",
-   "start": 18.04,
-   "end": 18.32
+   "start": 17.64,
+   "end": 17.92
   },
   {
    "text": "trabajar",
-   "start": 18.364,
-   "end": 18.72
+   "start": 17.964,
+   "end": 18.32
   },
   {
    "text": "con",
-   "start": 18.78,
-   "end": 18.96
+   "start": 18.38,
+   "end": 18.56
   },
   {
    "text": "usuarios",
-   "start": 19.013,
-   "end": 19.44
+   "start": 18.613,
+   "end": 19.04
   },
   {
    "text": "y",
-   "start": 19.48,
-   "end": 19.52
+   "start": 19.08,
+   "end": 19.12
   },
   {
    "text": "perfiles.",
-   "start": 19.58,
-   "end": 20.24
+   "start": 19.18,
+   "end": 19.84
   },
   {
    "text": "Puedes",
-   "start": 20.56,
-   "end": 21.04
+   "start": 20.16,
+   "end": 20.608
   },
   {
    "text": "definir",
-   "start": 21.093,
-   "end": 21.44
+   "start": 20.661,
+   "end": 21.008
   },
   {
    "text": "las",
-   "start": 21.48,
-   "end": 21.6
+   "start": 21.048,
+   "end": 21.168
   },
   {
    "text": "funciones",
-   "start": 21.648,
-   "end": 22.08
+   "start": 21.216,
+   "end": 21.648
   },
   {
    "text": "disponibles",
-   "start": 22.133,
-   "end": 22.72
+   "start": 21.701,
+   "end": 22.288
   },
   {
    "text": "según",
-   "start": 22.773,
-   "end": 23.04
+   "start": 22.341,
+   "end": 22.608
   },
   {
    "text": "el",
-   "start": 23.067,
-   "end": 23.12
+   "start": 22.635,
+   "end": 22.688
   },
   {
    "text": "perfil",
-   "start": 23.166,
-   "end": 23.44
+   "start": 22.734,
+   "end": 23.008
   },
   {
    "text": "asignado.",
-   "start": 23.507,
-   "end": 24.24
+   "start": 23.075,
+   "end": 23.808
   },
   {
    "text": "La",
-   "start": 24.427,
-   "end": 24.8
+   "start": 23.995,
+   "end": 24.353
   },
   {
    "text": "información",
-   "start": 24.847,
-   "end": 25.36
+   "start": 24.4,
+   "end": 24.913
   },
   {
    "text": "fiscal",
-   "start": 25.429,
-   "end": 25.84
+   "start": 24.982,
+   "end": 25.393
   },
   {
    "text": "también",
-   "start": 25.88,
-   "end": 26.16
+   "start": 25.433,
+   "end": 25.713
   },
   {
    "text": "necesita",
-   "start": 26.213,
-   "end": 26.64
+   "start": 25.766,
+   "end": 26.193
   },
   {
    "text": "control",
-   "start": 26.69,
-   "end": 27.04
+   "start": 26.243,
+   "end": 26.593
   },
   {
    "text": "de",
-   "start": 27.067,
-   "end": 27.12
+   "start": 26.62,
+   "end": 26.673
   },
   {
    "text": "acceso.",
-   "start": 27.189,
-   "end": 27.76
+   "start": 26.742,
+   "end": 27.313
   },
   {
    "text": "Únete",
-   "start": 28.12,
-   "end": 28.72
+   "start": 27.605,
+   "end": 28.163
   },
   {
    "text": "gratis",
-   "start": 28.777,
-   "end": 29.12
+   "start": 28.22,
+   "end": 28.563
   },
   {
    "text": "a",
-   "start": 29.16,
-   "end": 29.2
+   "start": 28.603,
+   "end": 28.643
   },
   {
    "text": "fispal.mx,",
-   "start": 29.28,
-   "end": 31.28
+   "start": 28.723,
+   "end": 30.723
   },
   {
    "text": "y",
-   "start": 31.4,
-   "end": 31.52
+   "start": 30.843,
+   "end": 30.963
   },
   {
    "text": "empieza",
-   "start": 31.56,
-   "end": 31.919
+   "start": 31.003,
+   "end": 31.362
   },
   {
    "text": "a",
-   "start": 31.92,
-   "end": 31.921
+   "start": 31.363,
+   "end": 31.364
   },
   {
    "text": "gestionar",
-   "start": 31.971,
-   "end": 32.401
+   "start": 31.414,
+   "end": 31.844
   },
   {
    "text": "tus",
-   "start": 32.461,
-   "end": 32.641
+   "start": 31.904,
+   "end": 32.084
   },
   {
    "text": "usuarios",
-   "start": 32.694,
-   "end": 33.121
+   "start": 32.137,
+   "end": 32.564
   },
   {
    "text": "y",
-   "start": 33.161,
-   "end": 33.201
+   "start": 32.604,
+   "end": 32.644
   },
   {
    "text": "perfiles.",
-   "start": 33.241,
-   "end": 34.961
+   "start": 32.684,
+   "end": 33.691
   }
  ]
 }
