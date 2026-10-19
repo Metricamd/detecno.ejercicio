@@ -35,7 +35,7 @@ const WordView: React.FC<{ word: Word; frame: number }> = ({ word, frame }) => {
   );
 };
 
-const PageView: React.FC<{ page: Page; frame: number; color?: string }> = ({ page, frame, color = C.text }) => {
+const PageView: React.FC<{ page: Page; frame: number; color?: string; heroColor?: string }> = ({ page, frame, color = C.text, heroColor = C.accent }) => {
   const out = interpolate(frame, [s(page.end) - 6, s(page.end)], [1, 0], clamp);
   const line = (role: Word["role"]) => page.words.filter((w) => w.role === role);
   const ctx = line("ctx");
@@ -65,7 +65,7 @@ const PageView: React.FC<{ page: Page; frame: number; color?: string }> = ({ pag
           style={{
             fontSize: 108,
             fontWeight: 800,
-            color: C.accent,
+            color: heroColor,
             letterSpacing: "-0.02em",
             lineHeight: 1.08,
           }}
@@ -86,10 +86,11 @@ const PageView: React.FC<{ page: Page; frame: number; color?: string }> = ({ pag
   );
 };
 
-export const Subtitles: React.FC<{ centerY?: number; pages: Page[]; color?: string }> = ({
+export const Subtitles: React.FC<{ centerY?: number; pages: Page[]; color?: string; heroColor?: string }> = ({
   centerY = 1560,
   pages,
   color,
+  heroColor,
 }) => {
   const frame = useCurrentFrame();
   const page = pages.find((p) => frame >= s(p.start) && frame < s(p.end));
@@ -107,7 +108,7 @@ export const Subtitles: React.FC<{ centerY?: number; pages: Page[]; color?: stri
           justifyContent: "center",
         }}
       >
-        <PageView page={page} frame={frame} color={color} />
+        <PageView page={page} frame={frame} color={color} heroColor={heroColor} />
       </div>
     </AbsoluteFill>
   );

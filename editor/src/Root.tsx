@@ -7,6 +7,7 @@ import { CONTROL_DURATION, ControlReel } from "./control/Reel";
 import { DISPERSA_DURATION, DispersaReel } from "./dispersa/Reel";
 import { ACCESOS_DURATION, AccesosReel } from "./accesos/Reel";
 import { RFC_DURATION, RfcReel } from "./rfc/Reel";
+import { CONCILIACION_DURATION, ConciliacionReel } from "./conciliacion/Reel";
 import { AlmacenamientoPost } from "./posts/Almacenamiento";
 import { MODULOS_FRAMES, ModulosRfcCarousel } from "./posts/ModulosRFC";
 import { VENVERS_FRAMES, VenversCard3D, VenversCarousel } from "./venvers/Carrusel";
@@ -32,6 +33,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition id="FispalConciliacion" component={ConciliacionReel} durationInFrames={CONCILIACION_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="FispalRfc" component={RfcReel} durationInFrames={RFC_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="FispalAccesos" component={AccesosReel} durationInFrames={ACCESOS_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="FispalDispersa" component={DispersaReel} durationInFrames={DISPERSA_DURATION} fps={30} width={1080} height={1920} />

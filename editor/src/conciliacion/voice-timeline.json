@@ -1,0 +1,431 @@
+{
+ "duration": 43.819,
+ "estimated": true,
+ "words": [
+  {
+   "text": "Tienes",
+   "start": 0.26,
+   "end": 0.32
+  },
+  {
+   "text": "la",
+   "start": 0.347,
+   "end": 0.4
+  },
+  {
+   "text": "factura.",
+   "start": 0.47,
+   "end": 1.519
+  },
+  {
+   "text": "Tienes",
+   "start": 1.52,
+   "end": 1.76
+  },
+  {
+   "text": "el",
+   "start": 1.813,
+   "end": 1.92
+  },
+  {
+   "text": "pago.",
+   "start": 2.0,
+   "end": 2.68
+  },
+  {
+   "text": "Entonces",
+   "start": 2.77,
+   "end": 3.68
+  },
+  {
+   "text": "¿por",
+   "start": 4.08,
+   "end": 4.16
+  },
+  {
+   "text": "qué",
+   "start": 4.18,
+   "end": 4.24
+  },
+  {
+   "text": "todavía",
+   "start": 4.3,
+   "end": 4.72
+  },
+  {
+   "text": "los",
+   "start": 4.74,
+   "end": 4.8
+  },
+  {
+   "text": "estás",
+   "start": 4.86,
+   "end": 5.12
+  },
+  {
+   "text": "cruzando",
+   "start": 5.168,
+   "end": 5.6
+  },
+  {
+   "text": "manualmente?",
+   "start": 5.646,
+   "end": 6.4
+  },
+  {
+   "text": "CFDI,",
+   "start": 6.773,
+   "end": 8.52
+  },
+  {
+   "text": "pagos,",
+   "start": 8.61,
+   "end": 9.6
+  },
+  {
+   "text": "complementos,",
+   "start": 9.644,
+   "end": 10.32
+  },
+  {
+   "text": "cruces.",
+   "start": 10.42,
+   "end": 11.68
+  },
+  {
+   "text": "Y",
+   "start": 11.96,
+   "end": 12.24
+  },
+  {
+   "text": "repetir.",
+   "start": 12.307,
+   "end": 12.96
+  },
+  {
+   "text": "Cuando",
+   "start": 13.051,
+   "end": 13.6
+  },
+  {
+   "text": "tienes",
+   "start": 13.646,
+   "end": 13.92
+  },
+  {
+   "text": "un",
+   "start": 13.973,
+   "end": 14.08
+  },
+  {
+   "text": "alto",
+   "start": 14.128,
+   "end": 14.32
+  },
+  {
+   "text": "volumen",
+   "start": 14.373,
+   "end": 14.72
+  },
+  {
+   "text": "de",
+   "start": 14.747,
+   "end": 14.8
+  },
+  {
+   "text": "operaciones,",
+   "start": 14.848,
+   "end": 15.68
+  },
+  {
+   "text": "hacerlo",
+   "start": 15.76,
+   "end": 16.24
+  },
+  {
+   "text": "manualmente",
+   "start": 16.297,
+   "end": 16.88
+  },
+  {
+   "text": "consume",
+   "start": 16.94,
+   "end": 17.36
+  },
+  {
+   "text": "tiempo",
+   "start": 17.429,
+   "end": 17.84
+  },
+  {
+   "text": "y",
+   "start": 17.92,
+   "end": 18.0
+  },
+  {
+   "text": "aumenta",
+   "start": 18.069,
+   "end": 18.52
+  },
+  {
+   "text": "el",
+   "start": 18.533,
+   "end": 18.56
+  },
+  {
+   "text": "trabajo",
+   "start": 18.61,
+   "end": 18.96
+  },
+  {
+   "text": "operativo.",
+   "start": 19.008,
+   "end": 19.76
+  },
+  {
+   "text": "Fispal",
+   "start": 20.12,
+   "end": 20.8
+  },
+  {
+   "text": "cuenta",
+   "start": 20.846,
+   "end": 21.12
+  },
+  {
+   "text": "con",
+   "start": 21.18,
+   "end": 21.36
+  },
+  {
+   "text": "Conciliación",
+   "start": 21.408,
+   "end": 22.0
+  },
+  {
+   "text": "de",
+   "start": 22.027,
+   "end": 22.08
+  },
+  {
+   "text": "Pagos.",
+   "start": 22.14,
+   "end": 22.64
+  },
+  {
+   "text": "Relaciona",
+   "start": 22.8,
+   "end": 23.68
+  },
+  {
+   "text": "los",
+   "start": 23.72,
+   "end": 23.84
+  },
+  {
+   "text": "CFDI",
+   "start": 23.893,
+   "end": 24.64
+  },
+  {
+   "text": "correspondientes",
+   "start": 24.691,
+   "end": 25.52
+  },
+  {
+   "text": "con",
+   "start": 25.56,
+   "end": 25.68
+  },
+  {
+   "text": "los",
+   "start": 25.72,
+   "end": 25.84
+  },
+  {
+   "text": "CFDI",
+   "start": 25.92,
+   "end": 26.64
+  },
+  {
+   "text": "de",
+   "start": 26.72,
+   "end": 26.88
+  },
+  {
+   "text": "pago",
+   "start": 26.944,
+   "end": 27.2
+  },
+  {
+   "text": "descargados",
+   "start": 27.248,
+   "end": 27.84
+  },
+  {
+   "text": "del",
+   "start": 27.88,
+   "end": 28.0
+  },
+  {
+   "text": "SAT,",
+   "start": 28.08,
+   "end": 28.8
+  },
+  {
+   "text": "y",
+   "start": 28.84,
+   "end": 28.88
+  },
+  {
+   "text": "presenta",
+   "start": 28.924,
+   "end": 29.28
+  },
+  {
+   "text": "los",
+   "start": 29.32,
+   "end": 29.44
+  },
+  {
+   "text": "resultados",
+   "start": 29.491,
+   "end": 30.0
+  },
+  {
+   "text": "en",
+   "start": 30.053,
+   "end": 30.16
+  },
+  {
+   "text": "la",
+   "start": 30.187,
+   "end": 30.24
+  },
+  {
+   "text": "plataforma.",
+   "start": 30.291,
+   "end": 30.96
+  },
+  {
+   "text": "Menos",
+   "start": 31.16,
+   "end": 31.84
+  },
+  {
+   "text": "cruces",
+   "start": 31.9,
+   "end": 32.24
+  },
+  {
+   "text": "manuales.",
+   "start": 32.28,
+   "end": 32.88
+  },
+  {
+   "text": "Más",
+   "start": 33.06,
+   "end": 33.6
+  },
+  {
+   "text": "visibilidad",
+   "start": 33.64,
+   "end": 34.32
+  },
+  {
+   "text": "sobre",
+   "start": 34.347,
+   "end": 34.48
+  },
+  {
+   "text": "tu",
+   "start": 34.533,
+   "end": 34.64
+  },
+  {
+   "text": "conciliación.",
+   "start": 34.688,
+   "end": 35.52
+  },
+  {
+   "text": "¿Todavía",
+   "start": 36.08,
+   "end": 36.48
+  },
+  {
+   "text": "haces",
+   "start": 36.52,
+   "end": 36.8
+  },
+  {
+   "text": "estos",
+   "start": 36.84,
+   "end": 37.04
+  },
+  {
+   "text": "cruces",
+   "start": 37.1,
+   "end": 37.44
+  },
+  {
+   "text": "manualmente?",
+   "start": 37.486,
+   "end": 38.16
+  },
+  {
+   "text": "Prueba",
+   "start": 38.427,
+   "end": 39.2
+  },
+  {
+   "text": "fispal.mx",
+   "start": 39.32,
+   "end": 40.88
+  },
+  {
+   "text": "gratis,",
+   "start": 40.971,
+   "end": 41.6
+  },
+  {
+   "text": "y",
+   "start": 41.72,
+   "end": 41.84
+  },
+  {
+   "text": "deja",
+   "start": 41.904,
+   "end": 42.16
+  },
+  {
+   "text": "que",
+   "start": 42.2,
+   "end": 42.319
+  },
+  {
+   "text": "haga",
+   "start": 42.32,
+   "end": 42.48
+  },
+  {
+   "text": "estos",
+   "start": 42.52,
+   "end": 42.72
+  },
+  {
+   "text": "cruces",
+   "start": 42.76,
+   "end": 43.04
+  },
+  {
+   "text": "por",
+   "start": 43.08,
+   "end": 43.2
+  },
+  {
+   "text": "ti.",
+   "start": 43.28,
+   "end": 43.519
+  }
+ ]
+}
