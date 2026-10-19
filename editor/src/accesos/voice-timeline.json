@@ -1,0 +1,401 @@
+{
+ "duration": 35.261,
+ "estimated": true,
+ "words": [
+  {
+   "text": "Hay",
+   "start": 0.216,
+   "end": 0.24
+  },
+  {
+   "text": "algo",
+   "start": 0.272,
+   "end": 0.4
+  },
+  {
+   "text": "que",
+   "start": 0.44,
+   "end": 0.56
+  },
+  {
+   "text": "no",
+   "start": 0.64,
+   "end": 0.8
+  },
+  {
+   "text": "todos",
+   "start": 0.84,
+   "end": 1.04
+  },
+  {
+   "text": "en",
+   "start": 1.093,
+   "end": 1.2
+  },
+  {
+   "text": "Finanzas",
+   "start": 1.26,
+   "end": 1.68
+  },
+  {
+   "text": "deberían",
+   "start": 1.72,
+   "end": 2.16
+  },
+  {
+   "text": "poder",
+   "start": 2.2,
+   "end": 2.4
+  },
+  {
+   "text": "hacer.",
+   "start": 2.467,
+   "end": 3.12
+  },
+  {
+   "text": "¿Sabes",
+   "start": 3.44,
+   "end": 3.68
+  },
+  {
+   "text": "qué",
+   "start": 3.74,
+   "end": 3.92
+  },
+  {
+   "text": "es?",
+   "start": 4.0,
+   "end": 4.24
+  },
+  {
+   "text": "No",
+   "start": 4.507,
+   "end": 5.04
+  },
+  {
+   "text": "todos",
+   "start": 5.08,
+   "end": 5.28
+  },
+  {
+   "text": "necesitan",
+   "start": 5.333,
+   "end": 5.84
+  },
+  {
+   "text": "administrar",
+   "start": 5.888,
+   "end": 6.4
+  },
+  {
+   "text": "usuarios.",
+   "start": 6.471,
+   "end": 7.12
+  },
+  {
+   "text": "No",
+   "start": 7.36,
+   "end": 7.84
+  },
+  {
+   "text": "todos",
+   "start": 7.88,
+   "end": 8.08
+  },
+  {
+   "text": "necesitan",
+   "start": 8.12,
+   "end": 8.56
+  },
+  {
+   "text": "consultar",
+   "start": 8.616,
+   "end": 9.12
+  },
+  {
+   "text": "lo",
+   "start": 9.147,
+   "end": 9.2
+  },
+  {
+   "text": "mismo.",
+   "start": 9.267,
+   "end": 9.68
+  },
+  {
+   "text": "No",
+   "start": 9.893,
+   "end": 10.32
+  },
+  {
+   "text": "todos",
+   "start": 10.373,
+   "end": 10.64
+  },
+  {
+   "text": "necesitan",
+   "start": 10.693,
+   "end": 11.12
+  },
+  {
+   "text": "las",
+   "start": 11.16,
+   "end": 11.28
+  },
+  {
+   "text": "mismas",
+   "start": 11.328,
+   "end": 11.6
+  },
+  {
+   "text": "funciones.",
+   "start": 11.672,
+   "end": 12.4
+  },
+  {
+   "text": "Por",
+   "start": 12.62,
+   "end": 13.28
+  },
+  {
+   "text": "eso",
+   "start": 13.34,
+   "end": 13.52
+  },
+  {
+   "text": "los",
+   "start": 13.54,
+   "end": 13.6
+  },
+  {
+   "text": "accesos",
+   "start": 13.667,
+   "end": 14.08
+  },
+  {
+   "text": "también",
+   "start": 14.12,
+   "end": 14.4
+  },
+  {
+   "text": "forman",
+   "start": 14.448,
+   "end": 14.8
+  },
+  {
+   "text": "parte",
+   "start": 14.84,
+   "end": 15.04
+  },
+  {
+   "text": "del",
+   "start": 15.08,
+   "end": 15.2
+  },
+  {
+   "text": "control",
+   "start": 15.25,
+   "end": 15.6
+  },
+  {
+   "text": "de",
+   "start": 15.627,
+   "end": 15.68
+  },
+  {
+   "text": "la",
+   "start": 15.707,
+   "end": 15.76
+  },
+  {
+   "text": "información",
+   "start": 15.807,
+   "end": 16.32
+  },
+  {
+   "text": "fiscal.",
+   "start": 16.4,
+   "end": 17.28
+  },
+  {
+   "text": "Fispal",
+   "start": 17.48,
+   "end": 18.0
+  },
+  {
+   "text": "permite",
+   "start": 18.04,
+   "end": 18.32
+  },
+  {
+   "text": "trabajar",
+   "start": 18.364,
+   "end": 18.72
+  },
+  {
+   "text": "con",
+   "start": 18.78,
+   "end": 18.96
+  },
+  {
+   "text": "usuarios",
+   "start": 19.013,
+   "end": 19.44
+  },
+  {
+   "text": "y",
+   "start": 19.48,
+   "end": 19.52
+  },
+  {
+   "text": "perfiles.",
+   "start": 19.58,
+   "end": 20.24
+  },
+  {
+   "text": "Puedes",
+   "start": 20.56,
+   "end": 21.04
+  },
+  {
+   "text": "definir",
+   "start": 21.093,
+   "end": 21.44
+  },
+  {
+   "text": "las",
+   "start": 21.48,
+   "end": 21.6
+  },
+  {
+   "text": "funciones",
+   "start": 21.648,
+   "end": 22.08
+  },
+  {
+   "text": "disponibles",
+   "start": 22.133,
+   "end": 22.72
+  },
+  {
+   "text": "según",
+   "start": 22.773,
+   "end": 23.04
+  },
+  {
+   "text": "el",
+   "start": 23.067,
+   "end": 23.12
+  },
+  {
+   "text": "perfil",
+   "start": 23.166,
+   "end": 23.44
+  },
+  {
+   "text": "asignado.",
+   "start": 23.507,
+   "end": 24.24
+  },
+  {
+   "text": "La",
+   "start": 24.427,
+   "end": 24.8
+  },
+  {
+   "text": "información",
+   "start": 24.847,
+   "end": 25.36
+  },
+  {
+   "text": "fiscal",
+   "start": 25.429,
+   "end": 25.84
+  },
+  {
+   "text": "también",
+   "start": 25.88,
+   "end": 26.16
+  },
+  {
+   "text": "necesita",
+   "start": 26.213,
+   "end": 26.64
+  },
+  {
+   "text": "control",
+   "start": 26.69,
+   "end": 27.04
+  },
+  {
+   "text": "de",
+   "start": 27.067,
+   "end": 27.12
+  },
+  {
+   "text": "acceso.",
+   "start": 27.189,
+   "end": 27.76
+  },
+  {
+   "text": "Únete",
+   "start": 28.12,
+   "end": 28.72
+  },
+  {
+   "text": "gratis",
+   "start": 28.777,
+   "end": 29.12
+  },
+  {
+   "text": "a",
+   "start": 29.16,
+   "end": 29.2
+  },
+  {
+   "text": "fispal.mx,",
+   "start": 29.28,
+   "end": 31.28
+  },
+  {
+   "text": "y",
+   "start": 31.4,
+   "end": 31.52
+  },
+  {
+   "text": "empieza",
+   "start": 31.56,
+   "end": 31.919
+  },
+  {
+   "text": "a",
+   "start": 31.92,
+   "end": 31.921
+  },
+  {
+   "text": "gestionar",
+   "start": 31.971,
+   "end": 32.401
+  },
+  {
+   "text": "tus",
+   "start": 32.461,
+   "end": 32.641
+  },
+  {
+   "text": "usuarios",
+   "start": 32.694,
+   "end": 33.121
+  },
+  {
+   "text": "y",
+   "start": 33.161,
+   "end": 33.201
+  },
+  {
+   "text": "perfiles.",
+   "start": 33.241,
+   "end": 34.961
+  }
+ ]
+}
