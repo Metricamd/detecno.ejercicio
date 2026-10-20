@@ -36,7 +36,7 @@ const S1: React.FC = () => (
       <Title t={t} size={52} parts={["Pero… ¿qué tan fácil es ", { hl: "encontrarla cuando la necesitas?" }]} style={{ marginTop: 14 }} />
     </div>
     <Glass3D name="erp-laberinto" x={600} y={820} size={560} />
-    <Photo name="c2-erp" hint="Contador frente a su ERP" position="50% 28%" radius="50%" ring="#fff" style={{ left: 60, top: 700, width: 330, height: 330 }} />
+    <Photo name="c2-erp" hint="Contador frente a su ERP" position="56% 30%" radius="50%" ring="#fff" style={{ left: 60, top: 700, width: 330, height: 330 }} />
     <Pill style={{ left: 70, top: 1060 }}>
       <Icon d={IC.search} size={30} color={C.purple} />
       <span style={{ fontFamily: MONO, fontSize: 24, color: CORAL }}>0 resultados</span>
@@ -80,7 +80,7 @@ const S2: React.FC = () => (
 /* 3 — responder rápido: photo banner on top, text below */
 const S3: React.FC = () => (
   <Frame t={t} i={2} n={N}>
-    <Photo name="c2-urgente" hint="Analista al teléfono con prisa" position="50% 30%" radius={40} style={{ left: 70, right: 70, top: 150, height: 560 }} />
+    <Photo name="c2-urgente" hint="Analista al teléfono con prisa" position="50% 38%" radius={40} style={{ left: 70, right: 70, top: 150, height: 560 }} />
     <Card t={t} style={{ position: "absolute", left: 110, top: 560, width: 560, padding: "20px 24px", transform: "rotate(-2deg)" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
         <div style={{ width: 46, height: 46, borderRadius: 23, background: C.purple, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -140,7 +140,7 @@ const S5: React.FC = () => (
       <Title t={t} size={58} parts={["Más facilidad para ", { hl: "consultarla y analizarla." }]} style={{ marginTop: 14 }} />
     </div>
     <Glass3D name="dashboard" x={850} y={400} size={420} />
-    <Photo name="c2-relax" hint="Gerente relajado con su laptop" position="55% 28%" radius="50%" ring={GREEN} style={{ left: 330, top: 640, width: 420, height: 420 }} />
+    <Photo name="c2-relax" hint="Gerente relajado con su laptop" position="35% 40%" radius="50%" ring={GREEN} style={{ left: 330, top: 640, width: 420, height: 420 }} />
     <Pill style={{ left: 640, top: 700 }}>
       <Icon d={IC.check} size={30} color={GREEN} sw={3} /> Consulta lista
     </Pill>
