@@ -46,7 +46,7 @@ const S1: React.FC = () => (
       <Icon d={ICX.clock} size={30} color={CORAL} />
       <span style={{ fontFamily: MONO, color: CORAL }}>00:47:12</span>
     </Chip>
-    <Glass3D name="calendario-lupa" x={850} y={690} size={330} />
+    <Glass3D name="calendario-lupa" x={860} y={600} size={300} />
     <div style={{ position: "absolute", left: L, right: L, top: 800 }}>
       <Title t={t} size={74} parts={["Te piden un CFDI de ", { hl: "hace 8 meses." }]} />
       <div style={{ marginTop: 26, fontFamily: FONT, fontWeight: 700, fontSize: 46, color: t.sub }}>
@@ -67,8 +67,8 @@ const SOURCES = [
 const S2: React.FC = () => (
   <Frame t={t} i={1} n={N} ribbon={false}>
     <Eyebrow>¿DÓNDE ESTÁ?</Eyebrow>
-    <Glass3D name="fuentes" x={810} y={470} size={420} />
-    <div style={{ position: "absolute", left: L, top: 250, display: "flex", flexDirection: "column", gap: 22 }}>
+    <Glass3D name="fuentes" x={820} y={500} size={440} />
+    <div style={{ position: "absolute", left: L, top: 260, display: "flex", flexDirection: "column", gap: 36 }}>
       {SOURCES.map((s) => (
         <div key={s.w} style={{ display: "flex", alignItems: "center", gap: 22 }}>
           <div style={{ width: 92, height: 92, borderRadius: 28, background: s.c, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: `0 14px 30px ${s.c}55`, flexShrink: 0 }}>
