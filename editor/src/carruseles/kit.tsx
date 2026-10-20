@@ -68,6 +68,20 @@ export const THEMES: Record<string, Theme> = {
     cardInk: "#131313",
     ribbon: "#7B61FF",
   },
+  sky: {
+    dark: false,
+    bg: "linear-gradient(165deg, #F8FAFF 0%, #DDE7FF 52%, #BCCDFF 100%)",
+    glows: [
+      { x: 980, y: 120, r: 460, color: "#D3C8FF", o: 0.75 },
+      { x: 80, y: 1260, r: 520, color: "#FFFFFF", o: 0.85 },
+    ],
+    ink: "#250E94",
+    sub: "#4A5578",
+    accent: "#2F6BFF",
+    card: "#FFFFFF",
+    cardInk: "#131313",
+    ribbon: "#2F6BFF",
+  },
   purple: {
     dark: true,
     bg: "linear-gradient(160deg, #4527E0 0%, #250E94 48%, #140660 100%)",
