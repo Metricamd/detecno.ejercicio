@@ -112,7 +112,7 @@ const S4: React.FC = () => (
     <Photo name="c6-tablet" hint="Empresaria segura con tablet" position="50% 25%" radius={0} style={{ left: 0, right: 0, top: 0, height: 760, boxShadow: "none" }} />
     <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 200, background: "linear-gradient(180deg, rgba(11,15,51,.75), rgba(11,15,51,0))" }} />
     <div style={{ position: "absolute", left: 0, right: 0, top: 460, height: 310, background: "linear-gradient(180deg, rgba(11,15,51,0), #0B0F33 92%)" }} />
-    <Glass3D name="factura-ok" x={870} y={620} size={300} />
+    <Glass3D name="factura-ok" x={880} y={570} size={280} />
     <div style={{ position: "absolute", left: L, right: L, top: 760, textAlign: "center" }}>
       <Title t={t} size={76} parts={["Consulta tus CFDI con ", { hl: "Fispal." }]} />
     </div>
