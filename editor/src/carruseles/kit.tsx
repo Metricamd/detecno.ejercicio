@@ -174,12 +174,12 @@ const Ribbon: React.FC<{ i: number; n: number; color: string }> = ({ i, n, color
 );
 
 /* ---------- slide frame: background, logo, counter, footer ---------- */
-export const Frame: React.FC<{ t: Theme; i: number; n: number; last?: boolean; children: React.ReactNode }> = ({ t, i, n, last, children }) => (
+export const Frame: React.FC<{ t: Theme; i: number; n: number; last?: boolean; ribbon?: boolean; children: React.ReactNode }> = ({ t, i, n, last, ribbon = true, children }) => (
   <AbsoluteFill style={{ background: t.bg, overflow: "hidden" }}>
     {t.glows.map((g, k) => (
       <div key={k} style={{ position: "absolute", left: g.x - g.r, top: g.y - g.r, width: g.r * 2, height: g.r * 2, borderRadius: "50%", background: g.color, filter: "blur(150px)", opacity: g.o }} />
     ))}
-    <Ribbon i={i} n={n} color={t.ribbon} />
+    {ribbon && <Ribbon i={i} n={n} color={t.ribbon} />}
     <div style={{ position: "absolute", left: 70, right: 70, top: 60, display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 5 }}>
       <Img src={staticFile(t.dark ? "brand/fispal-logo-white.png" : "brand/fispal-logo.png")} style={{ height: 54 }} />
       <span style={{ fontFamily: MONO, fontWeight: 700, fontSize: 26, color: t.ink, letterSpacing: "0.08em" }}>
