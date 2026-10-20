@@ -41,7 +41,7 @@ const Chip: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }>
 /* 1 — portada: photo banner with the calendar on its corner, question below */
 const S1: React.FC = () => (
   <Frame t={t} i={0} n={N} ribbon={false}>
-    <Photo name="c5-busca" hint="Contadora buscando entre carpetas" position="50% 35%" radius={40} style={{ left: L, right: L, top: 170, height: 560 }} />
+    <Photo name="c5-busca" hint="Contadora buscando entre carpetas" position="50% 45%" radius={40} style={{ left: L, right: L, top: 170, height: 560 }} />
     <Chip style={{ left: L + 30, top: 200 }}>
       <Icon d={ICX.clock} size={30} color={CORAL} />
       <span style={{ fontFamily: MONO, color: CORAL }}>00:47:12</span>
@@ -128,7 +128,7 @@ const S3: React.FC = () => (
 /* 4 — CTA: photo + laptop on top, statement and button below */
 const S4: React.FC = () => (
   <Frame t={t} i={3} n={N} last ribbon={false}>
-    <Photo name="c5-encontrado" hint="Gerente feliz frente a su laptop" position="50% 35%" radius={40} style={{ left: L, width: 470, top: 170, height: 560 }} ring="#fff" />
+    <Photo name="c5-encontrado" hint="Gerente feliz frente a su laptop" position="60% 50%" radius={40} style={{ left: L, width: 470, top: 170, height: 560 }} ring="#fff" />
     <Glass3D name="plataforma" x={790} y={450} size={430} />
     <div style={{ position: "absolute", left: L, right: L, top: 790 }}>
       <Title t={t} size={84} parts={["Una ", { hl: "plataforma." }]} />
