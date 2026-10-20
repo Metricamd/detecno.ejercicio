@@ -26,6 +26,20 @@ export type Theme = {
 };
 
 export const THEMES: Record<string, Theme> = {
+  light: {
+    dark: false,
+    bg: "linear-gradient(165deg, #FFFFFF 0%, #F2F4FF 55%, #E6FBF2 100%)",
+    glows: [
+      { x: 960, y: 140, r: 480, color: "#C9C2FF", o: 0.7 },
+      { x: 80, y: 1250, r: 520, color: "#9FF0CF", o: 0.6 },
+    ],
+    ink: "#250E94",
+    sub: "#5B5F86",
+    accent: "#13B57D",
+    card: "#FFFFFF",
+    cardInk: "#131313",
+    ribbon: "#7B61FF",
+  },
   purple: {
     dark: true,
     bg: "linear-gradient(160deg, #4527E0 0%, #250E94 48%, #140660 100%)",
@@ -151,8 +165,14 @@ export const Frame: React.FC<{ t: Theme; i: number; n: number; last?: boolean; c
   </AbsoluteFill>
 );
 
+/* ---------- current theme: a carousel can be rendered with any theme ---------- */
+let current: Theme | null = null;
+export const themed = (fallback: Theme): Theme =>
+  new Proxy({} as Theme, { get: (_, k: keyof Theme) => (current ?? fallback)[k] });
+
 /* ---------- carousel wrapper: one Sequence per slide ---------- */
-export const Carousel: React.FC<{ slides: React.FC[] }> = ({ slides }) => {
+export const Carousel: React.FC<{ slides: React.FC[]; theme?: Theme }> = ({ slides, theme }) => {
+  current = theme ?? null;
   const [handle] = useState(() => delayRender("Loading fonts"));
   useEffect(() => {
     fontsLoaded.then(() => continueRender(handle));

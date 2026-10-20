@@ -2,9 +2,10 @@
 // Theme: brand purple. Text verbatim from the brief.
 import React from "react";
 import { C, FONT, MONO } from "../fispal/theme";
-import { Body, Card, Carousel, Frame, Glass3D, IC, Icon, Photo, THEMES, Title } from "./kit";
+import { Body, Card, Carousel, Frame, Glass3D, IC, Icon, Photo, themed, THEMES, Title } from "./kit";
 
-const t = THEMES.purple;
+// read through a proxy so the same slides render with any theme
+const t = themed(THEMES.purple);
 const N = 5;
 const MINT = "#3FD497";
 const CORAL = "#FF7A7A";
@@ -27,7 +28,7 @@ const S1: React.FC = () => (
     <div style={{ position: "absolute", left: 70, right: 70, top: 170 }}>
       <Title t={t} size={78} parts={["¿Cuántos CFDI tiene el SAT de tu empresa que ", { hl: "tú no tienes?" }]} />
       <Body t={t} style={{ maxWidth: 820 }}>
-        <b style={{ color: "#fff" }}>Spoiler:</b> podrías estar comparando contra una información incompleta. →
+        <b style={{ color: t.ink }}>Spoiler:</b> podrías estar comparando contra una información incompleta. →
       </Body>
     </div>
     <Photo name="c1-dudas" hint="Contadora comparando facturas" position="40% 30%" style={{ left: 420, top: 640, width: 560, height: 590, transform: "rotate(3deg)" }} />
@@ -41,13 +42,13 @@ const S1: React.FC = () => (
 /* 2 — dos fuentes que no coinciden */
 const Bar: React.FC<{ label: string; n: string; h: number; color: string; x: number }> = ({ label, n, h, color, x }) => (
   <div style={{ position: "absolute", left: x, bottom: 230, width: 280, display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
-    <div style={{ fontFamily: FONT, fontWeight: 800, fontSize: 56, color: "#fff" }}>{n}</div>
+    <div style={{ fontFamily: FONT, fontWeight: 800, fontSize: 56, color: t.ink }}>{n}</div>
     <div style={{ width: "100%", height: h, borderRadius: 28, background: `linear-gradient(180deg, ${color}, ${color}AA)`, boxShadow: `0 20px 50px ${color}55`, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: 18, boxSizing: "border-box", gap: 10 }}>
       {Array.from({ length: Math.floor(h / 70) }).map((_, k) => (
         <div key={k} style={{ height: 40, borderRadius: 10, background: "rgba(255,255,255,.28)" }} />
       ))}
     </div>
-    <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 28, color: "#fff", letterSpacing: "0.06em" }}>{label}</div>
+    <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 28, color: t.ink, letterSpacing: "0.06em" }}>{label}</div>
   </div>
 );
 
@@ -56,8 +57,8 @@ const S2: React.FC = () => (
     <div style={{ position: "absolute", left: 70, right: 70, top: 170 }}>
       <Title t={t} size={64} parts={["Tú tienes tus CFDI."]} />
       <Title t={t} size={64} parts={["El SAT tiene sus propios registros."]} style={{ marginTop: 8 }} />
-      <Body t={t} size={38} style={{ color: "#fff", fontWeight: 700 }}>
-        ¿Qué pasa cuando ambas cantidades <span style={{ color: MINT }}>no coinciden?</span>
+      <Body t={t} size={38} style={{ color: t.ink, fontWeight: 700 }}>
+        ¿Qué pasa cuando ambas cantidades <span style={{ color: t.accent }}>no coinciden?</span>
       </Body>
     </div>
     <Bar label="TÚ" n="1,197" h={420} color="#20B07E" x={150} />
@@ -151,7 +152,7 @@ const S4: React.FC = () => (
 const S5: React.FC = () => (
   <Frame t={t} i={4} n={N} last>
     <div style={{ position: "absolute", left: 70, right: 70, top: 170 }}>
-      <Title t={t} size={52} parts={["No se trata de tener más archivos."]} style={{ color: "rgba(255,255,255,.7)" }} />
+      <Title t={t} size={52} parts={["No se trata de tener más archivos."]} style={{ color: t.sub }} />
       <Title t={t} size={66} parts={["Se trata de saber si tienes ", { hl: "la misma información que tiene el SAT." }]} style={{ marginTop: 14 }} />
     </div>
     <Photo name="c5-tranquila" hint="Gerente de finanzas satisfecha" position="62% 30%" style={{ left: 70, top: 640, width: 470, height: 520, transform: "rotate(-3deg)" }} ring={MINT} />
@@ -161,15 +162,16 @@ const S5: React.FC = () => (
         <Icon d={IC.check} size={30} sw={3.2} />
       </div>
     </Card>
-    <div style={{ position: "absolute", left: 580, right: 70, top: 860, fontFamily: FONT, fontWeight: 800, fontSize: 46, color: "#fff", lineHeight: 1.15 }}>¿Ya hiciste esta comparación?</div>
+    <div style={{ position: "absolute", left: 580, right: 70, top: 860, fontFamily: FONT, fontWeight: 800, fontSize: 46, color: t.ink, lineHeight: 1.15 }}>¿Ya hiciste esta comparación?</div>
     <div style={{ position: "absolute", left: 570, right: 40, top: 1000, display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start" }}>
-      <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 28, color: "rgba(255,255,255,.8)" }}>Empieza hoy</span>
+      <span style={{ fontFamily: FONT, fontWeight: 600, fontSize: 28, color: t.sub }}>Empieza hoy</span>
       <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: 31, color: "#0F3A2A", background: MINT, borderRadius: 999, padding: "18px 30px", whiteSpace: "nowrap", boxShadow: "0 16px 40px rgba(63,212,151,.45)" }}>Crea tu cuenta gratis →</span>
-      <span style={{ fontFamily: MONO, fontWeight: 700, fontSize: 30, color: "#fff" }}>fispal.mx</span>
+      <span style={{ fontFamily: MONO, fontWeight: 700, fontSize: 30, color: t.ink }}>fispal.mx</span>
     </div>
     <Glass3D name="esfera" x={930} y={1220} size={170} />
   </Frame>
 );
 
 export const C1_SLIDES = [S1, S2, S3, S4, S5];
-export const Carrusel1Sat: React.FC = () => <Carousel slides={C1_SLIDES} />;
+export const Carrusel1Sat: React.FC = () => <Carousel slides={C1_SLIDES} theme={THEMES.purple} />;
+export const Carrusel1SatLight: React.FC = () => <Carousel slides={C1_SLIDES} theme={THEMES.light} />;
