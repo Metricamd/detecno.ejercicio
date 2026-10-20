@@ -26,6 +26,20 @@ export type Theme = {
 };
 
 export const THEMES: Record<string, Theme> = {
+  teal: {
+    dark: true,
+    bg: "linear-gradient(170deg, #0E5560 0%, #0B3550 45%, #0A1A3A 100%)",
+    glows: [
+      { x: 980, y: 160, r: 460, color: "#3FD497", o: 0.38 },
+      { x: 60, y: 1200, r: 520, color: "#7B61FF", o: 0.4 },
+    ],
+    ink: "#FFFFFF",
+    sub: "rgba(255,255,255,.78)",
+    accent: "#5CF0B4",
+    card: "#FFFFFF",
+    cardInk: "#131313",
+    ribbon: "#5CF0B4",
+  },
   light: {
     dark: false,
     bg: "linear-gradient(165deg, #FFFFFF 0%, #F2F4FF 55%, #E6FBF2 100%)",
