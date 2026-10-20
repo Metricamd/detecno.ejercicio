@@ -30,7 +30,7 @@ const S1: React.FC = () => (
         <b style={{ color: "#fff" }}>Spoiler:</b> podrías estar comparando contra una información incompleta. →
       </Body>
     </div>
-    <Photo name="c1-dudas" hint="Contadora comparando facturas" style={{ left: 420, top: 640, width: 560, height: 590, transform: "rotate(3deg)" }} />
+    <Photo name="c1-dudas" hint="Contadora comparando facturas" position="40% 30%" style={{ left: 420, top: 640, width: 560, height: 590, transform: "rotate(3deg)" }} />
     <Counter who="SAT" n="1,284" icon={IC.building} color={C.purple} style={{ left: 70, top: 700, transform: "rotate(-4deg)" }} />
     <Counter who="TÚ" n="1,197" icon={IC.user} color="#20B07E" style={{ left: 110, top: 880, transform: "rotate(2deg)" }} />
     <div style={{ position: "absolute", left: 300, top: 1040, background: CORAL, color: "#fff", fontFamily: FONT, fontWeight: 800, fontSize: 44, borderRadius: 999, padding: "10px 30px", boxShadow: "0 16px 36px rgba(255,122,122,.5)", transform: "rotate(-6deg)" }}>−87 CFDI</div>
@@ -82,7 +82,7 @@ const S3: React.FC = () => (
       <Title t={t} size={64} parts={["La diferencia puede estar en comprobantes que ", { hl: "no tienes identificados." }]} />
       <Body t={t}>Y si no comparas ambas fuentes, es difícil saber que existe.</Body>
     </div>
-    <Photo name="c3-busqueda" hint="Analista buscando entre papeles" style={{ left: 600, top: 650, width: 400, height: 560, transform: "rotate(-3deg)" }} />
+    <Photo name="c3-busqueda" hint="Analista buscando entre papeles" position="62% 25%" style={{ left: 600, top: 650, width: 400, height: 560, transform: "rotate(-3deg)" }} />
     <Card t={t} style={{ position: "absolute", left: 70, top: 690, width: 600, padding: "18px 22px", transform: "rotate(-1.5deg)" }}>
       {ROWS.map((r, k) => (
         <div key={k} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 6px", borderBottom: k < ROWS.length - 1 ? "1px solid #EEF0F6" : "none", background: r.ok ? "transparent" : "rgba(255,122,122,.1)", border: r.ok ? undefined : `2px dashed ${CORAL}`, borderRadius: r.ok ? 0 : 14, margin: r.ok ? 0 : "4px 0" }}>
@@ -154,7 +154,7 @@ const S5: React.FC = () => (
       <Title t={t} size={52} parts={["No se trata de tener más archivos."]} style={{ color: "rgba(255,255,255,.7)" }} />
       <Title t={t} size={66} parts={["Se trata de saber si tienes ", { hl: "la misma información que tiene el SAT." }]} style={{ marginTop: 14 }} />
     </div>
-    <Photo name="c5-tranquila" hint="Gerente de finanzas satisfecha" style={{ left: 70, top: 640, width: 470, height: 520, transform: "rotate(-3deg)" }} ring={MINT} />
+    <Photo name="c5-tranquila" hint="Gerente de finanzas satisfecha" position="62% 30%" style={{ left: 70, top: 640, width: 470, height: 520, transform: "rotate(-3deg)" }} ring={MINT} />
     <Card t={t} style={{ position: "absolute", left: 470, top: 700, padding: "18px 26px", display: "flex", alignItems: "center", gap: 14, transform: "rotate(4deg)" }}>
       <span style={{ fontWeight: 800, fontSize: 40 }}>1,284 = 1,284</span>
       <div style={{ width: 48, height: 48, borderRadius: 24, background: "#20B07E", display: "flex", alignItems: "center", justifyContent: "center" }}>
