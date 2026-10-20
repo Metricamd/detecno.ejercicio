@@ -33,7 +33,7 @@ const S1: React.FC = () => (
       {/* bubble tail */}
       <div style={{ position: "absolute", left: 120, bottom: -34, width: 0, height: 0, borderLeft: "26px solid transparent", borderRight: "26px solid transparent", borderTop: "36px solid #fff" }} />
     </div>
-    <Photo name="c6-llamada" hint="Asistente al teléfono encogiéndose de hombros" position="50% 30%" radius="50%" ring={BLUE} style={{ left: L + 20, top: 560, width: 300, height: 300 }} />
+    <Photo name="c6-llamada" hint="Asistente al teléfono encogiéndose de hombros" position="50% 18%" radius="50%" ring={BLUE} style={{ left: L + 20, top: 560, width: 300, height: 300 }} />
     <Glass3D name="factura-rota" x={760} y={700} size={380} />
     <div style={{ position: "absolute", left: L, right: L, top: 920 }}>
       <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 44, lineHeight: 1.2, color: t.ink }}>
@@ -109,7 +109,7 @@ const S3: React.FC = () => (
 /* 4 — CTA: full-bleed photo fading into the night, centred close */
 const S4: React.FC = () => (
   <Frame t={t} i={3} n={N} last ribbon={false}>
-    <Photo name="c6-tablet" hint="Empresaria segura con tablet" position="50% 25%" radius={0} style={{ left: 0, right: 0, top: 0, height: 760, boxShadow: "none" }} />
+    <Photo name="c6-tablet" hint="Empresaria segura con tablet" position="50% 20%" radius={0} style={{ left: 0, right: 0, top: 0, height: 760, boxShadow: "none" }} />
     <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 200, background: "linear-gradient(180deg, rgba(11,15,51,.75), rgba(11,15,51,0))" }} />
     <div style={{ position: "absolute", left: 0, right: 0, top: 460, height: 310, background: "linear-gradient(180deg, rgba(11,15,51,0), #0B0F33 92%)" }} />
     <Glass3D name="factura-ok" x={880} y={570} size={280} />
