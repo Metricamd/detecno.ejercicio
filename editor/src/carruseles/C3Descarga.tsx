@@ -43,7 +43,7 @@ const S1: React.FC = () => (
     <Head>
       <Title t={t} size={78} parts={["¿Tu equipo todavía descarga CFDI ", { hl: "uno por uno?" }]} />
     </Head>
-    <Photo name="c3-repetitivo" hint="Contadora aburrida descargando" position="50% 30%" radius={36} style={{ left: L, top: 520, width: COL, height: 570 }} />
+    <Photo name="c3-repetitivo" hint="Contadora aburrida descargando" position="50% 42%" radius={36} style={{ left: L, top: 520, width: COL, height: 570 }} />
     {/* stack of single-download rows */}
     <div style={{ position: "absolute", left: COL2, top: 520, width: COL, display: "flex", flexDirection: "column", gap: 14 }}>
       {[1, 2, 3, 4].map((k) => (
@@ -156,7 +156,7 @@ const S5: React.FC = () => (
     <div style={{ position: "absolute", left: L, right: 1080 - R, top: 170, textAlign: "center" }}>
       <Title t={t} size={74} parts={["¿Todavía lo hacen ", { hl: "manualmente?" }]} />
     </div>
-    <Photo name="c3-equipo" hint="Equipo de finanzas feliz" position="50% 35%" radius={40} style={{ left: L, right: 1080 - R, top: 400, height: 520 }} ring={MINT} />
+    <Photo name="c3-equipo" hint="Equipo de finanzas feliz" position="50% 45%" radius={40} style={{ left: L, right: 1080 - R, top: 400, height: 520 }} ring={MINT} />
     <Glass3D name="reloj-arena" x={900} y={880} size={250} />
     <div style={{ position: "absolute", left: 0, right: 0, top: 990, display: "flex", flexDirection: "column", alignItems: "center", gap: 18 }}>
       <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: 40, color: "#0A1A3A", background: MINT, borderRadius: 999, padding: "22px 48px", boxShadow: "0 18px 44px rgba(92,240,180,.4)" }}>Prueba Fispal gratis →</span>
