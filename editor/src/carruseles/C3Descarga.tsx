@@ -56,7 +56,7 @@ const S1: React.FC = () => (
         </Card>
       ))}
     </div>
-    <Glass3D name="nube-descarga" x={COL2 + COL / 2} y={960} size={300} />
+    <Glass3D name="nube-descarga" x={COL2 + COL / 2} y={985} size={280} />
     <div style={{ position: "absolute", left: L, right: 1080 - R, top: 1125, fontFamily: FONT, fontWeight: 600, fontSize: 34, color: t.sub }}>
       <b style={{ color: t.ink }}>Spoiler:</b> esa no es la única forma de hacerlo. →
     </div>
@@ -111,7 +111,7 @@ const S3: React.FC = () => (
       <div style={{ fontFamily: FONT, fontWeight: 800, fontSize: 210, color: MINT, lineHeight: 0.95, letterSpacing: "-0.04em", textShadow: "0 20px 60px rgba(92,240,180,.35)" }}>1,000+</div>
       <Title t={t} size={56} parts={["Es descargar ", { hl: "cientos o miles." }]} style={{ marginTop: 26 }} />
     </div>
-    <Glass3D name="pila-xml" x={850} y={860} size={460} />
+    <Glass3D name="pila-xml" x={860} y={850} size={620} />
   </Frame>
 );
 
