@@ -13,6 +13,7 @@ import { C2_SLIDES, Carrusel2Erp } from "./carruseles/C2Erp";
 import { C3_SLIDES, Carrusel3Descarga } from "./carruseles/C3Descarga";
 import { C4_SLIDES, Carrusel4Trabajo } from "./carruseles/C4Trabajo";
 import { C5_SLIDES, Carrusel5Buscar } from "./carruseles/C5Buscar";
+import { C6_SLIDES, Carrusel6Factura } from "./carruseles/C6Factura";
 import { H as CAR_H, SLIDE_FRAMES as CAR_SF, W as CAR_W } from "./carruseles/kit";
 import { AlmacenamientoPost } from "./posts/Almacenamiento";
 import { MODULOS_FRAMES, ModulosRfcCarousel } from "./posts/ModulosRFC";
@@ -39,6 +40,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition id="Carrusel6Factura" component={Carrusel6Factura} durationInFrames={C6_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />
       <Composition id="Carrusel5Buscar" component={Carrusel5Buscar} durationInFrames={C5_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />
       <Composition id="Carrusel4Trabajo" component={Carrusel4Trabajo} durationInFrames={C4_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />
       <Composition id="Carrusel3Descarga" component={Carrusel3Descarga} durationInFrames={C3_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />

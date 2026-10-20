@@ -82,6 +82,20 @@ export const THEMES: Record<string, Theme> = {
     cardInk: "#131313",
     ribbon: "#2F6BFF",
   },
+  night: {
+    dark: true,
+    bg: "linear-gradient(165deg, #141C52 0%, #0B0F33 52%, #070A22 100%)",
+    glows: [
+      { x: 980, y: 140, r: 480, color: "#2F6BFF", o: 0.45 },
+      { x: 60, y: 1220, r: 520, color: "#7B61FF", o: 0.38 },
+    ],
+    ink: "#FFFFFF",
+    sub: "rgba(255,255,255,.75)",
+    accent: "#5FA0FF",
+    card: "#FFFFFF",
+    cardInk: "#131313",
+    ribbon: "#5FA0FF",
+  },
   purple: {
     dark: true,
     bg: "linear-gradient(160deg, #4527E0 0%, #250E94 48%, #140660 100%)",
