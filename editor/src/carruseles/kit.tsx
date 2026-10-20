@@ -93,7 +93,10 @@ export const Photo: React.FC<{ name: string; hint: string; style: React.CSSPrope
 };
 
 /* ---------- glass illustration, static for stills ---------- */
-export const Glass3D: React.FC<{ name: string; x: number; y: number; size: number; rot?: number }> = ({ name, x, y, size, rot = 0 }) => (
+export const Glass3D: React.FC<{ name: string; x: number; y: number; size: number; rot?: number }> = ({ name, x, y, size, rot = 0 }) =>
+  !getStaticFiles().some((f) => f.name === `fispal/illus/${name}.png`) ? (
+    <div style={{ position: "absolute", left: x - size / 2, top: y - size / 2, width: size, height: size, borderRadius: "50%", border: "4px dashed rgba(123,97,255,.6)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: MONO, fontSize: 22, color: "#7B61FF", background: "rgba(123,97,255,.08)" }}>{name}</div>
+  ) : (
   <div style={{ position: "absolute", left: x - size / 2, top: y - size / 2, transform: `rotate(${rot}deg)` }}>
     <AbsoluteFill style={{ position: "relative", width: size, height: size }}>
       <Illus name={name} at={-60} x={size / 2} y={size / 2} size={size} />
