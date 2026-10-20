@@ -9,6 +9,7 @@ import { ACCESOS_DURATION, AccesosReel } from "./accesos/Reel";
 import { RFC_DURATION, RfcReel } from "./rfc/Reel";
 import { CONCILIACION_DURATION, ConciliacionReel } from "./conciliacion/Reel";
 import { C1_SLIDES, Carrusel1Sat, Carrusel1SatLight } from "./carruseles/C1Sat";
+import { C2_SLIDES, Carrusel2Erp } from "./carruseles/C2Erp";
 import { H as CAR_H, SLIDE_FRAMES as CAR_SF, W as CAR_W } from "./carruseles/kit";
 import { AlmacenamientoPost } from "./posts/Almacenamiento";
 import { MODULOS_FRAMES, ModulosRfcCarousel } from "./posts/ModulosRFC";
@@ -35,6 +36,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition id="Carrusel2Erp" component={Carrusel2Erp} durationInFrames={C2_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />
       <Composition id="Carrusel2SatClaro" component={Carrusel1SatLight} durationInFrames={C1_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />
       <Composition id="Carrusel2Sat" component={Carrusel1Sat} durationInFrames={C1_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />
       <Composition id="FispalConciliacion" component={ConciliacionReel} durationInFrames={CONCILIACION_DURATION} fps={30} width={1080} height={1920} />
