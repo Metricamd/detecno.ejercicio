@@ -115,7 +115,7 @@ const S4: React.FC = () => (
     <div style={{ position: "absolute", left: 80, right: 80, top: 160, textAlign: "center" }}>
       <Title t={t} size={54} parts={[{ hl: "Fispal" }, " concentra tu información fiscal y permite consultarla utilizando diferentes criterios y filtros."]} />
     </div>
-    <Glass3D name="embudo" x={540} y={800} size={500} />
+    <Glass3D name="embudo" x={540} y={790} size={640} />
     {FILTERS.map(([k, x, y], i) => (
       <Pill key={k} bg={i % 2 ? C.purple : "#fff"} color={i % 2 ? "#fff" : "#131313"} style={{ left: x, top: y, transform: `rotate(${i % 2 ? 4 : -4}deg)` }}>
         <Icon d={ICX.filter} size={24} color={i % 2 ? "#fff" : C.purple} />
