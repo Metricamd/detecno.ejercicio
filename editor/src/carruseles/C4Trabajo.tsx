@@ -28,7 +28,7 @@ const S1: React.FC = () => (
       <div style={{ fontWeight: 800, fontSize: 190, lineHeight: 0.95, letterSpacing: "-0.05em", color: V }}>miles</div>
       <div style={{ fontWeight: 800, fontSize: 64, letterSpacing: "-0.02em" }}>de CFDI.</div>
     </div>
-    <Glass3D name="montana-cfdi" x={780} y={780} size={600} />
+    <Glass3D name="montana-cfdi" x={780} y={720} size={600} />
     <div style={{ position: "absolute", left: 70, top: 760, display: "flex", flexDirection: "column", gap: 12 }}>
       <span style={{ fontFamily: MONO, fontWeight: 700, fontSize: 28, color: P, background: "#fff", borderRadius: 999, padding: "10px 22px", boxShadow: "0 12px 30px rgba(37,14,148,.12)", alignSelf: "flex-start" }}>12,480 CFDI ✓</span>
     </div>
@@ -65,7 +65,7 @@ const S2: React.FC = () => (
         </Card>
       ))}
     </div>
-    <Glass3D name="caja-herramientas" x={540} y={995} size={220} />
+    <Glass3D name="caja-herramientas" x={540} y={985} size={230} />
     <div style={{ position: "absolute", left: 70, right: 70, top: 1090, display: "flex", alignItems: "center", gap: 20, background: P, borderRadius: 28, padding: "24px 30px" }}>
       <Icon d={IC.alert} size={52} color="#FF9A9A" />
       <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 31, color: "#fff", lineHeight: 1.2 }}>Y hacerlo con miles de comprobantes puede convertirse en otro problema operativo.</span>
@@ -76,7 +76,7 @@ const S2: React.FC = () => (
 /* 3 — split screen: text left, full-bleed photo right */
 const S3: React.FC = () => (
   <Frame t={t} i={2} n={N}>
-    <Photo name="c4-decision" hint="Directora presentando datos" position="45% 30%" radius={0} style={{ left: 600, right: 0, top: 0, bottom: 0, boxShadow: "none" }} />
+    <Photo name="c4-decision" hint="Directora presentando datos" position="28% 40%" radius={0} style={{ left: 600, right: 0, top: 0, bottom: 0, boxShadow: "none" }} />
     <div style={{ position: "absolute", left: 560, top: 0, bottom: 0, width: 120, background: "linear-gradient(90deg, rgba(214,247,232,1), rgba(214,247,232,0))" }} />
     <div style={{ position: "absolute", left: 70, width: 500, top: 190 }}>
       <Title t={t} size={54} parts={[{ hl: "Fispal" }, " reúne distintas herramientas para trabajar con tu información fiscal."]} />
