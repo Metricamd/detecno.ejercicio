@@ -30,7 +30,8 @@ const TAKES: Take[] = [
   { from: 86.79, to: 88.97, text: "Graba un video contando tu historia," },
   { from: 91.71, to: 94.37, text: "que te conozcan, que conecten contigo." },
   { from: 97.55, to: 98.14, text: "Dos:" },
-  { from: 100.85, to: 106.11, text: "agrega evidencia de tus medicamentos, de tu tratamiento," },
+  // 101.1–101.7: "agrega ev…" (restarted)
+  { from: 102.06, to: 106.11, text: "agrega evidencia de tus medicamentos, de tu tratamiento," },
   { from: 106.47, to: 112.6, text: "de tu situación, de lo que sea. Comparte evidencia para que las personas generen confianza," },
   // 116.6–116.9: a lone "y"
   { from: 118.7, to: 121.43, text: "que se entienda por qué necesitas el apoyo." },
