@@ -53,7 +53,10 @@ export const CLIPS: Clip[] = (() => {
   });
 })();
 export const SPEECH_END = CLIPS[CLIPS.length - 1].at + CLIPS[CLIPS.length - 1].len;
-export const OUTRO = 75;
+// Outro: the footage runs on to TAIL_END (after that the raw file has a
+// CapCut end card), then holds on public/yolapp/final.jpg under the logo.
+export const OUTRO = 60;
+export const TAIL_END = 159.28;
 export const TOTAL = SPEECH_END + OUTRO;
 
 // First frame of take i, plus an offset in seconds.
@@ -98,8 +101,8 @@ export const KEYWORDS = new Set(
 );
 export const isKeyword = (w: string) => KEYWORDS.has(norm(w));
 
-// Graphic beats: the video shrinks to a bubble and a brand scene takes over
-// from take `from` through take `to`.
+// Graphic beats: a brand card sits on the lower third (below the chin) and the
+// captions move above the head, from take `from` through take `to`.
 export const GRAPHICS = [
   { id: "dudoso", from: 2, to: 4 },
   { id: "confiable", from: 5, to: 6 },
