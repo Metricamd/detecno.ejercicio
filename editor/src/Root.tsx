@@ -26,6 +26,7 @@ import { TOTAL_FRAMES as CONTRALORIA_FRAMES } from "./contraloria/timings";
 import { VENVERS_W_FRAMES, VenversCarouselWhite } from "./venvers/CarruselBlanco";
 import { BlingReel, calculateBling } from "./bling/Reel";
 import { TOTAL as BLING_FRAMES } from "./bling/theme";
+import { YOLAPP_FRAMES, YolappReel } from "./yolapp/Reel";
 import { PERSONALIZA_FRAMES, PersonalizaCarousel, POST_H, POST_W } from "./posts/Personaliza";
 
 export const RemotionRoot: React.FC = () => {
@@ -130,6 +131,7 @@ export const RemotionRoot: React.FC = () => {
         height={1000}
         defaultProps={{ name: "planeta" }}
       />
+      <Composition id="YolappReel" component={YolappReel} durationInFrames={YOLAPP_FRAMES} fps={30} width={1080} height={1920} />
       <Composition id="BlingReel" component={BlingReel} durationInFrames={BLING_FRAMES} fps={30} width={1080} height={1920} defaultProps={{ voice: false }} calculateMetadata={calculateBling} />
       <Composition id="VenversCard3D" component={VenversCard3D} durationInFrames={60} fps={30} width={560} height={770} />
       <Composition
