@@ -25,8 +25,15 @@ const SPANS = (() => {
   return out;
 })();
 
-// White sticker outline so the gradient logo reads on top of the video.
-const OUTLINE = "drop-shadow(5px 0 0 #fff) drop-shadow(-5px 0 0 #fff) drop-shadow(0 5px 0 #fff) drop-shadow(0 -5px 0 #fff) drop-shadow(0 16px 30px rgba(26,18,64,.45))";
+// Continuous pieces of footage: a take with a `skip` plays as two pieces.
+const PARTS = CLIPS.flatMap((c) => {
+  if (!c.skip) return [{ at: c.at, len: c.len, from: c.from }];
+  const first = Math.round((c.skip[0] - c.from) * 30);
+  return [
+    { at: c.at, len: first, from: c.from },
+    { at: c.at + first, len: c.len - first, from: c.skip[1] },
+  ];
+});
 
 /* ---------- the talking-head video, always full screen ---------- */
 const zoomFor = (i: number) => (inGraphic(i) ? 1.0 : i === 14 ? 1.3 : i % 2 === 0 ? 1.0 : 1.14);
@@ -41,12 +48,12 @@ const Talking: React.FC = () => {
   return (
     <AbsoluteFill style={{ overflow: "hidden", background: "#000", transform: useShake(clipAt(14), 12, 18) }}>
       <AbsoluteFill style={{ transform: `scale(${scale})`, transformOrigin: "50% 36%" }}>
-        {CLIPS.map((c) => (
-          <Sequence key={c.i} from={c.at} durationInFrames={c.len} layout="none">
+        {PARTS.map((p, k) => (
+          <Sequence key={k} from={p.at} durationInFrames={p.len} layout="none">
             <OffthreadVideo
               src={staticFile(SRC)}
-              trimBefore={Math.round(c.from * 30)}
-              volume={(f) => Math.min(1, (f + 1) / 3, (c.len - f) / 3)}
+              trimBefore={Math.round(p.from * 30)}
+              volume={(f) => Math.min(1, (f + 1) / 3, (p.len - f) / 3)}
               style={{ width: W, height: 1920, objectFit: "cover" }}
             />
           </Sequence>
@@ -87,7 +94,8 @@ const PAGES: Page[] = (() => {
   return pages.map((ws, i) => ({
     words: ws,
     start: Math.floor(ws[0].start),
-    end: i + 1 < pages.length ? Math.floor(pages[i + 1][0].start) : SPEECH_END,
+    // a silent tail (e.g. the money gesture) shows no caption
+    end: Math.min(i + 1 < pages.length ? Math.floor(pages[i + 1][0].start) : SPEECH_END, CLIPS[ws[0].clip].at + CLIPS[ws[0].clip].speech + 4),
     // with a card on the lower third the captions go above the head
     top: inGraphic(ws[0].clip),
   }));
@@ -164,6 +172,51 @@ const Hearts: React.FC<{ at: number }> = ({ at }) => {
   );
 };
 
+// Money gesture: coins burst up the sides, away from the face.
+const CASH = clipAt(19) + CLIPS[19].speech + 2;
+const Coins: React.FC<{ at: number }> = ({ at }) => {
+  const frame = useCurrentFrame();
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none" }}>
+      {Array.from({ length: 10 }, (_, i) => {
+        const t = frame - at - (i % 5) * 2;
+        if (t < 0) return null;
+        const left = i % 2 === 0;
+        const x0 = left ? 120 + (i % 3) * 60 : 870 - (i % 3) * 60;
+        const x = x0 + (left ? -1 : 1) * t * (2 + (i % 3));
+        const y = 1500 - t * (28 - (i % 4) * 3) + t * t * 0.9;
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: x,
+              top: y,
+              width: 86,
+              height: 86,
+              borderRadius: "50%",
+              background: "radial-gradient(circle at 35% 30%, #FFF3B0, #FFC531 45%, #E09A00)",
+              border: "5px solid #fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: POPPINS,
+              fontWeight: 800,
+              fontSize: 46,
+              color: "#9A6400",
+              opacity: interpolate(t, [22, 30], [1, 0], clamp),
+              transform: `rotate(${t * (left ? -14 : 14)}deg) scale(${0.7 + (i % 3) * 0.15})`,
+              boxShadow: "0 10px 24px rgba(26,18,64,.35)",
+            }}
+          >
+            $
+          </div>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
+
 const Stickers: React.FC = () => {
   const frame = useCurrentFrame();
   const aguas = clipAt(14);
@@ -190,6 +243,10 @@ const Stickers: React.FC = () => {
       <Between from={clipAt(18)} to={clipAt(19)}>
         <Sticker at={A(18, "subir")} text="Subir" bg={GRAD.cool} rotate={-4} top={150} />
         <Sticker at={A(18, "no")} text="≠ recaudar" bg={GRAD.warm} rotate={3} top={275} size={70} />
+      </Between>
+      <Between from={CASH - 2} to={clipAt(20)}>
+        <Sticker at={CASH} text="¡Ka-ching!" bg="linear-gradient(135deg, #FFD54A, #FF9F1C)" size={96} rotate={-5} top={190} />
+        <Coins at={CASH} />
       </Between>
       <Between from={clipAt(23)} to={SPEECH_END}>
         <Sticker at={A(23, "historia")} text="Tu historia" bg={GRAD.warm} rotate={-3} />
@@ -513,7 +570,7 @@ const Outro: React.FC = () => {
   return (
     <AbsoluteFill style={{ alignItems: "center", justifyContent: "flex-start", flexDirection: "column", gap: 40, paddingTop: 1220 }}>
       <Pop at={start} from={0.3} rotate={-3}>
-        <Img src={staticFile(LOGO)} style={{ width: 760, filter: OUTLINE }} />
+        <Img src={staticFile(LOGO)} style={{ width: 760 }} />
       </Pop>
       <Pop at={start + 12}>
         <Chip size={42} bg={GRAD.warm} style={{ border: "6px solid #fff", boxShadow: "0 14px 40px rgba(26,18,64,.4)" }}>
@@ -526,7 +583,8 @@ const Outro: React.FC = () => {
 };
 
 /* ---------- sound ---------- */
-const SFX: { name: "whoosh" | "pop" | "ding" | "click"; at: number; v: number }[] = [
+const SFX: { name: "whoosh" | "pop" | "ding" | "click" | "cash"; at: number; v: number }[] = [
+  { name: "cash", at: CASH, v: 0.6 },
   ...SPANS.flatMap((s) => [
     { name: "whoosh" as const, at: s.start - 3, v: 0.35 },
     { name: "whoosh" as const, at: s.end - 8, v: 0.25 },

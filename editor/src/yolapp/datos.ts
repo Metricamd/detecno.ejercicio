@@ -7,7 +7,9 @@ export const FPS = 30;
 export const W = 1080;
 export const H = 1920;
 
-type Take = { from: number; to: number; text: string };
+// `skip` drops a stumble inside a take; `tail` keeps that many seconds of
+// silent footage at the end of a take (no captions, no card).
+type Take = { from: number; to: number; text: string; skip?: [number, number]; tail?: number };
 const TAKES: Take[] = [
   { from: 0.5, to: 2.25, text: "A ver, seamos honestos." },
   { from: 4.3, to: 6.1, text: "¿Tú le comprarías a un vendedor" },
@@ -31,10 +33,12 @@ const TAKES: Take[] = [
   { from: 101.81, to: 103.06, text: "y que quieran ayudarte." },
   { from: 105.93, to: 106.85, text: "Pero ¡aguas!" },
   { from: 107.84, to: 110.5, text: "Puedes tener la causa más completa en Yolapp," },
-  { from: 112.48, to: 116.22, text: "pero si no compartes tu link, nadie la va a ver." },
+  // 112.5–113.6: "pero si no… comp…" (restarted cleanly right after)
+  { from: 113.94, to: 116.22, text: "pero si no compartes tu link, nadie la va a ver." },
   { from: 122.55, to: 126.96, text: "Mándaselo a tu familia, amigos, compártanlo en tus redes, en tu grupo, donde sea." },
   { from: 132.14, to: 135.02, text: "Porque subir una causa y dejarla ahí no es recaudar." },
-  { from: 138.28, to: 141.08, text: "Compartir el link es el primer paso para recibir." },
+  // 141.1–142.2: money gesture with the hands (cash register SFX)
+  { from: 138.28, to: 142.2, tail: 1.12, text: "Compartir el link es el primer paso para recibir." },
   { from: 148.14, to: 149.2, text: "Mejora tu causa," },
   { from: 150.38, to: 151.54, text: "genera confianza," },
   { from: 152.75, to: 153.6, text: "comparte tu link." },
@@ -42,12 +46,14 @@ const TAKES: Take[] = [
 ];
 
 // Takes placed on the reel timeline (frames).
-export type Clip = Take & { i: number; at: number; len: number };
+// `speech` is the spoken part (len minus the silent tail).
+export type Clip = Take & { i: number; at: number; len: number; speech: number };
 export const CLIPS: Clip[] = (() => {
   let at = 0;
   return TAKES.map((t, i) => {
-    const len = Math.round((t.to - t.from) * FPS);
-    const c = { ...t, i, at, len };
+    const skipped = t.skip ? t.skip[1] - t.skip[0] : 0;
+    const len = Math.round((t.to - t.from - skipped) * FPS);
+    const c = { ...t, i, at, len, speech: len - Math.round((t.tail ?? 0) * FPS) };
     at += len;
     return c;
   });
@@ -68,7 +74,7 @@ export const WORDS: Word[] = CLIPS.flatMap((c) => {
   const words = c.text.split(" ");
   const lead = 0.06 * FPS;
   const tail = 0.1 * FPS;
-  const span = c.len - lead - tail;
+  const span = c.speech - lead - tail;
   const weight = (w: string) => w.replace(/[^\p{L}\p{N}]/gu, "").length + 1.5;
   const total = words.reduce((a, w) => a + weight(w), 0);
   let t = c.at + lead;
@@ -115,7 +121,7 @@ export const GRAPHICS = [
 export type GraphicId = (typeof GRAPHICS)[number]["id"];
 export const graphicSpan = (id: GraphicId) => {
   const g = GRAPHICS.find((x) => x.id === id)!;
-  return { start: CLIPS[g.from].at, end: CLIPS[g.to].at + CLIPS[g.to].len };
+  return { start: CLIPS[g.from].at, end: CLIPS[g.to].at + CLIPS[g.to].speech };
 };
 
 // Brand palette (from Yolapp_Logotipo.ai).
