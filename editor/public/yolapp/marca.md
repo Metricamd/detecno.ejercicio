@@ -63,3 +63,30 @@ npx remotion render src/index.ts YolappReel ../entregas/yolapp/<nombre>.mp4 \
   --concurrency=4 --crf=20
 ```
 Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` (modelo Whisper small q8 en `editor/models/`, no versionado).
+
+## Reel 2 "3 recomendaciones para recaudar más"
+
+- Composición: `Yolapp2Reel` (`src/yolapp2/Reel.tsx`, datos en `src/yolapp2/datos.ts`); reutiliza `src/yolapp/parts.tsx`. Mismas reglas de edición que el reel 1.
+- Crudo: `v2/crudo.mp4` (480×854, 3:13). Final: **68 s**. Música: `v2/musica.wav`. Cierre congelado: `v2/final.jpg` (el crudo no trae pantalla de CapCut).
+- Entrega: `entregas/yolapp/yolapp-reel2-borrador-1.mp4`.
+- Cara aprox. y = 320–1100 (mismas zonas que el reel 1).
+- Este audio tiene más ruido de fondo (≈ −42 dB): los tramos de voz se detectan a −32 dB.
+- Transcripción por tramos con una sola carga del modelo: `node scripts/transcribe_segments.mjs <audio16k.wav> <segmentos.json> <out.json>`.
+
+### Cortes del crudo
+| Se quitó | Motivo |
+|---|---|
+| 0,6–1,6 s "¿Sabes que puedes recibir…" | Arranque en falso |
+| 31–42 s "y conectar con personas que quieren…" (×3) | Repetido; queda "…que quieran sumarse a ayudarte" |
+| 52–55 s "Pero si ya creaste tu causa, aguas con esto" | Reformulado después ("Pero si ya subiste tu causa…") |
+| 70,6–71,2 s "donativos" | Repetido |
+| 116,6 s "y" suelto | Muletilla |
+| 124,7–127,4 s "y 3 y el más importante de todos" | Repetido |
+| 137,9–139,2 s "comparte tu link" | Repetido |
+| 154,8–155,3 s "Pero por…" | Reiniciado |
+| 183,7–184,4 s "copia tu link" | Repetido |
+| Todos los silencios | ~2 min de pausas |
+
+### Notas de guion
+- Subtítulos corregidos respecto a Whisper: "Yolapp" (oyó "Jolap"/"yo el app"), "Agrega" (oyó "Agregue"), "Muy fácil: entra a Yolapp".
+- Datos ilustrativos: "yolapp.com/tu-causa", contador de 1,250 visitas.
