@@ -1,5 +1,5 @@
 {
- "duration": 38.036,
+ "duration": 37.831,
  "estimated": false,
  "words": [
   {
@@ -14,358 +14,358 @@
   },
   {
    "text": "necesitas",
-   "start": 1.027,
-   "end": 1.6
+   "start": 1.0,
+   "end": 1.52
   },
   {
    "text": "abrir",
-   "start": 1.653,
-   "end": 1.92
+   "start": 1.56,
+   "end": 1.76
   },
   {
    "text": "para",
-   "start": 1.968,
-   "end": 2.16
+   "start": 1.808,
+   "end": 2.0
   },
   {
    "text": "responder",
-   "start": 2.224,
-   "end": 2.8
+   "start": 2.056,
+   "end": 2.56
   },
   {
    "text": "una",
-   "start": 2.86,
-   "end": 3.04
+   "start": 2.6,
+   "end": 2.72
   },
   {
    "text": "sola",
-   "start": 3.104,
-   "end": 3.36
+   "start": 2.784,
+   "end": 3.04
   },
   {
    "text": "pregunta",
-   "start": 3.413,
-   "end": 3.84
+   "start": 3.084,
+   "end": 3.44
   },
   {
    "text": "fiscal?",
-   "start": 3.909,
+   "start": 3.52,
    "end": 4.4
   },
   {
    "text": "Haz",
-   "start": 4.62,
-   "end": 5.089
+   "start": 4.462,
+   "end": 4.822
   },
   {
    "text": "la",
-   "start": 5.142,
-   "end": 5.249
+   "start": 4.875,
+   "end": 4.982
   },
   {
    "text": "cuenta",
-   "start": 5.306,
-   "end": 5.649
+   "start": 5.051,
+   "end": 5.462
   },
   {
    "text": "antes",
-   "start": 5.729,
-   "end": 6.129
+   "start": 5.542,
+   "end": 5.942
   },
   {
    "text": "de",
-   "start": 6.156,
-   "end": 6.209
+   "start": 5.969,
+   "end": 6.022
   },
   {
    "text": "seguir.",
-   "start": 6.278,
-   "end": 6.689
+   "start": 6.091,
+   "end": 6.662
   },
   {
    "text": "Un",
-   "start": 6.929,
-   "end": 7.379
+   "start": 6.898,
+   "end": 7.234
   },
   {
    "text": "Excel.",
-   "start": 7.472,
-   "end": 8.312
+   "start": 7.314,
+   "end": 8.103
   },
   {
    "text": "Una",
-   "start": 8.405,
-   "end": 8.705
+   "start": 8.131,
+   "end": 8.461
   },
   {
    "text": "carpeta.",
-   "start": 8.753,
-   "end": 9.681
+   "start": 8.509,
+   "end": 9.101
   },
   {
    "text": "Un",
-   "start": 9.76,
-   "end": 10.053
+   "start": 9.368,
+   "end": 9.792
   },
   {
    "text": "XML.",
-   "start": 10.353,
-   "end": 11.632
+   "start": 9.992,
+   "end": 10.672
   },
   {
    "text": "Otro",
-   "start": 11.675,
-   "end": 12.128
+   "start": 10.939,
+   "end": 11.453
   },
   {
    "text": "reporte.",
-   "start": 12.197,
-   "end": 12.768
+   "start": 11.533,
+   "end": 12.173
   },
   {
    "text": "Y",
-   "start": 13.048,
-   "end": 13.328
+   "start": 12.475,
+   "end": 12.75
   },
   {
    "text": "todavía",
-   "start": 13.368,
-   "end": 13.808
+   "start": 12.79,
+   "end": 13.23
   },
   {
    "text": "falta",
-   "start": 13.861,
-   "end": 14.128
+   "start": 13.27,
+   "end": 13.47
   },
   {
    "text": "cruzar",
-   "start": 14.176,
-   "end": 14.448
+   "start": 13.518,
+   "end": 13.79
   },
   {
    "text": "la",
-   "start": 14.475,
-   "end": 14.528
+   "start": 13.817,
+   "end": 13.87
   },
   {
    "text": "información.",
-   "start": 14.595,
-   "end": 15.707
+   "start": 13.93,
+   "end": 14.67
   },
   {
    "text": "Cuando",
-   "start": 15.707,
-   "end": 16.104
+   "start": 14.784,
+   "end": 15.47
   },
   {
    "text": "la",
-   "start": 16.131,
-   "end": 16.184
+   "start": 15.497,
+   "end": 15.55
   },
   {
    "text": "información",
-   "start": 16.231,
-   "end": 16.744
+   "start": 15.59,
+   "end": 16.03
   },
   {
    "text": "está",
-   "start": 16.776,
-   "end": 16.904
+   "start": 16.078,
+   "end": 16.27
   },
   {
    "text": "dispersa,",
-   "start": 16.974,
-   "end": 17.944
+   "start": 16.34,
+   "end": 17.39
   },
   {
    "text": "cada",
-   "start": 17.992,
-   "end": 18.184
+   "start": 17.422,
+   "end": 17.55
   },
   {
    "text": "consulta",
-   "start": 18.237,
-   "end": 18.664
+   "start": 17.612,
+   "end": 18.11
   },
   {
    "text": "se",
-   "start": 18.717,
-   "end": 18.824
+   "start": 18.163,
+   "end": 18.27
   },
   {
    "text": "convierte",
-   "start": 18.872,
-   "end": 19.304
+   "start": 18.302,
+   "end": 18.67
   },
   {
    "text": "en",
-   "start": 19.331,
-   "end": 19.384
+   "start": 18.723,
+   "end": 18.83
   },
   {
    "text": "una",
-   "start": 19.424,
-   "end": 19.544
+   "start": 18.87,
+   "end": 18.99
   },
   {
    "text": "pequeña",
-   "start": 19.624,
-   "end": 20.104
+   "start": 19.043,
+   "end": 19.47
   },
   {
    "text": "investigación.",
-   "start": 20.161,
-   "end": 21.064
+   "start": 19.527,
+   "end": 20.43
   },
   {
    "text": "Fispal",
-   "start": 21.359,
-   "end": 22.027
+   "start": 20.699,
+   "end": 21.41
   },
   {
    "text": "concentra",
-   "start": 22.077,
-   "end": 22.507
+   "start": 21.46,
+   "end": 21.89
   },
   {
    "text": "tus",
-   "start": 22.567,
-   "end": 22.747
+   "start": 21.95,
+   "end": 22.13
   },
   {
    "text": "CFDI",
-   "start": 22.827,
-   "end": 23.707
+   "start": 22.21,
+   "end": 23.25
   },
   {
    "text": "y",
-   "start": 23.827,
-   "end": 23.947
+   "start": 23.49,
+   "end": 23.73
   },
   {
    "text": "permite",
-   "start": 24.007,
-   "end": 24.427
+   "start": 23.79,
+   "end": 24.21
   },
   {
    "text": "consultarlos",
-   "start": 24.475,
-   "end": 25.067
+   "start": 24.266,
+   "end": 24.93
   },
   {
    "text": "utilizando",
-   "start": 25.118,
-   "end": 25.627
+   "start": 24.981,
+   "end": 25.49
   },
   {
    "text": "diferentes",
-   "start": 25.685,
-   "end": 26.267
+   "start": 25.541,
+   "end": 26.05
   },
   {
    "text": "filtros",
-   "start": 26.315,
-   "end": 26.667
+   "start": 26.114,
+   "end": 26.53
   },
   {
    "text": "y",
-   "start": 26.707,
-   "end": 26.747
+   "start": 26.57,
+   "end": 26.61
   },
   {
    "text": "criterios.",
-   "start": 26.793,
-   "end": 27.547
+   "start": 26.667,
+   "end": 27.41
   },
   {
    "text": "Menos",
-   "start": 27.747,
-   "end": 28.284
+   "start": 27.63,
+   "end": 28.13
   },
   {
    "text": "archivos",
-   "start": 28.328,
-   "end": 28.684
+   "start": 28.183,
+   "end": 28.61
   },
   {
    "text": "dispersos.",
-   "start": 28.744,
-   "end": 29.484
+   "start": 28.66,
+   "end": 29.744
   },
   {
    "text": "Más",
-   "start": 29.644,
-   "end": 30.124
+   "start": 29.854,
+   "end": 30.184
   },
   {
    "text": "visibilidad",
-   "start": 30.184,
-   "end": 30.844
+   "start": 30.244,
+   "end": 30.824
   },
   {
    "text": "sobre",
-   "start": 30.884,
-   "end": 31.084
+   "start": 30.864,
+   "end": 31.064
   },
   {
    "text": "tu",
-   "start": 31.111,
-   "end": 31.164
+   "start": 31.117,
+   "end": 31.224
   },
   {
    "text": "información",
-   "start": 31.211,
-   "end": 31.724
+   "start": 31.264,
+   "end": 31.704
   },
   {
    "text": "fiscal.",
-   "start": 31.793,
-   "end": 32.364
+   "start": 31.773,
+   "end": 32.344
   },
   {
    "text": "Prueba",
-   "start": 32.604,
-   "end": 33.121
+   "start": 32.626,
+   "end": 33.08
   },
   {
    "text": "gratis",
-   "start": 33.178,
-   "end": 33.521
+   "start": 33.137,
+   "end": 33.48
   },
   {
    "text": "en",
-   "start": 33.574,
-   "end": 33.681
+   "start": 33.533,
+   "end": 33.64
   },
   {
    "text": "fispal.mx,",
-   "start": 33.721,
-   "end": 35.841
+   "start": 33.68,
+   "end": 35.64
   },
   {
    "text": "y",
-   "start": 36.001,
-   "end": 36.161
+   "start": 35.84,
+   "end": 36.04
   },
   {
    "text": "concentra",
-   "start": 36.221,
-   "end": 36.721
+   "start": 36.09,
+   "end": 36.52
   },
   {
    "text": "tu",
-   "start": 36.748,
-   "end": 36.801
+   "start": 36.573,
+   "end": 36.68
   },
   {
    "text": "información",
-   "start": 36.848,
-   "end": 37.361
+   "start": 36.727,
+   "end": 37.24
   },
   {
    "text": "fiscal.",
-   "start": 37.441,
-   "end": 37.922
+   "start": 37.297,
+   "end": 37.72
   }
  ]
 }
