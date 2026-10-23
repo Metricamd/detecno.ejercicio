@@ -1,5 +1,5 @@
 {
- "duration": 42.159,
+ "duration": 44.318,
  "estimated": false,
  "words": [
   {
@@ -15,417 +15,417 @@
   {
    "text": "factura.",
    "start": 0.47,
-   "end": 1.519
+   "end": 1.28
   },
   {
    "text": "Tienes",
-   "start": 1.52,
-   "end": 1.76
+   "start": 1.417,
+   "end": 1.817
   },
   {
    "text": "el",
-   "start": 1.813,
-   "end": 1.92
+   "start": 1.844,
+   "end": 1.897
   },
   {
    "text": "pago.",
-   "start": 2.0,
-   "end": 2.68
+   "start": 1.977,
+   "end": 2.702
   },
   {
    "text": "Entonces",
-   "start": 2.77,
-   "end": 3.68
+   "start": 2.76,
+   "end": 3.89
   },
   {
    "text": "¿por",
-   "start": 4.08,
-   "end": 4.16
+   "start": 4.13,
+   "end": 4.21
   },
   {
    "text": "qué",
-   "start": 4.18,
-   "end": 4.24
+   "start": 4.25,
+   "end": 4.37
   },
   {
    "text": "todavía",
-   "start": 4.3,
-   "end": 4.72
+   "start": 4.41,
+   "end": 4.77
   },
   {
    "text": "los",
-   "start": 4.74,
-   "end": 4.8
+   "start": 4.81,
+   "end": 4.93
   },
   {
    "text": "estás",
-   "start": 4.86,
-   "end": 5.12
+   "start": 4.97,
+   "end": 5.25
   },
   {
    "text": "cruzando",
-   "start": 5.168,
-   "end": 5.6
+   "start": 5.282,
+   "end": 5.65
   },
   {
    "text": "manualmente?",
-   "start": 5.646,
-   "end": 6.4
+   "start": 5.696,
+   "end": 6.45
   },
   {
    "text": "CFDI,",
-   "start": 6.74,
-   "end": 8.07
+   "start": 6.637,
+   "end": 8.29
   },
   {
    "text": "pagos,",
-   "start": 8.16,
-   "end": 9.15
+   "start": 8.45,
+   "end": 9.25
   },
   {
    "text": "complementos,",
-   "start": 9.194,
-   "end": 9.87
+   "start": 9.323,
+   "end": 10.53
   },
   {
    "text": "cruces.",
-   "start": 9.97,
-   "end": 11.052
+   "start": 10.59,
+   "end": 11.17
   },
   {
    "text": "Y",
-   "start": 11.052,
-   "end": 11.281
+   "start": 11.49,
+   "end": 11.81
   },
   {
    "text": "repetir.",
-   "start": 11.348,
-   "end": 12.001
+   "start": 11.863,
+   "end": 12.73
   },
   {
    "text": "Cuando",
-   "start": 12.092,
-   "end": 12.641
+   "start": 12.73,
+   "end": 13.104
   },
   {
    "text": "tienes",
-   "start": 12.687,
-   "end": 12.961
+   "start": 13.15,
+   "end": 13.424
   },
   {
    "text": "un",
-   "start": 13.014,
-   "end": 13.121
+   "start": 13.477,
+   "end": 13.584
   },
   {
    "text": "alto",
-   "start": 13.169,
-   "end": 13.361
+   "start": 13.632,
+   "end": 13.824
   },
   {
    "text": "volumen",
-   "start": 13.414,
-   "end": 13.761
+   "start": 13.877,
+   "end": 14.224
   },
   {
    "text": "de",
-   "start": 13.788,
-   "end": 13.841
+   "start": 14.251,
+   "end": 14.304
   },
   {
    "text": "operaciones,",
-   "start": 13.889,
-   "end": 14.721
+   "start": 14.336,
+   "end": 15.344
   },
   {
    "text": "hacerlo",
-   "start": 14.801,
-   "end": 15.281
+   "start": 15.397,
+   "end": 15.744
   },
   {
    "text": "manualmente",
-   "start": 15.338,
-   "end": 15.921
+   "start": 15.79,
+   "end": 16.304
   },
   {
    "text": "consume",
-   "start": 15.981,
-   "end": 16.401
+   "start": 16.364,
+   "end": 16.784
   },
   {
    "text": "tiempo",
-   "start": 16.47,
-   "end": 16.881
+   "start": 16.853,
+   "end": 17.264
   },
   {
    "text": "y",
-   "start": 16.961,
-   "end": 17.041
+   "start": 17.384,
+   "end": 17.504
   },
   {
    "text": "aumenta",
-   "start": 17.11,
-   "end": 17.561
+   "start": 17.561,
+   "end": 17.944
   },
   {
    "text": "el",
-   "start": 17.574,
-   "end": 17.601
+   "start": 17.957,
+   "end": 17.984
   },
   {
    "text": "trabajo",
-   "start": 17.651,
-   "end": 18.001
+   "start": 18.034,
+   "end": 18.384
   },
   {
    "text": "operativo.",
-   "start": 18.049,
-   "end": 18.801
+   "start": 18.432,
+   "end": 19.184
   },
   {
    "text": "Fispal",
-   "start": 19.117,
-   "end": 19.688
+   "start": 19.464,
+   "end": 20.034
   },
   {
    "text": "cuenta",
-   "start": 19.734,
-   "end": 20.008
+   "start": 20.08,
+   "end": 20.354
   },
   {
    "text": "con",
-   "start": 20.068,
-   "end": 20.248
+   "start": 20.394,
+   "end": 20.514
   },
   {
    "text": "Conciliación",
-   "start": 20.296,
-   "end": 20.888
+   "start": 20.578,
+   "end": 21.154
   },
   {
    "text": "de",
-   "start": 20.915,
-   "end": 20.968
+   "start": 21.207,
+   "end": 21.314
   },
   {
    "text": "Pagos.",
-   "start": 21.028,
-   "end": 21.528
+   "start": 21.374,
+   "end": 21.954
   },
   {
    "text": "Relaciona",
-   "start": 21.688,
-   "end": 22.568
+   "start": 22.114,
+   "end": 22.994
   },
   {
    "text": "los",
-   "start": 22.608,
-   "end": 22.728
+   "start": 23.034,
+   "end": 23.154
   },
   {
    "text": "CFDI",
-   "start": 22.781,
-   "end": 23.528
+   "start": 23.261,
+   "end": 24.354
   },
   {
    "text": "correspondientes",
-   "start": 23.579,
-   "end": 24.408
+   "start": 24.405,
+   "end": 25.314
   },
   {
    "text": "con",
-   "start": 24.448,
-   "end": 24.568
+   "start": 25.434,
+   "end": 25.794
   },
   {
    "text": "los",
-   "start": 24.608,
-   "end": 24.728
+   "start": 25.834,
+   "end": 25.954
   },
   {
    "text": "CFDI",
-   "start": 24.808,
-   "end": 25.528
+   "start": 26.061,
+   "end": 27.074
   },
   {
    "text": "de",
-   "start": 25.608,
-   "end": 25.768
+   "start": 27.127,
+   "end": 27.234
   },
   {
    "text": "pago",
-   "start": 25.832,
-   "end": 26.088
+   "start": 27.314,
+   "end": 27.634
   },
   {
    "text": "descargados",
-   "start": 26.136,
-   "end": 26.728
+   "start": 27.682,
+   "end": 28.274
   },
   {
    "text": "del",
-   "start": 26.768,
-   "end": 26.888
+   "start": 28.294,
+   "end": 28.354
   },
   {
    "text": "SAT,",
-   "start": 26.968,
-   "end": 27.688
+   "start": 28.454,
+   "end": 29.154
   },
   {
    "text": "y",
-   "start": 27.728,
-   "end": 27.768
+   "start": 29.194,
+   "end": 29.234
   },
   {
    "text": "presenta",
-   "start": 27.812,
-   "end": 28.168
+   "start": 29.287,
+   "end": 29.714
   },
   {
    "text": "los",
-   "start": 28.208,
-   "end": 28.328
+   "start": 29.734,
+   "end": 29.794
   },
   {
    "text": "resultados",
-   "start": 28.379,
-   "end": 28.888
+   "start": 29.845,
+   "end": 30.354
   },
   {
    "text": "en",
-   "start": 28.941,
-   "end": 29.048
+   "start": 30.381,
+   "end": 30.434
   },
   {
    "text": "la",
-   "start": 29.075,
-   "end": 29.128
+   "start": 30.461,
+   "end": 30.514
   },
   {
    "text": "plataforma.",
-   "start": 29.179,
-   "end": 29.848
+   "start": 30.572,
+   "end": 31.314
   },
   {
    "text": "Menos",
-   "start": 30.048,
-   "end": 30.594
+   "start": 31.534,
+   "end": 32.145
   },
   {
    "text": "cruces",
-   "start": 30.654,
-   "end": 30.994
+   "start": 32.205,
+   "end": 32.545
   },
   {
    "text": "manuales.",
-   "start": 31.034,
-   "end": 31.634
+   "start": 32.585,
+   "end": 33.265
   },
   {
    "text": "Más",
-   "start": 31.814,
-   "end": 32.354
+   "start": 33.445,
+   "end": 33.985
   },
   {
    "text": "visibilidad",
-   "start": 32.394,
-   "end": 33.074
+   "start": 34.025,
+   "end": 34.625
   },
   {
    "text": "sobre",
-   "start": 33.101,
-   "end": 33.234
+   "start": 34.665,
+   "end": 34.865
   },
   {
    "text": "tu",
-   "start": 33.287,
-   "end": 33.394
+   "start": 34.918,
+   "end": 35.025
   },
   {
    "text": "conciliación.",
-   "start": 33.442,
-   "end": 34.274
+   "start": 35.073,
+   "end": 35.905
   },
   {
    "text": "¿Todavía",
-   "start": 34.768,
-   "end": 35.168
+   "start": 36.366,
+   "end": 36.766
   },
   {
    "text": "haces",
-   "start": 35.208,
-   "end": 35.488
+   "start": 36.806,
+   "end": 37.086
   },
   {
    "text": "estos",
-   "start": 35.528,
-   "end": 35.728
+   "start": 37.139,
+   "end": 37.406
   },
   {
    "text": "cruces",
-   "start": 35.788,
-   "end": 36.128
+   "start": 37.446,
+   "end": 37.726
   },
   {
    "text": "manualmente?",
-   "start": 36.174,
-   "end": 36.848
+   "start": 37.772,
+   "end": 38.526
   },
   {
    "text": "Prueba",
-   "start": 37.115,
-   "end": 37.709
+   "start": 38.739,
+   "end": 39.314
   },
   {
    "text": "fispal.mx",
-   "start": 37.829,
-   "end": 39.389
+   "start": 39.394,
+   "end": 41.154
   },
   {
    "text": "gratis,",
-   "start": 39.48,
-   "end": 40.109
+   "start": 41.257,
+   "end": 41.954
   },
   {
    "text": "y",
-   "start": 40.229,
-   "end": 40.349
+   "start": 42.194,
+   "end": 42.434
   },
   {
    "text": "deja",
-   "start": 40.413,
-   "end": 40.669
+   "start": 42.482,
+   "end": 42.674
   },
   {
    "text": "que",
-   "start": 40.709,
-   "end": 40.828
+   "start": 42.714,
+   "end": 42.834
   },
   {
    "text": "haga",
-   "start": 40.829,
-   "end": 40.989
+   "start": 42.874,
+   "end": 43.074
   },
   {
    "text": "estos",
-   "start": 41.029,
-   "end": 41.229
+   "start": 43.114,
+   "end": 43.314
   },
   {
    "text": "cruces",
-   "start": 41.269,
-   "end": 41.549
+   "start": 43.354,
+   "end": 43.634
   },
   {
    "text": "por",
-   "start": 41.589,
-   "end": 41.709
+   "start": 43.674,
+   "end": 43.794
   },
   {
    "text": "ti.",
-   "start": 41.789,
-   "end": 42.028
+   "start": 43.901,
+   "end": 44.154
   }
  ]
 }
