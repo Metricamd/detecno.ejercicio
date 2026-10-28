@@ -138,11 +138,7 @@ const TAKES: Take[] = [
     to: 225.05,
     text: "pero también permite que ese alguien sea el tuyo.",
   },
-  {
-    from: 233.2,
-    to: 235.89,
-    text: "A veces, dejarte cuidar también es una forma de crecer.",
-  },
+  // 233.2–235.9: "…es una forma de crecer" (she keeps only the "querer" line)
   {
     from: 238.91,
     to: 241.6,
@@ -207,17 +203,6 @@ export const srcFrame = (t: number) => {
   if (c.skip && t >= c.skip[1]) s -= c.skip[1] - c.skip[0];
   return c.at + Math.round(s * FPS);
 };
-
-// Soft cutaways (raw-file seconds) over the moments where she looks away
-// mid-sentence: the video goes out of focus under a warm veil while the audio
-// keeps playing.
-export const CUTAWAYS = [
-  { id: "profundo", from: 153.72, to: 154.28 },
-  { id: "dolor", from: 157.36, to: 157.85 },
-  { id: "decidir", from: 174.95, to: 175.5 },
-  { id: "ayudando", from: 202.98, to: 203.62 },
-  { id: "estar", from: 267.52, to: 268.12 },
-] as const;
 
 // First frame of take i, plus an offset in seconds.
 export const clipAt = (i: number, s = 0) => CLIPS[i].at + Math.round(s * FPS);
@@ -306,7 +291,7 @@ export const GRAPHICS = [
   { id: "balanza", from: 15, to: 17 },
   { id: "decision", from: 21, to: 24 },
   { id: "lugar", from: 27, to: 28 },
-  { id: "mano", from: 31, to: 32 },
+  { id: "mano", from: 30, to: 31 },
 ] as const;
 export type GraphicId = (typeof GRAPHICS)[number]["id"];
 export const graphicSpan = (id: GraphicId) => {

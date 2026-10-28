@@ -29,6 +29,8 @@ Degradados: morado→azul→turquesa, azul→turquesa, coral→fucsia→morado, 
 ### Reglas de edición (aprobadas)
 - **Sin silencios ni repeticiones**: de cada frase repetida o equivocada se deja solo la toma buena, para que el discurso suene como una sola toma.
 - **Video siempre a pantalla completa.** Nada de recortes en círculo ni burbujas.
+- **En todo momento se ve el video**: sin cortinillas/planos de corte a pantalla completa y sin filtros de color sobre el video (pedido en el reel 5; aplica a los siguientes).
+- **Pocos efectos de sonido, suaves y bajitos**; sin whoosh/soplos.
 - **No tapar la cara**: la cara ocupa aprox. y = 380–1150. Las tarjetas animadas van en el tercio inferior (y ≈ 1190–1660) y los subtítulos suben arriba de la cabeza mientras hay tarjeta; si no hay tarjeta, van abajo (y ≈ 1250).
 - Stickers de frases clave arriba de la cabeza (y ≈ 150–450).
 - Zoom alterno 1.0 / 1.14 en cada corte; sin zoom mientras hay tarjeta.
@@ -148,16 +150,16 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 ## Reel 5 "Déjate cuidar" (versión emotiva)
 
 - Composición: `Yolapp5Reel` (`src/yolapp5/Reel.tsx`, datos en `src/yolapp5/datos.ts`, ilustraciones de trazo blanco en `src/yolapp5/ilustraciones.tsx`: manos con corazón, abrazo, casa con corazón, mano ofrecida, balanza).
-- Crudo: `v5/crudo.mp4` (1080×1920, 4:31). Final: **1:40**. Cierre congelado: `v5/final.jpg` (desde 269,7 s estira la mano a la cámara).
-- Entrega: `entregas/yolapp/yolapp-reel5-borrador-1.mp4`.
+- Crudo: `v5/crudo.mp4` (1080×1920, 4:31). Final: **1:38**. Cierre congelado: `v5/final.jpg` (desde 269,7 s estira la mano a la cámara).
+- Entrega: `entregas/yolapp/yolapp-reel5-borrador-2.mp4`.
 - Cara aprox. y = 380–1050.
 
 ### Estilo emotivo (cuando se pida "más emotivo")
 - **Música**: `scripts/make_music_emotiva.py` — piano en arpegios + cuerdas + bajo, 72 BPM, La m – Fa – Do – Sol; entra solo piano, cuerdas desde 8 s, crece hacia el final. Volumen 0,15 bajo la voz, 0,5 en el cierre.
-- **SFX suaves**: `scripts/make_sfx_emotiva.py` → `sfx/brillo.wav` (campanita), `sfx/suave.wav` (soplo), `sfx/latido.wav` (latido). Sin caja registradora ni clics.
+- **SFX**: muy pocos y bajitos (5–6 en todo el video): `sfx/brillo.wav` (campanita, vol. 0,07) y `sfx/latido.wav` (vol. 0,18), de `scripts/make_sfx_emotiva.py`. **Sin soplos/whoosh** ni caja registradora ni clics.
 - **Animación**: fundidos lentos con desenfoque (16–18 cuadros) en vez de rebotes; tarjetas de vidrio translúcido (morado oscuro 38 % + blur) en vez de blancas; frases clave en Poppins 700 *cursiva* arriba de la cabeza; subtítulos Poppins 600 con brillo cálido (palabra activa en durazno, claves en rosa).
-- **Ambiente**: tono cálido suave + viñeta, luces cálidas flotando por los lados, corazones que suben en los momentos más emotivos, entrada desde negro y fundido final.
-- **Planos de corte suaves** sobre miradas a otro lado: el video se desenfoca bajo un velo cálido con ilustración y frase en cursiva (el audio sigue).
+- **Ambiente**: luces cálidas flotando por los lados y corazones que suben en los momentos más emotivos; fundido a negro solo al final. **Sin filtro sobre el video** (ni tono cálido, ni viñeta, ni sombras, ni entrada desde negro).
+- **Sin planos de corte / cortinillas**: en todo momento se ve el video (la clienta los pidió quitar en el reel 5).
 
 ### Cortes del crudo
 | Se quitó | Motivo |
@@ -172,10 +174,10 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 | 214,25–214,65 s | Pausa acortada tras "permítete" |
 | Todos los silencios | ~2:50 de pausas |
 
-### Miradas a otro lado (planos de corte suaves)
-153,7 s "Algo más profundo" · 157,4 s "Nuestro dolor" · 175,0 s "Decidimos por el otro" · 203,0 s "Siempre ayudando" · 267,5 s "Estar para ti".
+### Miradas a otro lado
+- Se conservan (153,7 s, 157,4 s, 175,0 s, 203,0 s, 267,5 s): la clienta prefiere ver siempre el video antes que cortinillas.
 
 ### Notas de guion
-- "…forma de crecer" y "…forma de querer" son dos frases distintas (se conservan las dos).
+- Solo queda "A veces, dejarte cuidar también es una forma de querer" (se quitó la previa "…de crecer", 233,2–235,9 s).
 - "¿Por qué me cuesta tanto permitirme ser eso para alguien más?"
 - Whisper oyó "de verdad es que"; se subtitula "Y la verdad es que".

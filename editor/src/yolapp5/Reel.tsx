@@ -1,8 +1,8 @@
 // Yolapp reel 5 (1080 × 1920, 30 fps): "Déjate cuidar" — the emotional cut.
 // Same rules as reels 1–4 (public/yolapp/marca.md): full-screen video, no
-// silences or retakes, nothing over the face (y ≈ 380–1050), cutaways over
-// look-aways. The tone is softer: slow blur-fades instead of pops, glass
-// cards, italic quotes, warm grade, floating lights and hearts, piano music.
+// silences or retakes, nothing over the face (y ≈ 380–1050). The tone is softer: slow blur-fades instead of pops, glass
+// cards, italic quotes, floating lights and hearts, piano music. No filter
+// over the video and no cutaways: the footage is always on screen.
 import { loadFont } from "@remotion/fonts";
 import { Audio } from "@remotion/media";
 import React, { useEffect, useState } from "react";
@@ -23,7 +23,6 @@ import { clamp } from "../yolapp/parts";
 import {
   CLIPS,
   clipAt,
-  CUTAWAYS,
   E,
   EGRAD,
   GRAPHICS,
@@ -31,7 +30,6 @@ import {
   graphicSpan,
   isKeyword,
   SPEECH_END,
-  srcFrame,
   TAIL_END,
   TOTAL,
   W,
@@ -145,32 +143,6 @@ const Talking: React.FC = () => {
           />
         </Sequence>
       </AbsoluteFill>
-      {/* warm grade + vignette */}
-      <AbsoluteFill
-        style={{
-          background: "rgba(255,150,110,.10)",
-          mixBlendMode: "soft-light",
-        }}
-      />
-      <AbsoluteFill
-        style={{
-          background:
-            "radial-gradient(ellipse 75% 60% at 50% 38%, rgba(0,0,0,0) 55%, rgba(42,26,62,.55) 100%)",
-        }}
-      />
-      <AbsoluteFill
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(42,26,62,.5) 0%, rgba(42,26,62,0) 22%, rgba(42,26,62,0) 58%, rgba(42,26,62,.6) 100%)",
-        }}
-      />
-      {/* fade in from black */}
-      <AbsoluteFill
-        style={{
-          background: "#000",
-          opacity: interpolate(frame, [0, 12], [1, 0], clamp),
-        }}
-      />
     </AbsoluteFill>
   );
 };
@@ -460,18 +432,13 @@ const Quotes: React.FC = () => (
       text="Te tengo que decir algo"
     />
     <Quote
-      at={A(29, "crecer")}
+      at={A(29, "querer")}
       until={clipAt(30)}
-      text="Dejarte cuidar es crecer"
-    />
-    <Quote
-      at={A(30, "querer")}
-      until={clipAt(31)}
       text="Dejarte cuidar es querer"
     />
-    <Quote at={A(33, "ti")} until={A(33, "ella")} text="Estar para ti" />
+    <Quote at={A(32, "ti")} until={A(32, "ella")} text="Estar para ti" />
     <Quote
-      at={A(33, "ella")}
+      at={A(32, "ella")}
       until={SPEECH_END}
       text="…como tú estás para ella"
       size={58}
@@ -484,7 +451,7 @@ const HeartMoments: React.FC = () => (
     <Hearts at={A(6, "apoyas")} />
     <Hearts at={A(12, "seguro")} count={5} />
     <Hearts at={A(28, "tuyo")} />
-    <Hearts at={A(30, "querer")} count={5} />
+    <Hearts at={A(29, "querer")} count={5} />
     <Hearts at={SPEECH_END - 10} count={9} />
   </>
 );
@@ -1011,7 +978,7 @@ const Lugar: React.FC = () => {
 
 const ManoScene: React.FC = () => {
   const frame = useCurrentFrame();
-  const mano = A(31, "mano");
+  const mano = A(30, "mano");
   const drop = interpolate(frame, [mano + 6, mano + 30], [0, 1], {
     ...clamp,
     easing: Easing.out(Easing.back(1.4)),
@@ -1029,7 +996,7 @@ const ManoScene: React.FC = () => {
       >
         <div style={{ position: "relative", width: 260, height: 240 }}>
           <div style={{ position: "absolute", left: 10, top: 20 }}>
-            <Mano size={240} draw={useFade(clipAt(31) + 4, 30)} />
+            <Mano size={240} draw={useFade(clipAt(30) + 4, 30)} />
           </div>
           <div
             style={{
@@ -1057,7 +1024,7 @@ const ManoScene: React.FC = () => {
               Cuando alguien te ofrezca su mano…
             </span>
           </Fade>
-          <Fade at={A(32, "apartarla")}>
+          <Fade at={A(31, "apartarla")}>
             <Pill size={34} bg={EGRAD.dawn}>
               No la apartes
             </Pill>
@@ -1068,105 +1035,13 @@ const ManoScene: React.FC = () => {
   );
 };
 
-/* ---------- soft cutaways over the look-aways ---------- */
-const CUT_LOOK: Record<
-  (typeof CUTAWAYS)[number]["id"],
-  { text: string; art: React.ReactNode; bg: string }
-> = {
-  profundo: {
-    text: "Algo más profundo",
-    art: <Corazon size={230} fill="rgba(255,255,255,.95)" />,
-    bg: EGRAD.dusk,
-  },
-  dolor: { text: "Nuestro dolor", art: <Manos size={300} />, bg: EGRAD.dusk },
-  decidir: {
-    text: "Decidimos por el otro",
-    art: <Abrazo size={300} />,
-    bg: EGRAD.dawn,
-  },
-  ayudando: {
-    text: "Siempre ayudando",
-    art: <Manos size={300} />,
-    bg: EGRAD.dawn,
-  },
-  estar: { text: "Estar para ti", art: <Abrazo size={300} />, bg: EGRAD.dusk },
-};
-const Cutaways: React.FC = () => {
-  const frame = useCurrentFrame();
-  const cut = CUTAWAYS.find(
-    (c) => frame >= srcFrame(c.from) && frame < srcFrame(c.to),
-  );
-  if (!cut) return null;
-  const start = srcFrame(cut.from);
-  const end = srcFrame(cut.to);
-  const look = CUT_LOOK[cut.id];
-  const p = Math.min(
-    interpolate(frame, [start, start + 6], [0, 1], { ...clamp, easing: SOFT }),
-    interpolate(frame, [end - 5, end], [1, 0], clamp),
-  );
-  return (
-    <AbsoluteFill
-      style={{
-        backdropFilter: `blur(${40 * p}px)`,
-        WebkitBackdropFilter: `blur(${40 * p}px)`,
-      }}
-    >
-      <AbsoluteFill style={{ background: look.bg, opacity: 0.85 * p }} />
-      <AbsoluteFill
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          gap: 40,
-          opacity: p,
-        }}
-      >
-        <div
-          style={{
-            transform: `scale(${0.9 + 0.1 * p})`,
-            filter: "drop-shadow(0 0 30px rgba(255,255,255,.5))",
-          }}
-        >
-          {look.art}
-        </div>
-        <div
-          style={{
-            fontFamily: POPPINS,
-            fontStyle: "italic",
-            fontWeight: 700,
-            fontSize: 92,
-            color: "#fff",
-            textAlign: "center",
-            lineHeight: 1.05,
-            padding: "0 60px",
-            textShadow: "0 0 30px rgba(255,92,138,.6)",
-          }}
-        >
-          {look.text}
-        </div>
-      </AbsoluteFill>
-    </AbsoluteFill>
-  );
-};
-
-/* ---------- outro: warm veil, gradient logo as is ---------- */
+/* ---------- outro: gradient logo as is, over the video ---------- */
 const Outro: React.FC = () => {
   const frame = useCurrentFrame();
   const start = SPEECH_END;
   if (frame < start - 6) return null;
-  const veil = interpolate(frame, [start - 6, start + 30], [0, 1], {
-    ...clamp,
-    easing: SOFT,
-  });
   return (
     <AbsoluteFill>
-      <AbsoluteFill
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(42,26,62,0) 30%, rgba(42,26,62,.55) 100%)",
-          opacity: veil,
-        }}
-      />
       <AbsoluteFill
         style={{
           alignItems: "center",
@@ -1196,44 +1071,14 @@ const Outro: React.FC = () => {
   );
 };
 
-/* ---------- sound: soft chimes, breaths and heartbeats ---------- */
-const SFX: { name: "brillo" | "suave" | "latido"; at: number; v: number }[] = [
-  ...GRAPHICS.map((g) => ({
-    name: "suave" as const,
-    at: graphicSpan(g.id).start - 4,
-    v: 0.22,
-  })),
-  ...CUTAWAYS.map((c) => ({
-    name: "suave" as const,
-    at: srcFrame(c.from) - 3,
-    v: 0.25,
-  })),
-  ...[
-    A(0, "necesitar"),
-    A(3, "permitir"),
-    A(4, "grabado"),
-    A(8, "ayuda"),
-    A(13, "permitirme"),
-    A(18, "ayude"),
-    A(20, "compartirlo"),
-    A(26, "algo"),
-    A(29, "crecer"),
-    A(30, "querer"),
-    A(33, "ti"),
-  ].map((at) => ({ name: "brillo" as const, at, v: 0.16 })),
-  { name: "brillo", at: A(1, "estar"), v: 0.14 },
-  { name: "brillo", at: A(2, "escucharlas"), v: 0.14 },
-  { name: "brillo", at: A(2, "sostenerlas"), v: 0.14 },
-  { name: "latido", at: A(6, "apoyas"), v: 0.4 },
-  { name: "brillo", at: A(11, "intimidad"), v: 0.14 },
-  { name: "brillo", at: A(12, "confianza"), v: 0.14 },
-  { name: "latido", at: A(12, "seguro") + 16, v: 0.35 },
-  { name: "brillo", at: A(17, "cuidados"), v: 0.16 },
-  { name: "brillo", at: A(24, "pertenece"), v: 0.16 },
-  { name: "latido", at: A(28, "tuyo") + 18, v: 0.35 },
-  { name: "latido", at: A(31, "mano") + 30, v: 0.4 },
-  { name: "brillo", at: SPEECH_END + 6, v: 0.22 },
-  { name: "latido", at: SPEECH_END + 30, v: 0.3 },
+/* ---------- sound: only a few soft chimes and heartbeats, kept low ---------- */
+const SFX: { name: "brillo" | "latido"; at: number; v: number }[] = [
+  { name: "brillo", at: A(0, "necesitar"), v: 0.07 },
+  { name: "latido", at: A(6, "apoyas"), v: 0.18 },
+  { name: "brillo", at: A(13, "permitirme"), v: 0.07 },
+  { name: "brillo", at: A(29, "querer"), v: 0.07 },
+  { name: "latido", at: A(30, "mano") + 30, v: 0.18 },
+  { name: "brillo", at: SPEECH_END + 6, v: 0.08 },
 ];
 
 export const Yolapp5Reel: React.FC = () => {
@@ -1256,7 +1101,6 @@ export const Yolapp5Reel: React.FC = () => {
       <ManoScene />
       <Quotes />
       <HeartMoments />
-      <Cutaways />
       <Captions />
       <Outro />
       <Audio
