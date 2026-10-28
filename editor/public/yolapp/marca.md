@@ -91,3 +91,25 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 ### Notas de guion
 - Subtítulos corregidos respecto a Whisper: "Yolapp" (oyó "Jolap"/"yo el app"), "Agrega" (oyó "Agregue"), "Muy fácil: entra a Yolapp".
 - Datos ilustrativos: "yolapp.com/tu-causa", contador de 1,250 visitas.
+
+## Reel 3 "Conviértete en Yoler"
+
+- Composición: `Yolapp3Reel` (`src/yolapp3/Reel.tsx`, datos en `src/yolapp3/datos.ts`, ilustraciones SVG propias en `src/yolapp3/ilustraciones.tsx`: perrito, comida, hospital, moneda, publicación). Reutiliza `src/yolapp/parts.tsx`.
+- Crudo: `v3/crudo.mp4` (**1080×1920**, 1:56). Final: **55 s**. Música: `v3/musica.wav`. Cierre congelado: `v3/final.jpg` (a partir de 113,9 s el crudo cambia a un plano abierto).
+- Entrega: `entregas/yolapp/yolapp-reel3-borrador-1.mp4`.
+- **Encuadre más cerrado**: la cara ocupa y ≈ 420–1300. Tarjetas en la franja y ≈ 1345–1675 (más compactas); subtítulos abajo en y ≈ 1380 sin tarjeta y arriba (y ≈ 130) con tarjeta; zoom suave 1.0 / 1.08.
+- Término de marca: **"Yoler"** (persona que comparte causas y gana por los donativos que ayuda a generar).
+- Diagramas: publicación → redes → "una lanita"; flujo Compartes → Donativos → Tú ganas + Ayudas.
+
+### Cortes del crudo
+| Se quitó | Motivo |
+|---|---|
+| 20,2–21,6 s "para perritos, para manuten…" | Repetido; queda "para perritos, para comida, para circunstancias hospitalarias" |
+| 35,4–40,7 s "¿Y tú qué puedes hacer? Si no puedes donarles algún…" | Reiniciado; queda la segunda pregunta |
+| 51,0–52,2 s "lo único que es…" | Arranque en falso |
+| 77,2–78,0 s "por los honet…" | Reiniciado |
+| 85,3 s y 94,7 s "y" sueltos | Muletillas |
+| Todos los silencios | ~1 min de pausas |
+
+### Notas de guion
+- Subtítulos corregidos respecto a Whisper: "Yolapp" (oyó "Yolab"/"yo el app"), "Yoler" (oyó "Joeler"; confirmado por la clienta).
