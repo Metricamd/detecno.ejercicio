@@ -121,3 +121,26 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 
 ### Notas de guion
 - Subtítulos corregidos respecto a Whisper: "Yolapp" (oyó "Yolab"/"yo el app"), "Yoler" (oyó "Joeler"; confirmado por la clienta).
+
+## Reel 4 "No cometas este error"
+
+- Composición: `Yolapp4Reel` (`src/yolapp4/Reel.tsx`, datos en `src/yolapp4/datos.ts`); reutiliza `src/yolapp/parts.tsx` y las ilustraciones de `src/yolapp3/ilustraciones.tsx`.
+- Crudo: `v4/crudo.mp4` (1080×1920, 1:38). Final: **41 s**. Música: `v4/musica.wav`. Cierre congelado: `v4/final.jpg` (a partir de 97,6 s el crudo cambia a un plano abierto).
+- Entrega: `entregas/yolapp/yolapp-reel4-borrador-1.mp4`.
+- Cara aprox. y = 380–1150 (mismas zonas que el reel 1); zoom 1.0 / 1.1.
+- Gráficos: pasos 1/3 ("solo el primer paso"), "Nadie la conoce", copiar link + Facebook/WhatsApp/Redes/Grupos/Donde sea (sin logos de marcas), gráfica "más personas → más donativos", app con "¡Copiado!" y "¡Hoy mismo!", checklist final con monedas.
+
+### Cortes del crudo
+| Se quitó | Motivo |
+|---|---|
+| 76,9–78,4 s "Porque alguien querría…" | Arranque en falso |
+| 80,5–81,9 s "Porque alguien quería…" | Arranque en falso; queda "Porque alguien podría querer ayudarte…" |
+| 63,8–64,1 s y 86,27–86,43 s | Pausas dentro de frase |
+| Todos los silencios | ~57 s de pausas |
+
+### Miradas a otro lado
+- 21,85–22,35 s (final de "Aquí viene lo importante"): plano de corte "Lo importante".
+- Resto revisado a 6–10 fps: gestos con la mirada a cámara, se conservan.
+
+### Notas de guion
+- Subtítulos corregidos respecto a Whisper: "Yolapp" (oyó "your lab"/"yo al app"), "y haz que" (oyó "y es que"), "Cuantas más personas…, más oportunidades…".

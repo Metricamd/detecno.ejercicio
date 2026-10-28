@@ -29,6 +29,7 @@ import { TOTAL as BLING_FRAMES } from "./bling/theme";
 import { YOLAPP_FRAMES, YolappReel } from "./yolapp/Reel";
 import { YOLAPP2_FRAMES, Yolapp2Reel } from "./yolapp2/Reel";
 import { YOLAPP3_FRAMES, Yolapp3Reel } from "./yolapp3/Reel";
+import { YOLAPP4_FRAMES, Yolapp4Reel } from "./yolapp4/Reel";
 import { PERSONALIZA_FRAMES, PersonalizaCarousel, POST_H, POST_W } from "./posts/Personaliza";
 
 export const RemotionRoot: React.FC = () => {
@@ -133,6 +134,7 @@ export const RemotionRoot: React.FC = () => {
         height={1000}
         defaultProps={{ name: "planeta" }}
       />
+      <Composition id="Yolapp4Reel" component={Yolapp4Reel} durationInFrames={YOLAPP4_FRAMES} fps={30} width={1080} height={1920} />
       <Composition id="Yolapp3Reel" component={Yolapp3Reel} durationInFrames={YOLAPP3_FRAMES} fps={30} width={1080} height={1920} />
       <Composition id="Yolapp2Reel" component={Yolapp2Reel} durationInFrames={YOLAPP2_FRAMES} fps={30} width={1080} height={1920} />
       <Composition id="YolappReel" component={YolappReel} durationInFrames={YOLAPP_FRAMES} fps={30} width={1080} height={1920} />
