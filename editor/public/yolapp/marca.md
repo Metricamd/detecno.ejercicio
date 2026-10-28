@@ -144,3 +144,38 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 
 ### Notas de guion
 - Subtítulos corregidos respecto a Whisper: "Yolapp" (oyó "your lab"/"yo al app"), "y haz que" (oyó "y es que"), "Cuantas más personas…, más oportunidades…".
+
+## Reel 5 "Déjate cuidar" (versión emotiva)
+
+- Composición: `Yolapp5Reel` (`src/yolapp5/Reel.tsx`, datos en `src/yolapp5/datos.ts`, ilustraciones de trazo blanco en `src/yolapp5/ilustraciones.tsx`: manos con corazón, abrazo, casa con corazón, mano ofrecida, balanza).
+- Crudo: `v5/crudo.mp4` (1080×1920, 4:31). Final: **1:40**. Cierre congelado: `v5/final.jpg` (desde 269,7 s estira la mano a la cámara).
+- Entrega: `entregas/yolapp/yolapp-reel5-borrador-1.mp4`.
+- Cara aprox. y = 380–1050.
+
+### Estilo emotivo (cuando se pida "más emotivo")
+- **Música**: `scripts/make_music_emotiva.py` — piano en arpegios + cuerdas + bajo, 72 BPM, La m – Fa – Do – Sol; entra solo piano, cuerdas desde 8 s, crece hacia el final. Volumen 0,15 bajo la voz, 0,5 en el cierre.
+- **SFX suaves**: `scripts/make_sfx_emotiva.py` → `sfx/brillo.wav` (campanita), `sfx/suave.wav` (soplo), `sfx/latido.wav` (latido). Sin caja registradora ni clics.
+- **Animación**: fundidos lentos con desenfoque (16–18 cuadros) en vez de rebotes; tarjetas de vidrio translúcido (morado oscuro 38 % + blur) en vez de blancas; frases clave en Poppins 700 *cursiva* arriba de la cabeza; subtítulos Poppins 600 con brillo cálido (palabra activa en durazno, claves en rosa).
+- **Ambiente**: tono cálido suave + viñeta, luces cálidas flotando por los lados, corazones que suben en los momentos más emotivos, entrada desde negro y fundido final.
+- **Planos de corte suaves** sobre miradas a otro lado: el video se desenfoca bajo un velo cálido con ilustración y frase en cursiva (el audio sigue).
+
+### Cortes del crudo
+| Se quitó | Motivo |
+|---|---|
+| 27,4 s "y" suelto | Muletilla |
+| 46,4–48,4 s "Cuando te sientas mal por apoyarte" | Reiniciado |
+| 52,6–53,3 s "recuerda" | Repetido al retomar |
+| 113,8–114,9 s "aceptar…" | Se corrige a "permitirme" |
+| 122,8–124,6 s "Creo que muchas veces valoramos" | Reiniciado |
+| 132,3–133,1 s "de cuidar" | Repetido |
+| 145,0–146,9 s "Y había algo todavía más profundo" | Reiniciado |
+| 214,25–214,65 s | Pausa acortada tras "permítete" |
+| Todos los silencios | ~2:50 de pausas |
+
+### Miradas a otro lado (planos de corte suaves)
+153,7 s "Algo más profundo" · 157,4 s "Nuestro dolor" · 175,0 s "Decidimos por el otro" · 203,0 s "Siempre ayudando" · 267,5 s "Estar para ti".
+
+### Notas de guion
+- "…forma de crecer" y "…forma de querer" son dos frases distintas (se conservan las dos).
+- "¿Por qué me cuesta tanto permitirme ser eso para alguien más?"
+- Whisper oyó "de verdad es que"; se subtitula "Y la verdad es que".
