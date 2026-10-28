@@ -22,7 +22,8 @@ const TAKES: Take[] = [
   { from: 43.24, to: 44.45, text: "¿Y tú qué puedes hacer?" },
   { from: 46.48, to: 48.99, text: "Muy fácil: simplemente convertirte en Yoler." },
   // 51.0–52.2: "lo único que es…" (restarted)
-  { from: 56.19, to: 59.31, text: "Y en muy pocos pasos. Número uno:" },
+  // 56.7–57.1: odd pause after "Y en"; 58.4–59.3: "Número uno" said looking away
+  { from: 56.19, to: 58.42, skip: [56.7, 57.07], text: "Y en muy pocos pasos:" },
   { from: 60.73, to: 63.36, text: "comparte la causa de Yolapp que más te interesa" },
   { from: 65.74, to: 68.77, text: "con tus amigos, en redes sociales, en tus grupos." },
   // 77.2–78.0: "por los honet…" (restarted)
@@ -30,12 +31,13 @@ const TAKES: Take[] = [
   { from: 79.33, to: 81.15, text: "por los donativos que ayudes a generar." },
   // 85.3–85.9 and 94.7–95.3: lone "y"
   { from: 83.32, to: 84.89, text: "Sí, puedes ganar" },
-  { from: 87.14, to: 89.24, text: "mientras ayudas a otras personas," },
-  { from: 91.33, to: 94.0, text: "y esas personas pueden recibir su apoyo." },
-  { from: 96.37, to: 99.08, text: "Así que deja de compartir por compartir" },
+  // trims below (87.1, 93.6, 96.4, 111.4) drop frames where she looks away
+  { from: 87.18, to: 89.24, text: "mientras ayudas a otras personas," },
+  { from: 91.33, to: 93.62, text: "y esas personas pueden recibir su apoyo." },
+  { from: 96.7, to: 99.08, text: "Así que deja de compartir por compartir" },
   { from: 103.34, to: 105.9, text: "y mejor comparte causas que pueden hacer la diferencia." },
   { from: 110.06, to: 110.9, text: "Entra a Yolapp" },
-  { from: 111.36, to: 113.74, text: "y comienza a compartir las causas que conecten contigo." },
+  { from: 111.38, to: 113.74, text: "y comienza a compartir las causas que conecten contigo." },
 ];
 
 // Takes placed on the reel timeline (frames).
@@ -57,6 +59,23 @@ export const SPEECH_END = CLIPS[CLIPS.length - 1].at + CLIPS[CLIPS.length - 1].l
 export const OUTRO = 60;
 export const TAIL_END = 113.85;
 export const TOTAL = SPEECH_END + OUTRO;
+
+// Reel frame for a time in the raw file (inside a kept take).
+export const srcFrame = (t: number) => {
+  const c = CLIPS.find((x) => t >= x.from - 0.05 && t <= x.to + 0.05);
+  if (!c) throw new Error(`${t}s is not in a kept take`);
+  let s = Math.max(t, c.from) - c.from;
+  if (c.skip && t >= c.skip[1]) s -= c.skip[1] - c.skip[0];
+  return c.at + Math.round(s * FPS);
+};
+
+// Full-screen cutaways (raw-file seconds) over the moments where she looks
+// away mid-sentence: the audio keeps playing underneath.
+export const CUTAWAYS = [
+  { id: "ayuda", from: 13.95, to: 14.5 },
+  { id: "personas", from: 18.5, to: 19.0 },
+  { id: "comparte", from: 103.88, to: 104.45 },
+] as const;
 
 // First frame of take i, plus an offset in seconds.
 export const clipAt = (i: number, s = 0) => CLIPS[i].at + Math.round(s * FPS);

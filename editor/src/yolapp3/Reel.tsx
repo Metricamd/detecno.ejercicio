@@ -31,12 +31,14 @@ import {
 import {
   CLIPS,
   clipAt,
+  CUTAWAYS,
   GRAD,
   GRAPHICS,
   GraphicId,
   graphicSpan,
   isKeyword,
   SPEECH_END,
+  srcFrame,
   TAIL_END,
   TOTAL,
   W,
@@ -326,7 +328,7 @@ const Stickers: React.FC = () => (
         top={150}
       />
       <Sticker
-        at={A(8, "uno")}
+        at={A(8, "pasos") + 10}
         text="Paso 1"
         bg={GRAD.warm}
         size={84}
@@ -951,6 +953,102 @@ const App: React.FC = () => {
   );
 };
 
+/* ---------- cutaways: full-screen brand shots over the look-aways ---------- */
+const CUT_LOOK: Record<
+  (typeof CUTAWAYS)[number]["id"],
+  { bg: string; text: string; art: React.ReactNode }
+> = {
+  ayuda: {
+    bg: GRAD.warm,
+    text: "Necesitan ayuda",
+    art: <Heart size={300} color="#fff" />,
+  },
+  personas: {
+    bg: GRAD.cool,
+    text: "Muchas personas",
+    art: (
+      <div style={{ display: "flex" }}>
+        {[GRAD.warm, GRAD.main, GRAD.deep].map((bg, i) => (
+          <div
+            key={i}
+            style={{
+              marginLeft: i ? -40 : 0,
+              width: 200,
+              height: 200,
+              borderRadius: "50%",
+              background: bg,
+              border: "10px solid #fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Glyph name="amigos" size={110} />
+          </div>
+        ))}
+      </div>
+    ),
+  },
+  comparte: {
+    bg: GRAD.main,
+    text: "Comparte causas",
+    art: <Glyph name="redes" size={300} />,
+  },
+};
+const Cutaways: React.FC = () => {
+  const frame = useCurrentFrame();
+  const cut = CUTAWAYS.find(
+    (c) => frame >= srcFrame(c.from) && frame < srcFrame(c.to),
+  );
+  if (!cut) return null;
+  const start = srcFrame(cut.from);
+  const look = CUT_LOOK[cut.id];
+  const p = interpolate(frame, [start, start + 5], [0, 1], {
+    ...clamp,
+    easing: EASE,
+  });
+  return (
+    <AbsoluteFill
+      style={{
+        background: look.bg,
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 50,
+        flexDirection: "column",
+        opacity: Math.min(1, p * 2),
+      }}
+    >
+      <AbsoluteFill
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(255,255,255,.16) 2px, transparent 2px)",
+          backgroundSize: "44px 44px",
+        }}
+      />
+      <div
+        style={{
+          transform: `scale(${0.7 + 0.3 * p}) rotate(${(1 - p) * -8}deg)`,
+        }}
+      >
+        {look.art}
+      </div>
+      <div
+        style={{
+          color: "#fff",
+          fontWeight: 800,
+          fontSize: 104,
+          lineHeight: 1,
+          textAlign: "center",
+          textShadow: "0 8px 30px rgba(26,18,64,.35)",
+          transform: `translateY(${(1 - p) * 40}px)`,
+        }}
+      >
+        {look.text}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 /* ---------- outro: gradient logo over the video, as is ---------- */
 const Outro: React.FC = () => {
   const frame = useCurrentFrame();
@@ -1010,7 +1108,12 @@ const SFX: {
   { name: "pop", at: A(5, "muchísimas"), v: 0.35 },
   { name: "pop", at: clipAt(6) + 2, v: 0.4 },
   { name: "ding", at: A(7, "yoler"), v: 0.45 },
-  { name: "pop", at: A(8, "uno"), v: 0.4 },
+  { name: "pop", at: A(8, "pasos") + 10, v: 0.4 },
+  ...CUTAWAYS.map((c) => ({
+    name: "whoosh" as const,
+    at: srcFrame(c.from) - 2,
+    v: 0.3,
+  })),
   ...PASO_TARGETS.map((t) => ({
     name: "pop" as const,
     at: A(10, t.word),
@@ -1044,6 +1147,7 @@ export const Yolapp3Reel: React.FC = () => {
       <Flujo />
       <App />
       <Stickers />
+      <Cutaways />
       <Captions />
       <Outro />
       <Audio

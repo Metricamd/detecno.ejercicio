@@ -95,8 +95,8 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 ## Reel 3 "Conviértete en Yoler"
 
 - Composición: `Yolapp3Reel` (`src/yolapp3/Reel.tsx`, datos en `src/yolapp3/datos.ts`, ilustraciones SVG propias en `src/yolapp3/ilustraciones.tsx`: perrito, comida, hospital, moneda, publicación). Reutiliza `src/yolapp/parts.tsx`.
-- Crudo: `v3/crudo.mp4` (**1080×1920**, 1:56). Final: **55 s**. Música: `v3/musica.wav`. Cierre congelado: `v3/final.jpg` (a partir de 113,9 s el crudo cambia a un plano abierto).
-- Entrega: `entregas/yolapp/yolapp-reel3-borrador-1.mp4`.
+- Crudo: `v3/crudo.mp4` (**1080×1920**, 1:56). Final: **53 s**. Música: `v3/musica.wav`. Cierre congelado: `v3/final.jpg` (a partir de 113,9 s el crudo cambia a un plano abierto).
+- Entrega: `entregas/yolapp/yolapp-reel3-borrador-2.mp4`.
 - **Encuadre más cerrado**: la cara ocupa y ≈ 420–1300. Tarjetas en la franja y ≈ 1345–1675 (más compactas); subtítulos abajo en y ≈ 1380 sin tarjeta y arriba (y ≈ 130) con tarjeta; zoom suave 1.0 / 1.08.
 - Término de marca: **"Yoler"** (persona que comparte causas y gana por los donativos que ayuda a generar).
 - Diagramas: publicación → redes → "una lanita"; flujo Compartes → Donativos → Tú ganas + Ayudas.
@@ -109,7 +109,15 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 | 51,0–52,2 s "lo único que es…" | Arranque en falso |
 | 77,2–78,0 s "por los honet…" | Reiniciado |
 | 85,3 s y 94,7 s "y" sueltos | Muletillas |
+| 56,7–57,1 s pausa tras "Y en" | Pausa rara; queda "Y en muy pocos pasos" |
+| 58,4–59,3 s "Número uno" | Mira hacia otro lado (la tarjeta "Paso 1" lo dice) |
+| 86,9–87,2 s, 93,6–94,0 s, 96,4–96,7 s, 111,0–111,4 s | Mira hacia otro lado al inicio/final de frase |
 | Todos los silencios | ~1 min de pausas |
+
+### Miradas a otro lado
+- **Regla**: no se ven momentos en que voltea a otro lado. Si caen al inicio/final de frase, se recorta la toma; si caen a mitad de frase, se tapan con un **plano de corte a pantalla completa** (degradado de marca + ilustración + texto, ~0,5 s) y el audio sigue (`CUTAWAYS` en `datos.ts`).
+- Planos de corte: 13,95–14,5 s "Necesitan ayuda", 18,5–19,0 s "Muchas personas", 103,9–104,45 s "Comparte causas".
+- Cómo se detectan: tiras de cuadros de la cara a 4–8 fps de cada toma conservada y revisión visual.
 
 ### Notas de guion
 - Subtítulos corregidos respecto a Whisper: "Yolapp" (oyó "Yolab"/"yo el app"), "Yoler" (oyó "Joeler"; confirmado por la clienta).
