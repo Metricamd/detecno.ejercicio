@@ -2,6 +2,7 @@ import { Composition } from "remotion";
 import { DOC2SIGN_DURATION, Doc2SignVideo } from "./doc2sign/Video";
 import { EXPPEDIFY_DURATION, ExppedifyVideo } from "./exppedify/Video";
 import { FISPAL_VIDEO_DURATION, FispalTalkVideo } from "./fispal-video/Video";
+import { SICONFIO_DURATION, SiconfioVideo } from "./siconfio/Video";
 import { MyComposition } from "./Composition";
 import { CUENTA_DURATION, CuentaReel } from "./cuenta/Reel";
 import { FispalReel, REEL_DURATION } from "./fispal/Reel";
@@ -43,6 +44,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition id="Siconfio" component={SiconfioVideo} durationInFrames={SICONFIO_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="FispalVideo" component={FispalTalkVideo} durationInFrames={FISPAL_VIDEO_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Exppedify" component={ExppedifyVideo} durationInFrames={EXPPEDIFY_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Doc2Sign" component={Doc2SignVideo} durationInFrames={DOC2SIGN_DURATION} fps={30} width={1080} height={1920} />
