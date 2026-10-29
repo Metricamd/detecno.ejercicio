@@ -1,4 +1,5 @@
 import { Composition } from "remotion";
+import { DOC2SIGN_DURATION, Doc2SignVideo } from "./doc2sign/Video";
 import { MyComposition } from "./Composition";
 import { CUENTA_DURATION, CuentaReel } from "./cuenta/Reel";
 import { FispalReel, REEL_DURATION } from "./fispal/Reel";
@@ -40,6 +41,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition id="Doc2Sign" component={Doc2SignVideo} durationInFrames={DOC2SIGN_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Carrusel6Factura" component={Carrusel6Factura} durationInFrames={C6_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />
       <Composition id="Carrusel5Buscar" component={Carrusel5Buscar} durationInFrames={C5_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />
       <Composition id="Carrusel4Trabajo" component={Carrusel4Trabajo} durationInFrames={C4_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />
