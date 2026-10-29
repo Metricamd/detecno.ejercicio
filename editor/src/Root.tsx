@@ -1,5 +1,6 @@
 import { Composition } from "remotion";
 import { DOC2SIGN_DURATION, Doc2SignVideo } from "./doc2sign/Video";
+import { EXPPEDIFY_DURATION, ExppedifyVideo } from "./exppedify/Video";
 import { MyComposition } from "./Composition";
 import { CUENTA_DURATION, CuentaReel } from "./cuenta/Reel";
 import { FispalReel, REEL_DURATION } from "./fispal/Reel";
@@ -41,6 +42,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition id="Exppedify" component={ExppedifyVideo} durationInFrames={EXPPEDIFY_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Doc2Sign" component={Doc2SignVideo} durationInFrames={DOC2SIGN_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Carrusel6Factura" component={Carrusel6Factura} durationInFrames={C6_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />
       <Composition id="Carrusel5Buscar" component={Carrusel5Buscar} durationInFrames={C5_SLIDES.length * CAR_SF} fps={30} width={CAR_W} height={CAR_H} />
