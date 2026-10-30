@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { AbsoluteFill, Audio, continueRender, delayRender, Easing, Img, interpolate, OffthreadVideo, spring, staticFile, useCurrentFrame } from "remotion";
 import { FONT, fontsLoaded } from "../fispal/theme";
 
-export const DOC2SIGN7_DURATION = 872; // 29.07 s at 30 fps
+export const DOC2SIGN7_DURATION = 874; // 29.13 s at 30 fps
 const BLUE = "#2A1CE3";
 const NAVY = "#17156C";
 const LILAC = "#B8B2FF";
@@ -22,7 +22,7 @@ const bounce = (f: number, at: number) => spring({ frame: f - at, fps: 30, confi
 /* ---------- reframing with jump-cut zooms on the silence cuts ---------- */
 const FACE = { x: 560, y: 920 };
 const TARGET = { x: 540, y: 1150 };
-const CUTS = [0, 1.633, 3.048, 9.59, 12.792, 15.011, 17.721, 22.966, 25.288, 27.253];
+const CUTS = [0, 1.633, 3.048, 9.59, 12.792, 15.071, 17.781, 23.026, 25.348, 27.313];
 
 const Reframed: React.FC = () => {
   const f = useCurrentFrame();
