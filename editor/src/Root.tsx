@@ -4,6 +4,7 @@ import { EXPPEDIFY_DURATION, ExppedifyVideo } from "./exppedify/Video";
 import { FISPAL_VIDEO_DURATION, FispalTalkVideo } from "./fispal-video/Video";
 import { SICONFIO_DURATION, SiconfioVideo } from "./siconfio/Video";
 import { TIMBRAME_DURATION, TimbrameVideo } from "./timbrame/Video";
+import { CFDIM_DURATION, CfdiManagerVideo } from "./cfdimanager/Video";
 import { MyComposition } from "./Composition";
 import { CUENTA_DURATION, CuentaReel } from "./cuenta/Reel";
 import { FispalReel, REEL_DURATION } from "./fispal/Reel";
@@ -45,6 +46,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition id="CfdiManager" component={CfdiManagerVideo} durationInFrames={CFDIM_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Timbrame" component={TimbrameVideo} durationInFrames={TIMBRAME_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Siconfio" component={SiconfioVideo} durationInFrames={SICONFIO_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="FispalVideo" component={FispalTalkVideo} durationInFrames={FISPAL_VIDEO_DURATION} fps={30} width={1080} height={1920} />
