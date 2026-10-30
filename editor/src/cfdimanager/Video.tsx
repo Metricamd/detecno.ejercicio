@@ -321,7 +321,7 @@ export const CfdiManagerVideo: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: "#000" }}>
       <Reframed />
-      <Audio src={staticFile("music/cfdimanager.wav")} volume={0.035} />
+      <Audio src={staticFile("music/cfdimanager.wav")} volume={0.07} />
       <div style={{ position: "absolute", left: 0, right: 0, top: 36, display: "flex", justifyContent: "center" }}>
         <div style={{ background: "rgba(255,255,255,.96)", borderRadius: 999, padding: "12px 30px", boxShadow: "0 10px 26px rgba(0,0,0,.2)" }}>
           <Img src={staticFile("cfdimanager/logo.png")} style={{ height: 70, display: "block" }} />
