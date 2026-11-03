@@ -1,16 +1,15 @@
-// detecno PSC — constancias NOM-151 por API. No brand kit was given, so the
-// look follows detecno (navy, white tiles, Barlow) with an emerald "integrity"
-// accent and a text wordmark. Newer layout: clip at 1.2× with the silences cut
+// PSC World — constancias NOM-151 por API. Look taken from the PSC World logo:
+// deep navy #0B153B, teal accent from the check badge, white tiles, Barlow. Newer layout: clip at 1.2× with the silences cut
 // (public/psc/video.mp4), reframed with jump-cut zooms, diagrams on a dark
 // navy stage at the top and subtitles at the bottom.
 import { loadFont } from "@remotion/fonts";
 import React, { useEffect, useState } from "react";
-import { AbsoluteFill, Audio, continueRender, delayRender, Easing, interpolate, OffthreadVideo, spring, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, continueRender, delayRender, Easing, Img, interpolate, OffthreadVideo, spring, staticFile, useCurrentFrame } from "remotion";
 
 export const PSC_DURATION = 799; // 26.62 s at 30 fps
 const BLUE = "#1F3C88";
 const NAVY = "#0B1638";
-const LILAC = "#2BD4A4"; // emerald accent: integrity
+const LILAC = "#6FD3C4"; // teal from the PSC World badge
 const FONT = "Barlow";
 
 const fontsLoaded = Promise.all(["500", "600", "700", "800"].map((w) => loadFont({ family: FONT, url: staticFile(`fonts/barlow-latin-${w}-normal.woff2`), weight: w })));
@@ -138,12 +137,7 @@ const Tile: React.FC<{ x: number; y: number; size?: number; d: string; at: numbe
 /* ---------- scenes (980×730 stage) ---------- */
 const Wordmark: React.FC<{ size?: number; at: number }> = ({ size = 110, at }) => {
   const f = useCurrentFrame();
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: size * 0.2, transform: `scale(${bounce(f, at)})` }}>
-      <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: size, color: "#fff", letterSpacing: "-0.01em" }}>detecno</span>
-      <span style={{ fontFamily: FONT, fontWeight: 800, fontSize: size * 0.55, color: NAVY, background: LILAC, borderRadius: size * 0.14, padding: `0 ${size * 0.16}px` }}>PSC</span>
-    </div>
-  );
+  return <Img src={staticFile("psc/logo.png")} style={{ height: size, transform: `scale(${bounce(f, at)})` }} />;
 };
 
 // 1 — sending and requesting digital documents
@@ -288,8 +282,8 @@ export const PscVideo: React.FC = () => {
       <Reframed />
       <Audio src={staticFile("music/psc.wav")} volume={0.035} />
       <div style={{ position: "absolute", left: 0, right: 0, top: 40, display: "flex", justifyContent: "center" }}>
-        <div style={{ background: "rgba(255,255,255,.96)", borderRadius: 999, padding: "14px 32px", boxShadow: "0 10px 26px rgba(10,8,60,.2)" }}>
-          <span style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: FONT, fontWeight: 800, fontSize: 48, lineHeight: 1, color: NAVY }}>detecno<span style={{ fontSize: 30, color: "#fff", background: "#13A07C", borderRadius: 8, padding: "2px 10px" }}>PSC</span></span>
+        <div style={{ background: "rgba(11,21,59,.96)", borderRadius: 999, padding: "16px 34px", boxShadow: "0 10px 26px rgba(0,0,0,.3)" }}>
+          <Img src={staticFile("psc/logo.png")} style={{ height: 46, display: "block" }} />
         </div>
       </div>
       <Stage />
