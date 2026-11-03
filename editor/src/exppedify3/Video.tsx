@@ -9,7 +9,7 @@ import { loadFont } from "@remotion/fonts";
 import React, { useEffect, useState } from "react";
 import { AbsoluteFill, Audio, continueRender, delayRender, Easing, Img, interpolate, OffthreadVideo, spring, staticFile, useCurrentFrame } from "remotion";
 
-export const EXPPEDIFY3_DURATION = 804; // 26.78 s at 30 fps
+export const EXPPEDIFY3_DURATION = 790; // 26.31 s at 30 fps
 const BLUE = "#2815DD"; // índigo vívido
 const NAVY = "#140E68"; // índigo de fondo
 const LILAC = "#3DEAB7"; // turquesa: emphasis, tags and CTA
@@ -31,7 +31,7 @@ const bounce = (f: number, at: number) => spring({ frame: f - at, fps: 30, confi
 /* ---------- reframing with jump-cut zooms on the silence cuts ---------- */
 const FACE = { x: 400, y: 840 };
 const TARGET = { x: 500, y: 1080 };
-const CUTS = [0, 1.774, 6.027, 8.663, 13.39, 14.352, 20.494, 22.237];
+const CUTS = [0, 1.774, 6.027, 7.09, 8.193, 12.92, 13.882, 20.024, 21.767];
 
 const Reframed: React.FC = () => {
   const f = useCurrentFrame();
@@ -52,15 +52,15 @@ const Reframed: React.FC = () => {
 type W = [string, number];
 const PAGES: { words: W[]; end: number }[] = [
   { words: [["¿Llevas", 0.24], ["un", 0.52], ["departamento", 0.66], ["*fiscal", 1.4]], end: 1.92 },
-  { words: [["y", 1.98], ["te", 2.16], ["preocupa", 2.56], ["que", 2.98], ["los", 3.1], ["*expedientes", 3.36], ["que", 3.78], ["tienes", 4.0], ["de", 4.14], ["tus", 4.26], ["*proveedores", 4.48]], end: 4.96 },
-  { words: [["o", 5.02], ["de", 5.08], ["sus", 5.18], ["*entregables", 5.46], ["no", 6.3], ["te", 6.46], ["permitan", 6.76], ["*acreditar", 7.6], ["*materialidad?", 8.06]], end: 8.78 },
-  { words: [["Te", 8.84], ["invito", 8.94], ["a", 9.16], ["crear", 9.26], ["una", 9.4], ["cuenta", 9.58], ["en", 9.78], ["*exppedify.com,", 9.94]], end: 11.02 },
-  { words: [["donde", 11.08], ["podrás", 11.38], ["*programar", 11.78], ["la", 12.06], ["gestión", 12.24], ["*recurrente", 12.64], ["o", 13.18], ["por", 13.62], ["*única", 13.82], ["*vez", 14.14]], end: 14.58 },
-  { words: [["de", 14.64], ["ciertos", 14.86], ["*documentos", 15.3], ["que", 15.6], ["te", 15.7], ["permitirán", 16.02], ["*acreditar", 16.44], ["una", 16.84], ["*relación", 17.26]], end: 17.78 },
-  { words: [["con", 17.84], ["cierto", 18.08], ["*proveedor", 18.36], ["o", 18.82], ["cierto", 19.0], ["*cliente", 19.3], ["o", 19.8], ["lo", 19.92], ["que", 20.02], ["fuera,", 20.24]], end: 20.8 },
-  { words: [["así", 20.86], ["como", 21.08], ["de", 21.2], ["ciertos", 21.38], ["*entregables.", 21.78]], end: 22.5 },
-  { words: [["Y", 22.56], ["hoy", 23.1], ["día", 23.22], ["la", 23.34], ["*autoridad", 23.46], ["está", 23.92], ["muy", 24.08], ["*exigente", 24.24], ["en", 24.6], ["estos", 24.7], ["expedientes,", 25.0]], end: 25.78 },
-  { words: [["y", 25.84], ["qué", 25.92], ["mejor", 26.12], ["que", 26.24], ["*anticiparse.", 26.42]], end: 26.78 },
+  { words: [["y", 1.98], ["te", 2.16], ["preocupa", 2.56], ["que", 2.98], ["los", 3.1], ["*expedientes", 3.36], ["que", 3.78], ["tienes", 4], ["de", 4.14], ["tus", 4.26], ["*proveedores", 4.48]], end: 4.96 },
+  { words: [["o", 5.02], ["de", 5.08], ["sus", 5.18], ["*entregables", 5.46], ["no", 6.3], ["te", 6.46], ["permitan", 6.76], ["*acreditar", 7.13], ["*materialidad?", 7.59]], end: 8.31 },
+  { words: [["Te", 8.37], ["invito", 8.47], ["a", 8.69], ["crear", 8.79], ["una", 8.93], ["cuenta", 9.11], ["en", 9.31], ["*exppedify.com,", 9.47]], end: 10.55 },
+  { words: [["donde", 10.61], ["podrás", 10.91], ["*programar", 11.31], ["la", 11.59], ["gestión", 11.77], ["*recurrente", 12.17], ["o", 12.71], ["por", 13.15], ["*única", 13.35], ["*vez", 13.67]], end: 14.11 },
+  { words: [["de", 14.17], ["ciertos", 14.39], ["*documentos", 14.83], ["que", 15.13], ["te", 15.23], ["permitirán", 15.55], ["*acreditar", 15.97], ["una", 16.37], ["*relación", 16.79]], end: 17.31 },
+  { words: [["con", 17.37], ["cierto", 17.61], ["*proveedor", 17.89], ["o", 18.35], ["cierto", 18.53], ["*cliente", 18.83], ["o", 19.33], ["lo", 19.45], ["que", 19.55], ["fuera,", 19.77]], end: 20.33 },
+  { words: [["así", 20.39], ["como", 20.61], ["de", 20.73], ["ciertos", 20.91], ["*entregables.", 21.31]], end: 22.03 },
+  { words: [["Y", 22.09], ["hoy", 22.63], ["día", 22.75], ["la", 22.87], ["*autoridad", 22.99], ["está", 23.45], ["muy", 23.61], ["*exigente", 23.77], ["en", 24.13], ["estos", 24.23], ["expedientes,", 24.53]], end: 25.31 },
+  { words: [["y", 25.37], ["qué", 25.45], ["mejor", 25.65], ["que", 25.77], ["*anticiparse.", 25.95]], end: 26.31 },
 ];
 
 const Subtitles: React.FC = () => {
@@ -158,7 +158,7 @@ const S1: React.FC = () => {
       <Tile x={190} y={230} d={IC.folder} at={t(3.36)} label="Expedientes" size={160} />
       <Tile x={490} y={230} d={IC.building} at={t(4.48)} label="Proveedores" size={160} phase={1} />
       <Tile x={790} y={230} d={IC.box} at={t(5.46)} label="Entregables" size={160} phase={2} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 500, display: "flex", justifyContent: "center", transform: `scale(${bounce(f, t(7.6))})`, opacity: f >= t(7.6) ? 1 : 0 }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 500, display: "flex", justifyContent: "center", transform: `scale(${bounce(f, t(7.13))})`, opacity: f >= t(7.13) ? 1 : 0 }}>
         <span style={{ display: "flex", alignItems: "center", gap: 14, fontFamily: FONT, fontWeight: 700, fontSize: 44, color: "#fff", border: `4px solid ${RED}`, borderRadius: 18, padding: "10px 28px" }}>
           <span style={{ width: 46, height: 46, borderRadius: 23, background: RED, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 32 }}>?</span>
           Materialidad
@@ -172,13 +172,13 @@ const S1: React.FC = () => {
 const S2: React.FC = () => {
   const f = useCurrentFrame();
   const url = "exppedify.com";
-  const typed = Math.round(interpolate(f, [t(9.9), t(10.6)], [0, url.length], clamp));
+  const typed = Math.round(interpolate(f, [t(9.43), t(10.13)], [0, url.length], clamp));
   return (
     <>
-      <div style={{ position: "absolute", left: 0, right: 0, top: 130, display: "flex", justifyContent: "center", transform: `scale(${bounce(f, t(8.9))})` }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 130, display: "flex", justifyContent: "center", transform: `scale(${bounce(f, t(8.43))})` }}>
         <Img src={staticFile("exppedify/logo-white.png")} style={{ width: 580 }} />
       </div>
-      <div style={{ position: "absolute", left: 150, right: 150, top: 420, display: "flex", alignItems: "center", gap: 14, background: "#fff", borderRadius: 999, padding: "20px 30px", boxShadow: "0 20px 44px rgba(0,0,0,.35)", transform: `scale(${bounce(f, t(9.6))})` }}>
+      <div style={{ position: "absolute", left: 150, right: 150, top: 420, display: "flex", alignItems: "center", gap: 14, background: "#fff", borderRadius: 999, padding: "20px 30px", boxShadow: "0 20px 44px rgba(0,0,0,.35)", transform: `scale(${bounce(f, t(9.13))})` }}>
         <Icon d={IC.search} size={40} color={BLUE} sw={2.6} />
         <span style={{ fontFamily: SANS, fontWeight: 600, fontSize: 44, color: NAVY }}>
           {url.slice(0, typed)}
@@ -192,16 +192,16 @@ const S2: React.FC = () => {
 // 3 — schedule recurring or one-off requests
 const S3: React.FC = () => {
   const f = useCurrentFrame();
-  const spin = interpolate(f, [t(12.64), t(14.4)], [0, 360], clamp);
+  const spin = interpolate(f, [t(12.17), t(13.93)], [0, 360], clamp);
   return (
     <>
-      <div style={{ position: "absolute", left: 290 - 95, top: 290 - 95, width: 190, display: "flex", flexDirection: "column", alignItems: "center", gap: 12, transform: `scale(${bounce(f, t(12.64))})`, opacity: f >= t(12.64) ? 1 : 0 }}>
+      <div style={{ position: "absolute", left: 290 - 95, top: 290 - 95, width: 190, display: "flex", flexDirection: "column", alignItems: "center", gap: 12, transform: `scale(${bounce(f, t(12.17))})`, opacity: f >= t(12.17) ? 1 : 0 }}>
         <div style={{ width: 190, height: 190, borderRadius: 48, background: LILAC, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 22px 44px rgba(0,0,0,.35)" }}>
           <div style={{ transform: `rotate(${spin}deg)` }}><Icon d={IC.repeat} size={96} color={NAVY} sw={2.2} /></div>
         </div>
         <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 32, color: "#fff" }}>Recurrente</span>
       </div>
-      <Tile x={690} y={290} d={IC.one} at={t(13.82)} label="Por única vez" size={190} phase={1} />
+      <Tile x={690} y={290} d={IC.one} at={t(13.35)} label="Por única vez" size={190} phase={1} />
     </>
   );
 };
@@ -209,18 +209,18 @@ const S3: React.FC = () => {
 // 4 — documents that prove the relationship with a supplier or client, and deliverables
 const S4: React.FC = () => {
   const f = useCurrentFrame();
-  const link = interpolate(f, [t(17.26), t(17.7)], [0, 1], clamp);
+  const link = interpolate(f, [t(16.79), t(17.23)], [0, 1], clamp);
   return (
     <>
       <svg width={980} height={730} style={{ position: "absolute", left: 0, top: 0 }}>
         <path d="M250 200 L730 200" stroke={LILAC} strokeWidth={8} strokeLinecap="round" strokeDasharray="480" strokeDashoffset={480 * (1 - link)} />
       </svg>
-      <Tile x={170} y={200} d={IC.building} at={t(18.36)} label="Proveedor" size={150} />
-      <Tile x={810} y={200} d={IC.user} at={t(19.3)} label="Cliente" size={150} phase={1} />
-      <Tile x={490} y={200} d={IC.shield} at={t(16.44)} size={140} />
+      <Tile x={170} y={200} d={IC.building} at={t(17.89)} label="Proveedor" size={150} />
+      <Tile x={810} y={200} d={IC.user} at={t(18.83)} label="Cliente" size={150} phase={1} />
+      <Tile x={490} y={200} d={IC.shield} at={t(15.97)} size={140} />
       <div style={{ position: "absolute", left: 0, right: 0, top: 300, textAlign: "center", fontFamily: FONT, fontWeight: 700, fontSize: 32, color: LILAC, opacity: link }}>Relación acreditada</div>
       <div style={{ position: "absolute", left: 0, right: 0, top: 420, display: "flex", justifyContent: "center", gap: 20 }}>
-        {[["Documentos", IC.doc, t(15.3)], ["Entregables", IC.box, t(21.78)]].map(([l, d, at]) => (
+        {[["Documentos", IC.doc, t(14.83)], ["Entregables", IC.box, t(21.31)]].map(([l, d, at]) => (
           <span key={l as string} style={{ display: "flex", alignItems: "center", gap: 12, fontFamily: FONT, fontWeight: 700, fontSize: 32, color: NAVY, background: "#fff", borderRadius: 18, padding: "14px 24px", transform: `scale(${bounce(f, at as number)})`, opacity: f >= (at as number) ? 1 : 0 }}>
             <Icon d={d as string} size={38} color={BLUE} sw={2.2} /> {l}
           </span>
@@ -235,11 +235,11 @@ const S5: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <>
-      <Tile x={490} y={170} d={IC.lens} at={t(23.46)} label="Autoridad exigente" size={170} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 400, display: "flex", justifyContent: "center", transform: `scale(${bounce(f, t(26.42))})`, opacity: f >= t(26.42) ? 1 : 0 }}>
+      <Tile x={490} y={170} d={IC.lens} at={t(22.99)} label="Autoridad exigente" size={170} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: 400, display: "flex", justifyContent: "center", transform: `scale(${bounce(f, t(25.95))})`, opacity: f >= t(25.95) ? 1 : 0 }}>
         <span style={{ fontFamily: FONT, fontWeight: 700, fontSize: 52, color: NAVY, background: LILAC, padding: "12px 40px" }}>Anticípate →</span>
       </div>
-      <div style={{ position: "absolute", left: 0, right: 0, top: 540, display: "flex", justifyContent: "center", opacity: interpolate(f, [t(26.5), t(26.7)], [0, 1], clamp) }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 540, display: "flex", justifyContent: "center", opacity: interpolate(f, [t(26.03), t(26.23)], [0, 1], clamp) }}>
         <Img src={staticFile("exppedify/logo-white.png")} style={{ width: 340 }} />
       </div>
     </>
@@ -247,11 +247,11 @@ const S5: React.FC = () => {
 };
 
 const SCENES: { from: number; to: number; C: React.FC }[] = [
-  { from: 0.1, to: 8.8, C: S1 },
-  { from: 8.8, to: 11.04, C: S2 },
-  { from: 11.04, to: 14.6, C: S3 },
-  { from: 14.6, to: 22.52, C: S4 },
-  { from: 22.52, to: 28, C: S5 },
+  { from: 0.1, to: 8.33, C: S1 },
+  { from: 8.33, to: 10.57, C: S2 },
+  { from: 10.57, to: 14.13, C: S3 },
+  { from: 14.13, to: 22.05, C: S4 },
+  { from: 22.05, to: 27.53, C: S5 },
 ];
 
 const Stage: React.FC = () => {
