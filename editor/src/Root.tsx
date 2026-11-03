@@ -11,6 +11,7 @@ import { DOC2SIGN4_DURATION, Doc2Sign4Video } from "./doc2sign4/Video";
 import { DOC2SIGN5_DURATION, Doc2Sign5Video } from "./doc2sign5/Video";
 import { DOC2SIGN6_DURATION, Doc2Sign6Video } from "./doc2sign6/Video";
 import { DOC2SIGN7_DURATION, Doc2Sign7Video } from "./doc2sign7/Video";
+import { EXPPEDIFY2_DURATION, Exppedify2Video } from "./exppedify2/Video";
 import { MyComposition } from "./Composition";
 import { CUENTA_DURATION, CuentaReel } from "./cuenta/Reel";
 import { FispalReel, REEL_DURATION } from "./fispal/Reel";
@@ -52,6 +53,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition id="Exppedify2" component={Exppedify2Video} durationInFrames={EXPPEDIFY2_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Doc2SignFlow" component={Doc2Sign7Video} durationInFrames={DOC2SIGN7_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Doc2SignPagares" component={Doc2Sign6Video} durationInFrames={DOC2SIGN6_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Doc2SignCLM" component={Doc2Sign5Video} durationInFrames={DOC2SIGN5_DURATION} fps={30} width={1080} height={1920} />
