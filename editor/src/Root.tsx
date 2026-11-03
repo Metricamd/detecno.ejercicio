@@ -15,6 +15,7 @@ import { EXPPEDIFY2_DURATION, Exppedify2Video } from "./exppedify2/Video";
 import { EXPPEDIFY3_DURATION, Exppedify3Video } from "./exppedify3/Video";
 import { FISPAL2_DURATION, Fispal2Video } from "./fispal2/Video";
 import { MULTIPAC_DURATION, MultipacVideo } from "./multipac/Video";
+import { PSC_DURATION, PscVideo } from "./psc/Video";
 import { MyComposition } from "./Composition";
 import { CUENTA_DURATION, CuentaReel } from "./cuenta/Reel";
 import { FispalReel, REEL_DURATION } from "./fispal/Reel";
@@ -56,6 +57,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition id="Psc" component={PscVideo} durationInFrames={PSC_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Multipac" component={MultipacVideo} durationInFrames={MULTIPAC_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Fispal2" component={Fispal2Video} durationInFrames={FISPAL2_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Exppedify3" component={Exppedify3Video} durationInFrames={EXPPEDIFY3_DURATION} fps={30} width={1080} height={1920} />
