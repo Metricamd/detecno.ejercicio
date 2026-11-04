@@ -19,6 +19,7 @@ import { PSC_DURATION, PscVideo } from "./psc/Video";
 import { SICONFIO2_DURATION, Siconfio2Video } from "./siconfio2/Video";
 import { TIMBRAME2_DURATION, Timbrame2Video } from "./timbrame2/Video";
 import { TIMBRAME3_DURATION, Timbrame3Video } from "./timbrame3/Video";
+import { TIMBRAME4_DURATION, Timbrame4Video } from "./timbrame4/Video";
 import { MyComposition } from "./Composition";
 import { CUENTA_DURATION, CuentaReel } from "./cuenta/Reel";
 import { FispalReel, REEL_DURATION } from "./fispal/Reel";
@@ -60,6 +61,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
       />
+      <Composition id="Timbrame4" component={Timbrame4Video} durationInFrames={TIMBRAME4_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Timbrame3" component={Timbrame3Video} durationInFrames={TIMBRAME3_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Timbrame2" component={Timbrame2Video} durationInFrames={TIMBRAME2_DURATION} fps={30} width={1080} height={1920} />
       <Composition id="Siconfio2" component={Siconfio2Video} durationInFrames={SICONFIO2_DURATION} fps={30} width={1080} height={1920} />
