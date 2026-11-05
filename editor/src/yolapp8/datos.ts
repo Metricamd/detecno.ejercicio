@@ -29,7 +29,7 @@ const TAKES: Take[] = [
   { from: 14.62, to: 15.46, who: "ella", text: "Súper sencillo." },
   {
     from: 16.13,
-    to: 19.5,
+    to: 19.97,
     who: "ella",
     text: "Yolapp es la nueva aplicación de causas en México.",
   },
@@ -41,7 +41,7 @@ const TAKES: Take[] = [
   },
   {
     from: 25.55,
-    to: 29.7,
+    to: 29.9,
     who: "ella",
     text: "y de las personas que lleguen a donar a partir de tu link, tú te llevas una comisión.",
   },
@@ -57,10 +57,9 @@ const TAKES: Take[] = [
     who: "el",
     text: "y ayudar a los demás? Un ganar-ganar.",
   },
-  // 40.3–40.55: a stray word over the next line
   {
     from: 38.35,
-    to: 40.24,
+    to: 40.5,
     who: "el",
     text: "Eso me gusta. Cuéntame más, ¿cómo me registro?",
   },
@@ -101,24 +100,13 @@ const TAKES: Take[] = [
     text: "¡Qué genial! Quiero ser Yoler, ayúdame a registrarme.",
   },
   { from: 64.68, to: 65.28, who: "ella", text: "¡Claro que sí!" },
+  // 69.4–79.4: his "¡Padrísimo! … y yo ganar una comisión sobre eso" and her
+  // "¡Claro que sí!" (she already said it right before) — cut on request
   {
-    from: 69.4,
-    to: 74.9,
-    who: "el",
-    text: "¡Padrísimo! Empezaré a compartir para ayudar a las causas que encuentre",
-  },
-  // 75.7–76.4: "mmm"
-  {
-    from: 76.67,
-    to: 77.9,
-    who: "el",
-    text: "y yo ganar una comisión sobre eso.",
-  },
-  {
-    from: 78.2,
+    from: 79.42,
     to: 83.02,
     who: "ella",
-    text: "¡Claro que sí! Comienza a ganar comisiones. ¿Y sabes qué es lo más padre? No hay tope.",
+    text: "Comienza a ganar comisiones. ¿Y sabes qué es lo más padre? No hay tope.",
   },
   // 86–89: "adiós, goza" and laughs
   { from: 83.55, to: 85.6, who: "el", text: "¡Muchas gracias!" },
@@ -210,7 +198,7 @@ export const GRAPHICS = [
   { id: "pasos", from: 12, to: 14 },
   { id: "monetizable", from: 15, to: 15 },
   { id: "comparte", from: 16, to: 16 },
-  { id: "tope", from: 21, to: 21 },
+  { id: "tope", from: 19, to: 19 },
 ] as const;
 export type GraphicId = (typeof GRAPHICS)[number]["id"];
 export const graphicSpan = (id: GraphicId) => {

@@ -872,7 +872,7 @@ const Comparte: React.FC = () => {
 const Tope: React.FC = () => {
   const { frame, start, visible, exit, enter } = useSpan("tope");
   if (!visible) return null;
-  const tope = A(21, "tope");
+  const tope = A(19, "tope");
   const fill = interpolate(
     frame,
     [start + 4, tope, tope + 20],
@@ -1036,7 +1036,7 @@ const SFX: { name: "pop" | "ding" | "cash"; at: number; v: number }[] = [
   { name: "ding", at: A(2, "yoler") + 4, v: 0.1 },
   { name: "cash", at: A(8, "comisión"), v: 0.15 },
   { name: "ding", at: A(15, "monetizable") + 4, v: 0.1 },
-  { name: "ding", at: A(21, "tope") + 6, v: 0.1 },
+  { name: "ding", at: A(19, "tope") + 6, v: 0.1 },
   { name: "ding", at: SPEECH_END, v: 0.1 },
 ];
 

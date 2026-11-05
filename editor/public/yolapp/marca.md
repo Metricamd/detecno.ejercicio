@@ -235,7 +235,7 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 
 - Composición: `Yolapp8Reel` (`src/yolapp8/Reel.tsx`, datos en `src/yolapp8/datos.ts`, cada toma con `who: "ella" | "el"`).
 - Crudo: `v8/crudo.mp4` (720×1280, 1:29), conversación de dos personas con el celular. Final: **67 s**. Voz limpia `v8/voz.wav` (cadena "anti-caja" en `v8/voz-cadena.txt`; ruido −45 dB, voz −20 dB). Master −14 LUFS.
-- Entrega: `entregas/yolapp/yolapp-reel8-borrador-2.mp4`.
+- Entrega: `entregas/yolapp/yolapp-reel8-borrador-3.mp4` (60 s).
 - **Formato diálogo**: quién habla se detectó por tono (ella ≈ 230 Hz, él ≈ 130 Hz). Subtítulos **normales** palabra por palabra abajo (y ≈ 1440) sobre las manos — la clienta no quiso burbujas de chat. Zoom suave hacia quien habla.
 - Se miran entre ellos y al celular a propósito: aquí no aplica la regla de mirar a cámara.
 - Caras: ella x 0–460 / y 480–1060, él x 600–1080 / y 280–960 → gráficos en la pared (bloque izquierdo y 40–420 o franja superior y 40–260); logo arriba a la derecha.
@@ -244,8 +244,7 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 ### Cortes del crudo
 | Se quitó | Motivo |
 |---|---|
-| 40,3–40,55 s | Palabra suelta encimada |
-| 75,7–76,4 s "mmm" | Muletilla |
+| 69,4–79,4 s "¡Padrísimo! … y yo ganar una comisión sobre eso" + su "¡Claro que sí!" | Pedido por la clienta; queda "¡Claro que sí!" (64,7 s) → "Comienza a ganar comisiones…" |
 | 86–89 s "adiós, goza" + risas | Fuera del mensaje; cierra en "¡Muchas gracias!" |
 | Todos los silencios | ~22 s |
 
@@ -256,3 +255,7 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 - Diagnóstico: casi toda la energía en 200–800 Hz y casi nada arriba de 3 kHz (micrófono de celular en cuarto) → suena encajonado. La cadena del reel 6 (denoise fuerte + lowpass) lo empeoraba.
 - **Cadena anti-caja**: `highpass 100 → afftdn suave (nr=10, nf=-32) → EQ −7 dB @280 Hz, −3 dB @500 Hz, +1 dB @1,2 kHz, +6 dB @3 kHz, highshelf +9 dB desde 6 kHz → aexciter (amount=3, drive=8, freq=3 kHz) → afftdn suave (nr=10, nf=-38) → de-esser → compresor 2,5:1 → limitador`. Sin compuerta ni lowpass.
 - Resultado: 3,2–6,4 kHz pasó de −24 a −8 dB relativo; 6,4–12 kHz de −44 a −25 dB. Usar esta cadena por defecto en los siguientes videos.
+
+### Borrador 3
+- Finales que se comían la última palabra: "…en México" (hasta 19,97 s), "…una comisión" (29,9 s), "…¿cómo me registro?" (40,5 s; lo de 40,3 s era "-tro", no una palabra suelta).
+- **Regla**: la cola de una palabra puede estar a −25/−30 dB, por debajo del umbral de tramos de voz; al fijar el final de cada toma, revisar la envolvente hasta que baje al ruido de fondo y confirmar con Whisper que la última palabra sale completa.
