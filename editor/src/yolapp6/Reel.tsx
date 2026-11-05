@@ -1,28 +1,36 @@
 // Yolapp reel 6 (1080 × 1920, 30 fps): "Modo Yoler" — earn commissions by
 // sharing a cause's link. Rules from public/yolapp/marca.md: full-screen video
 // at all times (no cutaways, no filter), few soft SFX, the gradient logo as is
-// every time she says "Yolapp". Face spans y ≈ 380–1300, so cards live on the
-// lower band (y ≈ 1340–1680) and captions move above the head while a card is up.
+// every time she says "Yolapp".
+//
+// Face-safe layout: the face spans x ≈ 280–800, y ≈ 380–1320. Graphics only
+// live on the chest band (y ≥ 1400), the side columns (x ≤ 230 or x ≥ 850)
+// and above the head (y ≤ 330, captions/stickers/logo).
+//
+// Audio: the video is muted; the voice plays from public/yolapp/v6/voz.wav,
+// the raw track cleaned with the chain in voz-cadena.txt (high-pass, FFT
+// denoise, EQ, de-esser, compressor, soft gate, limiter).
 import { Audio } from "@remotion/media";
 import React, { useEffect, useState } from "react";
 import {
   AbsoluteFill,
   continueRender,
   delayRender,
+  Easing,
+  Freeze,
   Img,
   interpolate,
   OffthreadVideo,
   Sequence,
+  spring,
   staticFile,
   useCurrentFrame,
+  useVideoConfig,
 } from "remotion";
 import { POPPINS, poppinsReady } from "../theme";
 import {
-  Card,
-  Check,
   Chip,
   clamp,
-  Counter,
   EASE,
   Glyph,
   Heart,
@@ -51,23 +59,24 @@ import {
 } from "./datos";
 
 const SRC = "yolapp/v6/crudo.mp4";
+const VOZ = "yolapp/v6/voz.wav";
 const LOGO = "yolapp/logo/logo-color.png";
 const A = wordAt;
 
 const inGraphic = (i: number) => GRAPHICS.some((g) => i >= g.from && i <= g.to);
 
-// Continuous pieces of footage: a take with a `skip` plays as two pieces.
+// Continuous pieces of footage/audio: a take with a `skip` plays as two pieces.
 const PARTS = CLIPS.flatMap((c) => {
-  if (!c.skip) return [{ at: c.at, len: c.len, from: c.from }];
+  if (!c.skip) return [{ at: c.at, len: c.len, from: c.from, hold: c.hold }];
   const first = Math.round((c.skip[0] - c.from) * 30);
   return [
-    { at: c.at, len: first, from: c.from },
-    { at: c.at + first, len: c.len - first, from: c.skip[1] },
+    { at: c.at, len: first, from: c.from, hold: undefined },
+    { at: c.at + first, len: c.len - first, from: c.skip[1], hold: c.hold },
   ];
 });
 
 /* ---------- the talking-head video, always full screen, no filter ---------- */
-const zoomFor = (i: number) => (inGraphic(i) ? 1.0 : i % 2 === 0 ? 1.0 : 1.1);
+const zoomFor = (i: number) => (inGraphic(i) ? 1.0 : i % 2 === 0 ? 1.0 : 1.08);
 const Talking: React.FC = () => {
   const frame = useCurrentFrame();
   const clip =
@@ -76,24 +85,42 @@ const Talking: React.FC = () => {
   const local = Math.min(1.5, (frame - clip.at) / clip.len);
   const hook =
     clip.i === 0
-      ? interpolate(frame, [0, 14], [0.22, 0], { ...clamp, easing: EASE })
+      ? interpolate(frame, [0, 14], [0.2, 0], { ...clamp, easing: EASE })
       : 0;
-  const scale = zoomFor(clip.i) + 0.03 * local + hook;
+  const scale = zoomFor(clip.i) + 0.025 * local + hook;
+  const video = (from: number) => (
+    <OffthreadVideo
+      src={staticFile(SRC)}
+      trimBefore={Math.round(from * 30)}
+      muted
+      style={{ width: W, height: 1920, objectFit: "cover" }}
+    />
+  );
   return (
     <AbsoluteFill style={{ overflow: "hidden", background: "#000" }}>
       <AbsoluteFill
         style={{ transform: `scale(${scale})`, transformOrigin: "50% 40%" }}
       >
-        {PARTS.map((p, k) => (
-          <Sequence key={k} from={p.at} durationInFrames={p.len} layout="none">
-            <OffthreadVideo
-              src={staticFile(SRC)}
-              trimBefore={Math.round(p.from * 30)}
-              volume={(f) => Math.min(1, (f + 1) / 3, (p.len - f) / 3)}
-              style={{ width: W, height: 1920, objectFit: "cover" }}
-            />
-          </Sequence>
-        ))}
+        {PARTS.map((p, k) => {
+          const holdAt =
+            p.hold === undefined ? p.len : Math.round((p.hold - p.from) * 30);
+          return (
+            <Sequence
+              key={k}
+              from={p.at}
+              durationInFrames={p.len}
+              layout="none"
+            >
+              {holdAt >= p.len ? (
+                video(p.from)
+              ) : (
+                <Freeze frame={holdAt} active={(f) => f >= holdAt}>
+                  {video(p.from)}
+                </Freeze>
+              )}
+            </Sequence>
+          );
+        })}
         <Sequence from={SPEECH_END} layout="none">
           <Img
             src={staticFile("yolapp/v6/final.jpg")}
@@ -104,6 +131,21 @@ const Talking: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
+// The cleaned voice, cut exactly like the picture (2-frame fades at each cut).
+const Voice: React.FC = () => (
+  <>
+    {PARTS.map((p, k) => (
+      <Sequence key={k} from={p.at} durationInFrames={p.len}>
+        <Audio
+          src={staticFile(VOZ)}
+          trimBefore={Math.round(p.from * 30)}
+          volume={(f) => Math.min(1, (f + 1) / 2, (p.len - f) / 2)}
+        />
+      </Sequence>
+    ))}
+  </>
+);
 
 /* ---------- captions: word by word, active word on a pink pill ---------- */
 type Page = { words: Word[]; start: number; end: number; top: boolean };
@@ -142,15 +184,15 @@ const Captions: React.FC = () => {
   const page = PAGES.find((pg) => frame >= pg.start && frame < pg.end);
   if (!page) return null;
   const out = interpolate(frame, [page.end - 3, page.end], [1, 0], clamp);
-  const size = page.top ? 62 : 70;
+  const size = page.top ? 60 : 68;
   return (
     <div
       style={{
         position: "absolute",
         left: 70,
         right: 70,
-        top: page.top ? 120 : 1390,
-        height: 240,
+        top: page.top ? 110 : 1420,
+        height: 220,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -201,7 +243,7 @@ const Captions: React.FC = () => {
   );
 };
 
-/* ---------- stickers above the head ---------- */
+/* ---------- above the head: stickers, logo pops, Yoler badge ---------- */
 const Between: React.FC<{
   from: number;
   to: number;
@@ -265,7 +307,7 @@ const Stickers: React.FC = () => (
         bg={GRAD.main}
         size={72}
         rotate={-3}
-        top={170}
+        top={150}
       />
     </Between>
     <Between from={clipAt(9)} to={clipAt(10)}>
@@ -273,7 +315,7 @@ const Stickers: React.FC = () => (
         at={clipAt(9) + 2}
         strikeAt={A(9, "gratis")}
         text="Links gratis"
-        top={190}
+        top={170}
       />
     </Between>
     <Between from={clipAt(10)} to={clipAt(11)}>
@@ -283,16 +325,15 @@ const Stickers: React.FC = () => (
         bg={GRAD.warm}
         size={76}
         rotate={3}
-        top={180}
+        top={160}
       />
     </Between>
   </>
 );
 
-// Gradient logo, as is, popping in above the head on every "Yolapp".
+// Gradient logo, as is, above the head on every "Yolapp" (until the take ends).
 const LogoPops: React.FC = () => {
   const frame = useCurrentFrame();
-  // shown until 40 frames later or the end of that take, whichever is first
   const endOf = (f: number) => {
     const c = CLIPS.find((x) => f >= x.at && f < x.at + x.len)!;
     return Math.min(f + 40, c.at + c.len);
@@ -311,20 +352,19 @@ const LogoPops: React.FC = () => {
         rotate={-4}
         style={{
           position: "absolute",
-          top: 120,
+          top: 110,
           left: 0,
           right: 0,
           display: "flex",
           justifyContent: "center",
         }}
       >
-        <Img src={staticFile(LOGO)} style={{ width: 560 }} />
+        <Img src={staticFile(LOGO)} style={{ width: 520 }} />
       </Pop>
     </AbsoluteFill>
   );
 };
 
-// "Yoler" badge right after "convertirte en Yoler".
 const YolerBadge: React.FC = () => {
   const frame = useCurrentFrame();
   const at = A(2, "yoler");
@@ -336,7 +376,7 @@ const YolerBadge: React.FC = () => {
       rotate={4}
       style={{
         position: "absolute",
-        top: 150,
+        top: 140,
         left: 0,
         right: 0,
         display: "flex",
@@ -363,46 +403,27 @@ const YolerBadge: React.FC = () => {
   );
 };
 
-/* ---------- cards on the lower band ---------- */
-const Scene: React.FC<{ id: GraphicId; children: React.ReactNode }> = ({
-  id,
-  children,
-}) => {
+/* ---------- shared bits for the graphics ---------- */
+const useSpan = (id: GraphicId) => {
   const frame = useCurrentFrame();
   const { start, end } = graphicSpan(id);
-  if (frame < start || frame >= end) return null;
-  const enter = interpolate(frame, [start, start + 12], [1, 0], {
-    ...clamp,
-    easing: EASE,
-  });
+  const visible = frame >= start && frame < end;
   const exit = interpolate(frame, [end - 8, end], [0, 1], {
     ...clamp,
     easing: EASE,
   });
-  return (
-    <div
-      style={{
-        position: "absolute",
-        left: 50,
-        right: 50,
-        top: 1340,
-        height: 340,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        transform: `translateY(${(enter + exit) * 600}px) rotate(${(enter - exit) * 4}deg)`,
-      }}
-    >
-      {children}
-    </div>
-  );
+  return { frame, start, end, visible, exit };
 };
-
-const row: React.CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  gap: 16,
+// Dark glass, readable over any background.
+const glass: React.CSSProperties = {
+  background: "rgba(22,14,52,.62)",
+  backdropFilter: "blur(18px) saturate(1.3)",
+  WebkitBackdropFilter: "blur(18px) saturate(1.3)",
+  border: "2px solid rgba(255,255,255,.22)",
+  boxShadow:
+    "0 20px 50px rgba(10,6,30,.45), inset 0 1px 0 rgba(255,255,255,.18)",
+  color: "#fff",
+  fontFamily: POPPINS,
 };
 const circle = (size: number, bg: string): React.CSSProperties => ({
   width: size,
@@ -415,356 +436,613 @@ const circle = (size: number, bg: string): React.CSSProperties => ({
   justifyContent: "center",
 });
 
-// Coins slipping away while the link sits unshared, then the link gets shared.
-const LinkScene: React.FC = () => {
+// Floating 3D phone; `children` is the screen.
+const Phone: React.FC<{
+  w: number;
+  tiltY: number;
+  children: React.ReactNode;
+  glow?: string;
+}> = ({ w, tiltY, children, glow = "rgba(125,14,213,.55)" }) => {
   const frame = useCurrentFrame();
-  const comisiones = A(0, "comisiones");
-  const link = A(1, "link");
   return (
-    <Scene id="link">
-      <Card
+    <div style={{ perspective: 1400 }}>
+      <div
         style={{
-          width: 920,
-          ...row,
-          gap: 24,
-          padding: "24px 30px",
-          position: "relative",
+          width: w,
+          height: w * 2.05,
+          borderRadius: w * 0.16,
+          background: "#120b2e",
+          padding: w * 0.045,
+          boxSizing: "border-box",
+          transform: `rotateY(${tiltY}deg) rotateX(8deg) translateY(${Math.sin(frame / 18) * 8}px)`,
+          boxShadow: `0 40px 80px rgba(10,6,30,.55), 0 0 60px ${glow}, inset 0 0 0 3px rgba(255,255,255,.12)`,
         }}
       >
-        <Pop at={clipAt(0) + 4}>
-          <Publicacion
-            size={230}
-            shared={interpolate(frame, [link, link + 8], [0, 1], clamp)}
-          />
-        </Pop>
         <div
-          style={{ flex: 1, display: "flex", flexDirection: "column", gap: 14 }}
+          style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: w * 0.12,
+            overflow: "hidden",
+            background: "#fff",
+            position: "relative",
+          }}
         >
-          <Pop at={clipAt(0) + 8}>
-            <div
-              style={{
-                ...row,
-                gap: 12,
-                background: "#F4F2FA",
-                borderRadius: 999,
-                padding: "10px 24px",
-              }}
-            >
-              <LinkIcon size={38} color={Y.purple} />
-              <span style={{ fontSize: 32, fontWeight: 800 }}>tu link</span>
-            </div>
-          </Pop>
-          <div style={{ position: "relative", height: 110 }}>
-            {[0, 1, 2].map((i) => {
-              // coins sit there from the start and slip away on "comisiones"
-              if (frame < clipAt(0) + 10 + i * 3) return null;
-              const t = frame - comisiones - i * 6;
-              const fall = interpolate(t, [0, 30], [0, 1], clamp);
-              return (
-                <div
-                  key={i}
-                  style={{
-                    position: "absolute",
-                    left: 30 + i * 110,
-                    top: fall * 60,
-                    opacity: 1 - fall * 0.7,
-                    transform: `rotate(${fall * (i % 2 ? 40 : -40)}deg)`,
-                  }}
-                >
-                  <Moneda size={90} />
-                </div>
-              );
-            })}
-          </div>
+          {children}
         </div>
-        <Pop
-          at={comisiones + 4}
-          rotate={-4}
-          style={{ position: "absolute", right: -20, top: -36 }}
-        >
-          <Chip size={30} bg={Y.coral} style={{ border: "5px solid #fff" }}>
-            Comisiones perdidas
-          </Chip>
-        </Pop>
-      </Card>
-    </Scene>
+      </div>
+    </div>
   );
 };
 
-// Diagram: find a cause → share its link → someone donates → you earn.
-const Paso: React.FC<{
-  at: number;
-  n: number;
-  label: string;
-  bg: string;
-  children: React.ReactNode;
-}> = ({ at, n, label, bg, children }) => (
-  <Pop
-    at={at}
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      gap: 8,
-      width: 190,
-    }}
-  >
-    <div style={{ position: "relative" }}>
-      <div
-        style={{
-          ...circle(112, bg),
-          border: "6px solid #fff",
-          boxShadow: "0 12px 28px rgba(26,18,64,.3)",
-        }}
-      >
-        {children}
-      </div>
-      <div
-        style={{
-          ...circle(40, Y.ink),
-          position: "absolute",
-          left: -6,
-          top: -6,
-          color: "#fff",
-          fontWeight: 800,
-          fontSize: 22,
-          border: "3px solid #fff",
-        }}
-      >
-        {n}
-      </div>
-    </div>
-    <span
-      style={{
-        fontSize: 26,
-        fontWeight: 800,
-        textAlign: "center",
-        lineHeight: 1.05,
-      }}
-    >
-      {label}
-    </span>
-  </Pop>
-);
-const Arrow: React.FC<{ at: number }> = ({ at }) => {
-  const p = interpolate(useCurrentFrame(), [at, at + 8], [0, 1], {
-    ...clamp,
-    easing: EASE,
-  });
+// Sparkle burst at `at` (frame), centered on its box.
+const Burst: React.FC<{ at: number; color?: string; size?: number }> = ({
+  at,
+  color = "#FFD54A",
+  size = 220,
+}) => {
+  const t = useCurrentFrame() - at;
+  if (t < 0 || t > 22) return null;
+  const p = t / 22;
   return (
     <svg
-      width={44}
-      height={30}
-      viewBox="0 0 44 30"
-      style={{ flexShrink: 0, marginTop: -40, opacity: p }}
+      width={size}
+      height={size}
+      viewBox="-50 -50 100 100"
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        marginLeft: -size / 2,
+        marginTop: -size / 2,
+        pointerEvents: "none",
+      }}
     >
-      <path
-        d="M4 15 H34 M26 6 L36 15 L26 24"
-        fill="none"
-        stroke={Y.purple}
-        strokeWidth={6}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      {Array.from({ length: 10 }, (_, i) => {
+        const a = (i / 10) * Math.PI * 2;
+        const r1 = 14 + p * 22;
+        const r2 = r1 + 10 * (1 - p);
+        return (
+          <line
+            key={i}
+            x1={Math.cos(a) * r1}
+            y1={Math.sin(a) * r1}
+            x2={Math.cos(a) * r2}
+            y2={Math.sin(a) * r2}
+            stroke={color}
+            strokeWidth={4}
+            strokeLinecap="round"
+            opacity={1 - p}
+          />
+        );
+      })}
     </svg>
   );
 };
-const Pasos: React.FC = () => {
-  const s1 = clipAt(4);
-  const s2 = clipAt(5);
-  const s3 = A(6, "donativo");
-  const s4 = A(7, "comisión");
+
+/* ---------- 1. the link you don't share: coins leak out of the phone ---------- */
+const LinkScene: React.FC = () => {
+  const { frame, start, visible, exit } = useSpan("link");
+  const { fps } = useVideoConfig();
+  if (!visible) return null;
+  const comisiones = A(0, "comisiones");
+  const link = A(1, "link");
+  const enter = spring({ frame: frame - start, fps, config: { damping: 14 } });
+  const lost = interpolate(
+    frame,
+    [comisiones, comisiones + 50],
+    [0, 1240],
+    clamp,
+  );
   return (
-    <Scene id="pasos">
-      <Card
+    <AbsoluteFill style={{ opacity: 1 - exit }}>
+      {/* phone floating bottom-left */}
+      <div
         style={{
-          width: 960,
-          padding: "26px 14px 22px",
-          ...row,
-          justifyContent: "center",
-          gap: 2,
+          position: "absolute",
+          left: 40,
+          top: 1330,
+          transform: `translateX(${(1 - enter) * -420}px) rotate(${-6 + (1 - enter) * -20}deg)`,
         }}
       >
-        <Paso at={s1} n={1} label="Encuentras una causa" bg={GRAD.cool}>
-          <Heart size={56} color="#fff" />
-        </Paso>
-        <Arrow at={s2 - 4} />
-        <Paso at={s2} n={2} label="Compartes su link" bg={GRAD.main}>
-          <LinkIcon size={56} />
-        </Paso>
-        <Arrow at={s3 - 4} />
-        <Paso at={s3} n={3} label="Alguien dona" bg={GRAD.warm}>
-          <Glyph name="amigos" size={60} />
-        </Paso>
-        <Arrow at={s4 - 4} />
-        <Paso
-          at={s4}
-          n={4}
-          label="Recibes comisión"
-          bg="linear-gradient(135deg, #FFD54A, #FF9F1C)"
+        <Phone w={240} tiltY={18}>
+          <div
+            style={{ padding: 12, display: "flex", justifyContent: "center" }}
+          >
+            <Publicacion
+              size={250}
+              shared={interpolate(frame, [link, link + 8], [0, 1], clamp)}
+            />
+          </div>
+        </Phone>
+      </div>
+      {/* coins leaking out of the phone and off the right edge */}
+      {Array.from({ length: 7 }, (_, i) => {
+        const t = frame - comisiones - i * 5;
+        if (t < 0 || t > 45) return null;
+        const p = t / 45;
+        const x = 300 + p * 640 + Math.sin(t / 5 + i) * 18;
+        const y = 1600 - Math.sin(p * Math.PI) * 140 + p * 40;
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: x,
+              top: y,
+              opacity: interpolate(p, [0, 0.15, 0.75, 1], [0, 1, 1, 0]),
+              transform: `rotate(${t * 14}deg) scale(${0.7 + (i % 3) * 0.12})`,
+            }}
+          >
+            <Moneda size={86} />
+          </div>
+        );
+      })}
+      {/* loss ticker bottom-right */}
+      <Pop
+        at={comisiones + 2}
+        rotate={-3}
+        style={{ position: "absolute", right: 40, top: 1700 }}
+      >
+        <div
+          style={{
+            ...glass,
+            borderRadius: 30,
+            padding: "14px 26px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+          }}
         >
-          <Moneda size={74} />
-        </Paso>
-      </Card>
-    </Scene>
+          <span style={{ fontSize: 24, fontWeight: 700, opacity: 0.8 }}>
+            Comisiones perdidas
+          </span>
+          <span
+            style={{
+              fontSize: 52,
+              fontWeight: 800,
+              color: "#FF6B7A",
+              fontVariantNumeric: "tabular-nums",
+            }}
+          >
+            -${Math.round(lost).toLocaleString("es-MX")}
+          </span>
+        </div>
+      </Pop>
+    </AbsoluteFill>
   );
 };
 
-// "Ojo": the cause needs monetization switched on.
-const Monetizar: React.FC = () => {
-  const frame = useCurrentFrame();
-  const at = A(8, "monetizar");
-  const on = interpolate(frame, [at, at + 8], [0, 1], {
+/* ---------- 2. the journey: a glowing path with a comet through 4 orbs ---------- */
+const PATH = "M 60 1660 C 220 1500, 320 1790, 540 1640 S 860 1500, 1020 1620";
+const NODES = [
+  {
+    x: 125,
+    y: 1610,
+    label: "Encuentras una causa",
+    bg: GRAD.cool,
+    icon: <Heart size={46} color="#fff" />,
+  },
+  {
+    x: 405,
+    y: 1690,
+    label: "Compartes su link",
+    bg: GRAD.main,
+    icon: <LinkIcon size={46} />,
+  },
+  {
+    x: 690,
+    y: 1560,
+    label: "Alguien dona",
+    bg: GRAD.warm,
+    icon: <Glyph name="amigos" size={50} />,
+  },
+  {
+    x: 960,
+    y: 1620,
+    label: "Tu comisión",
+    bg: "linear-gradient(135deg, #FFD54A, #FF9F1C)",
+    icon: <Moneda size={64} />,
+  },
+];
+const Journey: React.FC = () => {
+  const { frame, visible, exit } = useSpan("pasos");
+  if (!visible) return null;
+  const at = [clipAt(4), clipAt(5), A(6, "donativo"), A(7, "comisión")];
+  // the comet reaches node k at at[k]
+  const prog = interpolate(frame, at, [0.06, 0.38, 0.66, 0.95], {
     ...clamp,
-    easing: EASE,
+    easing: Easing.inOut(Easing.cubic),
   });
+  const draw = interpolate(frame, [at[0], at[3]], [0.06, 1], clamp);
   return (
-    <Scene id="monetizar">
-      <Card style={{ width: 880, padding: "26px 34px", position: "relative" }}>
-        <div style={{ ...row, justifyContent: "space-between" }}>
-          <div style={{ ...row, gap: 14 }}>
-            <Img src={staticFile(LOGO)} style={{ height: 44 }} />
-            <span style={{ fontSize: 34, fontWeight: 800 }}>
-              Ajustes de la causa
-            </span>
-          </div>
-        </div>
-        <div
+    <AbsoluteFill style={{ opacity: 1 - exit }}>
+      <svg
+        width={1080}
+        height={1920}
+        style={{ position: "absolute", inset: 0 }}
+      >
+        <defs>
+          <linearGradient id="jg" x1="0" x2="1">
+            <stop offset="0" stopColor={Y.teal} />
+            <stop offset=".5" stopColor={Y.purple} />
+            <stop offset="1" stopColor={Y.pink} />
+          </linearGradient>
+          <filter id="jglow">
+            <feGaussianBlur stdDeviation="6" />
+          </filter>
+        </defs>
+        <path
+          d={PATH}
+          fill="none"
+          stroke="rgba(255,255,255,.3)"
+          strokeWidth={10}
+          strokeLinecap="round"
+          strokeDasharray="2 22"
+        />
+        <path
+          d={PATH}
+          fill="none"
+          stroke="url(#jg)"
+          strokeWidth={14}
+          strokeLinecap="round"
+          pathLength={1}
+          strokeDasharray={1}
+          strokeDashoffset={1 - draw}
+          filter="url(#jglow)"
+        />
+        <path
+          d={PATH}
+          fill="none"
+          stroke="url(#jg)"
+          strokeWidth={8}
+          strokeLinecap="round"
+          pathLength={1}
+          strokeDasharray={1}
+          strokeDashoffset={1 - draw}
+        />
+        {/* comet: a short bright dash riding the path */}
+        <path
+          d={PATH}
+          fill="none"
+          stroke="#fff"
+          strokeWidth={16}
+          strokeLinecap="round"
+          pathLength={1}
+          strokeDasharray="0.03 1"
+          strokeDashoffset={-prog + 0.015}
+          filter="url(#jglow)"
+        />
+        <path
+          d={PATH}
+          fill="none"
+          stroke="#fff"
+          strokeWidth={8}
+          strokeLinecap="round"
+          pathLength={1}
+          strokeDasharray="0.02 1"
+          strokeDashoffset={-prog + 0.01}
+        />
+      </svg>
+      {NODES.map((n, k) => (
+        <Pop
+          key={k}
+          at={at[k]}
+          from={0.2}
           style={{
-            ...row,
-            justifyContent: "space-between",
-            marginTop: 22,
-            background: "#F4F2FA",
-            borderRadius: 26,
-            padding: "18px 24px",
+            position: "absolute",
+            left: n.x - 95,
+            top: n.y - 62,
+            width: 190,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <div style={{ ...row, gap: 14 }}>
-            <Moneda size={60} />
-            <span style={{ fontSize: 40, fontWeight: 800 }}>Monetizar</span>
+          <div style={{ position: "relative" }}>
+            <div
+              style={{
+                ...circle(124, n.bg),
+                border: "6px solid #fff",
+                boxShadow: `0 0 0 ${8 + Math.sin((frame - at[k]) / 5) * 4}px rgba(255,255,255,.2), 0 16px 34px rgba(10,6,30,.5)`,
+              }}
+            >
+              {n.icon}
+            </div>
+            <div
+              style={{
+                ...circle(42, Y.ink),
+                position: "absolute",
+                left: -6,
+                top: -6,
+                color: "#fff",
+                fontWeight: 800,
+                fontSize: 22,
+                border: "3px solid #fff",
+              }}
+            >
+              {k + 1}
+            </div>
+            {k === 3 && <Burst at={at[3]} size={300} />}
           </div>
           <div
             style={{
-              width: 130,
-              height: 70,
-              borderRadius: 35,
-              background: on > 0.5 ? Y.ok : "#D9D6E8",
+              ...glass,
+              marginTop: 8,
+              borderRadius: 16,
+              padding: "6px 12px",
+              fontSize: 22,
+              fontWeight: 800,
+              textAlign: "center",
+              lineHeight: 1.05,
+            }}
+          >
+            {n.label}
+          </div>
+        </Pop>
+      ))}
+    </AbsoluteFill>
+  );
+};
+
+/* ---------- 3. "Ojo": a big 3D monetize switch ---------- */
+const Monetize: React.FC = () => {
+  const { frame, start, visible, exit } = useSpan("monetizar");
+  const { fps } = useVideoConfig();
+  if (!visible) return null;
+  const at = A(8, "monetizar");
+  const knob = spring({
+    frame: frame - at,
+    fps,
+    config: { damping: 12, stiffness: 160 },
+  });
+  const enter = spring({ frame: frame - start, fps, config: { damping: 14 } });
+  const on = knob > 0.5;
+  return (
+    <AbsoluteFill style={{ opacity: 1 - exit }}>
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 1450,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 18,
+          transform: `translateY(${(1 - enter) * 500}px)`,
+        }}
+      >
+        <div style={{ display: "flex", gap: 2 }}>
+          {"MONETIZAR".split("").map((l, i) => {
+            const p = interpolate(frame - (start + 6 + i * 2), [0, 8], [0, 1], {
+              ...clamp,
+              easing: EASE,
+            });
+            return (
+              <span
+                key={i}
+                style={{
+                  fontFamily: POPPINS,
+                  fontWeight: 800,
+                  fontSize: 66,
+                  color: "#fff",
+                  opacity: p,
+                  transform: `translateY(${(1 - p) * 30}px) rotate(${(1 - p) * 20}deg)`,
+                  display: "inline-block",
+                  textShadow: on
+                    ? "0 0 24px rgba(20,195,142,.9), 0 4px 0 rgba(10,6,30,.6)"
+                    : "0 4px 0 rgba(10,6,30,.6), 0 0 18px rgba(10,6,30,.6)",
+                }}
+              >
+                {l}
+              </span>
+            );
+          })}
+        </div>
+        <div style={{ perspective: 900 }}>
+          <div
+            style={{
               position: "relative",
+              width: 340,
+              height: 160,
+              borderRadius: 80,
+              transform: "rotateX(18deg)",
+              background: on
+                ? "linear-gradient(135deg, #14C38E, #03C7C1)"
+                : "linear-gradient(135deg, #4A4466, #2B2547)",
+              boxShadow: on
+                ? "0 0 60px rgba(20,195,142,.7), inset 0 6px 14px rgba(0,0,0,.25)"
+                : "inset 0 6px 14px rgba(0,0,0,.4), 0 20px 40px rgba(10,6,30,.5)",
+              border: "4px solid rgba(255,255,255,.5)",
             }}
           >
             <div
               style={{
                 position: "absolute",
-                top: 7,
-                left: 7 + on * 60,
-                width: 56,
-                height: 56,
-                borderRadius: "50%",
-                background: "#fff",
-                boxShadow: "0 4px 10px rgba(26,18,64,.25)",
+                top: 10,
+                left: 10 + knob * 180,
+                ...circle(
+                  132,
+                  "radial-gradient(circle at 35% 30%, #fff, #E9E6F5)",
+                ),
+                boxShadow: "0 10px 24px rgba(10,6,30,.4)",
               }}
-            />
+            >
+              <Moneda size={88} />
+            </div>
+            <Burst at={at + 4} color="#5FF5EC" size={420} />
           </div>
         </div>
-        <Pop
-          at={clipAt(8) + 2}
-          rotate={-5}
-          style={{ position: "absolute", left: -18, top: -40 }}
+      </div>
+      <Pop
+        at={start + 2}
+        rotate={-8}
+        style={{ position: "absolute", left: 40, top: 1470 }}
+      >
+        <Chip
+          size={36}
+          bg="linear-gradient(135deg, #FFB800, #FF4A3A)"
+          style={{ border: "5px solid #fff" }}
         >
-          <Chip
-            size={34}
-            bg="linear-gradient(135deg, #FFB800, #FF4A3A)"
-            style={{ border: "5px solid #fff" }}
-          >
-            ¡Ojo!
-          </Chip>
-        </Pop>
-        <Pop
-          at={at + 8}
-          rotate={4}
-          style={{ position: "absolute", right: -18, bottom: -36 }}
-        >
-          <Chip size={30} bg={Y.ok} style={{ border: "5px solid #fff" }}>
-            <Tick size={32} />
-            Activada
-          </Chip>
-        </Pop>
-      </Card>
-    </Scene>
+          ¡Ojo!
+        </Chip>
+      </Pop>
+      <Pop
+        at={at + 10}
+        rotate={6}
+        style={{ position: "absolute", right: 40, top: 1470 }}
+      >
+        <Chip size={30} bg={Y.ok} style={{ border: "5px solid #fff" }}>
+          <Tick size={30} />
+          Activada
+        </Chip>
+      </Pop>
+    </AbsoluteFill>
   );
 };
 
-// Download → sign up → Yoler mode → share.
-const App: React.FC = () => {
-  const frame = useCurrentFrame();
-  const items: [string, number][] = [
-    ["Descarga Yolapp", A(11, "descarga")],
-    ["Regístrate", A(12, "regístrate")],
-    ["Activa tu modo Yoler", A(12, "activa")],
-    ["Comparte la causa", A(12, "compartir")],
-  ];
+/* ---------- 4. the app: phone with progress + commission notifications ---------- */
+const STEPS: [string, string, number][] = [
+  ["Descarga", "descarga", 11],
+  ["Regístrate", "regístrate", 12],
+  ["Modo Yoler", "activa", 12],
+  ["Comparte", "compartir", 12],
+];
+const TOASTS = [
+  { amount: 45, cause: "Perritos" },
+  { amount: 120, cause: "Tratamiento" },
+  { amount: 80, cause: "Comida" },
+];
+const AppScene: React.FC = () => {
+  const { frame, start, visible, exit } = useSpan("app");
+  const { fps } = useVideoConfig();
+  if (!visible) return null;
+  const stepAt = STEPS.map(([, w, take]) => A(take, w));
+  const done = stepAt.filter((f) => frame >= f).length;
+  const enter = spring({ frame: frame - start, fps, config: { damping: 14 } });
+  const share = A(12, "compartir");
+  const toastAt = TOASTS.map((_, i) => share + 2 + i * 12);
   return (
-    <Scene id="app">
-      <Card style={{ width: 900, padding: "22px 30px", position: "relative" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "14px 20px",
-          }}
-        >
-          {items.map(([label, at], i) => (
+    <AbsoluteFill style={{ opacity: 1 - exit }}>
+      {/* phone bottom-right */}
+      <div
+        style={{
+          position: "absolute",
+          right: 40,
+          top: 1330,
+          transform: `translateX(${(1 - enter) * 420}px) rotate(${6 + (1 - enter) * 20}deg)`,
+        }}
+      >
+        <Phone w={240} tiltY={-18} glow="rgba(255,5,102,.45)">
+          <div
+            style={{
+              padding: "18px 14px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+              fontFamily: POPPINS,
+            }}
+          >
+            <Img
+              src={staticFile(LOGO)}
+              style={{ width: 150, alignSelf: "center" }}
+            />
+            {STEPS.map(([label], i) => (
+              <div
+                key={label}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  opacity: i < done ? 1 : 0.35,
+                }}
+              >
+                <div style={{ ...circle(30, i < done ? Y.ok : "#D9D6E8") }}>
+                  {i < done ? (
+                    <Tick size={20} />
+                  ) : (
+                    <span
+                      style={{ color: "#fff", fontSize: 16, fontWeight: 800 }}
+                    >
+                      {i + 1}
+                    </span>
+                  )}
+                </div>
+                <span style={{ fontSize: 20, fontWeight: 800, color: Y.ink }}>
+                  {label}
+                </span>
+              </div>
+            ))}
             <div
-              key={label}
-              style={{ ...row, gap: 12, opacity: frame >= at ? 1 : 0.35 }}
+              style={{
+                height: 12,
+                borderRadius: 6,
+                background: "#EEEBF6",
+                overflow: "hidden",
+              }}
             >
               <div
                 style={{
-                  ...circle(
-                    54,
-                    [GRAD.cool, GRAD.main, GRAD.warm, GRAD.deep][i],
-                  ),
-                  color: "#fff",
-                  fontWeight: 800,
-                  fontSize: 28,
+                  height: "100%",
+                  width: `${(done / STEPS.length) * 100}%`,
+                  background: GRAD.warm,
+                  borderRadius: 6,
                 }}
-              >
-                {i + 1}
-              </div>
-              <span
-                style={{
-                  fontSize: 30,
-                  fontWeight: 800,
-                  flex: 1,
-                  lineHeight: 1.1,
-                }}
-              >
-                {label}
-              </span>
-              <Check at={at + 4} size={42} />
+              />
             </div>
-          ))}
-        </div>
-        <Pop
-          at={A(12, "compartir") + 6}
-          style={{ ...row, gap: 12, marginTop: 16, justifyContent: "center" }}
-        >
-          <span style={{ fontSize: 28, fontWeight: 700, color: Y.muted }}>
-            Comisiones:
-          </span>
-          <Counter
-            from={0}
-            to={850}
-            start={A(12, "compartir") + 6}
-            end={SPEECH_END}
-            style={{ fontSize: 40, fontWeight: 800, color: Y.ok }}
-          />
-          <span style={{ fontSize: 40, fontWeight: 800, color: Y.ok }}>
-            MXN
-          </span>
-        </Pop>
-      </Card>
-    </Scene>
+          </div>
+        </Phone>
+      </div>
+      {/* commission notifications sliding in bottom-left, newest on top */}
+      {TOASTS.map((t, i) => {
+        if (frame < toastAt[i]) return null;
+        const p = spring({
+          frame: frame - toastAt[i],
+          fps,
+          config: { damping: 13 },
+        });
+        const newer = TOASTS.filter(
+          (_, j) => j > i && frame >= toastAt[j],
+        ).length;
+        return (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: 40,
+              top: 1440 + newer * 124,
+              transform: `translateX(${(1 - p) * -600}px)`,
+              opacity: Math.min(1, p * 1.5) * (1 - newer * 0.2),
+            }}
+          >
+            <div
+              style={{
+                ...glass,
+                borderRadius: 26,
+                padding: "12px 18px",
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                width: 500,
+              }}
+            >
+              <Moneda size={54} />
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 21, fontWeight: 700, opacity: 0.75 }}>
+                  Nueva comisión · {t.cause}
+                </div>
+                <div
+                  style={{ fontSize: 36, fontWeight: 800, color: "#5FF5EC" }}
+                >
+                  +${t.amount} MXN
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </AbsoluteFill>
   );
 };
 
@@ -780,11 +1058,11 @@ const Outro: React.FC = () => {
         justifyContent: "flex-start",
         flexDirection: "column",
         gap: 36,
-        paddingTop: 1360,
+        paddingTop: 1420,
       }}
     >
       <Pop at={start} from={0.3} rotate={-3}>
-        <Img src={staticFile(LOGO)} style={{ width: 640 }} />
+        <Img src={staticFile(LOGO)} style={{ width: 620 }} />
       </Pop>
       <Pop at={start + 12}>
         <Chip
@@ -810,11 +1088,11 @@ const Outro: React.FC = () => {
 
 /* ---------- sound: few, soft, low ---------- */
 const SFX: { name: "pop" | "ding" | "cash"; at: number; v: number }[] = [
-  ...YOLAPP_AT.map((at) => ({ name: "pop" as const, at: at - 2, v: 0.15 })),
-  { name: "cash", at: A(7, "comisión"), v: 0.18 },
-  { name: "ding", at: A(8, "monetizar") + 8, v: 0.12 },
-  { name: "ding", at: A(10, "modo"), v: 0.12 },
-  { name: "ding", at: SPEECH_END, v: 0.12 },
+  ...YOLAPP_AT.map((at) => ({ name: "pop" as const, at: at - 2, v: 0.12 })),
+  { name: "cash", at: A(7, "comisión"), v: 0.15 },
+  { name: "ding", at: A(8, "monetizar") + 4, v: 0.1 },
+  { name: "ding", at: A(12, "compartir") + 2, v: 0.1 },
+  { name: "ding", at: SPEECH_END, v: 0.1 },
 ];
 
 export const Yolapp6Reel: React.FC = () => {
@@ -826,21 +1104,22 @@ export const Yolapp6Reel: React.FC = () => {
     <AbsoluteFill style={{ background: "#000", fontFamily: POPPINS }}>
       <Talking />
       <LinkScene />
-      <Pasos />
-      <Monetizar />
-      <App />
+      <Journey />
+      <Monetize />
+      <AppScene />
       <Stickers />
       <YolerBadge />
       <LogoPops />
       <Captions />
       <Outro />
+      <Voice />
       <Audio
         src={staticFile("yolapp/v6/musica.wav")}
         volume={(f) =>
           interpolate(
             f,
             [0, 10, SPEECH_END - 10, SPEECH_END + 4, TOTAL - 15, TOTAL],
-            [0, 0.05, 0.05, 0.2, 0.2, 0],
+            [0, 0.045, 0.045, 0.18, 0.18, 0],
             clamp,
           )
         }

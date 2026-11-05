@@ -185,18 +185,18 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 ## Reel 6 "Modo Yoler: gana comisiones"
 
 - Composición: `Yolapp6Reel` (`src/yolapp6/Reel.tsx`, datos en `src/yolapp6/datos.ts`); reutiliza `src/yolapp/parts.tsx` y las ilustraciones de `src/yolapp3/ilustraciones.tsx`.
-- Crudo: `v6/crudo.mp4` (720×1280, 1:05). Final: **30 s**. Música: `v6/musica.wav` (upbeat, volumen 0,05 bajo la voz). Cierre congelado: `v6/final.jpg`.
-- Entrega: `entregas/yolapp/yolapp-reel6-borrador-1.mp4`.
-- Cara hasta y ≈ 1300 en planos cerrados: tarjetas en la franja y ≈ 1340–1680; subtítulos abajo (y ≈ 1390) o arriba (y ≈ 120) con tarjeta.
+- Crudo: `v6/crudo.mp4` (720×1280, 1:05). Final: **30 s**. Voz limpia: `v6/voz.wav` (cadena en `v6/voz-cadena.txt`). Música: `v6/musica.wav` (upbeat, volumen 0,05 bajo la voz). Cierre congelado: `v6/final.jpg`.
+- Entrega: `entregas/yolapp/yolapp-reel6-borrador-2.mp4`.
+- Cara x ≈ 280–800, y ≈ 380–1320: gráficos solo en el pecho (y ≥ 1400), en las columnas laterales o arriba de la cabeza (y ≤ 330); subtítulos abajo (y ≈ 1420) o arriba (y ≈ 110) con gráfico.
 - **Logo de Yolapp tal cual cada vez que dice "Yolapp"** (arriba de la cabeza, ~1,3 s o hasta que termina la toma), con un pop bajito.
-- Gráficos: publicación + "tu link" + monedas que se escapan ("Comisiones perdidas"); diagrama de 4 pasos Encuentras causa → Compartes link → Alguien dona → Recibes comisión; ajuste "Monetizar" que se activa con "¡Ojo!"; checklist Descarga / Regístrate / Modo Yoler / Comparte con contador de comisiones.
+- Gráficos (borrador 2, vidrio oscuro + 3D): celular flotante inclinado del que se escapan monedas + contador rojo "Comisiones perdidas"; camino luminoso con un cometa que recorre 4 orbes (causa → link → donan → comisión); interruptor 3D "MONETIZAR" con letras animadas y destello; celular con progreso de pasos + notificaciones "Nueva comisión +$ MXN".
 - SFX: 6 en total, volumen 0,12–0,18.
 
 ### Cortes del crudo
 | Se quitó | Motivo |
 |---|---|
 | 10,3–10,6 s | Mira hacia abajo a mitad de frase |
-| 36,0–36,3 s | Cierra los ojos y baja la cabeza tras "comisión" |
+| 36,0–36,3 s (imagen) | Cierra los ojos tras "comisión": la imagen se congela en 36,0 s mientras el audio termina la palabra (llega a 36,21 s) |
 | 47,7–49,4 s "Así que, ¡deja de compartir!" | Reiniciado |
 | 53,2 s "de" suelto | Muletilla |
 | Todos los silencios | ~35 s de pausas |
@@ -204,3 +204,9 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 ### Notas de guion
 - Subtítulos corregidos respecto a Whisper: "Sí, en Yolapp" (oyó "Si en YOLAB"), "Yoler" (oyó "Joller"/"YOLOR"), "Descarga Yolapp".
 - Dato ilustrativo: contador de 850 MXN en comisiones.
+
+### Audio (borrador 2)
+- **Regla**: la voz se limpia antes de editar y el video se mezcla en silencio. Cadena ffmpeg: `highpass 85 Hz → lowpass 14,5 kHz → afftdn nr=22 nf=-26 → EQ −2,5 dB @220 Hz, +2,5 dB @3,2 kHz, +1,5 dB agudos → de-esser → compresor 2,8:1 → compuerta suave → limitador`. Ruido de fondo de −39 a −56 dB.
+- `afftdn` necesita `nf` cerca del ruido real (−25/−26); con −40 no hace nada.
+- Master final en 2 pasadas con `loudnorm` a **−14 LUFS, −1,5 dBTP**, AAC 320 kbps. Música a 0,045 bajo la voz.
+- **Cortes de palabra**: revisar la envolvente al final de cada toma para no comerse la última sílaba (pasó con "comisión").

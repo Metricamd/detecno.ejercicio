@@ -7,8 +7,16 @@
 export { FPS, GRAD, H, W, Y } from "../yolapp/datos";
 import { FPS } from "../yolapp/datos";
 
-// `skip` drops a pause or stumble inside a take.
-type Take = { from: number; to: number; text: string; skip?: [number, number] };
+// `skip` drops a pause or stumble inside a take; `hold` freezes the picture
+// from that source second on while the audio keeps going (she looks away
+// while the word is still ending).
+type Take = {
+  from: number;
+  to: number;
+  text: string;
+  skip?: [number, number];
+  hold?: number;
+};
 const TAKES: Take[] = [
   {
     from: 0.45,
@@ -31,8 +39,9 @@ const TAKES: Take[] = [
     to: 30.01,
     text: "y, si alguien hace un donativo a partir de tu link,",
   },
-  // 36.0–36.3: closes her eyes and drops her head after "comisión"
-  { from: 35.04, to: 36.02, text: "recibes una comisión." },
+  // "comisión" ends at 36.21; from 36.0 she closes her eyes and drops her
+  // head, so the picture holds on 36.0 while the word finishes
+  { from: 35.04, to: 36.3, hold: 36.0, text: "recibes una comisión." },
   {
     from: 39.23,
     to: 43.31,
