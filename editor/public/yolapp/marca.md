@@ -230,3 +230,24 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 ### Notas de guion
 - Subtítulos corregidos respecto a Whisper: "Yolapp" (oyó "YOLAB"), "Yoler" (oyó "YOLES"/"YOLOR"), "ese donativo" (oyó "sedot nativo"), "descarga la aplicación".
 - Datos ilustrativos: +$860, +$45, +$120 MXN y contador $9,999+.
+
+## Reel 8 "¿Ya activaste tu modo Yoler?" (diálogo)
+
+- Composición: `Yolapp8Reel` (`src/yolapp8/Reel.tsx`, datos en `src/yolapp8/datos.ts`, cada toma con `who: "ella" | "el"`).
+- Crudo: `v8/crudo.mp4` (720×1280, 1:29), conversación de dos personas con el celular. Final: **67 s**. Voz limpia `v8/voz.wav` (`nf=-27`; ruido de −39 a −50 dB). Master −14 LUFS.
+- Entrega: `entregas/yolapp/yolapp-reel8-borrador-1.mp4`.
+- **Formato diálogo**: quién habla se detectó por tono (ella ≈ 230 Hz, él ≈ 130 Hz). Subtítulos como **burbujas de chat** escritas palabra por palabra (ella a la izquierda en rosa, él a la derecha en turquesa; la burbuja anterior queda atenuada arriba) sobre las manos. Zoom suave hacia quien habla.
+- Se miran entre ellos y al celular a propósito: aquí no aplica la regla de mirar a cámara.
+- Caras: ella x 0–460 / y 480–1060, él x 600–1080 / y 280–960 → gráficos en la pared (bloque izquierdo y 40–420 o franja superior y 40–260); logo arriba a la derecha.
+- Gráficos: interruptor "MODO YOLER" (con "?"), tarjeta "La nueva app de Causas · México", tira de 5 pasos con cometa (Entras → Causa monetizable → Compartes link → Alguien dona → Tu comisión), anillos "Tú ganas / Ayudas" → "¡Ganar-ganar!", checklist de registro, interruptor "MONETIZABLE" con "¡Ojo!", destinos Redes/Amigos/Grupos/Donde sea, barra que rompe el "Tope".
+
+### Cortes del crudo
+| Se quitó | Motivo |
+|---|---|
+| 40,3–40,55 s | Palabra suelta encimada |
+| 75,7–76,4 s "mmm" | Muletilla |
+| 86–89 s "adiós, goza" + risas | Fuera del mensaje; cierra en "¡Muchas gracias!" |
+| Todos los silencios | ~22 s |
+
+### Notas de guion
+- Subtítulos corregidos respecto a Whisper: "Yoler" (oyó "yo le"/"YOLOR"), "Yolapp" (oyó "YOLAB"), "¿Modo qué?" (oyó "Y bueno, ok"), "Ok, explícame", "compartes el link" (oyó "compártese").

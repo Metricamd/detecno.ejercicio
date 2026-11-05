@@ -1,0 +1,1 @@
+highpass=f=80,lowpass=f=14500,afftdn=nr=20:nf=-27,equalizer=f=220:t=q:w=1.2:g=-2,equalizer=f=3200:t=q:w=1.0:g=2.5,equalizer=f=9000:t=h:w=2000:g=1.5,deesser=i=0.3,acompressor=threshold=-24dB:ratio=2.8:attack=8:release=120:makeup=1.5,agate=threshold=0.012:ratio=2:range=0.3:attack=8:release=250,alimiter=limit=0.89:level=false
