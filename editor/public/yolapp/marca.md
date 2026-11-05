@@ -181,3 +181,26 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 - Solo queda "A veces, dejarte cuidar también es una forma de querer" (se quitó la previa "…de crecer", 233,2–235,9 s).
 - "¿Por qué me cuesta tanto permitirme ser eso para alguien más?"
 - Whisper oyó "de verdad es que"; se subtitula "Y la verdad es que".
+
+## Reel 6 "Modo Yoler: gana comisiones"
+
+- Composición: `Yolapp6Reel` (`src/yolapp6/Reel.tsx`, datos en `src/yolapp6/datos.ts`); reutiliza `src/yolapp/parts.tsx` y las ilustraciones de `src/yolapp3/ilustraciones.tsx`.
+- Crudo: `v6/crudo.mp4` (720×1280, 1:05). Final: **30 s**. Música: `v6/musica.wav` (upbeat, volumen 0,05 bajo la voz). Cierre congelado: `v6/final.jpg`.
+- Entrega: `entregas/yolapp/yolapp-reel6-borrador-1.mp4`.
+- Cara hasta y ≈ 1300 en planos cerrados: tarjetas en la franja y ≈ 1340–1680; subtítulos abajo (y ≈ 1390) o arriba (y ≈ 120) con tarjeta.
+- **Logo de Yolapp tal cual cada vez que dice "Yolapp"** (arriba de la cabeza, ~1,3 s o hasta que termina la toma), con un pop bajito.
+- Gráficos: publicación + "tu link" + monedas que se escapan ("Comisiones perdidas"); diagrama de 4 pasos Encuentras causa → Compartes link → Alguien dona → Recibes comisión; ajuste "Monetizar" que se activa con "¡Ojo!"; checklist Descarga / Regístrate / Modo Yoler / Comparte con contador de comisiones.
+- SFX: 6 en total, volumen 0,12–0,18.
+
+### Cortes del crudo
+| Se quitó | Motivo |
+|---|---|
+| 10,3–10,6 s | Mira hacia abajo a mitad de frase |
+| 36,0–36,3 s | Cierra los ojos y baja la cabeza tras "comisión" |
+| 47,7–49,4 s "Así que, ¡deja de compartir!" | Reiniciado |
+| 53,2 s "de" suelto | Muletilla |
+| Todos los silencios | ~35 s de pausas |
+
+### Notas de guion
+- Subtítulos corregidos respecto a Whisper: "Sí, en Yolapp" (oyó "Si en YOLAB"), "Yoler" (oyó "Joller"/"YOLOR"), "Descarga Yolapp".
+- Dato ilustrativo: contador de 850 MXN en comisiones.
