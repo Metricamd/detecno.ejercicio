@@ -234,9 +234,9 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 ## Reel 8 "¿Ya activaste tu modo Yoler?" (diálogo)
 
 - Composición: `Yolapp8Reel` (`src/yolapp8/Reel.tsx`, datos en `src/yolapp8/datos.ts`, cada toma con `who: "ella" | "el"`).
-- Crudo: `v8/crudo.mp4` (720×1280, 1:29), conversación de dos personas con el celular. Final: **67 s**. Voz limpia `v8/voz.wav` (`nf=-27`; ruido de −39 a −50 dB). Master −14 LUFS.
-- Entrega: `entregas/yolapp/yolapp-reel8-borrador-1.mp4`.
-- **Formato diálogo**: quién habla se detectó por tono (ella ≈ 230 Hz, él ≈ 130 Hz). Subtítulos como **burbujas de chat** escritas palabra por palabra (ella a la izquierda en rosa, él a la derecha en turquesa; la burbuja anterior queda atenuada arriba) sobre las manos. Zoom suave hacia quien habla.
+- Crudo: `v8/crudo.mp4` (720×1280, 1:29), conversación de dos personas con el celular. Final: **67 s**. Voz limpia `v8/voz.wav` (cadena "anti-caja" en `v8/voz-cadena.txt`; ruido −45 dB, voz −20 dB). Master −14 LUFS.
+- Entrega: `entregas/yolapp/yolapp-reel8-borrador-2.mp4`.
+- **Formato diálogo**: quién habla se detectó por tono (ella ≈ 230 Hz, él ≈ 130 Hz). Subtítulos **normales** palabra por palabra abajo (y ≈ 1440) sobre las manos — la clienta no quiso burbujas de chat. Zoom suave hacia quien habla.
 - Se miran entre ellos y al celular a propósito: aquí no aplica la regla de mirar a cámara.
 - Caras: ella x 0–460 / y 480–1060, él x 600–1080 / y 280–960 → gráficos en la pared (bloque izquierdo y 40–420 o franja superior y 40–260); logo arriba a la derecha.
 - Gráficos: interruptor "MODO YOLER" (con "?"), tarjeta "La nueva app de Causas · México", tira de 5 pasos con cometa (Entras → Causa monetizable → Compartes link → Alguien dona → Tu comisión), anillos "Tú ganas / Ayudas" → "¡Ganar-ganar!", checklist de registro, interruptor "MONETIZABLE" con "¡Ojo!", destinos Redes/Amigos/Grupos/Donde sea, barra que rompe el "Tope".
@@ -251,3 +251,8 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 
 ### Notas de guion
 - Subtítulos corregidos respecto a Whisper: "Yoler" (oyó "yo le"/"YOLOR"), "Yolapp" (oyó "YOLAB"), "¿Modo qué?" (oyó "Y bueno, ok"), "Ok, explícame", "compartes el link" (oyó "compártese").
+
+### Audio "de caja" (borrador 2)
+- Diagnóstico: casi toda la energía en 200–800 Hz y casi nada arriba de 3 kHz (micrófono de celular en cuarto) → suena encajonado. La cadena del reel 6 (denoise fuerte + lowpass) lo empeoraba.
+- **Cadena anti-caja**: `highpass 100 → afftdn suave (nr=10, nf=-32) → EQ −7 dB @280 Hz, −3 dB @500 Hz, +1 dB @1,2 kHz, +6 dB @3 kHz, highshelf +9 dB desde 6 kHz → aexciter (amount=3, drive=8, freq=3 kHz) → afftdn suave (nr=10, nf=-38) → de-esser → compresor 2,5:1 → limitador`. Sin compuerta ni lowpass.
+- Resultado: 3,2–6,4 kHz pasó de −24 a −8 dB relativo; 6,4–12 kHz de −44 a −25 dB. Usar esta cadena por defecto en los siguientes videos.

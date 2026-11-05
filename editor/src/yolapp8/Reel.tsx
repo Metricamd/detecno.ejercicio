@@ -1,7 +1,6 @@
 // Yolapp reel 8 (1080 × 1920, 30 fps): "¿Ya activaste tu modo Yoler?" — a
-// dialogue (she explains, he asks) about the app, so the captions are chat
-// bubbles typed word by word: hers on the left in pink, his on the right in
-// turquoise, over their hands at the bottom.
+// dialogue (she explains, he asks) about the app. Captions are the usual
+// word-by-word ones, at the bottom over their hands.
 //
 // Face-safe layout: her face spans x ≈ 0–460, y ≈ 480–1060; his x ≈ 600–1080,
 // y ≈ 280–960. Graphics live on the wall above them: the left block
@@ -50,6 +49,7 @@ import {
   TOTAL,
   W,
   wordAt,
+  Word,
   WORDS,
   Y,
   YOLAPP_AT,
@@ -119,130 +119,96 @@ const Voice: React.FC = () => (
   </>
 );
 
-/* ---------- chat-bubble captions ---------- */
-const BUBBLE = {
-  ella: {
-    bg: "linear-gradient(135deg, #FF4F8B, #C81E8A)",
-    side: "flex-start" as const,
-    tail: "bottom-left",
-  },
-  el: {
-    bg: "linear-gradient(135deg, #03C7C1, #027BEB)",
-    side: "flex-end" as const,
-    tail: "bottom-right",
-  },
-};
-const Bubble: React.FC<{ i: number; faded: boolean }> = ({ i, faded }) => {
+/* ---------- captions: word by word at the bottom, active word on a pink pill ---------- */
+type Page = { words: Word[]; start: number; end: number };
+const PAGES: Page[] = (() => {
+  const pages: Word[][] = [];
+  for (const c of CLIPS) {
+    let cur: Word[] = [];
+    for (const w of WORDS.filter((x) => x.clip === c.i)) {
+      cur.push(w);
+      const punct = /[,.?!:;]$/.test(w.text);
+      if (cur.length >= 4 || (punct && cur.length >= 2)) {
+        pages.push(cur);
+        cur = [];
+      }
+    }
+    if (cur.length) {
+      if (
+        cur.length === 1 &&
+        pages.length &&
+        pages[pages.length - 1][0].clip === c.i
+      )
+        pages[pages.length - 1].push(...cur);
+      else pages.push(cur);
+    }
+  }
+  return pages.map((ws, i) => ({
+    words: ws,
+    start: Math.floor(ws[0].start),
+    end: i + 1 < pages.length ? Math.floor(pages[i + 1][0].start) : SPEECH_END,
+  }));
+})();
+
+const Captions: React.FC = () => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const c = CLIPS[i];
-  const words = WORDS.filter((w) => w.clip === i);
-  const look = BUBBLE[c.who];
-  const pop = spring({
-    frame: frame - c.at,
-    fps,
-    config: { damping: 14, stiffness: 200 },
-  });
-  const typing = frame < words[0].start - 1;
-  const right = c.who === "el";
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: look.side,
-        opacity: faded ? 0.5 : 1,
-        transform: `scale(${faded ? 0.9 : 0.6 + 0.4 * pop})`,
-        transformOrigin: right ? "100% 100%" : "0% 100%",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 780,
-          background: look.bg,
-          borderRadius: 38,
-          borderBottomLeftRadius: right ? 38 : 8,
-          borderBottomRightRadius: right ? 8 : 38,
-          padding: "16px 28px 18px",
-          boxShadow: "0 14px 34px rgba(10,6,30,.4)",
-          border: "3px solid rgba(255,255,255,.55)",
-          fontFamily: POPPINS,
-          color: "#fff",
-          fontSize: 46,
-          fontWeight: 700,
-          lineHeight: 1.18,
-        }}
-      >
-        {typing ? (
-          <span style={{ letterSpacing: 6, fontWeight: 800 }}>
-            {[0, 1, 2].map((k) => (
-              <span
-                key={k}
-                style={{
-                  opacity:
-                    0.4 + 0.6 * Math.max(0, Math.sin((frame - k * 4) / 3)),
-                }}
-              >
-                •
-              </span>
-            ))}
-          </span>
-        ) : (
-          words.map((w, k) => {
-            const shown = faded || frame >= w.start - 1;
-            if (!shown) return null;
-            const active = !faded && frame >= w.start && frame < w.end + 2;
-            const inP = faded
-              ? 1
-              : interpolate(frame - w.start, [-1, 3], [0, 1], clamp);
-            return (
-              <span
-                key={k}
-                style={{
-                  display: "inline-block",
-                  marginRight: 12,
-                  opacity: inP,
-                  transform: `translateY(${(1 - inP) * 10}px)`,
-                  color: active
-                    ? "#FFF6A8"
-                    : isKeyword(w.text)
-                      ? "#FFFFFF"
-                      : "rgba(255,255,255,.95)",
-                  fontWeight: isKeyword(w.text) || active ? 800 : 700,
-                  textDecoration:
-                    isKeyword(w.text) && !active
-                      ? "underline 4px rgba(255,255,255,.5)"
-                      : "none",
-                  textUnderlineOffset: 8,
-                }}
-              >
-                {w.text}
-              </span>
-            );
-          })
-        )}
-      </div>
-    </div>
-  );
-};
-const Chat: React.FC = () => {
-  const frame = useCurrentFrame();
-  if (frame >= SPEECH_END) return null;
-  const cur = CLIPS.findIndex((c) => frame >= c.at && frame < c.at + c.len);
-  if (cur < 0) return null;
+  const page = PAGES.find((pg) => frame >= pg.start && frame < pg.end);
+  if (!page) return null;
+  const out = interpolate(frame, [page.end - 3, page.end], [1, 0], clamp);
   return (
     <div
       style={{
         position: "absolute",
-        left: 36,
-        right: 36,
-        bottom: 120,
+        left: 70,
+        right: 70,
+        top: 1440,
+        height: 240,
         display: "flex",
-        flexDirection: "column",
-        gap: 16,
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      {cur > 0 && <Bubble i={cur - 1} faded />}
-      <Bubble i={cur} faded={false} />
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "6px 14px",
+          opacity: out,
+        }}
+      >
+        {page.words.map((w, i) => {
+          const t = frame - w.start;
+          const active = frame >= w.start && frame < w.end + 2;
+          const inP = interpolate(t, [-1, 4], [0, 1], clamp);
+          return (
+            <span
+              key={i}
+              style={{
+                fontFamily: POPPINS,
+                fontWeight: 800,
+                fontSize: 68,
+                lineHeight: 1.12,
+                letterSpacing: "-0.01em",
+                color: active ? "#fff" : isKeyword(w.text) ? "#5FF5EC" : "#fff",
+                background: active ? Y.pink : "transparent",
+                borderRadius: 20,
+                padding: "0 14px",
+                opacity: inP,
+                filter: `blur(${(1 - inP) * 6}px)`,
+                transform: `translateY(${(1 - inP) * 16}px) scale(${active ? 1.06 : 1}) rotate(${active ? -1.5 : 0}deg)`,
+                textShadow: active
+                  ? "none"
+                  : "0 4px 0 rgba(26,18,64,.85), 0 0 18px rgba(26,18,64,.7), 0 0 4px rgba(26,18,64,.9)",
+                boxShadow: active ? "0 8px 24px rgba(255,5,102,.45)" : "none",
+              }}
+            >
+              {w.text}
+            </span>
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -1091,7 +1057,7 @@ export const Yolapp8Reel: React.FC = () => {
       <Comparte />
       <Tope />
       <LogoPops />
-      <Chat />
+      <Captions />
       <Outro />
       <Voice />
       <Audio
