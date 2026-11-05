@@ -210,3 +210,23 @@ Transcripción: `node scripts/transcribe.mjs <audio16k.wav> <out.json> spanish` 
 - `afftdn` necesita `nf` cerca del ruido real (−25/−26); con −40 no hace nada.
 - Master final en 2 pasadas con `loudnorm` a **−14 LUFS, −1,5 dBTP**, AAC 320 kbps. Música a 0,045 bajo la voz.
 - **Cortes de palabra**: revisar la envolvente al final de cada toma para no comerse la última sílaba (pasó con "comisión").
+
+## Reel 7 "¿Ganar comisiones por compartir un link?"
+
+- Composición: `Yolapp7Reel` (`src/yolapp7/Reel.tsx`, datos en `src/yolapp7/datos.ts`); efectos compartidos (vidrio, celular 3D, destello) en `src/yolapp/fx.tsx`.
+- Crudo: `v7/crudo.mp4` (720×1280, 58 s, ya trae transiciones de cámara propias). Final: **42 s**. Voz limpia `v7/voz.wav` (misma cadena que el reel 6, `nf=-26`; ruido de −38 a −49 dB). Música `v7/musica.wav`. Cierre `v7/final.jpg`.
+- Entrega: `entregas/yolapp/yolapp-reel7-borrador-1.mp4` (master −14 LUFS, −1,5 dBTP).
+- Cara x ≈ 250–830, y ≈ 300–1220: gráficos solo en y ≥ 1380; subtítulos arriba (y ≈ 70) mientras hay gráfico. Si dice "Yolapp" mientras hay gráfico, el logo sale abajo (y ≈ 1700) para no chocar con los subtítulos.
+- Gráficos: celular → monedas que entran a "Tus comisiones"; interruptor 3D "MODO YOLER" con el logo; tarjetas de causas, una marcada "Monetizable", que se comparte a Amigos/Familia/Redes; anillo de donativo con "Tu parte %" y "Tu comisión"; ciclo con cometa Tú compartes → Alguien apoya → Tú recibes; celular con pasos + notificaciones de comisión; barra de comisiones que rompe el "Tope" ("¡Sin tope!").
+
+### Cortes del crudo
+| Se quitó | Motivo |
+|---|---|
+| 1,0–1,3 s | Pausa tras "¿Qué?" |
+| 35,16–35,36 s | Pausa entre "y esa" y "es tu comisión" |
+| Todos los silencios | ~16 s de pausas |
+- Sin arranques en falso ni miradas a otro lado claras (revisado a 6 fps).
+
+### Notas de guion
+- Subtítulos corregidos respecto a Whisper: "Yolapp" (oyó "YOLAB"), "Yoler" (oyó "YOLES"/"YOLOR"), "ese donativo" (oyó "sedot nativo"), "descarga la aplicación".
+- Datos ilustrativos: +$860, +$45, +$120 MXN y contador $9,999+.

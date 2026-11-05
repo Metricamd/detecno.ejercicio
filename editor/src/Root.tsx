@@ -32,6 +32,7 @@ import { YOLAPP3_FRAMES, Yolapp3Reel } from "./yolapp3/Reel";
 import { YOLAPP4_FRAMES, Yolapp4Reel } from "./yolapp4/Reel";
 import { YOLAPP5_FRAMES, Yolapp5Reel } from "./yolapp5/Reel";
 import { YOLAPP6_FRAMES, Yolapp6Reel } from "./yolapp6/Reel";
+import { YOLAPP7_FRAMES, Yolapp7Reel } from "./yolapp7/Reel";
 import { PERSONALIZA_FRAMES, PersonalizaCarousel, POST_H, POST_W } from "./posts/Personaliza";
 
 export const RemotionRoot: React.FC = () => {
@@ -136,6 +137,7 @@ export const RemotionRoot: React.FC = () => {
         height={1000}
         defaultProps={{ name: "planeta" }}
       />
+      <Composition id="Yolapp7Reel" component={Yolapp7Reel} durationInFrames={YOLAPP7_FRAMES} fps={30} width={1080} height={1920} />
       <Composition id="Yolapp6Reel" component={Yolapp6Reel} durationInFrames={YOLAPP6_FRAMES} fps={30} width={1080} height={1920} />
       <Composition id="Yolapp5Reel" component={Yolapp5Reel} durationInFrames={YOLAPP5_FRAMES} fps={30} width={1080} height={1920} />
       <Composition id="Yolapp4Reel" component={Yolapp4Reel} durationInFrames={YOLAPP4_FRAMES} fps={30} width={1080} height={1920} />
