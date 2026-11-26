@@ -163,7 +163,7 @@ export const S2Tipos: React.FC<P> = ({ from }) => {
       {grow <= frame && (
         <div style={{ position: "absolute", top: 640, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
           <Enter>
-            <Pill>+ CFDI todos los días</Pill>
+            <Pill>+ CFDIs todos los días</Pill>
           </Enter>
         </div>
       )}
@@ -185,7 +185,7 @@ export const S2Tipos: React.FC<P> = ({ from }) => {
                   <div style={{ fontWeight: 700, fontSize: 36, color: C.text }}>{c.label}</div>
                 </div>
                 <div style={{ marginTop: 18, fontWeight: 800, fontSize: 64, color: C.text, letterSpacing: "-0.02em", fontVariantNumeric: "tabular-nums" }}>{n.toLocaleString("en-US")}</div>
-                <div style={{ fontFamily: MONO, fontSize: 22, color: "#6B6F86", marginTop: 2 }}>CFDI</div>
+                <div style={{ fontFamily: MONO, fontSize: 22, color: "#6B6F86", marginTop: 2 }}>CFDIs</div>
               </Card>
             </div>
           );
@@ -292,7 +292,7 @@ export const S4Fispal: React.FC<P> = ({ from }) => {
           <div style={{ height: 96, background: C.white, display: "flex", alignItems: "center", padding: "0 32px", gap: 18, borderBottom: "1px solid #E6E8F0" }}>
             <Img src={staticFile("brand/fispal-logo.png")} style={{ height: 44 }} />
             <div style={{ flex: 1 }} />
-            <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 26, color: C.text, background: C.mint, borderRadius: 999, padding: "8px 20px", fontVariantNumeric: "tabular-nums" }}>{total.toLocaleString("en-US")} CFDI</div>
+            <div style={{ fontFamily: FONT, fontWeight: 700, fontSize: 26, color: C.text, background: C.mint, borderRadius: 999, padding: "8px 20px", fontVariantNumeric: "tabular-nums" }}>{total.toLocaleString("en-US")} CFDIs</div>
           </div>
           {/* search */}
           <div style={{ margin: "28px 32px 0", background: C.white, borderRadius: 18, height: 86, display: "flex", alignItems: "center", gap: 16, padding: "0 26px", boxShadow: frame > typing ? `0 0 0 3px ${C.accent}` : "0 4px 14px rgba(37,14,148,.06)" }}>
@@ -381,7 +381,7 @@ export const S5AntesAhora: React.FC<P> = ({ from }) => {
             <Img src={staticFile("brand/fispal-logo.png")} style={{ width: 96, objectFit: "contain" }} />
           </div>
           <div style={{ fontFamily: FONT }}>
-            <div style={{ fontWeight: 800, fontSize: 48, color: C.text, lineHeight: 1.05 }}>Todos tus CFDI</div>
+            <div style={{ fontWeight: 800, fontSize: 48, color: C.text, lineHeight: 1.05 }}>Todos tus CFDIs</div>
             <div style={{ fontWeight: 600, fontSize: 32, color: C.purple, marginTop: 8 }}>en un mismo lugar</div>
           </div>
           <div style={{ marginLeft: "auto" }}>
