@@ -164,7 +164,7 @@ export const S1Tres: React.FC<P> = ({ from }) => {
 /* ---------- 2. Más empresas → más CFDI, información, usuarios, lugares ---------- */
 const STATS: { k: keyof typeof CUE; label: string; to: number; fmt: (n: number) => string; icon: string }[] = [
   { k: "mas", label: "Empresas", to: 3, fmt: (n) => String(Math.round(n)), icon: IC.building },
-  { k: "cfdi", label: "CFDI", to: 42180, fmt: (n) => Math.round(n).toLocaleString("en-US"), icon: IC.doc },
+  { k: "cfdi", label: "CFDIs", to: 42180, fmt: (n) => Math.round(n).toLocaleString("en-US"), icon: IC.doc },
   { k: "informacion", label: "Información", to: 18.4, fmt: (n) => `${n.toFixed(1)} GB`, icon: IC.db },
   { k: "usuarios", label: "Usuarios", to: 24, fmt: (n) => String(Math.round(n)), icon: IC.users },
 ];
@@ -316,7 +316,7 @@ export const S4Cuenta: React.FC<P> = ({ from }) => {
           </div>
           {/* dashboard tiles: numbers follow the selected RFC */}
           <div style={{ margin: "34px 36px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }}>
-            {["CFDI", "Facturado", "Usuarios", "Estatus"].map((lab, i) => (
+            {["CFDIs", "Facturado", "Usuarios", "Estatus"].map((lab, i) => (
               <div key={lab} style={{ background: "#fff", borderRadius: 24, padding: "28px 28px", boxShadow: "0 8px 22px rgba(37,14,148,.06)", height: i < 2 ? 170 : 150, boxSizing: "border-box" }}>
                 <div style={{ fontWeight: 600, fontSize: 26, color: "#5E6480" }}>{lab}</div>
                 <div key={sel} style={{ fontWeight: 800, fontSize: 52, marginTop: 10, color: i === 3 ? "#20B07E" : "#131313" }}>{i === 3 ? "Al día" : NUMS[sel][i]}</div>
@@ -331,7 +331,7 @@ export const S4Cuenta: React.FC<P> = ({ from }) => {
         </div>
         {/* "1 cuenta" badge */}
         <div style={{ position: "absolute", right: -20, top: -30, transform: `scale(${one}) rotate(8deg)` }}>
-          <div style={{ background: V.mint, color: "#0F3A2A", fontFamily: FONT, fontWeight: 800, fontSize: 38, borderRadius: 999, padding: "16px 32px", boxShadow: "0 16px 40px rgba(63,212,151,.5)" }}>1 cuenta · 3 RFC</div>
+          <div style={{ background: V.mint, color: "#0F3A2A", fontFamily: FONT, fontWeight: 800, fontSize: 38, borderRadius: 999, padding: "16px 32px", boxShadow: "0 16px 40px rgba(63,212,151,.5)" }}>1 cuenta · 3 RFCs</div>
         </div>
       </div>
     </AbsoluteFill>
@@ -400,7 +400,7 @@ export const S6Pregunta: React.FC<P> = ({ from }) => {
   const { fps } = useVideoConfig();
   const L = (t: number) => s(t) - from;
   const pick = L(CUE.rfcQ) + 2;
-  const opts = ["1 RFC", "2 a 3 RFC", "4 RFC o más"];
+  const opts = ["1 RFC", "2 a 3 RFCs", "4 RFCs o más"];
   return (
     <AbsoluteFill>
       <div style={{ position: "absolute", left: 100, right: 100, top: 380, display: "flex", flexDirection: "column", gap: 56 }}>
