@@ -165,7 +165,7 @@ export const S1Par: React.FC<P> = ({ from }) => {
 
 /* ---------- 2. CFDI → pagos → complementos → cruces. Y repetir. (a loop) ---------- */
 const LOOP: { k: keyof typeof CUE; label: string; icon: string; color: string }[] = [
-  { k: "cfdi", label: "CFDI", icon: IC.doc, color: M.violet },
+  { k: "cfdi", label: "CFDIs", icon: IC.doc, color: M.violet },
   { k: "pagos", label: "Pagos", icon: IC.card, color: M.mint },
   { k: "complementos", label: "Complementos", icon: IC.puzzle, color: M.amber },
   { k: "cruces", label: "Cruces", icon: IC.link, color: M.coral },
@@ -296,9 +296,9 @@ export const S4Conciliacion: React.FC<P> = ({ from }) => {
             <span style={{ marginLeft: "auto", fontWeight: 800, fontSize: 34, color: M.purple }}>Conciliación de Pagos</span>
           </div>
           <div style={{ display: "flex", padding: "26px 34px 0", fontFamily: MONO, fontWeight: 700, fontSize: 22, color: M.sub, letterSpacing: "0.06em" }}>
-            <span style={{ flex: 1 }}>CFDI</span>
+            <span style={{ flex: 1 }}>CFDIs</span>
             <span style={{ flex: 1, textAlign: "right", display: "flex", justifyContent: "flex-end", alignItems: "center", gap: 10 }}>
-              CFDI DE PAGO
+              CFDIs DE PAGO
               <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#EEF0FF", color: M.purple, borderRadius: 999, padding: "4px 12px", transform: `scale(${sat})` }}>
                 <Icon d={IC.cloud} size={22} color={M.purple} /> SAT
               </span>

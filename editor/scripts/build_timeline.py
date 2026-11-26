@@ -12,7 +12,7 @@ file is available); rerun with the real file before the final render.
 import json, re, subprocess, sys
 
 MAX_PAUSE = 0.6
-MERGE = [(["ce", "efe", "de", "i,"], "CFDI,"), (["ce", "efe", "de", "i."], "CFDI."),
+MERGE = [(["ce", "efe", "de", "is,"], "CFDIs,"), (["ce", "efe", "de", "is"], "CFDIs"), (["ce", "efe", "de", "i,"], "CFDI,"), (["ce", "efe", "de", "i."], "CFDI."),
          (["erre", "efe", "ce."], "RFC."), (["erre", "efe", "ce?"], "RFC?"), (["Tres"], "3"), (["¿Tres"], "¿3"), (["ce", "efe", "de", "i"], "CFDI"),
          (["erre", "efe", "ce,"], "RFC,"), (["erre", "efe", "ce"], "RFC"),
          (["A", "P", "I."], "API."), (["veinte", "por", "ciento"], "20%"),
