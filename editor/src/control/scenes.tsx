@@ -121,7 +121,7 @@ const Stopwatch: React.FC<{ size: number; seconds: number; ring: number; color?:
 
 /* ---------- 1. ¿Cuánto tiempo pierde tu equipo? ---------- */
 const TASKS: { k: keyof typeof CUE; label: string; icon: string; x: number; y: number }[] = [
-  { k: "cfdi", label: "CFDI", icon: IC.doc, x: 200, y: 360 },
+  { k: "cfdi", label: "CFDIs", icon: IC.doc, x: 200, y: 360 },
   { k: "reportes", label: "Reportes", icon: IC.chart, x: 860, y: 420 },
   { k: "archivos", label: "Archivos", icon: IC.folder, x: 160, y: 1080 },
   { k: "consultas", label: "Consultas", icon: IC.search, x: 880, y: 1050 },
@@ -227,7 +227,7 @@ export const S3Reto: React.FC<P> = ({ from }) => {
           <Icon d={IC.db} size={84} color={D.violet} sw={1.6} />
           <div>
             <div style={{ fontWeight: 800, fontSize: 52 }}>Información</div>
-            <div style={{ fontFamily: MONO, fontSize: 24, color: D.sub, marginTop: 4 }}>14,735 CFDI · 2.3 GB</div>
+            <div style={{ fontFamily: MONO, fontSize: 24, color: D.sub, marginTop: 4 }}>14,735 CFDIs · 2.3 GB</div>
           </div>
           <div style={{ marginLeft: 16, width: 54, height: 54, borderRadius: 27, background: "rgba(255,255,255,.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Icon d={IC.check} size={30} color={D.sub} sw={3} />
@@ -298,7 +298,7 @@ export const S4Plataforma: React.FC<P> = ({ from }) => {
         <div style={{ position: "absolute", inset: -40, borderRadius: "50%", border: `2px solid rgba(32,217,157,.35)`, transform: `rotate(${frame}deg)`, borderTopColor: C.accent }} />
         <Glass glow={0.6 + 0.4 * plat} style={{ position: "absolute", inset: 0, borderRadius: "50%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 18 }}>
           <Img src={staticFile("brand/fispal-logo-white.png")} style={{ width: 300 }} />
-          <div style={{ fontFamily: MONO, fontSize: 30, fontWeight: 700, color: C.accent, fontVariantNumeric: "tabular-nums", opacity: frame >= conc ? 1 : 0 }}>{count.toLocaleString("en-US")} CFDI</div>
+          <div style={{ fontFamily: MONO, fontSize: 30, fontWeight: 700, color: C.accent, fontVariantNumeric: "tabular-nums", opacity: frame >= conc ? 1 : 0 }}>{count.toLocaleString("en-US")} CFDIs</div>
         </Glass>
       </div>
       {frame >= L(CUE.plataforma) - 4 && (
