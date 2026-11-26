@@ -1,406 +1,406 @@
 {
- "duration": 40.3,
+ "duration": 39.152,
  "estimated": false,
  "words": [
   {
    "text": "El",
-   "start": 0.219,
-   "end": 0.24
+   "start": 0.142,
+   "end": 0.16
   },
   {
    "text": "SAT",
-   "start": 0.34,
-   "end": 0.64
+   "start": 0.24,
+   "end": 0.48
   },
   {
    "text": "tiene",
-   "start": 0.68,
-   "end": 0.88
+   "start": 0.52,
+   "end": 0.72
   },
   {
    "text": "la",
-   "start": 0.933,
-   "end": 1.04
+   "start": 0.747,
+   "end": 0.8
   },
   {
    "text": "información",
-   "start": 1.093,
-   "end": 1.68
+   "start": 0.847,
+   "end": 1.36
   },
   {
    "text": "de",
-   "start": 1.707,
-   "end": 1.76
+   "start": 1.387,
+   "end": 1.44
   },
   {
    "text": "tus",
-   "start": 1.8,
-   "end": 1.92
+   "start": 1.48,
+   "end": 1.6
   },
   {
    "text": "operaciones.",
-   "start": 1.968,
-   "end": 3.08
+   "start": 1.664,
+   "end": 2.8
   },
   {
    "text": "Pero",
-   "start": 3.152,
+   "start": 2.832,
+   "end": 2.96
+  },
+  {
+   "text": "encontrar",
+   "start": 3.008,
    "end": 3.44
   },
   {
-   "text": "encontrar",
-   "start": 3.48,
-   "end": 3.84
-  },
-  {
    "text": "un",
-   "start": 3.893,
-   "end": 4.0
+   "start": 3.467,
+   "end": 3.52
   },
   {
    "text": "CFDI",
-   "start": 4.08,
-   "end": 5.28
+   "start": 3.68,
+   "end": 4.4
   },
   {
    "text": "específico",
-   "start": 5.34,
-   "end": 5.92
+   "start": 4.47,
+   "end": 5.2
   },
   {
    "text": "en",
-   "start": 5.947,
-   "end": 6.0
+   "start": 5.227,
+   "end": 5.28
   },
   {
    "text": "tu",
-   "start": 6.027,
-   "end": 6.08
+   "start": 5.307,
+   "end": 5.36
   },
   {
    "text": "empresa",
-   "start": 6.15,
-   "end": 7.272
+   "start": 5.44,
+   "end": 6.4
   },
   {
    "text": "puede",
-   "start": 7.312,
-   "end": 7.512
+   "start": 6.427,
+   "end": 6.56
   },
   {
    "text": "ser",
-   "start": 7.552,
-   "end": 7.672
+   "start": 6.62,
+   "end": 6.8
   },
   {
    "text": "otra",
-   "start": 7.72,
-   "end": 7.912
+   "start": 6.848,
+   "end": 7.04
   },
   {
    "text": "historia.",
-   "start": 7.956,
-   "end": 8.472
+   "start": 7.084,
+   "end": 7.52
   },
   {
-   "text": "CFDI",
-   "start": 8.712,
-   "end": 10.152
+   "text": "CFDIs",
+   "start": 7.92,
+   "end": 9.04
   },
   {
    "text": "emitidos,",
-   "start": 10.232,
-   "end": 11.112
+   "start": 9.136,
+   "end": 10.0
   },
   {
    "text": "recibidos,",
-   "start": 11.179,
-   "end": 12.152
+   "start": 10.093,
+   "end": 11.28
   },
   {
    "text": "pagos,",
-   "start": 12.212,
-   "end": 12.792
+   "start": 11.36,
+   "end": 12.16
   },
   {
    "text": "nómina.",
-   "start": 12.872,
-   "end": 13.352
+   "start": 12.267,
+   "end": 12.88
   },
   {
    "text": "La",
-   "start": 13.539,
-   "end": 13.912
+   "start": 13.04,
+   "end": 13.36
   },
   {
    "text": "información",
-   "start": 13.965,
-   "end": 14.552
+   "start": 13.407,
+   "end": 13.92
   },
   {
    "text": "crece",
-   "start": 14.612,
-   "end": 14.952
+   "start": 13.96,
+   "end": 14.24
   },
   {
    "text": "todos",
-   "start": 15.019,
-   "end": 15.352
+   "start": 14.32,
+   "end": 14.72
   },
   {
    "text": "los",
-   "start": 15.412,
-   "end": 15.592
+   "start": 14.76,
+   "end": 14.88
   },
   {
    "text": "días.",
-   "start": 15.672,
-   "end": 16.152
+   "start": 14.976,
+   "end": 15.56
   },
   {
    "text": "Y",
-   "start": 16.352,
-   "end": 16.552
+   "start": 15.66,
+   "end": 15.76
   },
   {
    "text": "cuando",
-   "start": 16.598,
-   "end": 16.872
+   "start": 15.794,
+   "end": 16.0
   },
   {
    "text": "necesitas",
-   "start": 16.912,
-   "end": 17.432
+   "start": 16.04,
+   "end": 16.48
   },
   {
    "text": "encontrar",
-   "start": 17.48,
-   "end": 17.912
+   "start": 16.536,
+   "end": 17.04
   },
   {
    "text": "algo",
-   "start": 17.944,
-   "end": 18.072
+   "start": 17.072,
+   "end": 17.2
   },
   {
    "text": "específico,",
-   "start": 18.132,
-   "end": 19.192
+   "start": 17.26,
+   "end": 18.32
   },
   {
    "text": "la",
-   "start": 19.245,
-   "end": 19.352
+   "start": 18.347,
+   "end": 18.4
   },
   {
    "text": "pregunta",
-   "start": 19.396,
-   "end": 19.752
+   "start": 18.444,
+   "end": 18.8
   },
   {
    "text": "cambia:",
-   "start": 19.816,
-   "end": 20.392
+   "start": 18.864,
+   "end": 19.44
   },
   {
    "text": "¿Dónde",
-   "start": 20.952,
-   "end": 21.192
+   "start": 20.0,
+   "end": 20.16
   },
   {
    "text": "está?",
-   "start": 21.256,
-   "end": 21.592
+   "start": 20.24,
+   "end": 20.64
   },
   {
    "text": "Fispal",
-   "start": 21.872,
-   "end": 22.552
+   "start": 20.97,
+   "end": 21.598
   },
   {
    "text": "concentra",
-   "start": 22.602,
-   "end": 23.032
+   "start": 21.658,
+   "end": 22.158
   },
   {
    "text": "tus",
-   "start": 23.092,
-   "end": 23.272
+   "start": 22.218,
+   "end": 22.398
   },
   {
-   "text": "CFDI",
-   "start": 23.379,
-   "end": 24.552
+   "text": "CFDIs",
+   "start": 22.558,
+   "end": 23.438
   },
   {
    "text": "y",
-   "start": 24.632,
-   "end": 24.712
+   "start": 23.598,
+   "end": 23.758
   },
   {
    "text": "te",
-   "start": 24.765,
-   "end": 24.872
+   "start": 23.811,
+   "end": 23.918
   },
   {
    "text": "permite",
-   "start": 24.922,
-   "end": 25.272
+   "start": 23.958,
+   "end": 24.238
   },
   {
    "text": "consultarlos",
-   "start": 25.328,
-   "end": 25.912
+   "start": 24.302,
+   "end": 25.038
   },
   {
    "text": "utilizando",
-   "start": 25.963,
-   "end": 26.472
+   "start": 25.089,
+   "end": 25.598
   },
   {
    "text": "distintos",
-   "start": 26.522,
-   "end": 27.032
+   "start": 25.648,
+   "end": 26.078
   },
   {
    "text": "criterios.",
-   "start": 27.089,
-   "end": 27.832
+   "start": 26.135,
+   "end": 26.878
   },
   {
    "text": "Lo",
-   "start": 28.019,
-   "end": 28.392
+   "start": 27.065,
+   "end": 27.438
   },
   {
    "text": "que",
-   "start": 28.432,
-   "end": 28.552
+   "start": 27.478,
+   "end": 27.598
   },
   {
    "text": "antes",
-   "start": 28.592,
-   "end": 28.792
+   "start": 27.651,
+   "end": 27.918
   },
   {
    "text": "implicaba",
-   "start": 28.838,
-   "end": 29.352
+   "start": 27.964,
+   "end": 28.398
   },
   {
    "text": "buscar",
-   "start": 29.409,
-   "end": 29.752
+   "start": 28.455,
+   "end": 28.798
   },
   {
    "text": "entre",
-   "start": 29.779,
-   "end": 29.912
+   "start": 28.825,
+   "end": 28.958
   },
   {
    "text": "archivos,",
-   "start": 29.983,
-   "end": 30.952
+   "start": 29.029,
+   "end": 29.998
   },
   {
    "text": "ahora",
-   "start": 31.005,
-   "end": 31.272
+   "start": 30.038,
+   "end": 30.238
   },
   {
    "text": "puedes",
-   "start": 31.318,
-   "end": 31.592
+   "start": 30.295,
+   "end": 30.638
   },
   {
    "text": "consultarlo",
-   "start": 31.642,
-   "end": 32.232
+   "start": 30.688,
+   "end": 31.278
   },
   {
    "text": "desde",
-   "start": 32.285,
-   "end": 32.552
+   "start": 31.331,
+   "end": 31.598
   },
   {
    "text": "un",
-   "start": 32.579,
-   "end": 32.632
+   "start": 31.625,
+   "end": 31.678
   },
   {
    "text": "mismo",
-   "start": 32.699,
-   "end": 33.032
+   "start": 31.745,
+   "end": 32.078
   },
   {
    "text": "lugar.",
-   "start": 33.099,
-   "end": 33.512
+   "start": 32.145,
+   "end": 32.558
   },
   {
    "text": "Comienza",
-   "start": 33.692,
-   "end": 34.423
+   "start": 32.718,
+   "end": 33.438
   },
   {
    "text": "gratis",
-   "start": 34.48,
-   "end": 34.823
+   "start": 33.518,
+   "end": 33.998
   },
   {
    "text": "en",
-   "start": 34.903,
-   "end": 35.063
+   "start": 34.051,
+   "end": 34.158
   },
   {
    "text": "fispal.mx,",
-   "start": 35.103,
-   "end": 37.223
+   "start": 34.238,
+   "end": 36.158
   },
   {
    "text": "y",
-   "start": 37.343,
-   "end": 37.463
+   "start": 36.318,
+   "end": 36.478
   },
   {
    "text": "encuentra",
-   "start": 37.503,
-   "end": 37.863
+   "start": 36.518,
+   "end": 36.878
   },
   {
    "text": "tu",
-   "start": 37.916,
-   "end": 38.023
+   "start": 36.931,
+   "end": 37.038
   },
   {
    "text": "información",
-   "start": 38.063,
-   "end": 38.503
+   "start": 37.078,
+   "end": 37.518
   },
   {
    "text": "fiscal",
-   "start": 38.572,
-   "end": 38.983
+   "start": 37.575,
+   "end": 37.918
   },
   {
    "text": "desde",
-   "start": 39.023,
-   "end": 39.223
+   "start": 37.958,
+   "end": 38.158
   },
   {
    "text": "un",
-   "start": 39.276,
-   "end": 39.383
+   "start": 38.211,
+   "end": 38.318
   },
   {
    "text": "mismo",
-   "start": 39.436,
-   "end": 39.703
+   "start": 38.358,
+   "end": 38.558
   },
   {
    "text": "lugar.",
-   "start": 39.77,
-   "end": 40.143
+   "start": 38.625,
+   "end": 38.998
   }
  ]
 }
